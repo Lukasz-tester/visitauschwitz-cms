@@ -27,6 +27,7 @@
     "@payloadcms/plugin-search": "latest",
     "@payloadcms/plugin-seo": "latest",
     "@payloadcms/richtext-lexical": "latest",
+    "@payloadcms/storage-vercel-blob": "^3.11.0",
     "@payloadcms/ui": "latest",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-label": "^2.0.2",
