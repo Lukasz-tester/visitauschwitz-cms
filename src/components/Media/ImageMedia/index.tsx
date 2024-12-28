@@ -55,6 +55,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .map(([, value]) => `(max-width: ${value}px) ${value}px`)
         .join(', ')
 
+  console.log('\nimg:\n',props,'\n\n')
+
   return (
     <NextImage
       alt={alt || ''}
