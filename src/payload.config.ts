@@ -124,6 +124,10 @@ export default buildConfig({
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   globals: [Header, Footer],
+  logger: {
+    destination: process.stdout,
+    options: { level : 'info' },
+  },
   plugins: [
     redirectsPlugin({
       collections: ['pages', 'posts'],

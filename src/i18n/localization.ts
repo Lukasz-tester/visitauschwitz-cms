@@ -1,6 +1,6 @@
 const localization = {
   defaultLocale: 'en',
-  // fallback: true,
+  fallback: true,
   locales: [
     {
       code: 'en',
