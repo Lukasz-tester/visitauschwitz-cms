@@ -210,7 +210,7 @@ export const Posts: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost, () => revalidatePath('/home')],
+    afterChange: [revalidatePost, () => revalidatePath('/en')],
     afterRead: [populateAuthors],
   },
   versions: {
