@@ -26,8 +26,8 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { revalidatePage } from '../Pages/hooks/revalidatePage'
 import { revalidatePath } from 'next/cache'
+import { revalidateHome } from './hooks/revalidateHome'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -210,7 +210,7 @@ export const Posts: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost, () => revalidatePath('/en')],
+    afterChange: [revalidatePost, revalidateHome],
     afterRead: [populateAuthors],
   },
   versions: {

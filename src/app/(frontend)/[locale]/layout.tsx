@@ -20,6 +20,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
+import { Map } from '@/components/Map/Map'
 
 type Args = {
   children: React.ReactNode
@@ -63,6 +64,7 @@ export default async function RootLayout({ children, params }: Args) {
             <Header locale={locale} />
             {children}
             <Footer locale={locale} />
+            <Map />
           </NextIntlClientProvider>
         </Providers>
       </body>
