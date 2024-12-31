@@ -6,10 +6,8 @@ export const Map = () => {
   const [modalOpen, setModalOpen] = useState(false)
   return (
     <>
-      <button
-        className="rounded bg-white w-12 h-12 flex items-center justify-center fixed bottom-3 right-3 text-black z-[1000]"
-        onClick={() => setModalOpen(!modalOpen)}
-      >
+      <button className="rounded bg-white w-12 h-12 flex items-center justify-center fixed bottom-3 right-3 text-black z-[1000]"
+        onClick={() => setModalOpen(!modalOpen)}>
         MAP
       </button>
       {modalOpen && (
@@ -17,7 +15,7 @@ export const Map = () => {
           <div className="flex justify-between items-center">
             <h1 className="font-bold text-2xl">Modal</h1>
             <button
-              className="rounded bg-black/10 w-12 h-12 flex items-center justify-center"
+              className="rounded bg-blue-900 w-12 h-12 flex items-center justify-center fixed bottom-3 right-3"
               onClick={() => setModalOpen(false)}
             >
               X
