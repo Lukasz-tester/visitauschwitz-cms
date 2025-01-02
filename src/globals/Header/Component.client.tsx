@@ -6,7 +6,7 @@ import React, { useEffect, useState, useTransition } from 'react'
 
 import type { Header } from '@/payload-types'
 
-import { Logo } from '@/components/Logo/Logo'
+import { Logo } from '@/components/ui/Icons'
 import { HeaderNav } from './Nav'
 import { useLocale } from 'next-intl'
 import localization from '@/i18n/localization'
