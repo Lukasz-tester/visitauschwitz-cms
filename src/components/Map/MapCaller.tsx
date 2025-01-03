@@ -1,20 +1,21 @@
-'use client';
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
+'use client'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
 
-const LazyMap = dynamic(() => import("./Map"), {
+const LazyMap = dynamic(() => import('./Map'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
-});
+})
 
 function MapCaller(props) {
+  const [modalOpen, setModalOpen] = useState(false)
 
-      const [modalOpen, setModalOpen] = useState(false)
-
-    return (
-        <>
-      <button className="rounded bg-white w-12 h-12 flex items-center justify-center fixed bottom-3 right-3 text-black z-[1000]"
-        onClick={() => setModalOpen(!modalOpen)}>
+  return (
+    <>
+      <button
+        className="rounded bg-white w-12 h-12 flex items-center justify-center fixed bottom-3 right-3 text-black z-[1000]"
+        onClick={() => setModalOpen(!modalOpen)}
+      >
         MAP
       </button>
       {modalOpen && (
@@ -32,7 +33,7 @@ function MapCaller(props) {
         </div>
       )}
     </>
-    )
+  )
 }
 
-export default MapCaller;
+export default MapCaller
