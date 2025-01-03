@@ -76,22 +76,22 @@ const layers = [
           radius={carparkRadius}
         >
           <Popup>
-            Car – 20 PLN
+            Car: 20 PLN
             <br />
-            Minibus – 30 PLN
+            Minibus: 30 PLN
             <br />
-            Bus – 40 PLN
+            Bus: 40 PLN
             <br />
-            Camper – 90 PLN
+            Camper: 90 PLN
             <br />
-            Motorcycle – 15 PLN
+            Motorcycle: 15 PLN
             <br />
             <h5>
               <a
                 href="https://visitauschwitz.info/get-ready/#on-site"
                 target="_blank"
               >
-                Learn what's on site.
+                Learn what is on site.
               </a>
             </h5>
           </Popup>
@@ -125,13 +125,13 @@ const layers = [
           radius={carparkRadius}
         >
           <Popup>
-            Car (up to 20 people) – 20 PLN
+            Car (up to 20 people): 20 PLN
             <br />
-            Camper – 30 PLN
+            Camper: 30 PLN
             <br />
-            Bus – 40 PLN
+            Bus: 40 PLN
             <br />
-            Motorcycle – 10 PLN
+            Motorcycle: 10 PLN
           </Popup>
         </CircleMarker>
         <CircleMarker
