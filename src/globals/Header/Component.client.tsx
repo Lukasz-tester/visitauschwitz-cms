@@ -41,7 +41,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
       <Link href="/" className="mr-auto">
         <Logo />
       </Link>
-      {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller />}
+      {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller header={header} />}
     </header>
   )
 }

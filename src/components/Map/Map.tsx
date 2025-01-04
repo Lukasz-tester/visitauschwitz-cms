@@ -79,7 +79,7 @@ const layers = [
       <>
         <CircleMarker
           center={carparkMuzeum}
-          pathOptions={{ color: '', fillColor: carparkColor }}
+          pathOptions={{ color: carparkColor, fillColor: carparkColor }}
           radius={carparkRadius}
         >
           <Popup>
@@ -138,7 +138,7 @@ const layers = [
         </CircleMarker>
         <CircleMarker
           center={carparkRide}
-          pathOptions={{ color: carparkColor, fillColor: carparkColor }}
+          pathOptions={{ color: '', fillColor: carparkColor }}
           radius={carparkRadius}
         >
           <Popup>Park & Ride by the railway station.</Popup>
@@ -170,12 +170,6 @@ export default function Map() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={entranceAuschwitz}>
-            <Popup>
-              This cdcMarker icon is displayed correctly with{' '}
-              <i>leaflet-defaulticon-compatibility</i>.
-            </Popup>
-          </Marker>
           <LayersControl position="topright" collapsed={true}>
             {layers.map((layer) => (
               <LayersControl.Overlay name={layer.name} key={layer.name}>
