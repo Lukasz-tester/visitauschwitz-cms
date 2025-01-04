@@ -4,7 +4,6 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-
 import { Logo } from '@/components/ui/Icons'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'

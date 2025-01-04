@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/select'
 import { TypedLocale } from 'payload'
 import { usePathname, useRouter } from '@/i18n/routing'
+import { useMediaQuery } from '@/utilities/helpers'
 
 interface HeaderClientProps {
   header: Header
@@ -40,6 +41,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
+  const isWideScreen = useMediaQuery('(min-width: 768px)')
+
   return (
     <header
       className="container relative z-20 py-8 flex justify-end gap-2"
@@ -49,7 +52,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
         <Logo />
       </Link>
       <LocaleSwitcher />
-      <HeaderNav header={header} />
+      {isWideScreen && <HeaderNav header={header} />}
     </header>
   )
 }
