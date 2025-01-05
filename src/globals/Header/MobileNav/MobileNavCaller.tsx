@@ -20,11 +20,8 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         |||
       </button>
       {modalOpen && (
-        <div
-          className="fixed inset-0 height-screen p-4 bg-black z-[10000] flex flex-col gap-6"
-          onClick={() => setModalOpen(false)}
-        >
-          <div>
+        <div className="fixed inset-0 height-screen p-4 bg-black z-[10000] flex flex-col gap-6">
+          <div onClick={() => setModalOpen(false)}>
             <div className="rounded bg-blue-900">
               <div className=" w-12 h-12 flex items-center justify-center fixed top-20 right-4">
                 <Link href="/search">
@@ -35,13 +32,16 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
                 X
               </button>
             </div>
+            <div className="flex flex-col p-4 gap-6">
+              <NavItems header={header} />
+            </div>
           </div>
-          <NavItems header={header} />
-
-          <LocaleSwitcher />
-          <Link href="/" className="flex fixed bottom-4 left-4">
+          <div className="flex fixed bottom-16 right-4">
+            <LocaleSwitcher />
+          </div>
+          <div className="flex fixed bottom-8 left-5">
             <Logo />
-          </Link>
+          </div>
         </div>
       )}
     </>
