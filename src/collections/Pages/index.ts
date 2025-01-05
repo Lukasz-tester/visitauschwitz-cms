@@ -71,7 +71,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              localized: true,
+              // localized: true,   "leave it this way or layout will reset for each language"
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
             },
