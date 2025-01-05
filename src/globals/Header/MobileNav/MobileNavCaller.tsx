@@ -36,7 +36,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               <NavItems header={header} />
             </div>
           </div>
-          <div className="flex fixed bottom-16 right-4">
+          <div className="flex fixed bottom-20 right-4">
             <LocaleSwitcher />
           </div>
           <div className="flex fixed bottom-8 left-5">

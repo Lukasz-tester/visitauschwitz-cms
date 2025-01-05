@@ -11,6 +11,10 @@ const localization = {
       label: 'English (English)',
     },
     {
+      code: 'pl',
+      label: 'Polish (Polski)',
+    },
+    {
       code: 'es',
       label: 'Spanish (Español)',
     },
@@ -19,13 +23,12 @@ const localization = {
       label: 'German (Deutsch)',
     },
     {
-      code: 'ja',
-      label: 'Japanese (日本語)',
+      code: 'it',
+      label: 'Italian (Italiano)',
     },
     {
-      code: 'ar',
-      label: 'Arabic (العربية)',
-      rtl: true,
+      code: 'ru',
+      label: 'Russian (Русский)',
     },
   ],
 }
