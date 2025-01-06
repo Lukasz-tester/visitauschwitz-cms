@@ -26,7 +26,6 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
-import { seedHandler } from './endpoints/seedHandler'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
@@ -56,7 +55,6 @@ export default buildConfig({
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
-      afterDashboard: ['@/components/AfterDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -126,7 +124,7 @@ export default buildConfig({
   globals: [Header, Footer],
   logger: {
     destination: process.stdout,
-    options: { level : 'info' },
+    options: { level: 'info' },
   },
   plugins: [
     redirectsPlugin({
