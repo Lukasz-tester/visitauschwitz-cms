@@ -26,7 +26,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { revalidatePath } from 'next/cache'
 import { revalidateHome } from './hooks/revalidateHome'
 
 export const Posts: CollectionConfig = {
