@@ -55,7 +55,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .map(([, value]) => `(max-width: ${value}px) ${value}px`)
         .join(', ')
 
-  console.log('\nimg:\n',props,'\n\n')
+  // let's return img objects to check if they are passed on
+  //  console.log('\nimg:\n',props,'\n\n')
 
   return (
     <NextImage

@@ -14,7 +14,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
   const t = useTranslations()
 
   return (
-    <nav className="flex gap-3 items-center">
+    <nav className="flex gap-6 items-center">
       <NavItems header={header} />
       <LocaleSwitcher />
       <Link href="/search">

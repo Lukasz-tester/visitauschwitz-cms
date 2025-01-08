@@ -7,6 +7,7 @@ import { SearchIcon } from 'lucide-react'
 import type { Header as HeaderType } from '@/payload-types'
 import NavItems from '../NavItems'
 import { Logo } from '@/components/ui/Icons'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -36,8 +37,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               <NavItems header={header} />
             </div>
           </div>
-          <div className="flex fixed bottom-20 right-4">
+          <div className="flex flex-col gap-4 fixed bottom-20 right-4">
             <LocaleSwitcher />
+            <ThemeSelector />
           </div>
           <div className="flex fixed bottom-8 left-5">
             <Logo />
