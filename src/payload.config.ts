@@ -36,6 +36,8 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import localization from './i18n/localization'
 
+// import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -205,4 +207,17 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  // email: nodemailerAdapter({
+  //   defaultFromAddress: 'info@payloadcms.com',
+  //   defaultFromName: 'Payload',
+  //   // Nodemailer transportOptions
+  //   transportOptions: {
+  //     host: process.env.SMTP_HOST,
+  //     port: 587,
+  //     auth: {
+  //       user: process.env.SMTP_USER,
+  //       pass: process.env.SMTP_PASS,
+  //     },
+  //   },
+  // }),
 })

@@ -14,6 +14,9 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
 
   const navItems = footer?.navItems || []
 
+  const date = new Date()
+  const year = date.getFullYear()
+
   return (
     <footer className="border-t border-border bg-black dark:bg-card text-white">
       <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
@@ -30,6 +33,7 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
           </nav>
         </div>
       </div>
+      <div className="text-center p-4 text-sm text-slate-500">© {year} visitauschwitz.info</div>
     </footer>
   )
 }
