@@ -17,6 +17,7 @@ import {
   IS_UNDERLINE,
 } from './nodeFormat'
 import type { Page } from '@/payload-types'
+import { OpeningHoursBlock, type Props as OpeningHoursProps } from '@/blocks/OpeningHours/Component'
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -25,6 +26,7 @@ export type NodeTypes =
       | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
       | BannerBlockProps
       | CodeBlockProps
+      | OpeningHoursProps
     >
 
 type Props = {
@@ -108,6 +110,8 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           switch (blockType) {
             case 'cta':
               return <CallToActionBlock key={index} {...block} />
+            case 'oh':
+              return <OpeningHoursBlock key={index} {...block} />
             case 'mediaBlock':
               return (
                 <MediaBlock

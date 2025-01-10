@@ -9,18 +9,25 @@ import { SearchIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import LocaleSwitcher from '../LocaleSwitcher'
 import NavItems from '../NavItems'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
   const t = useTranslations()
 
   return (
-    <nav className="flex gap-6 items-center">
-      <NavItems header={header} />
-      <LocaleSwitcher />
-      <Link href="/search">
-        <span className="sr-only">{t('search')}</span>
-        <SearchIcon className="w-5 text-primary" />
-      </Link>
+    <nav className="flex-wrap">
+      <div className="flex items-center">
+        <NavItems header={header} />
+
+        <Link href="/search">
+          <span className="sr-only">{t('search')}</span>
+          <SearchIcon className="w-6 dark:text-white" />
+        </Link>
+      </div>
+      <div className="flex items-center right-4 absolute text-sm text-slate-500">
+        <LocaleSwitcher />
+        <ThemeSelector />
+      </div>
     </nav>
   )
 }

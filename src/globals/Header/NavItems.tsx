@@ -9,9 +9,9 @@ const NavItems: React.FC<{ header: HeaderType }> = ({ header }) => {
 
   return (
     <>
-      {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="link" />
-      })}
+      {navItems.map(({ link }, i) => (
+        <CMSLink key={i} {...link} appearance="link" className="pr-6 text-lg" />
+      ))}
     </>
   )
 }

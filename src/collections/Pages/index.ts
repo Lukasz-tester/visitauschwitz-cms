@@ -7,6 +7,7 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -72,7 +73,7 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               // localized: true,   "leave it this way or layout will reset for each language"
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, OpeningHours],
               required: true,
             },
           ],

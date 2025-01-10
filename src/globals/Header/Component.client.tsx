@@ -34,14 +34,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
   const isWideScreen = useMediaQuery('(min-width: 768px)')
 
   return (
-    <header
-      className="container relative z-20 py-8 flex justify-end gap-2"
-      {...(theme ? { 'data-theme': theme } : {})}
-    >
-      <Link href="/" className="mr-auto">
-        <Logo />
-      </Link>
-      {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller header={header} />}
+    <header className="pr-8 relative z-20 py-5 flex" {...(theme ? { 'data-theme': theme } : {})}>
+      <>
+        <Link href="/" className="ml-3 mr-auto">
+          <Logo />
+        </Link>
+        {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller header={header} />}
+      </>
     </header>
   )
 }

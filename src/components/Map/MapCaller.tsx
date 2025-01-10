@@ -13,7 +13,7 @@ function MapCaller(props) {
   return (
     <>
       <button
-        className="w-12 h-12 flex items-center justify-center fixed bottom-4 right-4 text-white z-[1000]"
+        className="w-12 h-12 flex items-center justify-center fixed bottom-4 right-6 dark:text-white text-lg z-[1000]"
         onClick={() => setModalOpen(!modalOpen)}
       >
         MAP
