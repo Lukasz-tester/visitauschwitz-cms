@@ -1,8 +1,8 @@
 {
   "date-published": "Fecha de publicación",
   "author": "Autor",
-  "page-not-found": "No se encontró esta página.",
-  "go-home": "Ir a inicio",
+  "page-not-found": "No se ha encontrado esta página.",
+  "go-home": "Ir a la página de inicio",
   "loading": "Cargando, por favor espere...",
   "posts": "Publicaciones",
   "post": "Publicación",
@@ -12,5 +12,6 @@
   "dashboard": "Panel de control",
   "previous": "Anterior",
   "next": "Siguiente",
-  "more-pages": "Más páginas"
+  "more-pages": "Más páginas",
+  "contact": "Contacto"
 }

@@ -20,20 +20,23 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
   return (
     <footer className="border-t border-border bg-black dark:bg-card text-white">
       <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <Logo />
-        </Link>
-
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <ThemeSelector />
-          <nav className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col items-start gap-4">
+          <nav className="flex flex-col gap-6">
             {navItems.map(({ link }, i) => {
               return <CMSLink className="text-white" key={i} {...link} />
             })}
           </nav>
+          <ThemeSelector />
         </div>
       </div>
-      <div className="text-center p-4 text-sm text-slate-500">© {year} visitauschwitz.info</div>
+      <div className=" items-center p-4 gap-5 text-sm text-slate-500 flex-col flex">
+        <>
+          <Link className="flex items-center" href="/">
+            <Logo />
+          </Link>
+        </>
+        <>© {year} All Rights Reserved</>
+      </div>
     </footer>
   )
 }

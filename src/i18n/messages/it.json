@@ -1,16 +1,17 @@
 {
   "date-published": "Data di pubblicazione",
   "author": "Autore",
-  "page-not-found": "La sua pagina non è stata trovata",
-  "go-home": "Vai alla home",
-  "loading": "Caricamento...",
+  "page-not-found": "Questa pagina non è stata trovata.",
+  "go-home": "Vai alla homepage",
+  "loading": "Caricamento, attendere prego...",
   "posts": "Posti",
-  "post": "Posta",
+  "post": "Post",
   "showing": "Mostrando",
   "of": "di",
   "search": "Ricerca",
   "dashboard": "Plancia di comando",
   "previous": "Precedente",
   "next": "Avanti",
-  "more-pages": "Altre pagine"
+  "more-pages": "Altre pagine",
+  "contact": "Contatto"
 }

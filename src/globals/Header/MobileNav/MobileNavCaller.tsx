@@ -9,8 +9,12 @@ import NavItems from '../NavItems'
 import { Logo } from '@/components/ui/Icons'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
+import { useTranslations } from 'next-intl'
+
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
   const [modalOpen, setModalOpen] = useState(false)
+
+  const t = useTranslations()
 
   return (
     <>
@@ -37,12 +41,17 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               <NavItems header={header} />
             </div>
           </div>
-          <div className="flex flex-col gap-4 fixed bottom-20 right-4 text-sm items-end text-slate-500">
+          <div className="flex flex-col gap-4 fixed bottom-24 right-4 text-lg items-end text-slate-500">
             <LocaleSwitcher />
             <ThemeSelector />
+            <a className="pr-5 pt-2" href="/contact">
+              {t('contact')}
+            </a>
           </div>
           <div className="flex fixed bottom-8 left-5">
-            <Logo />
+            <Link href="/" onClick={() => setModalOpen(false)}>
+              <Logo />
+            </Link>
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 {
   "date-published": "Data publikacji",
   "author": "Autor",
-  "page-not-found": "Nie",
+  "page-not-found": "Nie odnaleziono strony",
   "go-home": "Do strony głównej",
   "loading": "Ładowanie, proszę poczekać...",
   "posts": "Posty",
@@ -12,5 +12,6 @@
   "dashboard": "Panel nawigacji",
   "previous": "Poprzedni",
   "next": "Następny",
-  "more-pages": "Więcej stron"
+  "more-pages": "Więcej stron",
+  "contact": "Kontakt"
 }
