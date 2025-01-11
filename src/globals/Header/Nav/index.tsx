@@ -24,7 +24,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
           <SearchIcon className="w-6 dark:text-white" />
         </Link>
       </div>
-      <div className="flex items-center right-4 absolute text-sm text-slate-500">
+      <div className="flex pt-1 items-center right-4 absolute text-sm text-slate-500">
         <LocaleSwitcher />
         <ThemeSelector />
       </div>

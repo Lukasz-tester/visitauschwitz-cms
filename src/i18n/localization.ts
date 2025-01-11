@@ -27,8 +27,8 @@ const localization = {
       label: 'Italian (Italiano)',
     },
     {
-      code: 'ru',
-      label: 'Russian (Русский)',
+      code: 'fr',
+      label: 'French (Français)',
     },
   ],
 }
