@@ -55,9 +55,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .map(([, value]) => `(max-width: ${value}px) ${value}px`)
         .join(', ')
 
-  // let's return img objects to check if they are passed on
-  //  console.log('\nimg:\n',props,'\n\n')
-
   return (
     <NextImage
       alt={alt || ''}
@@ -72,7 +69,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         }
       }}
       priority={priority}
-      quality={90}
+      quality={40}
       sizes={sizes}
       src={src}
       width={!fill ? width : undefined}
