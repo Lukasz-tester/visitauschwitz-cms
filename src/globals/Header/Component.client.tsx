@@ -36,7 +36,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
   return (
     <header className="pr-8 relative z-20 py-5 flex" {...(theme ? { 'data-theme': theme } : {})}>
       <>
-        <Link href="/" className="ml-3 mr-auto">
+        <Link href="/" className="ml-5 mr-auto">
           <Logo />
         </Link>
         {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller header={header} />}

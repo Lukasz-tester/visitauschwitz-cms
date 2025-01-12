@@ -21,7 +21,7 @@ export const ContentBlock: React.FC<
     oneThird: '4',
     twoThirds: '8',
   }
-
+  // each content block receives unique id = blockName
   return (
     <div className="container my-16" id={props.blockName || undefined}>
       <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
