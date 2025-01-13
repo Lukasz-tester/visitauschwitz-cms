@@ -13,9 +13,15 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
     <div className="relative -mt-[10.4rem] flex items-end text-white">
       <div className="container mb-8 z-10 relative">
         <div className="max-w-[34rem]">
-          {richText && <RichText className="mb-6" content={richText} enableGutter={false} />}
+          {richText && (
+            <RichText
+              className="mb-4 pl-3 pb-2  text-white from-slate-700 via-transparent bg-gradient-to-tr rounded"
+              content={richText}
+              enableGutter={false}
+            />
+          )}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex gap-4">
+            <ul className="flex gap-4 mb-3">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
@@ -27,7 +33,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-[95vh] select-none">
+      <div className="min-h-[90vh] select-none">
         {media && typeof media === 'object' && (
           <React.Fragment>
             <Media fill imgClassName="-z-10 object-cover" priority resource={media} />

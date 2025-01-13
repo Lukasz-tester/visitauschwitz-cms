@@ -24,7 +24,10 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         </Link>
       </div>
       <div className="flex p-1 items-center right-4 gap-2 absolute text-sm text-slate-500">
-        <a href="/contact">{t('contact')}</a>
+        <a href="/contact">
+          {/* maybe className="text-[#E0713B]" for brand color */}
+          {t('contact')}
+        </a>
         <LocaleSwitcher />
         <ThemeSelector />
       </div>
