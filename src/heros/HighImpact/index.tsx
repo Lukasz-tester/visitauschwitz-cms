@@ -16,7 +16,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <div className="max-w-[34rem]">
           {richText && (
             <RichText
-              className="mb-4 pl-3 pb-2  text-white rounded
+              className="mb-4 pl-3 pb-2  text-white rounded 
+              md:prose-h1:text-6xl md:prose-p:text-lg lg:prose-h1:text-7xl
               from-slate-500 via-slate-700 via-25% bg-gradient-to-tr to-85%"
               content={richText}
               enableGutter={false}
