@@ -5,6 +5,7 @@ import RichText from '@/components/RichText'
 import type { Page } from '@/payload-types'
 
 import { CMSLink } from '../../components/Link'
+import { ImageMedia } from '@/components/Media/ImageMedia'
 
 type Props = Extract<Page['layout'][0], { blockType: 'content' }>
 
@@ -28,7 +29,7 @@ export const ContentBlock: React.FC<
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, size } = col
+            const { enableLink, enableMedia, link, richText, richTextEnd, size, media } = col
 
             return (
               <div
@@ -37,9 +38,17 @@ export const ContentBlock: React.FC<
                 })}
                 key={index}
               >
-                {richText && <RichText content={richText} enableGutter={false} />}
+                <div className="mb-8">
+                  {richText && (
+                    <RichText className="mb-3" content={richText} enableGutter={false} />
+                  )}
 
-                {enableLink && <CMSLink {...link} />}
+                  {enableLink && <CMSLink className="mb-4" {...link} />}
+                  {enableMedia && <ImageMedia resource={media} />}
+                  {richTextEnd && (
+                    <RichText className="mt-3" content={richTextEnd} enableGutter={false} />
+                  )}
+                </div>
               </div>
             )
           })}

@@ -7,6 +7,7 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { ImageMedia } from '@/components/Media/ImageMedia'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   return (
@@ -15,7 +16,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <div className="max-w-[34rem]">
           {richText && (
             <RichText
-              className="mb-4 pl-3 pb-2  text-white from-slate-700 via-transparent bg-gradient-to-tr rounded"
+              className="mb-4 pl-3 pb-2  text-white rounded
+              from-slate-500 via-slate-700 via-25% bg-gradient-to-tr to-85%"
               content={richText}
               enableGutter={false}
             />
@@ -33,11 +35,15 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-[90vh] select-none">
+      <div className="min-h-screen select-none">
         {media && typeof media === 'object' && (
           <React.Fragment>
-            <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-full from-white from-10% via-transparent via-25% bg-gradient-to-b dark:from-black dark:via-transparent dark:to-black" />
+            <ImageMedia fill imgClassName="-z-1000 object-cover" priority resource={media} />
+            <div
+              className="absolute pointer-events-none left-0 bottom-0 w-full h-full bg-gradient-to-b
+            from-white via-35% via-transparent 
+            dark:from-black dark:from-0% dark:via-transparent dark:to-black"
+            />
           </React.Fragment>
         )}
       </div>

@@ -253,6 +253,23 @@ export interface ContentBlock {
            */
           appearance?: ('default' | 'outline') | null;
         };
+        enableMedia?: boolean | null;
+        media?: (string | null) | Media;
+        richTextEnd?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -885,6 +902,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
             };
+        enableMedia?: T;
+        media?: T;
+        richTextEnd?: T;
         id?: T;
       };
   id?: T;

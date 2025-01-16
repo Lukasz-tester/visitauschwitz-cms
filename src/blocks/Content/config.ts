@@ -8,6 +8,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { media } from '@/fields/media'
 
 const columnFields: Field[] = [
   {
@@ -60,6 +61,33 @@ const columnFields: Field[] = [
       },
     },
   }),
+  {
+    name: 'enableMedia',
+    type: 'checkbox',
+  },
+  media({
+    overrides: {
+      admin: {
+        condition: (_, { enableMedia }) => Boolean(enableMedia),
+      },
+    },
+  }),
+  {
+    name: 'richTextEnd',
+    type: 'richText',
+    localized: true,
+    editor: lexicalEditor({
+      features: ({ rootFeatures }) => {
+        return [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ]
+      },
+    }),
+    label: false,
+  },
 ]
 
 export const Content: Block = {
