@@ -114,6 +114,9 @@ export default {
               fontWeight: 'normal',
               marginBottom: '0.25em',
             },
+            p: {
+              fontSize: '1.1rem',
+            },
           },
         },
       }),

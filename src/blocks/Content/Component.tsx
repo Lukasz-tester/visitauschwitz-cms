@@ -33,14 +33,18 @@ export const ContentBlock: React.FC<
 
             return (
               <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
+                className={cn(` mt-10 col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
                   'md:col-span-2': size !== 'full',
                 })}
                 key={index}
               >
-                <div className="mb-8">
+                <div className="">
                   {richText && (
-                    <RichText className="mb-3" content={richText} enableGutter={false} />
+                    <RichText
+                      className="md:prose-h2:text-4xl prose-h2:mt-1"
+                      content={richText}
+                      enableGutter={false}
+                    />
                   )}
 
                   {enableLink && <CMSLink className="mb-4" {...link} />}

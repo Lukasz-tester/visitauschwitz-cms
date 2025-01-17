@@ -20,10 +20,10 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         <NavItems header={header} />
         <Link href="/search">
           <span className="sr-only">{t('search')}</span>
-          <SearchIcon className="w-6 dark:text-white" />
+          <SearchIcon className="ml-4 w-6 dark:text-white" />
         </Link>
       </div>
-      <div className="flex p-1 items-center right-4 gap-2 absolute text-sm text-slate-500">
+      <div className="flex p-1 items-center right-4 gap-2 absolute text-sm lg:text-base text-slate-500">
         <a href="/contact">
           {/* maybe className="text-[#E0713B]" for brand color */}
           {t('contact')}
