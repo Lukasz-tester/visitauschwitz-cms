@@ -28,7 +28,7 @@ export const ContentBlock: React.FC<
     <div className="container" id={props.blockName || undefined}>
       {heading && (
         <RichText
-          className="lg:text-center py-11 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
+          className="lg:pl-56 py-11 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
           content={heading}
           enableGutter={false}
         />
