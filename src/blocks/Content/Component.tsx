@@ -14,7 +14,7 @@ export const ContentBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { columns } = props
+  const { columns, heading } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -25,8 +25,15 @@ export const ContentBlock: React.FC<
   }
   // each content block receives unique id = blockName
   return (
-    <div className="container my-16 bg-slate-900" id={props.blockName || undefined}>
-      <div className="bg-slate-800 grid  grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+    <div className="container" id={props.blockName || undefined}>
+      {heading && (
+        <RichText
+          className="lg:text-center py-11 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
+          content={heading}
+          enableGutter={false}
+        />
+      )}
+      <div className="grid  grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
@@ -35,7 +42,7 @@ export const ContentBlock: React.FC<
             return (
               <div
                 className={cn(
-                  `mt-10 bg-slate-700  col-span-4 lg:col-span-${colsSpanClasses[size!]}`,
+                  `col-span-4 lg:col-span-${colsSpanClasses[size!]}`,
                   {
                     'md:col-span-2': size !== 'full' && size !== 'twoThirds',
                   },
@@ -47,7 +54,7 @@ export const ContentBlock: React.FC<
               >
                 {richText && (
                   <RichText
-                    className="md:prose-h2:text-3xl lg:prose-h2:text-4xl prose-h2:mt-1"
+                    className="mb-2 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
                     content={richText}
                     enableGutter={false}
                   />
@@ -56,7 +63,7 @@ export const ContentBlock: React.FC<
                 {enableLink && <CMSLink className="mb-4" {...link} />}
                 {enableMedia && <ImageMedia resource={media} />}
                 {richTextEnd && (
-                  <RichText className="mt-3" content={richTextEnd} enableGutter={false} />
+                  <RichText className="my-4" content={richTextEnd} enableGutter={false} />
                 )}
               </div>
             )
