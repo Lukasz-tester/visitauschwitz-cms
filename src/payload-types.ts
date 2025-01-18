@@ -222,7 +222,7 @@ export interface CallToActionBlock {
 export interface ContentBlock {
   columns?:
     | {
-        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        size?: ('oneThird' | 'half' | 'twoThirds' | 'full' | 'oneSixth') | null;
         richText?: {
           root: {
             type: string;

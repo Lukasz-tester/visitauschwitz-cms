@@ -32,6 +32,10 @@ const columnFields: Field[] = [
         label: 'Full',
         value: 'full',
       },
+      {
+        label: 'One Sixth',
+        value: 'oneSixth',
+      },
     ],
   },
   {
