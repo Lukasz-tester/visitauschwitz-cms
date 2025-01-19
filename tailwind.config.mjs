@@ -27,12 +27,12 @@ export default {
     container: {
       center: true,
       padding: {
-        '2xl': '2rem',
-        DEFAULT: '1rem',
-        lg: '2rem',
+        '2xl': '4rem',
+        DEFAULT: '1.5rem',
+        lg: '3rem',
         md: '2rem',
-        sm: '1rem',
-        xl: '2rem',
+        sm: '2rem',
+        xl: '3rem',
       },
       screens: {
         '2xl': '86rem',
@@ -113,9 +113,17 @@ export default {
               fontSize: '3rem',
               fontWeight: 'normal',
               marginBottom: '0.25em',
+            },            
+            h2: {
+              fontSize: '2rem',
+              fontWeight: 'normal',
+            },            
+            h3: {
+              fontSize: '1.5rem',
+              fontWeight: 'normal',
             },
             p: {
-              fontSize: '1.1rem',
+              fontSize: '1.125rem',
             },
           },
         },

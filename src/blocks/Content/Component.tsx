@@ -28,12 +28,14 @@ export const ContentBlock: React.FC<
     <div className="container" id={props.blockName || undefined}>
       {heading && (
         <RichText
-          className="lg:pl-56 py-11 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
+          className="pt-11 pb-9
+          md:px-[17.3%]  md:prose-h2:text-4xl
+          xl:prose-h2:text-5xl xl:prose-h3:text-3xl"
           content={heading}
           enableGutter={false}
         />
       )}
-      <div className="grid  grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
@@ -54,7 +56,7 @@ export const ContentBlock: React.FC<
               >
                 {richText && (
                   <RichText
-                    className="mb-2 md:prose-h2:text-3xl lg:prose-h2:text-4xl"
+                    className="md:prose-h2:text-3xl lg:prose-h2:text-4xl xl:prose-h3:text-3xl"
                     content={richText}
                     enableGutter={false}
                   />
@@ -62,9 +64,7 @@ export const ContentBlock: React.FC<
 
                 {enableLink && <CMSLink className="mb-4" {...link} />}
                 {enableMedia && <ImageMedia resource={media} />}
-                {richTextEnd && (
-                  <RichText className="my-4" content={richTextEnd} enableGutter={false} />
-                )}
+                {richTextEnd && <RichText content={richTextEnd} enableGutter={false} />}
               </div>
             )
           })}
