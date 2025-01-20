@@ -99,6 +99,10 @@ export const Content: Block = {
   interfaceName: 'ContentBlock',
   fields: [
     {
+      name: 'changeBackground',
+      type: 'checkbox',
+    },
+    {
       name: 'heading',
       type: 'richText',
       localized: true,

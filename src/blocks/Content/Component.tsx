@@ -14,7 +14,7 @@ export const ContentBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { columns, heading } = props
+  const { columns, heading, changeBackground } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -25,49 +25,55 @@ export const ContentBlock: React.FC<
   }
   // each content block receives unique id = blockName
   return (
-    <div className="container" id={props.blockName || undefined}>
-      {heading && (
-        <RichText
-          className="pt-11 pb-9
+    <div
+      className={cn({
+        'bg-accent pb-11': changeBackground,
+      })}
+    >
+      <div className="container" id={props.blockName || undefined}>
+        {heading && (
+          <RichText
+            className="pt-11 pb-9
           md:px-[17.3%]  md:prose-h2:text-4xl
           xl:prose-h2:text-5xl xl:prose-h3:text-3xl"
-          content={heading}
-          enableGutter={false}
-        />
-      )}
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11">
-        {columns &&
-          columns.length > 0 &&
-          columns.map((col, index) => {
-            const { enableLink, enableMedia, link, richText, richTextEnd, size, media } = col
+            content={heading}
+            enableGutter={false}
+          />
+        )}
+        <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11">
+          {columns &&
+            columns.length > 0 &&
+            columns.map((col, index) => {
+              const { enableLink, enableMedia, link, richText, richTextEnd, size, media } = col
 
-            return (
-              <div
-                className={cn(
-                  `col-span-4 lg:col-span-${colsSpanClasses[size!]}`,
-                  {
-                    'md:col-span-2': size !== 'full' && size !== 'twoThirds',
-                  },
-                  {
-                    'hidden lg:block': size === 'oneSixth',
-                  },
-                )}
-                key={index}
-              >
-                {richText && (
-                  <RichText
-                    className="md:prose-h2:text-3xl lg:prose-h2:text-4xl xl:prose-h3:text-3xl"
-                    content={richText}
-                    enableGutter={false}
-                  />
-                )}
+              return (
+                <div
+                  className={cn(
+                    `col-span-4 lg:col-span-${colsSpanClasses[size!]}`,
+                    {
+                      'md:col-span-2': size !== 'full' && size !== 'twoThirds',
+                    },
+                    {
+                      'hidden lg:block': size === 'oneSixth',
+                    },
+                  )}
+                  key={index}
+                >
+                  {richText && (
+                    <RichText
+                      className="md:prose-h2:text-3xl lg:prose-h2:text-4xl xl:prose-h3:text-3xl"
+                      content={richText}
+                      enableGutter={false}
+                    />
+                  )}
 
-                {enableLink && <CMSLink className="mb-4" {...link} />}
-                {enableMedia && <ImageMedia resource={media} />}
-                {richTextEnd && <RichText content={richTextEnd} enableGutter={false} />}
-              </div>
-            )
-          })}
+                  {enableLink && <CMSLink className="mb-4" {...link} />}
+                  {enableMedia && <ImageMedia resource={media} />}
+                  {richTextEnd && <RichText content={richTextEnd} enableGutter={false} />}
+                </div>
+              )
+            })}
+        </div>
       </div>
     </div>
   )

@@ -220,6 +220,7 @@ export interface CallToActionBlock {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
+  changeBackground?: boolean | null;
   heading?: {
     root: {
       type: string;
@@ -901,6 +902,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
+  changeBackground?: T;
   heading?: T;
   columns?:
     | T

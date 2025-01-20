@@ -31,7 +31,7 @@ export default {
         DEFAULT: '1.5rem',
         lg: '3rem',
         md: '2rem',
-        sm: '2rem',
+        sm: '1.2rem',
         xl: '3rem',
       },
       screens: {
