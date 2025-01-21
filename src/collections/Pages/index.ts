@@ -7,12 +7,14 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
+
+import { OpeningHours } from '@/blocks/OpeningHours/config'
+import { Accordion } from '@/blocks/Accordion/config'
 
 import {
   MetaDescriptionField,
@@ -21,6 +23,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -73,7 +76,15 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               // localized: true,   "leave it this way or layout will reset for each language"
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, OpeningHours],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                OpeningHours,
+                Accordion,
+              ],
               required: true,
             },
           ],

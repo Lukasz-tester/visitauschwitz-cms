@@ -10,6 +10,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component'
+import { AccordionBlock } from './Accordion/Component.client'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -18,6 +19,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
+  accordion: AccordionBlock,
 }
 
 export const RenderBlocks: React.FC<{

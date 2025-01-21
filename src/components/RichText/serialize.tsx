@@ -6,6 +6,7 @@ import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import type { BannerBlock as BannerBlockProps } from '@/payload-types'
+import { OpeningHoursBlock, type Props as OpeningHoursProps } from '@/blocks/OpeningHours/Component'
 
 import {
   IS_BOLD,
@@ -17,7 +18,6 @@ import {
   IS_UNDERLINE,
 } from './nodeFormat'
 import type { Page } from '@/payload-types'
-import { OpeningHoursBlock, type Props as OpeningHoursProps } from '@/blocks/OpeningHours/Component'
 
 export type NodeTypes =
   | DefaultNodeTypes
