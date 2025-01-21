@@ -26,8 +26,8 @@ export const ContentBlock: React.FC<
   // each content block receives unique id = blockName
   return (
     <div
-      className={cn({
-        'bg-accent pb-11': changeBackground,
+      className={cn('my-11 pb-11', {
+        'bg-card': changeBackground,
       })}
     >
       <div className="container" id={props.blockName || undefined}>

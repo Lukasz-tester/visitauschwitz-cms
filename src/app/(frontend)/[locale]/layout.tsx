@@ -60,7 +60,6 @@ export default async function RootLayout({ children, params }: Args) {
               }}
             />
             <LivePreviewListener />
-
             <Header locale={locale} />
             {children}
             <Footer locale={locale} />

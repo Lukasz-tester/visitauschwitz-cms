@@ -9,6 +9,7 @@ import React from 'react'
 import PageClient from './page.client'
 import { TypedLocale } from 'payload'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import Accordion from '@/blocks/Accordion/Component'
 
 export const revalidate = 600
 
@@ -48,6 +49,11 @@ export default async function Page({ params }: Args) {
           totalDocs={posts.totalDocs}
         />
       </div>
+
+      <div>CCCDCDCADSCSACDSACDSACDSA</div>
+      <Accordion />
+
+      <div>CCCDCDCADSCSACDSACDSACDSA</div>
 
       <CollectionArchive posts={posts.docs} />
 

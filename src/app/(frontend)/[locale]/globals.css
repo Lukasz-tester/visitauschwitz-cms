@@ -14,10 +14,10 @@
   }
 
   :root {
-    --background: 230 14% 94%;
+    --background: 240 5% 98%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 240 5% 98%;
+    --card: 240 8% 89%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
@@ -32,7 +32,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 223 13% 83%;
+    --accent: 240 5% 98%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -53,7 +53,7 @@
     --background: 0 0% 0%;
     --foreground: 210 40% 98%;
 
-    --card: 240 6% 10%;
+    --card: 200 6% 10%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222.2 84% 4.9%;
