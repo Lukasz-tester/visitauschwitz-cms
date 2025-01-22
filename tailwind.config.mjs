@@ -28,7 +28,7 @@ export default {
       center: true,
       padding: {
         '2xl': '4rem',
-        DEFAULT: '1.5rem',
+        DEFAULT: '1rem',
         lg: '3rem',
         md: '2rem',
         sm: '1.2rem',
@@ -110,20 +110,24 @@ export default {
             '--tw-prose-body': 'var(--text)',
             '--tw-prose-headings': 'var(--text)',
             h1: {
-              fontSize: '3rem',
+              fontSize: '3.5rem',
               fontWeight: 'normal',
               marginBottom: '0.25em',
             },            
             h2: {
-              fontSize: '2rem',
+              fontSize: '2.5rem',
               fontWeight: 'normal',
             },            
             h3: {
+              fontSize: '2rem',
+              fontWeight: 'normal',
+            },
+            h4: {
               fontSize: '1.5rem',
               fontWeight: 'normal',
             },
             p: {
-              fontSize: '1.125rem',
+              fontSize: '1.2rem',
             },
           },
         },

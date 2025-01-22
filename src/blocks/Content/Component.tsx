@@ -26,7 +26,7 @@ export const ContentBlock: React.FC<
   // each content block receives unique id = blockName
   return (
     <div
-      className={cn('my-11 pb-11', {
+      className={cn('pb-14 pt-3', {
         'bg-card': changeBackground,
       })}
     >
@@ -34,8 +34,8 @@ export const ContentBlock: React.FC<
         {heading && (
           <RichText
             className="pt-11 pb-9
-          md:px-[17.3%]  md:prose-h2:text-4xl
-          xl:prose-h2:text-5xl xl:prose-h3:text-3xl"
+          md:px-[17.3%] md:prose-h2:text-5xl
+          xl:prose-h2:text-6xl xl:prose-h3:text-3xl"
             content={heading}
             enableGutter={false}
           />
