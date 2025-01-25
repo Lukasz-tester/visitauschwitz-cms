@@ -27,17 +27,15 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
       {modalOpen && (
         <div className="fixed inset-0 height-screen p-4 bg-white dark:bg-black z-[10000] flex flex-col gap-6">
           <div onClick={() => setModalOpen(false)}>
-            <div className="rounded bg-blue-900">
-              <div className=" w-12 h-12 flex items-center justify-center fixed top-16 right-4">
-                <Link href="/search">
-                  <SearchIcon className="w-fit text-primary" />
-                </Link>
-              </div>
-              <button className="w-12 h-12 flex items-center justify-center fixed top-3 right-4 text-2xl">
-                X
-              </button>
+            <div className=" w-12 h-12 flex items-center justify-center fixed top-20 right-4">
+              <Link href="/search">
+                <SearchIcon className="w-fit text-primary" />
+              </Link>
             </div>
-            <div className="flex flex-col gap-7 pt-4 text-black dark:text-white">
+            <button className="w-12 h-12 flex items-center justify-center fixed top-5 right-4 text-2xl">
+              X
+            </button>
+            <div className="flex flex-col py-1 text-black dark:text-white">
               <NavItems header={header} />
             </div>
           </div>

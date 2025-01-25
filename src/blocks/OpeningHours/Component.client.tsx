@@ -32,7 +32,7 @@ export const OpeningHoursBlock: React.FC<
   }
   return (
     <div className="container">
-      <div className="md:px-[17.3%] xl:px-[25%] p-11 place-content-center justify-between">
+      <div className="md:px-[17.3%] xl:px-[25%] md:p-11 place-content-center justify-between">
         <div className="text-base mb-8">
           {richText && <RichText content={richText} enableGutter={false} />}
         </div>
