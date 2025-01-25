@@ -36,7 +36,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 import localization from './i18n/localization'
 
-// import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -207,17 +207,13 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // email: nodemailerAdapter({
-  //   defaultFromAddress: 'info@payloadcms.com',
-  //   defaultFromName: 'Payload',
-  //   // Nodemailer transportOptions
-  //   transportOptions: {
-  //     host: process.env.SMTP_HOST,
-  //     port: 587,
-  //     auth: {
-  //       user: process.env.SMTP_USER,
-  //       pass: process.env.SMTP_PASS,
-  //     },
-  //   },
-  // }),
+  email: resendAdapter({
+    defaultFromAddress: 'contact@visitauschwitz.info',
+    defaultFromName: 'Lukasz',
+    apiKey: process.env.RESEND_API || '',
+  }),
+
+  // https://www.youtube.com/watch?v=OtA7bmr1tvI
+  // 10 min
+  // trzeba dodac domain na resend.com (login przez google) i lecimy dalej!
 })
