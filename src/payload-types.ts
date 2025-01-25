@@ -648,22 +648,16 @@ export interface OpeningHoursBlock {
     };
     [k: string]: unknown;
   } | null;
-  links?:
+  description?: string | null;
+  enterBetweenTitle?: string | null;
+  freeFromTitle?: string | null;
+  leaveBeforeTitle?: string | null;
+  months?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
+        month: string;
+        enterBetween?: string | null;
+        freeFrom?: string | null;
+        leaveBefore?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1024,19 +1018,17 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface OpeningHoursBlockSelect<T extends boolean = true> {
   richText?: T;
-  links?:
+  description?: T;
+  enterBetweenTitle?: T;
+  freeFromTitle?: T;
+  leaveBeforeTitle?: T;
+  months?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
+        month?: T;
+        enterBetween?: T;
+        freeFrom?: T;
+        leaveBefore?: T;
         id?: T;
       };
   id?: T;

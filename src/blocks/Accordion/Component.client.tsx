@@ -23,7 +23,7 @@ export const AccordionBlock: React.FC<
 
   return (
     <div
-      className={cn('pb-11', {
+      className={cn('md:px-[17.3%] mx-0 pb-11', {
         'bg-card': changeBackground,
       })}
     >
@@ -31,7 +31,7 @@ export const AccordionBlock: React.FC<
       <div className="container" id={props.blockName || undefined}>
         {heading && (
           <RichText
-            className="py-11 pb-3 lg:mx-32 xl:mx-64
+            className="py-11 pb-3
           md:prose-h2:text-5xl
           xl:prose-h2:text-6xl xl:prose-h3:text-3xl"
             content={heading}
@@ -61,9 +61,9 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
   const contentHeight = React.useRef<HTMLInputElement>(null)
 
   return (
-    <div className="my-1 overflow-clip bg-card rounded border border-border lg:mx-32 xl:mx-64">
+    <div className="mb-1 overflow-clip bg-card rounded border border-card-foreground">
       <button
-        className={`w-full p-4 text-start ease-in-out duration-700
+        className={`w-full p-3 text-start ease-in-out duration-700
           text-xl
           ${isOpen ? 'bg-card-foreground font-semibold' : ''}`}
         onClick={onClick}
@@ -71,13 +71,15 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
         <p>{question}</p>
         {/* <RiArrowDropDownLine className={`arrow ${isOpen ? 'active' : ''}`} /> */}
       </button>
-      <div className={`${isOpen ? 'py-6 ease-in-out duration-700' : 'ease-in-out duration-700'}`}>
+      <div
+        className={`px-4 ${isOpen ? 'py-2 ease-in-out duration-700' : 'ease-in-out duration-700'}`}
+      >
         <div
           className="ease-in-out duration-700 flex"
           ref={contentHeight}
           style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}
         >
-          <RichText content={answer} />
+          <RichText content={answer} enableGutter={false} />
         </div>
       </div>
     </div>

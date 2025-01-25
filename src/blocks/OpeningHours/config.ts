@@ -7,8 +7,6 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { linkGroup } from '../../fields/linkGroup'
-
 export const OpeningHours: Block = {
   slug: 'oh',
   interfaceName: 'OpeningHoursBlock',
@@ -29,12 +27,61 @@ export const OpeningHours: Block = {
       }),
       label: false,
     },
-    linkGroup({
-      appearances: ['default', 'outline'],
-      overrides: {
-        maxRows: 2,
-      },
-    }),
+    {
+      name: 'description',
+      type: 'textarea',
+      localized: true,
+      label: 'Description',
+    },
+    {
+      name: 'enterBetweenTitle',
+      type: 'text',
+      localized: true,
+      label: 'You can enter between',
+    },
+    {
+      name: 'freeFromTitle',
+      type: 'text',
+      localized: true,
+      label: 'Without a guide only after',
+    },
+    {
+      name: 'leaveBeforeTitle',
+      type: 'text',
+      localized: true,
+      label: 'Leave the Museum before',
+    },
+    {
+      name: 'months',
+      type: 'array',
+      fields: [
+        {
+          name: 'month',
+          required: true,
+          type: 'text',
+          localized: true,
+          label: 'Month',
+        },
+        {
+          name: 'enterBetween',
+          type: 'text',
+          localized: true,
+          label: 'Enter Between',
+        },
+        {
+          name: 'freeFrom',
+          type: 'text',
+          localized: true,
+          label: 'Free entry from',
+        },
+        {
+          name: 'leaveBefore',
+          type: 'text',
+          localized: true,
+          label: 'Leave Before',
+        },
+      ],
+    },
   ],
   labels: {
     plural: 'Opening Hours',
