@@ -35,7 +35,7 @@ export const AccordionBlock: React.FC<
           md:prose-h2:text-5xl
           xl:prose-h2:text-6xl xl:prose-h3:text-3xl"
             content={heading}
-            enableGutter={false}
+            enableGutter={true}
           />
         )}
 
