@@ -23,21 +23,13 @@ export const AccordionBlock: React.FC<
 
   return (
     <div
-      className={cn('md:px-[17.3%] mx-0 pb-11', {
+      className={cn('md:px-[17.3%] mx-0 pb-1', {
         'bg-card': changeBackground,
       })}
     >
       {/* each content block receives unique id = blockName */}
       <div className="container" id={props.blockName || undefined}>
-        {heading && (
-          <RichText
-            className="py-11 pb-3
-          md:prose-h2:text-5xl
-          xl:prose-h2:text-6xl xl:prose-h3:text-3xl"
-            content={heading}
-            enableGutter={true}
-          />
-        )}
+        {heading && <RichText className="pt-11 pb-8" content={heading} enableGutter={false} />}
 
         {accordionItems &&
           accordionItems.length > 0 &&
@@ -61,21 +53,20 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
   const contentHeight = React.useRef<HTMLInputElement>(null)
 
   return (
-    <div className="mb-1 overflow-clip bg-card rounded border border-card-foreground">
+    <div
+      className={`[&_*]:ease-in-out [&_*]:duration-700 ease-in-out duration-700 mb-1 overflow-clip bg-card rounded border ${isOpen ? 'border-amber-700' : ''}`}
+    >
       <button
-        className={`w-full p-3 text-start ease-in-out duration-700
-          text-xl
-          ${isOpen ? 'bg-card-foreground font-semibold' : ''}`}
+        className={`w-full p-3 text-start text-xl flex place-content-between
+          ${isOpen ? 'bg-card-foreground' : ''}`}
         onClick={onClick}
       >
         <p>{question}</p>
-        {/* <RiArrowDropDownLine className={`arrow ${isOpen ? 'active' : ''}`} /> */}
+        <div className="font-extrabold">{isOpen ? '<' : '>'}</div>
       </button>
-      <div
-        className={`px-4 ${isOpen ? 'py-2 ease-in-out duration-700' : 'ease-in-out duration-700'}`}
-      >
+      <div className={`px-4 ${isOpen ? 'py-2' : ''}`}>
         <div
-          className="ease-in-out duration-700 flex"
+          className="flex"
           ref={contentHeight}
           style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}
         >

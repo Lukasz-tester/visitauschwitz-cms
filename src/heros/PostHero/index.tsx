@@ -13,8 +13,8 @@ export const PostHero: React.FC<{
   const t = useTranslations()
 
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
+    <div className="md:px-[17.3%] relative -mt-[10.4rem] flex items-end">
+      <div className="container z-10 relative lg:grid text-white pb-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {
@@ -35,12 +35,9 @@ export const PostHero: React.FC<{
               return null
             })}
           </div>
+          <h1 className="mb-6 font-semibold text-5xl lg:text-6xl">{title}</h1>
 
-          <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4 md:gap-16">
+          <div className="flex flex-row gap-4 md:gap-16">
             <div className="flex flex-col gap-4">
               {populatedAuthors && (
                 <div className="flex flex-col gap-1">
@@ -83,7 +80,10 @@ export const PostHero: React.FC<{
         {metaImage && typeof metaImage !== 'string' && (
           <Media fill imgClassName="-z-10 object-cover" resource={metaImage} />
         )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-full opacity-60 from-white from-20% via-transparent via-20% bg-gradient-to-b dark:from-black dark:via-transparent dark:to-black" />
+        <div
+          className="absolute pointer-events-none left-0 bottom-0 w-full h-full
+          bg-gradient-to-b from-10% from-background via-30% via-transparent to-70% to-black opacity-80"
+        />
       </div>
     </div>
   )

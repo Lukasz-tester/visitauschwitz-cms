@@ -1,3 +1,5 @@
+import { Heading } from 'lucide-react';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -111,9 +113,9 @@ export default {
             '--tw-prose-headings': 'var(--text)',
             h1: {
               fontSize: '3.5rem',
-              fontWeight: 'normal',
-              marginBottom: '0.25em',
-            },            
+              // fontWeight: 'normal', 
+              marginBottom: '0rem',
+            },         
             h2: {
               fontSize: '2.5rem',
               fontWeight: 'normal',

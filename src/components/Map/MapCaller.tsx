@@ -21,9 +21,9 @@ function MapCaller(props) {
       {modalOpen && (
         <div className="fixed inset-0 height-screen bg-white dark:text-white dark:bg-black z-[10000] flex flex-col">
           <div className="flex justify-between items-center">
-            <h1 className="container font-bold text-2xl text-center p-2">
+            <div className="container font-bold text-2xl text-center p-2">
               Map of the Auschwitz Memorial
-            </h1>
+            </div>
             <button
               className="w-12 h-12 flex items-center justify-center fixed bottom-4 right-4"
               onClick={() => setModalOpen(false)}
