@@ -6,7 +6,7 @@ import { SearchIcon } from 'lucide-react'
 
 import type { Header as HeaderType } from '@/payload-types'
 import NavItems from '../NavItems'
-import { Logo } from '@/components/ui/Icons'
+import { Favicion } from '@/components/ui/Icons'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 import { useTranslations } from 'next-intl'
@@ -19,7 +19,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <>
       <button
-        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6' : 'bg-background/70 top-3 right-3 rounded-bl-3xl '}  w-14 h-14 flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6 w-14 h-14' : 'bg-background/70 top-0 right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -57,9 +57,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               {t('contact')}
             </a>
           </div>
-          <div className="flex fixed bottom-8 left-5">
+          <div className="flex fixed bottom-8 left-6">
             <Link href="/" onClick={() => setModalOpen(false)}>
-              <Logo />
+              <Favicion />
             </Link>
           </div>
         </div>
