@@ -24,7 +24,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         </Link>
       </div>
 
-      <div className="flex p-1 items-center [&_*]:ease-out [&_*]:duration-700 right-4 gap-2 absolute text-sm lg:text-base text-slate-500">
+      <div className="flex p-1 items-center [&_*]:ease-out [&_*]:duration-300 right-4 gap-2 absolute text-sm lg:text-base text-slate-500">
         <div>
           <a className="text-amber-700 hover:font-bold pr-3" href="/contact">
             {/* maybe className="text-[#E0713B]" for brand color */}

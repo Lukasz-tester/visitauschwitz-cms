@@ -39,7 +39,7 @@ export const Card: React.FC<{
         {!metaImage && <div className="">No image</div>}
         {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="360px" />}
       </div>
-      <div className="p-4">
+      <div className="p-4 opacity-85">
         {showCategories && hasCategories && (
           <div className="uppercase text-sm mb-4">
             {showCategories && hasCategories && (

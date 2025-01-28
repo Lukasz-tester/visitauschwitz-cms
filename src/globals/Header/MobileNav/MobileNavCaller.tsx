@@ -19,7 +19,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <>
       <button
-        className="rounded w-12 h-12 flex items-center justify-center fixed top-3 right-4 z-[1000] dark:text-white text-2xl"
+        className="rounded w-12 h-12 flex items-center justify-center fixed top-3 right-4 z-[1000] dark:text-white/90 text-2xl"
         onClick={() => setModalOpen(!modalOpen)}
       >
         |||

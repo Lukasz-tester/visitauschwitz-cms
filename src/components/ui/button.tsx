@@ -19,11 +19,13 @@ const buttonVariants = cva(
         sm: 'h-9 rounded px-3',
       },
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+        default:
+          'bg-primary/80 text-base text-primary-foreground/90 border border-amber-700 dark:border-amber-700/50 hover:bg-amber-700',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-card hover:text-accent-foreground',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline',
-        outline: 'border border-border bg-background hover:bg-card text-accent-foreground',
+        outline:
+          'bg-background/80 text-base text-accent-foreground/80 border border-amber-700 dark:border-amber-700/50 hover:bg-amber-700',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
       },
     },

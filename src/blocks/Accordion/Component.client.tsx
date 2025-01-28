@@ -54,7 +54,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
 
   return (
     <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 ease-in-out duration-700 mb-1 overflow-clip bg-card rounded border ${isOpen ? 'border-amber-700' : ''}`}
+      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip bg-card rounded border ${isOpen ? 'border-amber-700 dark:border-amber-700/50' : ''}`}
     >
       <button
         className={`w-full p-3 text-start text-xl flex place-content-between
