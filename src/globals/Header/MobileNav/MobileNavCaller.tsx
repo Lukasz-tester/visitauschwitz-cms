@@ -19,22 +19,33 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <>
       <button
-        className="rounded w-12 h-12 flex items-center justify-center fixed top-3 right-4 z-[1000] dark:text-white/90 text-2xl"
+        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6' : 'bg-background/70 top-3 right-3 rounded-bl-3xl '}  w-14 h-14 flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
-        |||
+        <div
+          className={`ease-in-out duration-1000 ${modalOpen ? 'rotate-45 translate-x-2' : 'pb-1'}`}
+        >
+          |
+        </div>
+        <div className={`ease-in-out duration-1000 ${modalOpen ? 'opacity-0 text-amber-500' : ''}`}>
+          |
+        </div>
+        <div
+          className={`ease-in-out duration-1000 ${modalOpen ? '-rotate-45 -translate-x-2' : 'pt-1'}`}
+        >
+          |
+        </div>
       </button>
       {modalOpen && (
-        <div className="fixed inset-0 height-screen p-4 bg-white dark:bg-black z-[10000] flex flex-col gap-6">
+        <div className="fixed inset-0 height-screen p-4 bg-white dark:bg-background z-[1000] flex flex-col gap-6">
           <div onClick={() => setModalOpen(false)}>
-            <div className=" w-12 h-12 flex items-center justify-center fixed top-20 right-4">
+            <div
+              className={`bg-card rounded- w-14 h-14 flex items-center justify-center fixed top-28 right-6`}
+            >
               <Link href="/search">
                 <SearchIcon className="w-fit text-primary" />
               </Link>
             </div>
-            <button className="w-12 h-12 flex items-center justify-center fixed top-5 right-4 text-2xl">
-              X
-            </button>
             <div className="flex flex-col py-1 mr-16">
               <NavItems header={header} />
             </div>
