@@ -6,7 +6,7 @@ import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-import PageClient from './page.client'
+// import PageClient from './page.client'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { TypedLocale } from 'payload'
@@ -40,7 +40,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <div className="pt-24 pb-24">
-      <PageClient />
+      {/* <PageClient /> */}
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>{t('posts')}</h1>

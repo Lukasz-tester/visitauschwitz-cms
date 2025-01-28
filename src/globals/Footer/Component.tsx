@@ -17,7 +17,7 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
   const year = date.getFullYear()
 
   return (
-    <footer className="border-t border-border bg-black dark:bg-card text-white">
+    <footer className="border-t border-border bg-black dark:bg-card">
       <div className="container py-8 gap-8 flex flex-col">
         <div className="flex flex-col items-start gap-4">
           <nav className="flex flex-col gap-6 text-lg">

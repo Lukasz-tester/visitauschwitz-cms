@@ -40,7 +40,7 @@ export const OpeningHoursBlock: React.FC<
           <div className="mb-8">
             {description && <div className="mb-6 mr-6">{description}</div>}
             <Select onValueChange={onMonthChange} value={value}>
-              <SelectTrigger className="w-auto bg-card md:pl-3 border border-border">
+              <SelectTrigger className="w-auto bg-card px-3 border border-border">
                 <SelectValue placeholder={currentMonth} />
               </SelectTrigger>
               <SelectContent>

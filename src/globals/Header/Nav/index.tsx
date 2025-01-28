@@ -24,20 +24,21 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         </Link>
       </div>
 
-      <div className="flex p-1 items-center [&_*]:ease-out [&_*]:duration-300 right-4 gap-2 absolute text-sm lg:text-base text-slate-500">
-        <div>
-          <a className="text-amber-700 hover:font-bold pr-3" href="/contact">
-            {/* maybe className="text-[#E0713B]" for brand color */}
+      <div className="flex items-center [&_*]:ease-in-out [&_*]:duration-200 right-4 absolute text-sm lg:text-base text-slate-500">
+        <div className="text-amber-700 hover:text-slate-500">
+          <a className="px-3" href="/contact">
             {t('contact')}
           </a>
         </div>
-        <div className="hover:font-bold">
-          <a href="/faq">FAQ</a>
+        <div className="hover:text-amber-700">
+          <a className="pl-3 pr-4" href="/faq">
+            FAQ
+          </a>
         </div>
-        <div className="hover:font-bold">
+        <div className="hover:text-amber-700">
           <LocaleSwitcher />
         </div>
-        <div className="hover:font-bold">
+        <div className="hover:text-amber-700">
           <ThemeSelector />
         </div>
       </div>

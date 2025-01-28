@@ -34,7 +34,7 @@ function LocaleSwitcher() {
 
   return (
     <Select onValueChange={onSelectChange} value={locale}>
-      <SelectTrigger className="w-auto bg-transparent pl-0 md:pl-3 border-none">
+      <SelectTrigger className="w-auto bg-transparent border-none p-2">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>
