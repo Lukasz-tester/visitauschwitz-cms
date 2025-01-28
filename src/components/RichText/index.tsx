@@ -36,7 +36,7 @@ const RichText: React.FC<Props> = ({
           'max-w-none ': !enableGutter,
           'prose dark:prose-invert opacity-85 dark:opacity-80 prose-a:decoration-amber-700':
             enableProse,
-          'lg:prose-h1:text-7xl opacity-90': styleH1,
+          'md:prose-h1:text-7xl opacity-90': styleH1,
           'lg:prose-h2:text-5xl ': styleH2,
           'lg:prose-h3:text-4xl ': styleH3,
           'lg:prose-h4:text-3xl ': styleH4,

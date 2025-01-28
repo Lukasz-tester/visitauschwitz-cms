@@ -110,7 +110,7 @@ export default {
             '--tw-prose-body': 'var(--text)',
             '--tw-prose-headings': 'var(--text)',
             h1: {
-              fontSize: '3.5rem',
+              fontSize: '3.2rem',
               // fontWeight: 'normal',
               marginBottom: '0rem',
             },

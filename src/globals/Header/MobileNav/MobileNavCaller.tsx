@@ -35,7 +35,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             <button className="w-12 h-12 flex items-center justify-center fixed top-5 right-4 text-2xl">
               X
             </button>
-            <div className="flex flex-col py-1 text-black dark:text-white">
+            <div className="flex flex-col py-1 mr-16 text-black dark:text-white">
               <NavItems header={header} />
             </div>
           </div>
