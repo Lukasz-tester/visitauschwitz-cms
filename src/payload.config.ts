@@ -212,8 +212,4 @@ export default buildConfig({
     defaultFromName: 'Lukasz',
     apiKey: process.env.RESEND_API || '',
   }),
-
-  // https://www.youtube.com/watch?v=OtA7bmr1tvI
-  // 10 min
-  // trzeba dodac domain na resend.com (login przez google) i lecimy dalej!
 })

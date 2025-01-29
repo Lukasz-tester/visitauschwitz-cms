@@ -14,6 +14,5 @@ export const useMediaQuery = (query) => {
 
     return () => mediaMatch.removeEventListener('change', handler)
   })
-
   return matches
 }

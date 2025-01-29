@@ -20,12 +20,12 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-primary/80 text-base text-primary-foreground/90 border border-amber-700 dark:border-amber-700/50 hover:bg-amber-800',
+          'bg-primary/80 text-base text-primary-foreground/90 border border-amber-800 hover:bg-amber-700',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-card hover:text-accent-foreground',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline',
         outline:
-          'bg-background/80 text-base text-accent-foreground/80 border border-amber-700 dark:border-amber-700/50 hover:bg-amber-800',
+          'bg-background/80 text-base text-accent-foreground/80 border border-amber-800 hover:bg-amber-700',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
       },
     },

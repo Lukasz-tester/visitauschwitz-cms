@@ -19,7 +19,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <>
       <button
-        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6 w-14 h-14' : 'bg-background/70 top-0 right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6 w-14 h-14' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -57,9 +57,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               {t('contact')}
             </a>
           </div>
-          <div className="flex fixed bottom-8 left-6">
+          <div className="flex fixed bottom-4 left-5">
             <Link href="/" onClick={() => setModalOpen(false)}>
-              <Favicion />
+              <Favicion color1="#b45309" color4="#b45309" />
             </Link>
           </div>
         </div>
