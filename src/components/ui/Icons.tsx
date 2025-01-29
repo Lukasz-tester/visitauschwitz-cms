@@ -1,5 +1,3 @@
-// export somewhere to test different looks with amber-700
-//
 export const Favicion = ({
   color1 = '#64748b',
   color2 = '#64748b',

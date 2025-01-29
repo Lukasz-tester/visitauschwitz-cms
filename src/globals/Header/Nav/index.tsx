@@ -24,7 +24,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
         </Link>
       </div>
 
-      <div className="flex items-center [&_*]:ease-in-out [&_*]:duration-200 right-4 absolute text-sm lg:text-base text-slate-500">
+      <div className="flex items-center [&_*]:ease-in-out [&_*]:duration-200 right-4 absolute text-sm lg:text-base text-slate-500 font-bold">
         <div className="text-amber-700 hover:text-slate-500">
           <a className="px-3" href="/contact">
             {t('contact')}

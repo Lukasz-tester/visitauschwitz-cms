@@ -59,7 +59,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
           </div>
           <div className="flex fixed bottom-4 left-5">
             <Link href="/" onClick={() => setModalOpen(false)}>
-              <Favicion color1="#b45309" color4="#b45309" />
+              <Favicion color2="#b45309" />
             </Link>
           </div>
         </div>

@@ -41,7 +41,7 @@ export const Card: React.FC<{
       </div>
       <div className="p-4 opacity-85">
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
+          <div className="uppercase text-sm mb-4 text-amber-700">
             {showCategories && hasCategories && (
               <div>
                 {categories?.map((category, index) => {

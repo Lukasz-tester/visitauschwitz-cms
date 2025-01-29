@@ -13,7 +13,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <div className="max-w-[36rem]">
           {richText && (
             <RichText
-              className="mb-4 px-3 py-3 rounded lg:prose-p:text-2xl bg-gradient-to-tr 
+              className="mb-4 pb-5 px-3 pt-4 rounded-xl lg:prose-p:text-2xl bg-gradient-to-tr 
               from-slate-500 from-5% via-slate-800 via-40% to-75%"
               content={richText}
               enableGutter={false}
@@ -21,7 +21,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             />
           )}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex gap-4 mb-3">
+            <ul className="flex sm:pl-5 gap-4 mb-3">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
