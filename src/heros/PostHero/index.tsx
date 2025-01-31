@@ -13,7 +13,7 @@ export const PostHero: React.FC<{
   const t = useTranslations()
 
   return (
-    <div className="md:px-[17.3%] relative -mt-[10.4rem] flex items-end">
+    <div className="relative -mt-[10.4rem] flex items-end">
       <div className="container z-10 relative lg:grid text-white/80 pb-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
@@ -82,7 +82,7 @@ export const PostHero: React.FC<{
         )}
         <div
           className="absolute pointer-events-none left-0 bottom-0 w-full h-full
-          bg-gradient-to-b from-10% from-background via-30% via-transparent to-70% to-black opacity-80"
+          bg-gradient-to-b from-10% from-background via-30% via-transparent to-70% to-black opacity-90"
         />
       </div>
     </div>

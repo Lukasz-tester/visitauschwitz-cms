@@ -20,14 +20,14 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
     <footer className="border-t border-border bg-black dark:bg-card">
       <div className="container py-8 gap-8 flex flex-col">
         <div className="flex flex-col items-start gap-4">
-          <nav className="flex flex-col gap-6 text-lg">
+          <nav className="flex flex-row gap-6 text-lg">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return <CMSLink className="text-white/80" key={i} {...link} />
             })}
           </nav>
         </div>
       </div>
-      <div className="container items-start py-6 pl-6 p-4 gap-5 text-sm text-slate-500 flex-col flex">
+      <div className="container items-center py-6 pl-6 p-4 gap-5 text-sm text-slate-500 flex-col flex">
         <>
           <Link className="flex" href="/">
             <Logo />
