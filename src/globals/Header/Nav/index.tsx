@@ -31,7 +31,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
           </a>
         </div>
         <div className="hover:text-amber-700">
-          <a className="pl-3 pr-4" href="/faq">
+          <a className="pl-3 pr-4" href="/frequently-asked-questions">
             FAQ
           </a>
         </div>
