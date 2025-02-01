@@ -40,8 +40,17 @@ export const Card: React.FC<{
         {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="360px" />}
       </div>
       <div className="p-4 opacity-85">
+        {titleToUse && (
+          <div className="prose">
+            <div>
+              <Link className="not-prose text-2xl" href={href} ref={link.ref}>
+                {titleToUse}
+              </Link>
+            </div>
+          </div>
+        )}
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4 text-amber-700">
+          <div className="uppercase text-sm my-4 text-amber-700">
             {showCategories && hasCategories && (
               <div>
                 {categories?.map((category, index) => {
@@ -64,15 +73,6 @@ export const Card: React.FC<{
                 })}
               </div>
             )}
-          </div>
-        )}
-        {titleToUse && (
-          <div className="prose">
-            <div>
-              <Link className="not-prose text-2xl" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </div>
           </div>
         )}
         {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}

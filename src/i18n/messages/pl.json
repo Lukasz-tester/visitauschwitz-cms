@@ -13,5 +13,8 @@
   "previous": "Poprzedni",
   "next": "Następny",
   "more-pages": "Więcej stron",
-  "contact": "Kontakt"
+  "contact": "Kontakt",
+
+  "cookie-message": "Ta strona używa plików cookie, aby zapewnić wygodę przeglądania.",
+  "hide-message": "Ukryj wiadomość"
 }

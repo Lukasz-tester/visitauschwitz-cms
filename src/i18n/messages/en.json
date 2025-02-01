@@ -13,5 +13,8 @@
   "previous": "Previous",
   "next": "Next",
   "more-pages": "More pages",
-  "contact": "Contact"
+  "contact": "Contact",
+
+  "cookie-message": "This site uses cookies to provide a better browsing experience.",
+  "hide-message": "Hide message"
 }
