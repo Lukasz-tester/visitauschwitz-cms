@@ -16,3 +16,35 @@ export const useMediaQuery = (query) => {
   })
   return matches
 }
+
+export const scrolledFromTop = () => {
+  const [visible, setVisible] = useState(false)
+
+  const scrolledDown = () => {
+    if (window.scrollY > 130) {
+      setVisible(true)
+    } else {
+      setVisible(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrolledDown)
+    return () => {
+      window.removeEventListener('scroll', scrolledDown)
+    }
+  }, [])
+
+  return visible
+}
+
+// export const scrollToAnchor = (id) => {
+//   const yOffset = 0
+//   const element = document.querySelector(id)
+
+//   if (element) {
+//     const pageY = document.querySelector('#root')?.scrollTop
+//     const y = element.getBoundingClientRect().top + pageY + yOffset
+//     document.querySelector('#root')?.scrollTo({ top: y, behavior: 'smooth' })
+//   }
+// }

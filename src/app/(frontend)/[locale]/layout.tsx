@@ -21,7 +21,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import MapCaller from '@/components/Map/MapCaller'
-import { CookiePopup } from '@/components/Cookies/cookie-popup'
+import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 type Args = {
   children: React.ReactNode

@@ -22,6 +22,7 @@ import {
 import { LatLngExpression } from 'leaflet'
 import { buildings } from './buildings'
 import { routes } from './routes'
+import { LocateMeButton } from './myLocation-NOT-USED'
 
 const entranceAuschwitz: LatLngExpression = [50.02949, 19.20553]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
@@ -155,54 +156,30 @@ const layers = [
   },
 ]
 
-export default function Map() {
+export default function MapModal() {
   return (
-    <div className="container">
-      <div id="map-container">
-        <MapContainer
-          preferCanvas={true}
-          center={entranceAuschwitz}
-          zoom={14}
-          scrollWheelZoom={true}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <LayersControl position="topright" collapsed={true}>
-            {layers.map((layer) => (
-              <LayersControl.Overlay name={layer.name} key={layer.name}>
-                <LayerGroup>{layer.markers}</LayerGroup>
-              </LayersControl.Overlay>
-            ))}
-          </LayersControl>
-        </MapContainer>
-      </div>
-      <style jsx>{`
-        .container {
-          // z-index: 10;
-          // position: fixed;
-          bottom: 0;
-          left: 0;
-          padding: 0;
-          padding-bottom: 48px;
+    <div className="w-full h-full">
+      <MapContainer
+        preferCanvas={true}
+        center={entranceAuschwitz}
+        zoom={14}
+        scrollWheelZoom={true}
+        style={{ height: '100%', width: '100%' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <LayersControl position="topright" collapsed={true}>
+          {layers.map((layer) => (
+            <LayersControl.Overlay name={layer.name} key={layer.name}>
+              <LayerGroup>{layer.markers}</LayerGroup>
+            </LayersControl.Overlay>
+          ))}
+        </LayersControl>
+      </MapContainer>
 
-          // overflow: hidden;
-          height: 100dvh;
-          // height: calc(100vh - 52px);
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          #map-container {
-            width: 100%;
-            height: 100%;
-            background: #afafaf;
-          }
-        }
-      `}</style>
+      <LocateMeButton />
     </div>
   )
 }

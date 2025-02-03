@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
+import { scrolledFromTop } from '@/utilities/helpers'
 
-const LazyMap = dynamic(() => import('./Map'), {
+const LazyMap = dynamic(() => import('./mapModal'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 })
@@ -11,9 +12,9 @@ function MapCaller(props) {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <>
+    <div className={`ease-in-out duration-1000 visible ${scrolledFromTop() ? '' : 'hidden'}`}>
       <button
-        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card bottom-16 right-0 w-14 h-14 rounded-s-3xl' : 'pb-2 bg-background/70 bottom-0 right-0 pr-2 rounded-tl-3xl w-16 h-16'} flex items-center justify-center font-thin fixed z-[10001] dark:text-white/80 text-3xl`}
+        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card bottom-4 right-0 w-14 h-14 rounded-s-3xl' : 'pb-2 bg-background/70 bottom-0 right-0 rounded-tl-3xl w-16 h-16'} pr-3 flex items-center justify-center font-thin fixed z-[10001] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -35,17 +36,13 @@ function MapCaller(props) {
           |
         </div>
       </button>
+
       {modalOpen && (
-        <div className="fixed inset-0 height-screen bg-white dark:text-white dark:bg-black z-[10000] flex flex-col">
-          <div className="flex justify-between items-center">
-            <div className="container font-bold text-2xl text-center p-2">
-              Map of the Auschwitz Memorial
-            </div>
-          </div>
+        <div className="fixed inset-0 z-[10000]">
           <LazyMap {...props} />
         </div>
       )}
-    </>
+    </div>
   )
 }
 

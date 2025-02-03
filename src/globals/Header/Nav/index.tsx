@@ -10,12 +10,14 @@ import { useTranslations } from 'next-intl'
 import LocaleSwitcher from '../LocaleSwitcher'
 import NavItems from '../NavItems'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { useMediaQuery } from '@/utilities/helpers'
 
 export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
   const t = useTranslations()
+  const isWideScreen = useMediaQuery('(min-width: 768px)')
 
   return (
-    <nav className="flex-wrap">
+    <nav className={`flex-wrap ease-in-out duration-1000 ${isWideScreen ? '' : 'hidden'}`}>
       <div className="flex items-center">
         <NavItems header={header} />
         <Link href="/search">

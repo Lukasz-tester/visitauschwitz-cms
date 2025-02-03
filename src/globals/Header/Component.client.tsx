@@ -1,14 +1,13 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
-import React, { useEffect, useState, useTransition } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/ui/Icons'
 import { HeaderNav } from './Nav'
 import { usePathname } from '@/i18n/routing'
-import { useMediaQuery } from '@/utilities/helpers'
 import MobileNavCaller from './MobileNav/MobileNavCaller'
 
 interface HeaderClientProps {
@@ -31,15 +30,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
-  const isWideScreen = useMediaQuery('(min-width: 768px)')
-
   return (
     <header className="pr-8 relative z-20 py-5 flex" {...(theme ? { 'data-theme': theme } : {})}>
       <>
         <Link href="/" className="pl-5 pt-2 mr-auto">
           <Logo />
         </Link>
-        {isWideScreen ? <HeaderNav header={header} /> : <MobileNavCaller header={header} />}
+        <HeaderNav header={header} />
+        <MobileNavCaller header={header} />
       </>
     </header>
   )
