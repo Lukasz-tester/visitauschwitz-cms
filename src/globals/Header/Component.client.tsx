@@ -31,7 +31,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
   }, [headerTheme])
 
   return (
-    <header className="pr-8 relative z-20 py-3 flex" {...(theme ? { 'data-theme': theme } : {})}>
+    <header className="pr-8 relative z-20 py-5 flex" {...(theme ? { 'data-theme': theme } : {})}>
       <>
         <Link href="/" className="pl-5 pt-2 mr-auto">
           <Logo />
