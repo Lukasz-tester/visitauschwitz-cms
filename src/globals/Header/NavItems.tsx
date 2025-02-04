@@ -14,7 +14,7 @@ const NavItems: React.FC<{ header: HeaderType }> = ({ header }) => {
           key={i}
           {...link}
           appearance="link"
-          className="px-3 py-1 xl:py-3 text-2xl lg:text-3xl opacity-85"
+          className="px-3 py-3 text-2xl lg:text-3xl opacity-85"
         />
       ))}
     </>

@@ -35,7 +35,7 @@ export const ThemeSelector: React.FC = () => {
 
   return (
     <Select onValueChange={onThemeChange} value={value}>
-      <SelectTrigger className="bg-transparent max-w-fit pl-0 border-none p-2">
+      <SelectTrigger className="bg-transparent max-w-fit border-none px-2">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>

@@ -11,7 +11,11 @@ const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://loc
 const nextConfig = {
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL, 'https://**.vercel-storage.com', 'https://raw.githubusercontent.com'].map((item) => {
+      ...[
+        NEXT_PUBLIC_SERVER_URL,
+        'https://**.vercel-storage.com',
+        'https://raw.githubusercontent.com',
+      ].map((item) => {
         const url = new URL(item)
 
         return {
@@ -20,6 +24,8 @@ const nextConfig = {
         }
       }),
     ],
+    // formats: ['image/avif'], 
+    unoptimized: true,
   },
   reactStrictMode: true,
   redirects,

@@ -21,7 +21,7 @@ export const scrolledFromTop = () => {
   const [visible, setVisible] = useState(false)
 
   const scrolledDown = () => {
-    if (window.scrollY > 130) {
+    if (window.scrollY > 200) {
       setVisible(true)
     } else {
       setVisible(false)
