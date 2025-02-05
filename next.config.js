@@ -24,8 +24,6 @@ const nextConfig = {
         }
       }),
     ],
-    // formats: ['image/avif'], 
-    unoptimized: true,
   },
   reactStrictMode: true,
   redirects,
