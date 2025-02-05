@@ -54,17 +54,18 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
 
   return (
     <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip bg-card rounded border ${isOpen ? 'border-amber-700 dark:border-amber-700/50' : ''}`}
+      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip bg-card rounded border hover:border-amber-600 dark:hover:border-amber-700/70
+        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}`}
     >
       <button
         className={`w-full p-3 text-start text-xl flex place-content-between
           ${isOpen ? 'bg-card-foreground' : ''}`}
         onClick={onClick}
       >
-        <p>{question}</p>
+        <h3>{question}</h3>
         <div className="font-extrabold">{isOpen ? '<' : '>'}</div>
       </button>
-      <div className={`px-4 ${isOpen ? 'py-2' : ''}`}>
+      <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
         <div
           className="flex"
           ref={contentHeight}

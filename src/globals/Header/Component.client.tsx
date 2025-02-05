@@ -36,7 +36,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <>
-        <Link href="/" className="pl-3 pt-1 mr-auto">
+        <Link href="/" className="pl-3 pt-1 md:pl-5 md:pt-3 mr-auto">
           <Logo />
         </Link>
         <HeaderNav header={header} />
