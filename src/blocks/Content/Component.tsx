@@ -29,11 +29,17 @@ export const ContentBlock: React.FC<
       id={props.blockName || undefined}
       className={`${changeBackground ? 'bg-card' : ''}`}
     >
-      <div className="container py-11">
-        {heading && <RichText className="md:px-[17.3%]" content={heading} enableGutter={false} />}
-
+      <div className="container py-16">
+        {heading && (
+          <RichText
+            // className="md:px-[17.3%]"
+            className={`md:px-[17.3%] ${heading?.root?.direction !== null ? 'pb-11' : ''}`}
+            content={heading}
+            enableGutter={false}
+          />
+        )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11 ${columns && columns.length > 0 ? 'py-11' : ''}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 md:gap-12 gap-y-6 ${columns && columns.length > 0 ? 'pb-11' : ''}`}
         >
           {columns &&
             columns.length > 0 &&
@@ -53,11 +59,19 @@ export const ContentBlock: React.FC<
                   )}
                   key={index}
                 >
-                  {richText && <RichText content={richText} enableGutter={false} />}
+                  {richText && (
+                    <RichText className="pb-6 md:pb-0" content={richText} enableGutter={false} />
+                  )}
 
                   {enableLink && <CMSLink className="mb-4" {...link} />}
                   {enableMedia && <ImageMedia resource={media} />}
-                  {richTextEnd && <RichText content={richTextEnd} enableGutter={false} />}
+                  {richTextEnd && (
+                    <RichText
+                      className={`${richTextEnd.root.direction !== null ? 'py-6' : ''}`}
+                      content={richTextEnd}
+                      enableGutter={false}
+                    />
+                  )}
                 </div>
               )
             })}
