@@ -23,7 +23,7 @@ export const Accordion: Block = {
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h4'] }),
+            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
           ]
@@ -49,7 +49,7 @@ export const Accordion: Block = {
             features: ({ rootFeatures }) => {
               return [
                 ...rootFeatures,
-                HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+                HeadingFeature({ enabledHeadingSizes: ['h4'] }),
                 FixedToolbarFeature(),
                 InlineToolbarFeature(),
               ]

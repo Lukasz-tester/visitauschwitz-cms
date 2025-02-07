@@ -23,18 +23,18 @@ export const ContentBlock: React.FC<
     twoThirds: '8',
     oneSixth: '2',
   }
-  // each content block receives unique id = blockName
+
   return (
-    <div
-      className={cn('pb-14 pt-3', {
-        'bg-card': changeBackground,
-      })}
+    <div // each content block receives unique id = blockName
+      id={props.blockName || undefined}
+      className={`${changeBackground ? 'bg-card' : ''}`}
     >
-      <div className="container" id={props.blockName || undefined}>
-        {heading && (
-          <RichText className="pt-11 pb-9 md:px-[17.3%]" content={heading} enableGutter={false} />
-        )}
-        <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11">
+      <div className="container py-11">
+        {heading && <RichText className="md:px-[17.3%]" content={heading} enableGutter={false} />}
+
+        <div
+          className={`grid grid-cols-4 lg:grid-cols-12 gap-y-11 gap-x-11 ${columns && columns.length > 0 ? 'py-11' : ''}`}
+        >
           {columns &&
             columns.length > 0 &&
             columns.map((col, index) => {

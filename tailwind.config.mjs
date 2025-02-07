@@ -115,11 +115,13 @@ export default {
             },
             h2: {
               fontSize: '2.5rem',
-              fontWeight: 'normal',
+              paddingTop: '3.5rem',
+              paddingBottom: '2.5rem',
             },
             h3: {
               fontSize: '2rem',
-              fontWeight: 'normal',
+              paddingTop: '1.5rem',
+              paddingBottom: '2rem',
             },
             h4: {
               fontSize: '1.5rem',
@@ -127,6 +129,7 @@ export default {
             },
             p: {
               fontSize: '1.2rem',
+              marginTop: '1rem',
             },
           },
         },

@@ -20,30 +20,41 @@ export const AccordionBlock: React.FC<
   const handleItemClick = (inndex) => {
     setActiveIndex((prevIndex) => (prevIndex === inndex ? null : inndex))
   }
-
+  console.log('heading ISISISIS children 0 array?:', heading?.root?.direction)
   return (
     <div
-      className={cn('md:px-[17.3%] mx-0 pb-1', {
+      className={cn('w-full mx-0 pt-1 pb-1 place-self-center', {
         'bg-card': changeBackground,
       })}
     >
-      {/* each content block receives unique id = blockName */}
-      <div className="container" id={props.blockName || undefined}>
-        {heading && <RichText className="pt-11 pb-8" content={heading} enableGutter={false} />}
+      <div //each content block receives unique id = blockName
+        className="container"
+        id={props.blockName || undefined}
+      >
+        <div className="md:px-[17.3%]">
+          {heading && (
+            <RichText
+              // no text > no text direction > no padding
+              className={`${heading?.root?.direction !== null ? 'py-11' : ''}`}
+              content={heading}
+              enableGutter={false}
+            />
+          )}
 
-        {accordionItems &&
-          accordionItems.length > 0 &&
-          accordionItems.map((item, index) => {
-            return (
-              <AccordionItem
-                key={index}
-                answer={item.answer}
-                question={item.question}
-                isOpen={activeIndex === index}
-                onClick={() => handleItemClick(index)}
-              />
-            )
-          })}
+          {accordionItems &&
+            accordionItems.length > 0 &&
+            accordionItems.map((item, index) => {
+              return (
+                <AccordionItem
+                  key={index}
+                  answer={item.answer}
+                  question={item.question}
+                  isOpen={activeIndex === index}
+                  onClick={() => handleItemClick(index)}
+                />
+              )
+            })}
+        </div>
       </div>
     </div>
   )
@@ -58,16 +69,15 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
         ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}`}
     >
       <button
-        className={`w-full p-3 text-start text-xl flex place-content-between
+        className={` w-full p-3 text-start text-xl flex place-content-between
           ${isOpen ? 'bg-card-foreground' : ''}`}
         onClick={onClick}
       >
         <h3>{question}</h3>
-        <div className="font-extrabold">{isOpen ? '<' : '>'}</div>
+        <div className="font-bold">{isOpen ? '<' : '>'}</div>
       </button>
       <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
         <div
-          className="flex"
           ref={contentHeight}
           style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}
         >
