@@ -111,16 +111,16 @@ export default {
             '--tw-prose-headings': 'var(--text)',
             h1: {
               fontSize: '3.2rem',
-              marginBottom: '0rem',
+              marginBottom: '1rem',
             },
             h2: {
               fontSize: '2.5rem',
-              paddingTop: '5rem',
-              marginBottom: '4rem',
+              paddingTop: '4rem',
+              marginBottom: '3rem',
             },
             h3: {
               fontSize: '2rem',
-              paddingBottom: '3rem',
+              paddingBottom: '1rem',
               marginBottom: '0rem',
             },
             h4: {

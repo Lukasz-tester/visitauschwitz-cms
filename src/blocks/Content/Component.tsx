@@ -29,7 +29,7 @@ export const ContentBlock: React.FC<
       id={props.blockName || undefined}
       className={`${changeBackground ? 'bg-card' : ''}`}
     >
-      <div className="container py-16">
+      <div className="container py-12">
         {heading && (
           <RichText
             // className="md:px-[17.3%]"
