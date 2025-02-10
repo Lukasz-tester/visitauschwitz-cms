@@ -60,9 +60,12 @@ export const ContentBlock: React.FC<
                   key={index}
                 >
                   {richText && (
-                    <RichText className="pb-6 md:pb-0" content={richText} enableGutter={false} />
+                    <RichText
+                      className={`${richText.root.direction !== null ? 'mb-6' : ''}`}
+                      content={richText}
+                      enableGutter={false}
+                    />
                   )}
-
                   {enableLink && <CMSLink className="mb-4" {...link} />}
                   {enableMedia && <ImageMedia resource={media} />}
                   {richTextEnd && (

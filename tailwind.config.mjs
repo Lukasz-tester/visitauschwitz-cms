@@ -115,8 +115,8 @@ export default {
             },
             h2: {
               fontSize: '2.5rem',
-              paddingTop: '4rem',
-              marginBottom: '3rem',
+              paddingTop: '3rem',
+              marginBottom: '2.5rem',
             },
             h3: {
               fontSize: '2rem',

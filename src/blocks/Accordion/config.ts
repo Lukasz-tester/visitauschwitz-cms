@@ -1,11 +1,6 @@
 import type { Block } from 'payload'
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Accordion: Block = {
   slug: 'accordion',
@@ -25,7 +20,6 @@ export const Accordion: Block = {
             ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
-            InlineToolbarFeature(),
           ]
         },
       }),
@@ -51,7 +45,6 @@ export const Accordion: Block = {
                 ...rootFeatures,
                 HeadingFeature({ enabledHeadingSizes: ['h4'] }),
                 FixedToolbarFeature(),
-                InlineToolbarFeature(),
               ]
             },
           }),

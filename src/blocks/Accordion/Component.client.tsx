@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { cn } from 'src/utilities/cn'
 import React from 'react'
 import RichText from '@/components/RichText'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 import type { Page } from '@/payload-types'
 
@@ -20,14 +21,13 @@ export const AccordionBlock: React.FC<
   const handleItemClick = (inndex) => {
     setActiveIndex((prevIndex) => (prevIndex === inndex ? null : inndex))
   }
-  console.log('heading ISISISIS children 0 array?:', heading?.root?.direction)
   return (
     <div
       className={cn('w-full mx-0 pt-1 pb-1 place-self-center', {
         'bg-card': changeBackground,
       })}
     >
-      <div //each content block receives unique id = blockName
+      <div //each content block receives unique id = blockName for internal linking
         className="container"
         id={props.blockName || undefined}
       >
@@ -74,7 +74,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
         onClick={onClick}
       >
         <h3>{question}</h3>
-        <div className="font-bold">{isOpen ? '<' : '>'}</div>
+        {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
       <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
         <div

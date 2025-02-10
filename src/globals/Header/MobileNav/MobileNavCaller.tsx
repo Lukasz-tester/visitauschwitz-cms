@@ -20,7 +20,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <div className={`${scrolledFromTop() ? '' : 'md:hidden'}`}>
       <button
-        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6 w-14 h-14' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`hover:text-amber-700 ease-in-out duration-1000 ${modalOpen ? 'bg-card top-7 right-6 w-14 h-14' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -28,9 +28,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         >
           |
         </div>
-        <div className={`ease-in-out duration-1000 ${modalOpen ? 'opacity-0 text-amber-500' : ''}`}>
-          |
-        </div>
+        <div className={`ease-in-out duration-1000 ${modalOpen ? 'opacity-0' : ''}`}>|</div>
         <div
           className={`ease-in-out duration-1000 ${modalOpen ? '-rotate-45 -translate-x-2' : 'pt-1'}`}
         >
@@ -41,14 +39,13 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         <div className="fixed inset-0 w-full">
           <div className="p-4 bg-background z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0">
             <div onClick={() => setModalOpen(false)}>
-              <div
-                className={`bg-card rounded- w-14 h-14 flex items-center justify-center fixed top-28 right-6`}
+              <Link
+                className="bg-card w-14 h-14 flex items-center justify-center fixed top-28 right-6"
+                href="/search"
               >
-                <Link href="/search">
-                  <SearchIcon className="w-fit text-primary" />
-                </Link>
-              </div>
-              <div className="flex flex-col py-2 mr-16 md:pr-24 md:pl-4">
+                <SearchIcon className="w-fit text-primary" />
+              </Link>
+              <div className="flex flex-col py-2 pr-24 md:pr-32 md:pl-4">
                 <NavItems header={header} />
               </div>
             </div>

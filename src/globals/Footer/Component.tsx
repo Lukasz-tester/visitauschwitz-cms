@@ -22,7 +22,13 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
         <div className="flex flex-col items-start gap-4">
           <nav className="flex flex-row gap-6 text-lg">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white/80" key={i} {...link} />
+              return (
+                <CMSLink
+                  className="text-white/80 font-semibold hover:text-amber-700 ease-in-out duration-500"
+                  key={i}
+                  {...link}
+                />
+              )
             })}
           </nav>
         </div>
