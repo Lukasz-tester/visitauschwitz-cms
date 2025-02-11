@@ -228,7 +228,6 @@ export interface CallToActionBlock {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
-  changeBackground?: boolean | null;
   heading?: {
     root: {
       type: string;
@@ -297,6 +296,9 @@ export interface ContentBlock {
         id?: string | null;
       }[]
     | null;
+  changeBackground?: boolean | null;
+  addMarginTop?: boolean | null;
+  addMarginBottom?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -951,7 +953,6 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
-  changeBackground?: T;
   heading?: T;
   columns?:
     | T
@@ -974,6 +975,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
         richTextEnd?: T;
         id?: T;
       };
+  changeBackground?: T;
+  addMarginTop?: T;
+  addMarginBottom?: T;
   id?: T;
   blockName?: T;
 }

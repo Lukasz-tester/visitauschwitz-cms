@@ -14,7 +14,7 @@ export const ContentBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { columns, heading, changeBackground } = props
+  const { columns, heading, changeBackground, addMarginTop, addMarginBottom } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -27,19 +27,28 @@ export const ContentBlock: React.FC<
   return (
     <div // each content block receives unique id = blockName
       id={props.blockName || undefined}
-      className={`${changeBackground ? 'bg-card' : ''}`}
+      className={cn(
+        {
+          'bg-card': changeBackground,
+        },
+        {
+          'mt-20': addMarginTop,
+        },
+        {
+          'mb-20': addMarginBottom,
+        },
+      )}
     >
       <div className="container py-12">
         {heading && (
           <RichText
-            // className="md:px-[17.3%]"
             className={`md:px-[17.3%] ${heading?.root?.direction !== null ? 'pb-11' : ''}`}
             content={heading}
             enableGutter={false}
           />
         )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 md:gap-12 gap-y-6 ${columns && columns.length > 0 ? 'pb-11' : ''}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 md:gap-12 gap-y-6 ${columns && columns.length > 0 ? 'mb-11' : ''}`}
         >
           {columns &&
             columns.length > 0 &&
@@ -61,7 +70,7 @@ export const ContentBlock: React.FC<
                 >
                   {richText && (
                     <RichText
-                      className={`${richText.root.direction !== null ? 'mb-6' : ''}`}
+                      className={`${richText.root.direction !== null ? 'pb-4' : ''}`}
                       content={richText}
                       enableGutter={false}
                     />
@@ -70,7 +79,7 @@ export const ContentBlock: React.FC<
                   {enableMedia && <ImageMedia resource={media} />}
                   {richTextEnd && (
                     <RichText
-                      className={`${richTextEnd.root.direction !== null ? 'py-6' : ''}`}
+                      className={`${richTextEnd.root.direction !== null ? 'pt-6 pb-2' : ''}`}
                       content={richTextEnd}
                       enableGutter={false}
                     />

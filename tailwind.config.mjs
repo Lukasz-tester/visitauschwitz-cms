@@ -120,6 +120,7 @@ export default {
             },
             h3: {
               fontSize: '2rem',
+              paddingTop: '1rem',
               paddingBottom: '1rem',
               marginBottom: '0rem',
             },
