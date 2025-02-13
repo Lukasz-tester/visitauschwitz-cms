@@ -293,6 +293,7 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
+        noPaddingRichTextEnd?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -973,6 +974,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         enableMedia?: T;
         media?: T;
         richTextEnd?: T;
+        noPaddingRichTextEnd?: T;
         id?: T;
       };
   changeBackground?: T;

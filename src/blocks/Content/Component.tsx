@@ -32,28 +32,37 @@ export const ContentBlock: React.FC<
           'bg-card': changeBackground,
         },
         {
-          'mt-20': addMarginTop,
+          '': addMarginTop,
         },
         {
-          'mb-20': addMarginBottom,
+          '': addMarginBottom,
         },
       )}
     >
-      <div className="container py-12">
+      <div className="container">
         {heading && (
           <RichText
-            className={`md:px-[17.3%] ${heading?.root?.direction !== null ? 'pb-11' : ''}`}
+            className={`md:px-[17.3%] ${heading?.root?.direction !== null ? 'pt-24' : ''}`}
             content={heading}
             enableGutter={false}
           />
         )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 md:gap-12 gap-y-6 ${columns && columns.length > 0 ? 'mb-11' : ''}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 md:gap-14 md:gap-y-12 gap-y-6 py-14 ${columns && columns.length > 0 ? '' : ''}`}
         >
           {columns &&
             columns.length > 0 &&
             columns.map((col, index) => {
-              const { enableLink, enableMedia, link, richText, richTextEnd, size, media } = col
+              const {
+                enableLink,
+                enableMedia,
+                link,
+                richText,
+                richTextEnd,
+                noPaddingRichTextEnd,
+                size,
+                media,
+              } = col
 
               return (
                 <div
@@ -70,16 +79,27 @@ export const ContentBlock: React.FC<
                 >
                   {richText && (
                     <RichText
-                      className={`${richText.root.direction !== null ? 'pb-4' : ''}`}
+                      className={`${richText.root.direction !== null ? 'pb-9' : ''}`}
                       content={richText}
                       enableGutter={false}
                     />
                   )}
-                  {enableLink && <CMSLink className="mb-4" {...link} />}
-                  {enableMedia && <ImageMedia resource={media} />}
+                  {enableLink && <CMSLink {...link} />}
+                  {enableMedia && (
+                    <div className={`${enableMedia ? 'md:pt-2' : 'hidden'}`}>
+                      <ImageMedia resource={media} />
+                    </div>
+                  )}
                   {richTextEnd && (
                     <RichText
-                      className={`${richTextEnd.root.direction !== null ? 'pt-6 pb-2' : ''}`}
+                      className={cn(
+                        {
+                          'py-5 md:pb-0 md:pt-9': richTextEnd.root.direction !== null,
+                        },
+                        {
+                          'md:pt-9': noPaddingRichTextEnd,
+                        },
+                      )}
                       content={richTextEnd}
                       enableGutter={false}
                     />

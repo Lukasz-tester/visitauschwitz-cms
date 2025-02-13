@@ -92,6 +92,10 @@ const columnFields: Field[] = [
     }),
     label: false,
   },
+  {
+    name: 'noPaddingRichTextEnd',
+    type: 'checkbox',
+  },
 ]
 
 export const Content: Block = {

@@ -23,7 +23,7 @@ export const AccordionBlock: React.FC<
   }
   return (
     <div
-      className={cn('w-full mx-0 pt-1 pb-1 place-self-center', {
+      className={cn('w-full mx-0 py-1 place-self-center', {
         'bg-card': changeBackground,
       })}
     >
@@ -35,7 +35,7 @@ export const AccordionBlock: React.FC<
           {heading && (
             <RichText
               // no text > no text direction > no padding
-              className={`${heading?.root?.direction !== null ? 'py-11' : ''}`}
+              className={`${heading?.root?.direction !== null ? '' : ''}`}
               content={heading}
               enableGutter={false}
             />

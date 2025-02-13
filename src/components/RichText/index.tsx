@@ -39,7 +39,7 @@ const RichText: React.FC<Props> = ({
           'md:prose-h1:text-7xl opacity-90': styleH1,
           'lg:prose-h2:text-5xl ': styleH2,
           'lg:prose-h3:text-4xl ': styleH3,
-          'lg:prose-h4:text-3xl ': styleH4,
+          'lg:prose-h4:text-2xl ': styleH4,
         },
         className,
       )}
