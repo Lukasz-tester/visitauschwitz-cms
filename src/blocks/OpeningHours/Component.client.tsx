@@ -22,7 +22,7 @@ export const OpeningHoursBlock: React.FC<
   Props & {
     id?: string
   }
-> = ({ months, richText, description, enterBetweenTitle, freeFromTitle, leaveBeforeTitle }) => {
+> = ({ months, richText, enterBetweenTitle, freeFromTitle, leaveBeforeTitle }) => {
   const currentMonth = months?.[currentMonthNumber].month
 
   const [value, setValue] = useState(currentMonth)
@@ -32,15 +32,14 @@ export const OpeningHoursBlock: React.FC<
   }
   return (
     <div className="container">
-      <div className="md:px-[17.3%] xl:px-[25%] md:p-11 place-content-center justify-between">
-        <div className="text-base mb-8">
+      <div className="md:px-[17.3%] grid xl:grid-cols-2">
+        <div className="xl:mr-7">
           {richText && <RichText content={richText} enableGutter={false} />}
         </div>
-        <div className="text-lg lg:grid lg:grid-cols-2 place-content-between">
-          <div className="mb-8">
-            {description && <div className="mb-6 mr-6">{description}</div>}
+        <div className="text-lg rounded border border-border bg-card xl:ml-7">
+          <div className="justify-items-end">
             <Select onValueChange={onMonthChange} value={value}>
-              <SelectTrigger className="w-auto bg-card px-3 border border-border">
+              <SelectTrigger className="w-auto bg-card-foreground px-3 border border-border">
                 <SelectValue placeholder={currentMonth} />
               </SelectTrigger>
               <SelectContent>
@@ -52,22 +51,20 @@ export const OpeningHoursBlock: React.FC<
               </SelectContent>
             </Select>
           </div>
-          <div className="p-5 rounded border border-border">
-            {(months || []).map(({ month }, i) => (
-              <div key={i}>
-                {month === value && (
-                  <div>
-                    <div className="pb-1">{enterBetweenTitle + ' '} </div>
-                    <div className="text-2xl pb-1">{months?.[i].enterBetween}</div>
-                    <div className="mt-4 pb-1">{freeFromTitle}</div>
-                    <div className="text-2xl pb-1">{months?.[i].freeFrom}</div>
-                    <div className="mt-4 pb-1">{leaveBeforeTitle}</div>
-                    <div className="text-2xl">{months?.[i].leaveBefore}</div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          {(months || []).map(({ month }, i) => (
+            <div key={i}>
+              {month === value && (
+                <div className="p-5">
+                  <div className="pb-2">{enterBetweenTitle + ' '} </div>
+                  <div className="text-3xl pb-2">{months?.[i].enterBetween}</div>
+                  <div className="mt-4 pb-2">{freeFromTitle}</div>
+                  <div className="text-3xl pb-2">{months?.[i].freeFrom}</div>
+                  <div className="mt-4 pb-2">{leaveBeforeTitle}</div>
+                  <div className="text-3xl pb-2">{months?.[i].leaveBefore}</div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </div>

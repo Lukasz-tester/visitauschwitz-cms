@@ -36,7 +36,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         </div>
       </button>
       {modalOpen && (
-        <div className="fixed inset-0 w-full">
+        <div className="fixed inset-0 w-full " onClick={() => setModalOpen(false)}>
           <div className="p-4 bg-background z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0">
             <div onClick={() => setModalOpen(false)}>
               <Link
@@ -45,14 +45,21 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               >
                 <SearchIcon className="w-fit text-primary" />
               </Link>
-              <div className="flex flex-col py-2 pr-24 md:pr-32 md:pl-4">
+              <div className="flex flex-col py-2 pr-36 md:pl-4">
                 <NavItems header={header} />
               </div>
             </div>
-            <div className="flex flex-col gap-4 fixed bottom-24 right-4 text-lg items-end text-slate-500">
+            <div className="flex flex-col fixed bottom-24 right-4 text-lg items-end text-slate-500 font-semibold">
+              {/* <div className="pb-5"> */}
               <LocaleSwitcher />
-              <ThemeSelector />
-              <a className="pr-5 pt-2" href="/contact">
+              {/* </div> */}
+              <div className="pt-4">
+                <ThemeSelector />
+              </div>
+              <a className="pt-5 pr-3" href="/frequently-asked-questions">
+                FAQ
+              </a>
+              <a className="pt-5 pr-3" href="/contact">
                 {t('contact')}
               </a>
             </div>

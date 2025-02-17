@@ -651,7 +651,6 @@ export interface OpeningHoursBlock {
     };
     [k: string]: unknown;
   } | null;
-  description?: string | null;
   enterBetweenTitle?: string | null;
   freeFromTitle?: string | null;
   leaveBeforeTitle?: string | null;
@@ -1024,7 +1023,6 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface OpeningHoursBlockSelect<T extends boolean = true> {
   richText?: T;
-  description?: T;
   enterBetweenTitle?: T;
   freeFromTitle?: T;
   leaveBeforeTitle?: T;

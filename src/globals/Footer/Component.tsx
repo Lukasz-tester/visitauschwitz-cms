@@ -19,27 +19,25 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
   return (
     <footer className="border-t border-border bg-black dark:bg-card">
       <div className="container py-8 gap-8 flex flex-col">
-        <div className="flex flex-col items-start gap-4">
-          <nav className="flex flex-row gap-6 text-lg">
-            {navItems.map(({ link }, i) => {
-              return (
-                <CMSLink
-                  className="text-white/80 font-semibold hover:text-amber-700 ease-in-out duration-500"
-                  key={i}
-                  {...link}
-                />
-              )
-            })}
-          </nav>
+        <nav className="flex gap-6 text-lg">
+          {navItems.map(({ link }, i) => {
+            return (
+              <CMSLink
+                className="text-white/80 font-semibold hover:text-amber-700 ease-in-out duration-500"
+                key={i}
+                {...link}
+              />
+            )
+          })}
+        </nav>
+        <div className="py-6 gap-5 text-sm text-slate-500 flex-col flex">
+          <>
+            <Link className="flex" href="/">
+              <Logo />
+            </Link>
+          </>
+          <>© {year} All Rights Reserved</>
         </div>
-      </div>
-      <div className="container items-center py-6 pl-6 p-4 gap-5 text-sm text-slate-500 flex-col flex">
-        <>
-          <Link className="flex" href="/">
-            <Logo />
-          </Link>
-        </>
-        <>© {year} All Rights Reserved</>
       </div>
     </footer>
   )

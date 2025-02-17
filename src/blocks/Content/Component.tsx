@@ -49,7 +49,7 @@ export const ContentBlock: React.FC<
                 'hidden ': heading.root.direction === null,
               },
               {
-                'pb-7 md:pb-14 ': heading.root.direction !== null && columns && columns.length,
+                'pb-7 md:pb-14 ': heading.root.direction !== null && columns && columns.length > 0,
               },
             )}
             content={heading}
@@ -57,7 +57,7 @@ export const ContentBlock: React.FC<
           />
         )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 gap-8 ${columns && columns.length > 0 ? 'md:gap-14 md:pb-14 pb-14 ' : ''}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 gap-7 ${columns && columns.length > 0 ? 'md:gap-14 pb-14 ' : ''}`}
         >
           {columns &&
             columns.length > 0 &&
@@ -88,7 +88,7 @@ export const ContentBlock: React.FC<
                 >
                   {richText && (
                     <RichText
-                      className={`${richText.root.direction !== null ? 'pb-4 md:pb-6' : 'hidden'}`}
+                      className={`${richText.root.direction !== null ? 'md:pb-4 ' : 'hidden'}`}
                       content={richText}
                       enableGutter={false}
                       styleLink={true}
@@ -99,7 +99,6 @@ export const ContentBlock: React.FC<
                   {richTextEnd && (
                     <RichText
                       className={cn(
-                        'pt-7 ',
                         {
                           'hidden ': richTextEnd.root.direction === null,
                         },
@@ -107,7 +106,10 @@ export const ContentBlock: React.FC<
                           'md:py-0 ': noPaddingRichTextEnd,
                         },
                         {
-                          'md:pt-3 ': noPaddingRichTextEnd && enableMedia,
+                          'mt-7': enableMedia,
+                        },
+                        {
+                          'mt-3 ': noPaddingRichTextEnd && enableMedia,
                         },
                       )}
                       content={richTextEnd}

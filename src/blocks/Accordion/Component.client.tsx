@@ -51,6 +51,7 @@ export const AccordionBlock: React.FC<
                   question={item.question}
                   isOpen={activeIndex === index}
                   onClick={() => handleItemClick(index)}
+                  changedBackground={changeBackground}
                 />
               )
             })}
@@ -60,23 +61,25 @@ export const AccordionBlock: React.FC<
   )
 }
 
-const AccordionItem = ({ question, answer, isOpen, onClick }) => {
+const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground }) => {
   const contentHeight = React.useRef<HTMLInputElement>(null)
 
   return (
     <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip bg-card rounded border hover:border-amber-600 dark:hover:border-amber-700/70
-        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}`}
+      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip  rounded border hover:border-amber-600 dark:hover:border-amber-700/70
+        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}
+        ${changedBackground ? 'bg-background' : 'bg-card'}`}
     >
       <button
         className={` w-full p-3 text-start text-xl flex place-content-between
-          ${isOpen ? 'bg-card-foreground' : ''}`}
+          ${isOpen ? 'bg-card-foreground' : ''}
+          ${changedBackground ? 'bg-background' : ''}`}
         onClick={onClick}
       >
         <h3>{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
-      <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
+      <div className={`px-5 ${isOpen ? 'pt-5 pb-2' : ''}`}>
         <div
           ref={contentHeight}
           style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}

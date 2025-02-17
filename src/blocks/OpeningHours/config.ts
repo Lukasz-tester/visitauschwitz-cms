@@ -28,12 +28,6 @@ export const OpeningHours: Block = {
       label: false,
     },
     {
-      name: 'description',
-      type: 'textarea',
-      localized: true,
-      label: 'Description',
-    },
-    {
       name: 'enterBetweenTitle',
       type: 'text',
       localized: true,
