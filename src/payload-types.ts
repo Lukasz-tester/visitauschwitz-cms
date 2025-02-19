@@ -673,21 +673,6 @@ export interface OpeningHoursBlock {
  */
 export interface AccordionBlock {
   changeBackground?: boolean | null;
-  heading?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   accordionItems?:
     | {
         question?: string | null;
@@ -1044,7 +1029,6 @@ export interface OpeningHoursBlockSelect<T extends boolean = true> {
  */
 export interface AccordionBlockSelect<T extends boolean = true> {
   changeBackground?: T;
-  heading?: T;
   accordionItems?:
     | T
     | {

@@ -11,21 +11,6 @@ export const Accordion: Block = {
       type: 'checkbox',
     },
     {
-      name: 'heading',
-      type: 'richText',
-      localized: true,
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-          ]
-        },
-      }),
-      label: false,
-    },
-    {
       name: 'accordionItems',
       type: 'array',
       fields: [

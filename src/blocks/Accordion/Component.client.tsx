@@ -15,7 +15,7 @@ export const AccordionBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { accordionItems, heading, changeBackground } = props
+  const { accordionItems, changeBackground } = props
 
   const [activeIndex, setActiveIndex] = useState(null)
   const handleItemClick = (inndex) => {
@@ -23,7 +23,7 @@ export const AccordionBlock: React.FC<
   }
   return (
     <div
-      className={cn('w-full mx-0 py-1 place-self-center', {
+      className={cn('w-full m-0 place-self-center', {
         'bg-card': changeBackground,
       })}
     >
@@ -32,15 +32,6 @@ export const AccordionBlock: React.FC<
         id={props.blockName || undefined}
       >
         <div className="md:px-[17.3%]">
-          {heading && (
-            <RichText
-              // no text > no text direction > no padding
-              className={`${heading?.root?.direction !== null ? '' : ''}`}
-              content={heading}
-              enableGutter={false}
-            />
-          )}
-
           {accordionItems &&
             accordionItems.length > 0 &&
             accordionItems.map((item, index) => {
@@ -66,7 +57,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
 
   return (
     <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 mb-1 overflow-clip  rounded border hover:border-amber-600 dark:hover:border-amber-700/70
+      className={`my-2 [&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded border hover:border-amber-600 dark:hover:border-amber-700/70
         ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}
         ${changedBackground ? 'bg-background' : 'bg-card'}`}
     >

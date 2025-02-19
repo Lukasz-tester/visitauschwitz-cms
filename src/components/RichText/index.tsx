@@ -43,7 +43,7 @@ const RichText: React.FC<Props> = ({
           'lg:prose-h2:text-5xl ': styleH2,
           'lg:prose-h3:text-4xl ': styleH3,
           'lg:prose-h4:text-2xl ': styleH4,
-          'prose-a:bg-card-foreground prose-a:no-underline prose-a:rounded prose-a:p-2 prose-a:text-[22px]':
+          'prose-a:bg-card prose-a:no-underline prose-a:rounded prose-a:p-2 prose-a:text-[22px] prose-a:border prose-a:border-card-foreground ':
             styleLink,
         },
         className,
