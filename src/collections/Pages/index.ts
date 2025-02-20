@@ -15,7 +15,6 @@ import { revalidatePage } from './hooks/revalidatePage'
 
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
-import { Cards } from '@/blocks/Cards/config'
 import { Tiles } from '@/blocks/Tiles/config'
 
 import {
@@ -87,7 +86,6 @@ export const Pages: CollectionConfig = {
                 OpeningHours,
                 Accordion,
                 Tiles,
-                Cards,
               ],
               required: true,
             },

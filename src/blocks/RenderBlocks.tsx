@@ -11,7 +11,6 @@ import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component.client'
 import { AccordionBlock } from './Accordion/Component.client'
 import { TilesBlock } from './Tiles/Component'
-// import { CardsBlock } from './Cards/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -22,7 +21,6 @@ const blockComponents = {
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
   tiles: TilesBlock,
-  // cards: CardsBlock,
 }
 
 export const RenderBlocks: React.FC<{

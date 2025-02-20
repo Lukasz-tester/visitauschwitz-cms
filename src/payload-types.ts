@@ -130,7 +130,7 @@ export interface Page {
     | FormBlock
     | OpeningHoursBlock
     | AccordionBlock
-    | CardsBlock
+    | TilesBlock
   )[];
   meta?: {
     title?: string | null;
@@ -701,10 +701,10 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardsBlock".
+ * via the `definition` "tilesBlock".
  */
-export interface CardsBlock {
-  cards?:
+export interface TilesBlock {
+  tiles?:
     | {
         size?: ('half' | 'oneThird' | 'oneForth' | 'oneSixth') | null;
         enableMedia?: boolean | null;
@@ -731,7 +731,7 @@ export interface CardsBlock {
   changeBackground?: boolean | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'cards';
+  blockType: 'tiles';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -929,7 +929,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         oh?: T | OpeningHoursBlockSelect<T>;
         accordion?: T | AccordionBlockSelect<T>;
-        cards?: T | CardsBlockSelect<T>;
+        tiles?: T | TilesBlockSelect<T>;
       };
   meta?:
     | T
@@ -1077,10 +1077,10 @@ export interface AccordionBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardsBlock_select".
+ * via the `definition` "tilesBlock_select".
  */
-export interface CardsBlockSelect<T extends boolean = true> {
-  cards?:
+export interface TilesBlockSelect<T extends boolean = true> {
+  tiles?:
     | T
     | {
         size?: T;
