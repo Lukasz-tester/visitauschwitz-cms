@@ -67,8 +67,8 @@ const tileFields: Field[] = [
 ]
 
 export const Tiles: Block = {
-  slug: 'tiles',
-  interfaceName: 'tilesBlock',
+  slug: 'tilesBlock',
+  interfaceName: 'TilesBlock',
   fields: [
     {
       name: 'tiles',

@@ -8,11 +8,12 @@ import { CMSLink } from '../../components/Link'
 import { ImageMedia } from '@/components/Media/ImageMedia'
 import { Icon } from 'lucide-react'
 
-type Props = Extract<Page['layout'][0], { blockType: 'tiles' }>
+type Props = Extract<Page['layout'][0], { blockType: 'tilesBlock' }>
 
 export const TilesBlock: React.FC<
   {
     id?: string
+    // locale?: string
   } & Props
 > = (props) => {
   const { tiles, changeBackground } = props

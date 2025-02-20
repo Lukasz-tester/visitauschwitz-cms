@@ -37,7 +37,7 @@ export const AccordionBlock: React.FC<
             accordionItems.length > 0 &&
             accordionItems.map((item, index) => {
               return (
-                <div className="py-1">
+                <div key={index} className="py-1">
                   <AccordionItem
                     key={index}
                     answer={item.answer}

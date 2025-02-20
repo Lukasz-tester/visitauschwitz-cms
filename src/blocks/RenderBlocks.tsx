@@ -20,7 +20,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
-  tiles: TilesBlock,
+  // tilesBlock: TilesBlock,
 }
 
 export const RenderBlocks: React.FC<{

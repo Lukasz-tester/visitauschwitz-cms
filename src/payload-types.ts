@@ -701,7 +701,7 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tilesBlock".
+ * via the `definition` "TilesBlock".
  */
 export interface TilesBlock {
   tiles?:
@@ -731,7 +731,7 @@ export interface TilesBlock {
   changeBackground?: boolean | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'tiles';
+  blockType: 'tilesBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -929,7 +929,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         oh?: T | OpeningHoursBlockSelect<T>;
         accordion?: T | AccordionBlockSelect<T>;
-        tiles?: T | TilesBlockSelect<T>;
+        tilesBlock?: T | TilesBlockSelect<T>;
       };
   meta?:
     | T
@@ -1077,7 +1077,7 @@ export interface AccordionBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tilesBlock_select".
+ * via the `definition` "TilesBlock_select".
  */
 export interface TilesBlockSelect<T extends boolean = true> {
   tiles?:
