@@ -63,6 +63,7 @@ const cardFields: Field[] = [
   {
     name: 'linkTo',
     type: 'text',
+    localized: false,
   },
 ]
 

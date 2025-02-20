@@ -10,7 +10,8 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component.client'
 import { AccordionBlock } from './Accordion/Component.client'
-import { CardsBlock } from './Cards/Component'
+import { TilesBlock } from './Tiles/Component'
+// import { CardsBlock } from './Cards/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,7 +21,8 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
-  cb: CardsBlock,
+  tiles: TilesBlock,
+  // cards: CardsBlock,
 }
 
 export const RenderBlocks: React.FC<{
