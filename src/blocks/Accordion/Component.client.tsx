@@ -24,6 +24,7 @@ export const AccordionBlock: React.FC<
   return (
     <div
       className={cn('w-full m-0 place-self-center', {
+        // 'bg-gradient-to-r from-transparent via-slate-800/30 to-transparent': changeBackground,
         'bg-card': changeBackground,
       })}
     >
@@ -36,14 +37,16 @@ export const AccordionBlock: React.FC<
             accordionItems.length > 0 &&
             accordionItems.map((item, index) => {
               return (
-                <AccordionItem
-                  key={index}
-                  answer={item.answer}
-                  question={item.question}
-                  isOpen={activeIndex === index}
-                  onClick={() => handleItemClick(index)}
-                  changedBackground={changeBackground}
-                />
+                <div className="py-1">
+                  <AccordionItem
+                    key={index}
+                    answer={item.answer}
+                    question={item.question}
+                    isOpen={activeIndex === index}
+                    onClick={() => handleItemClick(index)}
+                    changedBackground={changeBackground}
+                  />
+                </div>
               )
             })}
         </div>
@@ -57,7 +60,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
 
   return (
     <div
-      className={`my-2 [&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded border hover:border-amber-600 dark:hover:border-amber-700/70
+      className={`[&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded border hover:border-amber-600 dark:hover:border-amber-700/70
         ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}
         ${changedBackground ? 'bg-background' : 'bg-card'}`}
     >

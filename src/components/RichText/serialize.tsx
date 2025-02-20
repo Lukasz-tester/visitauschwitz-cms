@@ -6,10 +6,10 @@ import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
 import type { BannerBlock as BannerBlockProps } from '@/payload-types'
-import {
-  OpeningHoursBlock,
-  type Props as OpeningHoursProps,
-} from '@/blocks/OpeningHours/Component.client'
+// import {
+//   OpeningHoursBlock,
+//   type Props as OpeningHoursProps,
+// } from '@/blocks/OpeningHours/Component.client'
 
 import {
   IS_BOLD,
@@ -29,7 +29,7 @@ export type NodeTypes =
       | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
       | BannerBlockProps
       | CodeBlockProps
-      | OpeningHoursProps
+      // | OpeningHoursProps
     >
 
 type Props = {
@@ -113,8 +113,8 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           switch (blockType) {
             case 'cta':
               return <CallToActionBlock key={index} {...block} />
-            case 'oh':
-              return <OpeningHoursBlock key={index} {...block} />
+            // case 'oh':
+            //   return <OpeningHoursBlock key={index} {...block} />
             case 'mediaBlock':
               return (
                 <MediaBlock

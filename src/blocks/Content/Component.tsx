@@ -88,7 +88,7 @@ export const ContentBlock: React.FC<
                 >
                   {richText && (
                     <RichText
-                      className={`${richText.root.direction !== null ? 'md:pb-4 ' : 'hidden'}`}
+                      className={`${richText.root.direction !== null ? '' : 'hidden'}`}
                       content={richText}
                       enableGutter={false}
                       styleLink={true}
