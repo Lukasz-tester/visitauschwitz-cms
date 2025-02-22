@@ -186,40 +186,54 @@ export interface Media {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  links?:
+  tiles?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
+        icon?:
+          | (
+              | 'bus'
+              | 'car'
+              | 'diamond'
+              | 'food'
+              | 'luggage'
+              | 'mapLookingGlass'
+              | 'mapPlaceholder'
+              | 'placeholder'
+              | 'plane'
+              | 'shoe'
+              | 'stopSign'
+              | 'ticket'
+              | 'ticketId'
+              | 'ticketIdSmall'
+              | 'toilet'
+              | 'train'
+              | 'umbrella'
+              | 'umbrellaDrops'
+            )
+          | null;
+        enableMedia?: boolean | null;
+        media?: (string | null) | Media;
+        title?: string | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        linkTo?: string | null;
         id?: string | null;
       }[]
     | null;
+  size?: ('half' | 'oneThird' | 'oneForth' | 'oneSixth') | null;
+  changeBackground?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -950,22 +964,19 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
-  richText?: T;
-  links?:
+  tiles?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
+        icon?: T;
+        enableMedia?: T;
+        media?: T;
+        title?: T;
+        richText?: T;
+        linkTo?: T;
         id?: T;
       };
+  size?: T;
+  changeBackground?: T;
   id?: T;
   blockName?: T;
 }
