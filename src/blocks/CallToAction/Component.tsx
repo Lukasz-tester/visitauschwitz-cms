@@ -67,7 +67,7 @@ export const CallToActionBlock: React.FC<
   return (
     <div // each tiles block receives unique id = blockName
       id={blockName || undefined}
-      className={cn('my-14 ', {
+      className={cn('mt-7 mb-12', {
         'bg-gradient-to-r from-amber-900/20 to-transparent py-7 ': changeBackground,
       })}
     >

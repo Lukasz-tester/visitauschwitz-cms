@@ -324,8 +324,12 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  position?: ('default' | 'fullscreen') | null;
-  media: string | Media;
+  images: {
+    media?: (string | null) | Media;
+    title?: string | null;
+    link?: string | null;
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -1019,8 +1023,14 @@ export interface ContentBlockSelect<T extends boolean = true> {
  * via the `definition` "MediaBlock_select".
  */
 export interface MediaBlockSelect<T extends boolean = true> {
-  position?: T;
-  media?: T;
+  images?:
+    | T
+    | {
+        media?: T;
+        title?: T;
+        link?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

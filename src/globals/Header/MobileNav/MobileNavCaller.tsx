@@ -38,22 +38,20 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
       {modalOpen && (
         <div className="fixed inset-0 w-full " onClick={() => setModalOpen(false)}>
           <div className="p-4 bg-background z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0">
-            <div onClick={() => setModalOpen(false)}>
-              <Link
-                className="bg-card w-14 h-14 flex items-center justify-center fixed top-28 right-6"
-                href="/search"
-              >
-                <SearchIcon className="w-fit text-primary" />
-              </Link>
-              <div className="flex flex-col py-2 pr-36 md:pl-4">
-                <NavItems header={header} />
-              </div>
+            <Link
+              className="bg-card w-14 h-14 flex items-center justify-center fixed top-28 right-6"
+              href="/search"
+            >
+              <SearchIcon className="w-fit text-primary" />
+            </Link>
+            <div className="flex flex-col py-2 pr-36 md:pl-4">
+              <NavItems header={header} />
             </div>
             <div className="flex flex-col fixed bottom-24 right-4 text-lg items-end text-slate-500 font-semibold">
-              {/* <div className="pb-5"> */}
-              <LocaleSwitcher />
-              {/* </div> */}
-              <div className="pt-4">
+              <div onClick={(e) => e.stopPropagation()}>
+                <LocaleSwitcher />
+              </div>
+              <div className="pt-4" onClick={(e) => e.stopPropagation()}>
                 <ThemeSelector />
               </div>
               <a className="pt-5 pr-3" href="/frequently-asked-questions">

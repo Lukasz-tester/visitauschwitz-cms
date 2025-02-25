@@ -25,7 +25,7 @@ export const AccordionBlock: React.FC<
     <div
       className={cn('w-full m-0 place-self-center', {
         // 'bg-gradient-to-r from-transparent via-slate-800/30 to-transparent': changeBackground,
-        'bg-card': changeBackground,
+        'bg-card-foreground': changeBackground,
       })}
     >
       <div //each content block receives unique id = blockName for internal linking
@@ -66,7 +66,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
     >
       <button
         className={` w-full p-3 text-start text-xl flex place-content-between
-          ${isOpen ? 'bg-card-foreground' : ''}
+          ${isOpen ? 'bg-card' : ''}
           ${changedBackground ? 'bg-background' : ''}`}
         onClick={onClick}
       >

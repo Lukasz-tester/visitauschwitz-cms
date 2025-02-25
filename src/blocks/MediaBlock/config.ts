@@ -5,25 +5,45 @@ export const MediaBlock: Block = {
   interfaceName: 'MediaBlock',
   fields: [
     {
-      name: 'position',
-      type: 'select',
-      defaultValue: 'default',
-      options: [
+      name: 'images',
+      type: 'array',
+      required: true,
+      fields: [
         {
-          label: 'Default',
-          value: 'default',
+          name: 'media',
+          type: 'upload',
+          relationTo: 'media',
         },
         {
-          label: 'Fullscreen',
-          value: 'fullscreen',
+          name: 'title',
+          type: 'text',
+          localized: true,
+        },
+        {
+          name: 'link',
+          type: 'text',
         },
       ],
     },
-    {
-      name: 'media',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
+    // {
+    //   name: 'position',
+    //   type: 'select',
+    //   defaultValue: 'default',
+    //   options: [
+    //     {
+    //       label: 'Default',
+    //       value: 'default',
+    //     },
+    //     {
+    //       label: 'Fullscreen',
+    //       value: 'fullscreen',
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: 'images',
+    //   type: 'upload',
+    //   fields: tileFields,
+    // },
   ],
 }

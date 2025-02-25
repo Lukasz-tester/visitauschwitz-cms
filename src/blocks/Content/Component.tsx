@@ -30,7 +30,7 @@ export const ContentBlock: React.FC<
       className={cn(
         'pt-14 ',
         {
-          'bg-card': changeBackground,
+          'bg-card-foreground': changeBackground,
         },
         {
           'mt-14': addMarginTop,
