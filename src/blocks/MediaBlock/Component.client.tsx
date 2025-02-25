@@ -2,12 +2,19 @@
 
 import React from 'react'
 import type { Page } from '@/payload-types'
+import type { StaticImageData } from 'next/image'
 import { ImageMedia } from '@/components/Media/ImageMedia'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Props = Extract<Page['layout'][0], { blockType: 'mediaBlock' }> & {
-  // className?: string
+  breakout?: boolean
+  captionClassName?: string
+  className?: string
+  enableGutter?: boolean
   id?: string
+  imgClassName?: string
+  staticImage?: StaticImageData
+  disableInnerContainer?: boolean
 }
 
 export const MediaBlock: React.FC<Props> = (props) => {
