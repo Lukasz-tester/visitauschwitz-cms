@@ -26,8 +26,20 @@ const tileFields: Field[] = [
         value: 'diamond',
       },
       {
+        label: 'Eating',
+        value: 'eating',
+      },
+      {
         label: 'Food',
         value: 'food',
+      },
+      {
+        label: 'Handshake',
+        value: 'handshake',
+      },
+      {
+        label: 'Hotel',
+        value: 'hotel',
       },
       {
         label: 'Luggage',
@@ -38,16 +50,37 @@ const tileFields: Field[] = [
         value: 'mapLookingGlass',
       },
       {
+        label: 'Map',
+        value: 'map',
+      },
+      {
         label: 'Map & Placeholder',
         value: 'mapPlaceholder',
       },
+      {
+        label: 'Massage & Question',
+        value: 'massageQuestion',
+      },
+
       {
         label: 'Placeholder',
         value: 'placeholder',
       },
       {
+        label: 'Placeholder & House',
+        value: 'placeholderHouse',
+      },
+      {
+        label: 'Placeholder on Map',
+        value: 'placeholderOnMap',
+      },
+      {
         label: 'Plane',
         value: 'plane',
+      },
+      {
+        label: 'Route',
+        value: 'route',
       },
       {
         label: 'Shoe',
@@ -56,6 +89,10 @@ const tileFields: Field[] = [
       {
         label: 'Stop Sign',
         value: 'stopSign',
+      },
+      {
+        label: 'Store',
+        value: 'store',
       },
       {
         label: 'Ticket',
@@ -69,6 +106,11 @@ const tileFields: Field[] = [
         label: 'Ticket & ID small',
         value: 'ticketIdSmall',
       },
+
+      {
+        label: 'Tickets',
+        value: 'tickets',
+      },
       {
         label: 'Toilet',
         value: 'toilet',
@@ -76,6 +118,10 @@ const tileFields: Field[] = [
       {
         label: 'Train',
         value: 'train',
+      },
+      {
+        label: 'Trees',
+        value: 'trees',
       },
       {
         label: 'Umbrella',

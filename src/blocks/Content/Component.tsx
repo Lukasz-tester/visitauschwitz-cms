@@ -88,7 +88,14 @@ export const ContentBlock: React.FC<
                 >
                   {richText && (
                     <RichText
-                      className={`${richText.root.direction !== null ? '' : 'hidden'}`}
+                      className={cn(
+                        {
+                          'hidden ': richText.root.direction === null,
+                        },
+                        {
+                          'prose-a:bg-card': changeBackground,
+                        },
+                      )}
                       content={richText}
                       enableGutter={false}
                       styleLink={true}
@@ -102,9 +109,9 @@ export const ContentBlock: React.FC<
                         {
                           'hidden ': richTextEnd.root.direction === null,
                         },
-                        {
-                          'md:py-0 ': noPaddingRichTextEnd,
-                        },
+                        // {
+                        //   'md:py-0 ': noPaddingRichTextEnd,
+                        // },
                         {
                           'mt-7': enableMedia,
                         },

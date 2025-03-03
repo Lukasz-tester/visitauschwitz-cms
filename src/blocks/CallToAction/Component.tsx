@@ -9,19 +9,30 @@ import {
   Bus,
   Car,
   Diamond,
+  Eating,
   Food,
+  Handshake,
+  Hotel,
   Luggage,
+  Map,
   MapLookingGlass,
   MapPlaceholder,
+  MassageQuestion,
   Placeholder,
+  PlaceholderHouse,
+  PlaceholderOnMap,
   Plane,
+  Route,
   Shoe,
   StopSign,
+  Store,
   Ticket,
   TicketID,
   TicketIDsmall,
+  Tickets,
   Toilet,
   Train,
+  Trees,
   Umbrella,
   UmbrellaDrops,
 } from '@/components/ui/Icons'
@@ -42,24 +53,36 @@ export const CallToActionBlock: React.FC<
   const gridSize = tilesSpanClasses[size!]
 
   const icons = {
-    bus: <Bus />,
-    car: <Car />,
+    placeholder: <Placeholder />, // NOT USED
+    mapPlaceholder: <MapPlaceholder />, // NOT USED
+
     food: <Food />,
     luggage: <Luggage />,
-    plane: <Plane />,
-    shoe: <Shoe />,
-    ticketId: <TicketID />,
     ticketIdSmall: <TicketIDsmall />,
     toilet: <Toilet />,
-    train: <Train />,
-    umbrella: <Umbrella />,
     // some not used above?
+    bus: <Bus />,
+    car: <Car />,
     diamond: <Diamond />,
+    eating: <Eating />,
+    handshake: <Handshake />,
+    hotel: <Hotel />,
+    map: <Map />,
     mapLookingGlass: <MapLookingGlass />,
-    mapPlaceholder: <MapPlaceholder />,
-    placeholder: <Placeholder />,
+    massageQuestion: <MassageQuestion />,
+    placeholderHouse: <PlaceholderHouse />,
+    placeholderOnMap: <PlaceholderOnMap />,
+    plane: <Plane />, //
+    route: <Route />,
+    shoe: <Shoe />,
     stopSign: <StopSign />,
+    store: <Store />,
     ticket: <Ticket />,
+    ticketId: <TicketID />,
+    tickets: <Tickets />,
+    train: <Train />,
+    trees: <Trees />,
+    umbrella: <Umbrella />,
     umbrellaDrops: <UmbrellaDrops />,
   }
 
@@ -73,23 +96,19 @@ export const CallToActionBlock: React.FC<
         },
 
         {
-          'md:px-[17.3%]': tiles?.length === 1,
+          'md:px-[17.3%] md:py-8': tiles?.length === 1,
         },
       )}
     >
       <div className="container justify-center">
         <div
           className={cn(
-            ` gap-4 md:gap-7 lg:gap-14
+            `gap-7 lg:gap-14
             ${
               tiles && (gridSize === '3' || tiles?.length === 1)
                 ? 'flex flex-wrap justify-center'
                 : 'grid-cols-3 sm:grid-cols-6 lg:grid-cols-12 grid '
             }`,
-            {
-              'pt-1 px-2 border border-card-foreground rounded-2xl shadow-xl shadow-card-foreground':
-                tiles?.length === 1,
-            },
           )}
         >
           {tiles &&
@@ -98,55 +117,82 @@ export const CallToActionBlock: React.FC<
               const { icon, enableMedia, media, title, richText, linkTo } = col
 
               return (
-                <a
+                <div
+                  key={index}
                   className={cn(
-                    `col-span-3 lg:col-span-${gridSize}
-                    ${
-                      linkTo
-                        ? 'bg-gradient-to-tl from-amber-700/50 via-slate-800/15 dark:from-amber-700/35 dark:via-slate-900 to-70% to-transparent border border-card hover:border-amber-700/70'
-                        : 'from-transparent '
-                    }`,
+                    `col-span-3 lg:col-span-${gridSize} border border-card-foreground
+                ${
+                  linkTo
+                    ? 'bg-gradient-to-tl from-card-foreground to-40% to-transparent hover:border-amber-700/70'
+                    : 'from-transparent '
+                }`,
                     {
-                      'rounded-xl bg-gradient-to-bl': !enableMedia,
+                      'rounded-2xl bg-gradient-to-bl from-amber-700/50 via-slate-800/15 dark:from-amber-700/35 dark:via-slate-900 to-70% ':
+                        !enableMedia && linkTo,
                     },
                     {
-                      'max-w-[300px] place-self-center': gridSize === '3',
+                      'max-w-[360px] items-start border-none': tiles.length === 5,
                     },
                     {
-                      'place-self-center': tiles.length === 1,
+                      'place-self-center border-none': tiles.length === 1 && gridSize !== '6',
                     },
                   )}
-                  key={index}
-                  href={linkTo || undefined}
                 >
-                  {enableMedia && <ImageMedia resource={media} />}
-                  <div
-                    className={`px-4 ${icon && title && gridSize === '3' ? 'place-self-center' : ''}`}
+                  <a
+                    href={linkTo || undefined}
+                    target={linkTo?.includes('http') ? '_blank' : undefined}
                   >
-                    {icon && !enableMedia && (
-                      <div className={`sm:w-fit ${title ? 'place-self-center' : ''}`}>
-                        {icons[icon]}
-                      </div>
-                    )}
-                    {title && (
-                      <div
-                        className={cn(
-                          'pt-4 mb-5 text-2xl',
-                          {
-                            'text-center': gridSize === '3',
-                          },
-                          {
-                            'text-3xl md:text-4xl pt-5': tiles.length === 1,
-                          },
-                        )}
-                      >
-                        {title}
-                      </div>
-                    )}
+                    {enableMedia && <ImageMedia resource={media} />}
+                    <div
+                      className={`px-6 ${icon && title && gridSize === '3' ? 'place-self-center' : ''}`}
+                    >
+                      {icon && !enableMedia && (
+                        <div className={`sm:w-fit ${title ? 'place-self-center py-2' : ''}`}>
+                          {icons[icon]}
+                        </div>
+                      )}
+                      {title && (
+                        <div
+                          className={cn(
+                            'text-2xl opacity-85 font-semibold ',
+                            {
+                              'text-center pb-8 pt-4': gridSize === '3',
+                            },
+                            {
+                              'text-3xl md:text-4xl mt-5 ': tiles.length === 1,
+                            },
 
+                            {
+                              'text-3xl': tiles.length === 5,
+                            },
+                          )}
+                        >
+                          {title}
+                        </div>
+                      )}
+
+                      {richText && tiles.length !== 5 && (
+                        <RichText
+                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl pb-2 mt-6'}`}
+                          content={richText}
+                          enableGutter={false}
+                          // styleLink={true}
+                          styleH3={false}
+                        />
+                      )}
+                    </div>
+                  </a>
+                  {/* Custom style when 5 tiles */}
+                  <div
+                    className={`${
+                      tiles.length === 5
+                        ? 'p-6 pb-2 rounded-2xl border border-slate-500/30 shadow-lg shadow-slate-500/50 hover:border-amber-700/60 hover:shadow-amber-700/60 hover:bg-card/30'
+                        : 'hidden'
+                    }`}
+                  >
                     {richText && (
                       <RichText
-                        className={`${richText.root.direction !== null ? 'prose-h3:text-3xl pb-2 mt-6' : 'hidden'}`}
+                        // className="prose-p:pt-1"
                         content={richText}
                         enableGutter={false}
                         styleLink={true}
@@ -154,7 +200,7 @@ export const CallToActionBlock: React.FC<
                       />
                     )}
                   </div>
-                </a>
+                </div>
               )
             })}
         </div>

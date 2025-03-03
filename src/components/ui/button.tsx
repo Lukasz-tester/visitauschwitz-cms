@@ -4,7 +4,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import * as React from 'react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded text-lg font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-xl ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     defaultVariants: {
       size: 'default',
@@ -20,12 +20,12 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-primary/80 text-base text-primary-foreground/90 border border-amber-800 hover:bg-amber-700',
+          'bg-primary/80 text-primary-foreground/90 border border-amber-800 hover:bg-amber-700 ',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         ghost: 'hover:bg-card hover:text-accent-foreground',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline decoration-amber-700',
         outline:
-          'bg-background/80 text-base text-accent-foreground/80 border border-amber-800 hover:bg-amber-700',
+          'bg-background/80 text-accent-foreground/80 border border-amber-800 hover:bg-amber-700',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
       },
     },
