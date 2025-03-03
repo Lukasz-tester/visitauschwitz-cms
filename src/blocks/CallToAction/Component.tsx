@@ -37,7 +37,6 @@ export const CallToActionBlock: React.FC<
     half: '6',
     oneThird: '4',
     oneForth: '3',
-    oneSixth: '2',
   }
 
   const gridSize = tilesSpanClasses[size!]
@@ -54,7 +53,7 @@ export const CallToActionBlock: React.FC<
     toilet: <Toilet />,
     train: <Train />,
     umbrella: <Umbrella />,
-    // not used below?
+    // some not used above?
     diamond: <Diamond />,
     mapLookingGlass: <MapLookingGlass />,
     mapPlaceholder: <MapPlaceholder />,
@@ -67,17 +66,31 @@ export const CallToActionBlock: React.FC<
   return (
     <div // each tiles block receives unique id = blockName
       id={blockName || undefined}
-      className={cn('mt-7 mb-12', {
-        'bg-gradient-to-r from-amber-900/20 to-transparent py-7 ': changeBackground,
-      })}
+      className={cn(
+        'my-7 mb-12',
+        {
+          'bg-gradient-to-b from-card-foreground to-transparent py-7 my-0': changeBackground,
+        },
+
+        {
+          'md:px-[17.3%]': tiles?.length === 1,
+        },
+      )}
     >
       <div className="container justify-center">
         <div
-          className={` gap-4 md:gap-7 lg:gap-14 ${
-            tiles && gridSize === '3'
-              ? 'flex flex-wrap justify-center'
-              : 'grid-cols-3 sm:grid-cols-6 lg:grid-cols-12 grid '
-          }`}
+          className={cn(
+            ` gap-4 md:gap-7 lg:gap-14
+            ${
+              tiles && (gridSize === '3' || tiles?.length === 1)
+                ? 'flex flex-wrap justify-center'
+                : 'grid-cols-3 sm:grid-cols-6 lg:grid-cols-12 grid '
+            }`,
+            {
+              'pt-1 px-2 border border-card-foreground rounded-2xl shadow-xl shadow-card-foreground':
+                tiles?.length === 1,
+            },
+          )}
         >
           {tiles &&
             tiles.length > 0 &&
@@ -99,6 +112,9 @@ export const CallToActionBlock: React.FC<
                     {
                       'max-w-[300px] place-self-center': gridSize === '3',
                     },
+                    {
+                      'place-self-center': tiles.length === 1,
+                    },
                   )}
                   key={index}
                   href={linkTo || undefined}
@@ -114,14 +130,23 @@ export const CallToActionBlock: React.FC<
                     )}
                     {title && (
                       <div
-                        className={`pt-4 pb-5 text-2xl ${gridSize === '3' ? 'text-center' : ''}`}
+                        className={cn(
+                          'pt-4 mb-5 text-2xl',
+                          {
+                            'text-center': gridSize === '3',
+                          },
+                          {
+                            'text-3xl md:text-4xl pt-5': tiles.length === 1,
+                          },
+                        )}
                       >
                         {title}
                       </div>
                     )}
+
                     {richText && (
                       <RichText
-                        className={`${richText.root.direction !== null ? 'prose-h3:text-3xl pb-1' : 'hidden'}`}
+                        className={`${richText.root.direction !== null ? 'prose-h3:text-3xl pb-2 mt-6' : 'hidden'}`}
                         content={richText}
                         enableGutter={false}
                         styleLink={true}

@@ -232,7 +232,7 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
-  size?: ('half' | 'oneThird' | 'oneForth' | 'oneSixth') | null;
+  size?: ('half' | 'oneThird' | 'oneForth') | null;
   changeBackground?: boolean | null;
   id?: string | null;
   blockName?: string | null;

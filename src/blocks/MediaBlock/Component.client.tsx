@@ -32,7 +32,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
 
   return (
     <div className="overflow-hidden items-center self-center ">
-      <div className="h-[50vh] md:h-[80vh] flex items-end justify-center">
+      <div className="h-[50vh] md:h-[90vh] flex items-end justify-center">
         {images.map((image, i) => {
           const { id, title, link, media } = image
           return (
@@ -41,7 +41,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
               href={link || undefined}
               className={`absolute ease-in-out transition-opacity duration-1000 ${currentSlide !== i ? 'opacity-0' : 'opacity-100 z-10'}`}
             >
-              <div className="max-w-[50vh] md:max-w-[80vh] items-center">
+              <div className="max-w-[50vh] md:max-w-[90vh] items-center">
                 <ImageMedia resource={media} imgClassName="rounded-3xl p-3" />
                 <div className="absolute m-6 md:m-7 inset-0 bg-transparent flex items-end place-content-center ">
                   {title && (

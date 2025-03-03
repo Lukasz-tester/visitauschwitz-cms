@@ -151,10 +151,6 @@ export const CallToAction: Block = {
           label: 'One Forth',
           value: 'oneForth',
         },
-        {
-          label: 'One Sixth',
-          value: 'oneSixth',
-        },
       ],
     },
     {
