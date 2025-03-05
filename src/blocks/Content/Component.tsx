@@ -4,7 +4,6 @@ import RichText from '@/components/RichText'
 
 import type { Page } from '@/payload-types'
 
-import { CMSLink } from '../../components/Link'
 import { ImageMedia } from '@/components/Media/ImageMedia'
 
 type Props = Extract<Page['layout'][0], { blockType: 'content' }>
@@ -14,7 +13,8 @@ export const ContentBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { columns, heading, changeBackground, addMarginTop, addMarginBottom } = props
+  const { columns, heading, changeBackground, addMarginTop, addMarginBottom, addPaddingBottom } =
+    props
 
   const colsSpanClasses = {
     full: '12',
@@ -38,13 +38,20 @@ export const ContentBlock: React.FC<
         {
           'mb-14': addMarginBottom,
         },
+        {
+          'pb-14': addPaddingBottom,
+        },
+        {
+          // no heading and 4 or more columns
+          'pt-24': heading?.root.direction === null && columns && columns.length > 3,
+        },
       )}
     >
       <div className="container">
         {heading && (
           <RichText
             className={cn(
-              'md:px-[17.3%] pt-9 ',
+              'md:px-[17.3%] pt-10 ',
               {
                 'hidden ': heading.root.direction === null,
               },
@@ -57,21 +64,12 @@ export const ContentBlock: React.FC<
           />
         )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 gap-7 ${columns && columns.length > 0 ? 'md:gap-14 pb-14 ' : ''}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 gap-8 md:gap-14 ${changeBackground ? 'pb-14' : 'mb-14'}`}
         >
           {columns &&
             columns.length > 0 &&
             columns.map((col, index) => {
-              const {
-                enableLink,
-                enableMedia,
-                link,
-                richText,
-                richTextEnd,
-                noPaddingRichTextEnd,
-                size,
-                media,
-              } = col
+              const { enableMedia, richText, richTextEnd, size, media } = col
 
               return (
                 <div
@@ -89,8 +87,12 @@ export const ContentBlock: React.FC<
                   {richText && (
                     <RichText
                       className={cn(
+                        '',
                         {
-                          'hidden ': richText.root.direction === null,
+                          'mb-4 md:mb-7': richText.root.direction !== null && enableMedia,
+                        },
+                        {
+                          hidden: richText.root.direction === null,
                         },
                         {
                           'prose-a:bg-card': changeBackground,
@@ -101,22 +103,15 @@ export const ContentBlock: React.FC<
                       styleLink={true}
                     />
                   )}
-                  {enableLink && <CMSLink {...link} />}
-                  {enableMedia && <ImageMedia resource={media} />}
+                  {enableMedia && <ImageMedia imgClassName="rounded" resource={media} />}
                   {richTextEnd && (
                     <RichText
                       className={cn(
                         {
-                          'hidden ': richTextEnd.root.direction === null,
-                        },
-                        // {
-                        //   'md:py-0 ': noPaddingRichTextEnd,
-                        // },
-                        {
-                          'mt-7': enableMedia,
+                          hidden: richTextEnd.root.direction === null,
                         },
                         {
-                          'mt-3 ': noPaddingRichTextEnd && enableMedia,
+                          'mt-2 ': enableMedia,
                         },
                       )}
                       content={richTextEnd}

@@ -23,9 +23,9 @@ export const AccordionBlock: React.FC<
   }
   return (
     <div
-      className={cn('w-full m-0 place-self-center', {
+      className={cn('w-full m-0 mt-14 place-self-center', {
         // 'bg-gradient-to-r from-transparent via-slate-800/30 to-transparent': changeBackground,
-        'bg-card-foreground': changeBackground,
+        'bg-card-foreground mt-0': changeBackground,
       })}
     >
       <div //each content block receives unique id = blockName for internal linking
@@ -73,7 +73,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
         <h3>{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
-      <div className={`px-5 ${isOpen ? 'pt-5 pb-2' : ''}`}>
+      <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
         <div
           ref={contentHeight}
           style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}

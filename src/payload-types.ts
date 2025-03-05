@@ -287,21 +287,6 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
         enableMedia?: boolean | null;
         media?: (string | null) | Media;
         richTextEnd?: {
@@ -319,13 +304,13 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
-        noPaddingRichTextEnd?: boolean | null;
         id?: string | null;
       }[]
     | null;
   changeBackground?: boolean | null;
   addMarginTop?: boolean | null;
   addMarginBottom?: boolean | null;
+  addPaddingBottom?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -1006,26 +991,15 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | {
         size?: T;
         richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
         enableMedia?: T;
         media?: T;
         richTextEnd?: T;
-        noPaddingRichTextEnd?: T;
         id?: T;
       };
   changeBackground?: T;
   addMarginTop?: T;
   addMarginBottom?: T;
+  addPaddingBottom?: T;
   id?: T;
   blockName?: T;
 }

@@ -1,4 +1,5 @@
 import type { Block, Field } from 'payload'
+import { media } from '@/fields/media'
 
 import {
   FixedToolbarFeature,
@@ -6,9 +7,6 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-
-import { link } from '@/fields/link'
-import { media } from '@/fields/media'
 
 const columnFields: Field[] = [
   {
@@ -55,17 +53,6 @@ const columnFields: Field[] = [
     label: false,
   },
   {
-    name: 'enableLink',
-    type: 'checkbox',
-  },
-  link({
-    overrides: {
-      admin: {
-        condition: (_, { enableLink }) => Boolean(enableLink),
-      },
-    },
-  }),
-  {
     name: 'enableMedia',
     type: 'checkbox',
   },
@@ -91,10 +78,6 @@ const columnFields: Field[] = [
       },
     }),
     label: false,
-  },
-  {
-    name: 'noPaddingRichTextEnd',
-    type: 'checkbox',
   },
 ]
 
@@ -133,6 +116,10 @@ export const Content: Block = {
     },
     {
       name: 'addMarginBottom',
+      type: 'checkbox',
+    },
+    {
+      name: 'addPaddingBottom',
       type: 'checkbox',
     },
   ],

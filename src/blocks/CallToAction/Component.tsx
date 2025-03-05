@@ -90,13 +90,13 @@ export const CallToActionBlock: React.FC<
     <div // each tiles block receives unique id = blockName
       id={blockName || undefined}
       className={cn(
-        'my-7 mb-12',
+        'mt-7',
         {
           'bg-gradient-to-b from-card-foreground to-transparent py-7 my-0': changeBackground,
         },
 
         {
-          'md:px-[17.3%] md:py-8': tiles?.length === 1,
+          'md:px-[17.3%]': tiles?.length === 1,
         },
       )}
     >
@@ -120,7 +120,7 @@ export const CallToActionBlock: React.FC<
                 <div
                   key={index}
                   className={cn(
-                    `col-span-3 lg:col-span-${gridSize} border border-card-foreground
+                    `col-span-3 lg:col-span-${gridSize} border border-card-foreground rounded
                 ${
                   linkTo
                     ? 'bg-gradient-to-tl from-card-foreground to-40% to-transparent hover:border-amber-700/70'
@@ -142,7 +142,9 @@ export const CallToActionBlock: React.FC<
                     href={linkTo || undefined}
                     target={linkTo?.includes('http') ? '_blank' : undefined}
                   >
-                    {enableMedia && <ImageMedia resource={media} />}
+                    {enableMedia && (
+                      <ImageMedia className="rounded-" imgClassName="rounded-t" resource={media} />
+                    )}
                     <div
                       className={`px-6 ${icon && title && gridSize === '3' ? 'place-self-center' : ''}`}
                     >
@@ -159,7 +161,7 @@ export const CallToActionBlock: React.FC<
                               'text-center pb-8 pt-4': gridSize === '3',
                             },
                             {
-                              'text-3xl md:text-4xl mt-5 ': tiles.length === 1,
+                              'text-3xl md:text-4xl mt-5': tiles.length === 1,
                             },
 
                             {
@@ -173,7 +175,7 @@ export const CallToActionBlock: React.FC<
 
                       {richText && tiles.length !== 5 && (
                         <RichText
-                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl pb-2 mt-6'}`}
+                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-6'}`}
                           content={richText}
                           enableGutter={false}
                           // styleLink={true}
@@ -186,7 +188,7 @@ export const CallToActionBlock: React.FC<
                   <div
                     className={`${
                       tiles.length === 5
-                        ? 'p-6 pb-2 rounded-2xl border border-slate-500/30 shadow-lg shadow-slate-500/50 hover:border-amber-700/60 hover:shadow-amber-700/60 hover:bg-card/30'
+                        ? 'p-6 rounded-2xl border border-slate-500/30 shadow-lg shadow-slate-500/50 hover:border-amber-700/60 hover:shadow-amber-700/60 hover:bg-card/30'
                         : 'hidden'
                     }`}
                   >
