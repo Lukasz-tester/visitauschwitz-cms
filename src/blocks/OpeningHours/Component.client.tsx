@@ -36,7 +36,7 @@ export const OpeningHoursBlock: React.FC<
         <div className="xl:mr-7">
           {richText && <RichText content={richText} enableGutter={false} />}
         </div>
-        <div className="text-lg rounded border border-border bg-card xl:ml-7">
+        <div className="text-xl rounded border border-border bg-card xl:ml-7">
           <div className="justify-items-end">
             <Select onValueChange={onMonthChange} value={value}>
               <SelectTrigger className="w-auto bg-card-foreground px-3 border border-border">

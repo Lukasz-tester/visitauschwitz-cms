@@ -53,10 +53,10 @@ export const ContentBlock: React.FC<
             className={cn(
               'md:px-[17.3%] pt-10 ',
               {
-                'hidden ': heading.root.direction === null,
+                'pb-14': heading.root.direction !== null && columns && columns.length > 0,
               },
               {
-                'pb-7 md:pb-14 ': heading.root.direction !== null && columns && columns.length > 0,
+                hidden: heading.root.direction === null,
               },
             )}
             content={heading}
@@ -64,7 +64,7 @@ export const ContentBlock: React.FC<
           />
         )}
         <div
-          className={`grid grid-cols-4 lg:grid-cols-12 gap-8 md:gap-14 ${changeBackground ? 'pb-14' : 'mb-14'}`}
+          className={`grid grid-cols-4 lg:grid-cols-12 gap-6 md:gap-14 ${changeBackground ? 'pb-14' : 'mb-14'}`}
         >
           {columns &&
             columns.length > 0 &&
@@ -89,13 +89,16 @@ export const ContentBlock: React.FC<
                       className={cn(
                         '',
                         {
-                          'mb-4 md:mb-7': richText.root.direction !== null && enableMedia,
+                          'prose-a:bg-card': changeBackground,
+                        },
+                        {
+                          'mb-6': richText.root.direction !== null && enableMedia,
+                        },
+                        {
+                          'pb-1 md:pb-0': richText.root.direction !== null,
                         },
                         {
                           hidden: richText.root.direction === null,
-                        },
-                        {
-                          'prose-a:bg-card': changeBackground,
                         },
                       )}
                       content={richText}
@@ -108,10 +111,10 @@ export const ContentBlock: React.FC<
                     <RichText
                       className={cn(
                         {
-                          hidden: richTextEnd.root.direction === null,
+                          'mt-4': enableMedia,
                         },
                         {
-                          'mt-2 ': enableMedia,
+                          hidden: richTextEnd.root.direction === null,
                         },
                       )}
                       content={richTextEnd}

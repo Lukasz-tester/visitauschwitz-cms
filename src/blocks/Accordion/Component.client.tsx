@@ -60,8 +60,8 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
 
   return (
     <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded-xl border border-slate-500/30 hover:border-amber-600 dark:hover:border-amber-700/70
-        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : ''}
+      className={`[&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded-xl border hover:border-amber-600 dark:hover:border-amber-700/70
+        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : 'border-slate-500/40'}
         ${changedBackground ? 'bg-background' : 'bg-card'}`}
     >
       <button

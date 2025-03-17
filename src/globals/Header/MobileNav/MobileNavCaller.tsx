@@ -20,7 +20,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   return (
     <div className={`${scrolledFromTop() ? '' : 'md:hidden'}`}>
       <button
-        className={`hover:text-amber-700 ease-in-out duration-1000 ${modalOpen ? 'rounded bg-card top-7 right-6 w-14 h-14 hover:bg-card-foreground' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`ease-in-out duration-1000 ${modalOpen ? 'rounded bg-card top-7 right-6 w-14 h-14 hover:bg-card-foreground' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16 hover:bg-card-foreground'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -39,7 +39,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         <div className="fixed inset-0 w-full " onClick={() => setModalOpen(false)}>
           <div className="p-4 bg-background z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0">
             <Link
-              className="rounded bg-card hover:bg-card-foreground w-14 h-14 flex items-center justify-center fixed top-28 right-6"
+              className="ease-in-out duration-1000 rounded bg-card hover:bg-card-foreground w-14 h-14 flex items-center justify-center fixed top-28 right-6"
               href="/search"
             >
               <SearchIcon className="w-fit text-primary" />
