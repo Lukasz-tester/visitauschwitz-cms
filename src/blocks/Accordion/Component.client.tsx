@@ -70,7 +70,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground })
           ${changedBackground ? '' : ''}`}
         onClick={onClick}
       >
-        <h3>{question}</h3>
+        <h3 className="pr-2">{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
       <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>

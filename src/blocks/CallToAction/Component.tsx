@@ -53,14 +53,13 @@ export const CallToActionBlock: React.FC<
   const gridSize = tilesSpanClasses[size!]
 
   const icons = {
-    placeholder: <Placeholder />, // NOT USED
-    mapPlaceholder: <MapPlaceholder />, // NOT USED
-
+    placeholder: <Placeholder />,
+    mapPlaceholder: <MapPlaceholder />,
+    ticketIdSmall: <TicketIDsmall />,
+    // THOSE ABOVE ARE NOT USED  -----------
     food: <Food />,
     luggage: <Luggage />,
-    ticketIdSmall: <TicketIDsmall />,
     toilet: <Toilet />,
-    // some not used above?
     bus: <Bus />,
     car: <Car />,
     diamond: <Diamond />,
