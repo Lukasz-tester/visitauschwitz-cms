@@ -38,6 +38,11 @@ import localization from './i18n/localization'
 
 import { resendAdapter } from '@payloadcms/email-resend'
 
+import { translator, openAIResolver } from '@payload-enchants/translator'
+// import { openAIResolver } from './translator/openAIresolver'
+// import openAiResolver from '@payload-enchants/translator/dist/resolvers/'
+// /Users/lucky/dev/payload-3.0-stable/localization/node_modules/
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -129,6 +134,18 @@ export default buildConfig({
     options: { level: 'info' },
   },
   plugins: [
+    translator({
+      // collections with the enabled translator in the admin UI
+      collections: ['posts', 'pages'],
+      // globals with the enabled translator in the admin UI
+      globals: [],
+      // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
+      resolvers: [
+        openAIResolver({
+          apiKey: process.env.OPENAI_KEY!,
+        }),
+      ],
+    }),
     redirectsPlugin({
       collections: ['pages', 'posts'],
       overrides: {

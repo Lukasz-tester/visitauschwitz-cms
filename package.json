@@ -17,6 +17,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payload-enchants/translator": "^1.3.0",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/email-resend": "3.11.0",
     "@payloadcms/live-preview-react": "latest",
