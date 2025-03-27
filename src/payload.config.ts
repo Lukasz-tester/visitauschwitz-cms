@@ -39,15 +39,15 @@ import localization from './i18n/localization'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { translator, openAIResolver } from '@payload-enchants/translator'
-// import { openAIResolver } from './translator/openAIresolver'
-// import openAiResolver from '@payload-enchants/translator/dist/resolvers/'
-// /Users/lucky/dev/payload-3.0-stable/localization/node_modules/
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Visit Auschwitz` : 'Visit Auschwitz Info'
+  const date = new Date()
+  return doc?.title
+    ? `${doc.title} | Visit Auschwitz in ${date.getFullYear()}`
+    : `Auschwitz Visitor Information | ${date.getFullYear()}`
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -98,7 +98,7 @@ export default buildConfig({
         BoldFeature(),
         ItalicFeature(),
         LinkFeature({
-          enabledCollections: ['pages', 'posts'],
+          enabledCollections: ['pages', 'posts', 'media'],
           fields: ({ defaultFields }) => {
             const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
               if ('name' in field && field.name === 'url') return false
