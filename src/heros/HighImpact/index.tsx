@@ -8,7 +8,7 @@ import { ImageMedia } from '@/components/Media/ImageMedia'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   return (
-    <div className="relative -mt-[10.4rem] flex items-end text-white">
+    <div className="relative -mt-[10.4rem] flex items-end text-white min-h-screen">
       <div className="container mb-8 z-10 relative">
         <div className="max-w-[37rem]">
           {richText && (
@@ -33,19 +33,20 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-screen select-none">
-        {media && typeof media === 'object' && (
-          <React.Fragment>
-            <ImageMedia fill imgClassName="-z-1000 object-cover" priority resource={media} />
-            <div
-              className="absolute pointer-events-none left-0 bottom-0 w-full h-full
-               bg-gradient-to-b
-            from-5% from-background via-30% via-transparent 
-            dark:via-transparent dark:to-background"
-            />
-          </React.Fragment>
-        )}
-      </div>
+      {media && typeof media === 'object' && (
+        <React.Fragment>
+          <ImageMedia
+            fill
+            imgClassName="-z-1000 object-cover select-none"
+            priority
+            resource={media}
+          />
+          <div
+            className="absolute pointer-events-none left-0 bottom-0 w-full h-full
+               bg-gradient-to-b from-5% from-background via-30% via-transparent dark:via-transparent dark:to-background select-none"
+          />
+        </React.Fragment>
+      )}
     </div>
   )
 }

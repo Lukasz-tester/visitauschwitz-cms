@@ -20,7 +20,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
-  // tilesBlock: TilesBlock,
+  tilesBlock: TilesBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -38,7 +38,7 @@ export const RenderBlocks: React.FC<{
           const { blockType } = block
 
           if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
+            const Block = blockComponents[blockType] as any
 
             if (Block) {
               return (

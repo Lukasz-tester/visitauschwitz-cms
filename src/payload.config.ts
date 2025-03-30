@@ -143,6 +143,23 @@ export default buildConfig({
       resolvers: [
         openAIResolver({
           apiKey: process.env.OPENAI_KEY!,
+          prompt: ({
+            localeFrom,
+            localeTo,
+            texts,
+          }) => `You are an expert in Auschwitz tours, specializing in translating texts related to visiting the Auschwitz Memorial.
+Translate me the following array: ${JSON.stringify(texts)} in locale=${localeFrom} to locale ${localeTo}, respond me with the same array structure and follow these translation instructions for each text:
+
+When translating the text, preserve the capitalization of the first letter of each word, if it is capitalized in the source language.
+Example:
+Source: "This is a Sample Sentence."
+Translated: "Esto es una Oración de Ejemplo."
+Make sure that words like "Sample" and "Oración" remain capitalized as they are in the source sentence.
+
+Some source texts you are about to translate are fragments of a sentence, structured this way because they serve as link texts.
+Never merge the content and do not move any words between these fragments, but ensure consistency of the meaning within the shared context.
+
+Preserve leading and trailing whitespace " " exactly as in the source text.`,
         }),
       ],
     }),
