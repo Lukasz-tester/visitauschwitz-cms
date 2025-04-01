@@ -119,21 +119,21 @@ export const CallToActionBlock: React.FC<
                 <div
                   key={index}
                   className={cn(
-                    `col-span-3 lg:col-span-${gridSize} border border-card-foreground rounded
+                    `col-span-3 lg:col-span-${gridSize} rounded-xl
                 ${
                   linkTo
-                    ? 'bg-gradient-to-tl from-card-foreground to-40% to-transparent hover:border-amber-700/70'
+                    ? 'bg-gradient-to-tl from-card-foreground to-40% to-transparent border border-background hover:border-amber-700/70'
                     : 'from-transparent '
                 }`,
                     {
-                      'rounded-2xl bg-gradient-to-bl from-amber-700/50 via-slate-800/15 dark:from-amber-700/35 dark:via-slate-900 to-70% ':
+                      'bg-gradient-to-bl from-amber-700/50 via-slate-800/15 dark:from-amber-700/35 dark:via-slate-900 to-70% ':
                         !enableMedia && linkTo,
                     },
                     {
-                      'max-w-[360px] items-start border-none': tiles.length === 5,
+                      'max-w-[360px] items-start': tiles.length === 5,
                     },
                     {
-                      'place-self-center border-none pt-16': tiles.length === 1 && gridSize !== '6',
+                      'place-self-center pt-16': tiles.length === 1 && gridSize !== '6',
                     },
                   )}
                 >
@@ -141,7 +141,7 @@ export const CallToActionBlock: React.FC<
                     href={linkTo || undefined}
                     target={linkTo?.includes('http') ? '_blank' : undefined}
                   >
-                    {enableMedia && <ImageMedia imgClassName="rounded-t" resource={media} />}
+                    {enableMedia && <ImageMedia imgClassName="rounded-t-xl" resource={media} />}
                     <div
                       className={`px-6 ${icon && title && gridSize === '3' ? 'place-self-center' : ''}`}
                     >
@@ -155,7 +155,7 @@ export const CallToActionBlock: React.FC<
                           className={cn(
                             'text-2xl opacity-85 font-semibold ',
                             {
-                              'text-center pb-8 pt-4': gridSize === '3',
+                              'text-center py-3': gridSize === '3',
                             },
                             {
                               'text-3xl md:text-4xl mt-5': tiles.length === 1,
@@ -182,11 +182,7 @@ export const CallToActionBlock: React.FC<
                   </a>
                   {/* Custom style when 5 tiles */}
                   <div
-                    className={`${
-                      tiles.length === 5
-                        ? 'p-6 rounded-2xl border border-slate-500/30 shadow-lg shadow-slate-500/50 hover:border-amber-700/60 hover:shadow-amber-700/60 hover:bg-card/30'
-                        : 'hidden'
-                    }`}
+                    className={`${tiles.length === 5 ? 'p-5 rounded-3xl bg-card/50' : 'hidden'}`}
                   >
                     {richText && (
                       <RichText

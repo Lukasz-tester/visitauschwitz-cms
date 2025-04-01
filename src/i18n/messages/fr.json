@@ -4,8 +4,8 @@
   "page-not-found": "Cette page n'a pas pu être trouvée.",
   "go-home": "Aller à la page d'accueil",
   "loading": "Chargement, veuillez patienter...",
-  "posts": "Posts",
-  "post": "Post",
+  "posts": "Articles",
+  "post": "Article",
   "showing": "Affichage",
   "of": "de",
   "search": "Recherche",
@@ -13,5 +13,8 @@
   "previous": "Précédent",
   "next": "Suivant",
   "more-pages": "Plus de pages",
-  "contact": "Contact"
+  "contact": "Contact",
+
+  "cookie-message": "Ce site utilise des cookies pour offrir une meilleure expérience de navigation.",
+  "hide-message": "Masquer le message"
 }

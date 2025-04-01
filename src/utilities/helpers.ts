@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from 'react'
 
+export const useLockBodyScroll = (flag: boolean) =>
+  useEffect(() => {
+    document.body.style.overflow = flag ? 'hidden' : 'auto'
+  }, [flag])
+
 export const useMediaQuery = (query) => {
   const [matches, setMatches] = useState<any | null>(null)
   useEffect(() => {

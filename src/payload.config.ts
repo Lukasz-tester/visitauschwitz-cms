@@ -46,7 +46,7 @@ const dirname = path.dirname(filename)
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   const date = new Date()
   return doc?.title
-    ? `${doc.title} | Visit Auschwitz in ${date.getFullYear()}`
+    ? `${doc.title} | ${date.getFullYear()} Visit Auschwitz Info`
     : `Auschwitz Visitor Information | ${date.getFullYear()}`
 }
 
@@ -124,6 +124,7 @@ export default buildConfig({
   }),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
+    transactionOptions: { retryWrites: true },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
@@ -138,28 +139,35 @@ export default buildConfig({
       // collections with the enabled translator in the admin UI
       collections: ['posts', 'pages'],
       // globals with the enabled translator in the admin UI
-      globals: [],
+      globals: ['header'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
       resolvers: [
         openAIResolver({
           apiKey: process.env.OPENAI_KEY!,
-          prompt: ({
-            localeFrom,
-            localeTo,
-            texts,
-          }) => `You are an expert in Auschwitz tours, specializing in translating texts related to visiting the Auschwitz Memorial.
+          model: 'gpt-4o',
+          prompt: ({ localeFrom, localeTo, texts }) => {
+            // console.log('>>>>>>>>>>>> JSON ', texts)
+            // console.log('>>>>>>>>>>>> FROM ', localeFrom)
+            // console.log('>>>>>>>>>>>> TO ', localeTo)
+            return `
+You are an expert in Auschwitz tours, specializing in translating texts related to visiting the Auschwitz Memorial.
+
 Translate me the following array: ${JSON.stringify(texts)} in locale=${localeFrom} to locale ${localeTo}, respond me with the same array structure and follow these translation instructions for each text:
 
 When translating the text, preserve the capitalization of the first letter of each word, if it is capitalized in the source language.
 Example:
-Source: "This is a Sample Sentence."
-Translated: "Esto es una Oración de Ejemplo."
-Make sure that words like "Sample" and "Oración" remain capitalized as they are in the source sentence.
+Source (EN): "This is a Sample Sentence."
+Translated (ES): "Esto es una Oración de Ejemplo."
+Make sure that words like "Sample" and "Oración" remain capitalized if they are in the source sentence.
 
-Some source texts you are about to translate are fragments of a sentence, structured this way because they serve as link texts.
-Never merge the content and do not move any words between these fragments, but ensure consistency of the meaning within the shared context.
+Some source texts you are about to translate are fragments of a sentence, split this way because they are link texts or bolded words, which causes them to be sliced into separate parts. They share a single context, so ensure their meaning remains consistent whithin the sentence.
 
-Preserve leading and trailing whitespace " " exactly as in the source text.`,
+If the translation naturally causes a fragment to become empty due to content merging or word shifts, maintain the array structure by replacing the empty fragment with an empty string ('') so that indexes from the input array should match output translations in great majority with occassional additional ('').
+
+Preserve leading and trailing whitespace " " exactly as in the source text.
+
+`
+          },
         }),
       ],
     }),

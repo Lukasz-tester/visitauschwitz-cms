@@ -4,14 +4,17 @@
   "page-not-found": "Questa pagina non è stata trovata.",
   "go-home": "Vai alla homepage",
   "loading": "Caricamento, attendere prego...",
-  "posts": "Posti",
-  "post": "Post",
+  "posts": "Articoli",
+  "post": "Articolo",
   "showing": "Mostrando",
   "of": "di",
   "search": "Ricerca",
-  "dashboard": "Plancia di comando",
+  "dashboard": "Dashboard",
   "previous": "Precedente",
-  "next": "Avanti",
+  "next": "Successivo",
   "more-pages": "Altre pagine",
-  "contact": "Contatto"
+  "contact": "Contatto",
+
+  "cookie-message": "Questo sito utilizza i cookie per offrire una migliore esperienza di navigazione.",
+  "hide-message": "Nascondi messaggio"
 }

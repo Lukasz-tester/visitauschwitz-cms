@@ -10,15 +10,18 @@ import { Favicion } from '@/components/ui/Icons'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 import { useTranslations } from 'next-intl'
-import { scrolledFromTop } from '@/utilities/helpers'
+import { scrolledFromTop, useLockBodyScroll } from '@/utilities/helpers'
 
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const t = useTranslations()
+  useLockBodyScroll(modalOpen)
 
   return (
-    <div className={`${scrolledFromTop() ? '' : 'md:hidden'}`}>
+    <div
+    // className={`${scrolledFromTop() ? '' : 'md:hidden'}`}
+    >
       <button
         className={`ease-in-out duration-1000 ${modalOpen ? 'rounded bg-card top-7 right-6 w-14 h-14 hover:bg-card-foreground' : 'bg-background/70 top-0 right-0 lg:bottom-0 lg:right-0 pr-2 rounded-bl-3xl w-16 h-16 hover:bg-card-foreground'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
@@ -63,7 +66,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             </div>
             <div className="flex fixed left-5 bottom-4 md:top-4 md:bg-background/70 md:p-4 md:rounded md:h-fit">
               <Link href="/" onClick={() => setModalOpen(false)}>
-                <Favicion color2="#b45309" />
+                <Favicion />
               </Link>
             </div>
           </div>

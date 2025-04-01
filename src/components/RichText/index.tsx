@@ -37,14 +37,13 @@ const RichText: React.FC<Props> = ({
         {
           'container ': enableGutter,
           'max-w-none ': !enableGutter,
-          //below!> prose-a:text-nowrap
-          'prose dark:prose-invert prose-a:text-nowrap empty:prose-p:py-0.5 prose-p:opacity-90 prose-h2:opacity-75 prose-h3:opacity-80 prose-h4:opacity-85  prose-a:decoration-amber-600 dark:prose-a:decoration-amber-700 hover:prose-a:bg-amber-600 dark:hover:prose-a:bg-amber-700':
+          'prose dark:prose-invert break-words empty:prose-p:py-0.5 prose-p:opacity-90 prose-strong:opacity-90 prose-h2:opacity-75 prose-h3:opacity-80 prose-h4:opacity-85 prose-a:decoration-amber-700 hover:prose-a:bg-amber-700 hover:prose-a:text-white/90 ':
             enableProse,
           'md:prose-h1:text-7xl opacity-85': styleH1,
           'lg:prose-h2:text-5xl ': styleH2,
           'lg:prose-h3:text-4xl ': styleH3,
           'lg:prose-h4:text-2xl ': styleH4,
-          'prose-a:bg-card-foreground prose-a:p-2 prose-a:mx-0.5 prose-a:font-normal prose-a:no-underline prose-a:rounded-xl prose-a:text-xl prose-a:leading-[2.6] gap-9 prose-a:border prose-a:border-slate-500/40':
+          'prose-a:bg-card-foreground prose-a:text-nowrap prose-a:p-2 prose-a:mx-0.5 prose-a:font-normal prose-a:no-underline prose-a:rounded-xl prose-a:text-xl prose-a:leading-[2.6] gap-9 prose-a:border prose-a:border-slate-500/40 hover:prose-a:border-amber-700 dark:hover:prose-a:border-white/80 hover:prose-a:text-primary-foreground/90 dark:hover:prose-a:text-white/90 ':
             styleLink,
         },
         className,

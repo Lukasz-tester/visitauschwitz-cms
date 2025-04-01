@@ -13,7 +13,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <div className="max-w-[37rem]">
           {richText && (
             <RichText
-              className="mb-4 p-5 rounded-xl md:prose-p:text-2xl prose-p:pt-1 bg-gradient-to-tr 
+              className="mb-4 mt-28 p-5 rounded-xl md:prose-p:text-2xl prose-p:pt-1 bg-gradient-to-tr 
               from-slate-500 from-5% via-slate-800 via-40% to-75%"
               content={richText}
               enableGutter={false}

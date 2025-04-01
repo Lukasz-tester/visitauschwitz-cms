@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { scrolledFromTop } from '@/utilities/helpers'
+import { scrolledFromTop, useLockBodyScroll } from '@/utilities/helpers'
 
 const LazyMap = dynamic(() => import('./mapModal'), {
   ssr: false,
@@ -10,6 +10,8 @@ const LazyMap = dynamic(() => import('./mapModal'), {
 
 function MapCaller(props) {
   const [modalOpen, setModalOpen] = useState(false)
+
+  useLockBodyScroll(modalOpen)
 
   return (
     <div className={`ease-in-out duration-1000 visible ${scrolledFromTop() ? '' : 'hidden'}`}>
