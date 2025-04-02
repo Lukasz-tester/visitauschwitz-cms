@@ -46,7 +46,7 @@ const dirname = path.dirname(filename)
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   const date = new Date()
   return doc?.title
-    ? `${doc.title} | ${date.getFullYear()} Visit Auschwitz Info`
+    ? `${doc.title} | ${date.getFullYear()}`
     : `Auschwitz Visitor Information | ${date.getFullYear()}`
 }
 
@@ -137,9 +137,9 @@ export default buildConfig({
   plugins: [
     translator({
       // collections with the enabled translator in the admin UI
-      collections: ['posts', 'pages'],
+      collections: ['posts', 'pages', 'categories', 'forms'],
       // globals with the enabled translator in the admin UI
-      globals: ['header'],
+      globals: ['header', 'footer'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
       resolvers: [
         openAIResolver({
