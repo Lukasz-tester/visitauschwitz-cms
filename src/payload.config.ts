@@ -126,8 +126,6 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
     transactionOptions: {
       retryWrites: true,
-      readConcern: { level: 'local' },
-      writeConcern: { w: 'majority' },
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
@@ -141,7 +139,7 @@ export default buildConfig({
   plugins: [
     translator({
       // collections with the enabled translator in the admin UI
-      collections: ['posts', 'pages', 'categories', 'forms'],
+      collections: ['posts', 'pages'],
       // globals with the enabled translator in the admin UI
       globals: ['header', 'footer'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
