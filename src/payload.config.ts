@@ -124,7 +124,11 @@ export default buildConfig({
   }),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
-    transactionOptions: { retryWrites: true },
+    transactionOptions: {
+      retryWrites: true,
+      readConcern: { level: 'local' },
+      writeConcern: { w: 'majority' },
+    },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),

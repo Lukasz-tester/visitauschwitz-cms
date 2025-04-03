@@ -42,7 +42,10 @@ function LocaleSwitcher() {
           .sort((a, b) => a.label.localeCompare(b.label)) // Ordenar por label
           .map((locale) => (
             <SelectItem value={locale.code} key={locale.code}>
-              {locale.label}
+              <div className={`flex ${locale.code === 'it' ? 'gap-3.5' : 'gap-2'}`}>
+                <div className="uppercase">{locale.code}</div>
+                <div className="">{locale.label}</div>
+              </div>
             </SelectItem>
           ))}
       </SelectContent>

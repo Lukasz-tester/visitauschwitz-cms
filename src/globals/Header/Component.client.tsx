@@ -32,7 +32,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
 
   return (
     <header
-      className="pr-20 relative z-20 pt-2 pb-2 flex"
+      className="pr-16 relative z-20 pt-2 pb-2 flex"
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <>

@@ -13,6 +13,7 @@ import type { Theme } from './types'
 
 import { useTheme } from '..'
 import { themeLocalStorageKey } from './types'
+import { Moon, Sun, SunMoon } from 'lucide-react'
 
 export const ThemeSelector: React.FC = () => {
   const { setTheme } = useTheme()
@@ -39,9 +40,24 @@ export const ThemeSelector: React.FC = () => {
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="auto">Auto</SelectItem>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
+        <SelectItem value="dark">
+          <div className="flex gap-2">
+            <Moon />
+            Dark
+          </div>
+        </SelectItem>
+        <SelectItem value="light">
+          <div className="flex gap-2">
+            <Sun />
+            Light
+          </div>
+        </SelectItem>
+        <SelectItem value="auto">
+          <div className="flex gap-2">
+            <SunMoon />
+            Auto
+          </div>
+        </SelectItem>
       </SelectContent>
     </Select>
   )

@@ -37,7 +37,7 @@ const RichText: React.FC<Props> = ({
         {
           'container ': enableGutter,
           'max-w-none ': !enableGutter,
-          'prose dark:prose-invert break-words empty:prose-p:py-0.5 prose-p:opacity-90 prose-strong:opacity-90 prose-h2:opacity-75 prose-h3:opacity-80 prose-h4:opacity-85 prose-a:decoration-amber-700 hover:prose-a:bg-amber-800/90 hover:prose-a:text-white/90 ':
+          'prose dark:prose-invert break-words empty:prose-p:py-0.5 prose-p:opacity-90 prose-strong:opacity-90 prose-h2:opacity-75 prose-h3:opacity-80 prose-h4:opacity-85 prose-a:decoration-amber-700 hover:prose-a:bg-amber-700/90 hover:prose-a:text-white/90 ':
             enableProse,
           'md:prose-h1:text-7xl opacity-85': styleH1,
           'lg:prose-h2:text-5xl ': styleH2,

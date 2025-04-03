@@ -200,7 +200,6 @@ export interface CallToActionBlock {
               | 'luggage'
               | 'mapLookingGlass'
               | 'map'
-              | 'mapPlaceholder'
               | 'massageQuestion'
               | 'placeholder'
               | 'placeholderHouse'

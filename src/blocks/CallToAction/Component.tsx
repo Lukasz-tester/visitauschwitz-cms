@@ -54,7 +54,6 @@ export const CallToActionBlock: React.FC<
 
   const icons = {
     placeholder: <Placeholder />,
-    mapPlaceholder: <MapPlaceholder />,
     ticketIdSmall: <TicketIDsmall />,
     // THOSE ABOVE ARE NOT USED  -----------
     food: <Food />,

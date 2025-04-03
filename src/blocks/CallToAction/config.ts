@@ -54,10 +54,6 @@ const tileFields: Field[] = [
         value: 'map',
       },
       {
-        label: 'Map & Placeholder',
-        value: 'mapPlaceholder',
-      },
-      {
         label: 'Massage & Question',
         value: 'massageQuestion',
       },
