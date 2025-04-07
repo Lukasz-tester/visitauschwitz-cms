@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
+import { useLockBodyScroll } from '@/utilities/helpers'
 
 function setCookie(name, value, days = 365) {
   var expires = ''
@@ -35,6 +36,7 @@ export const CookiePopup = () => {
   }, [])
 
   const t = useTranslations()
+  useLockBodyScroll(show)
 
   if (!show) return null
 

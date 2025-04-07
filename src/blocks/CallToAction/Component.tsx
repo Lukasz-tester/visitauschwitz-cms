@@ -129,7 +129,7 @@ export const CallToActionBlock: React.FC<
                         !enableMedia && linkTo,
                     },
                     {
-                      'max-w-[360px] items-start': tiles.length === 5,
+                      'max-w-[378px] items-start': tiles.length === 5 || gridSize === '3',
                     },
                     {
                       'place-self-center pt-16': tiles.length === 1 && gridSize !== '6',
@@ -137,15 +137,30 @@ export const CallToActionBlock: React.FC<
                   )}
                 >
                   <a
+                    className="place-self-center"
                     href={linkTo || undefined}
                     target={linkTo?.includes('http') ? '_blank' : undefined}
                   >
-                    {enableMedia && <ImageMedia imgClassName="rounded-t-xl" resource={media} />}
+                    {enableMedia && (
+                      <ImageMedia
+                        imgClassName={`${linkTo ? 'rounded-t-xl' : 'rounded'}`}
+                        resource={media}
+                      />
+                    )}
                     <div
-                      className={`px-6 ${icon && title && gridSize === '3' ? 'place-self-center' : ''}`}
+                      className={cn(
+                        {
+                          'px-6': linkTo,
+                        },
+                        {
+                          'place-self-center': icon && title && gridSize === '3',
+                        },
+                      )}
                     >
                       {icon && !enableMedia && (
-                        <div className={`sm:w-fit ${title ? 'place-self-center py-2' : ''}`}>
+                        <div
+                          className={`sm:w-fit ${title ? 'place-self-center py-2' : ''} ${tiles.length === 5 ? 'px-6' : ''}`}
+                        >
                           {icons[icon]}
                         </div>
                       )}
@@ -170,10 +185,9 @@ export const CallToActionBlock: React.FC<
 
                       {richText && tiles.length !== 5 && (
                         <RichText
-                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-6'}`}
+                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-3'}`}
                           content={richText}
                           enableGutter={false}
-                          // styleLink={true}
                           styleH3={false}
                         />
                       )}
@@ -185,7 +199,6 @@ export const CallToActionBlock: React.FC<
                   >
                     {richText && (
                       <RichText
-                        // className="prose-p:pt-1"
                         content={richText}
                         enableGutter={false}
                         styleLink={true}

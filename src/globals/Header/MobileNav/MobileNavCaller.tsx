@@ -43,8 +43,8 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         </div>
       </button>
       {modalOpen && (
-        <div className="fixed inset-0 w-full " onClick={() => setModalOpen(false)}>
-          <div className="p-2 bg-card z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0 md:border-l-2">
+        <div className="fixed inset-0 w-full" onClick={() => setModalOpen(false)}>
+          <div className="pt-2 bg-card z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0 md:bg-card/95">
             <Link
               className="ease-in-out duration-1000 rounded bg-slate-500/30 w-14 h-14 flex items-center justify-center fixed top-28 right-6"
               href="/search"
@@ -57,8 +57,8 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             <div className="flex flex-col py-2 pr-36">
               <NavItems header={header} />
             </div>
-            <div className="w-full flex flex-col fixed bottom-3 text-lg text-slate-500 font-semibold">
-              <a className="pt-2 pb-1 px-3 text-amber-700/90" href="contact">
+            <div className="pl-2 w-full flex flex-col fixed bottom-3 text-lg text-slate-500 font-semibold">
+              <a className="pt-2 pb-1 px-3 text-amber-700/90 text-xl lg:text-2xl" href="contact">
                 {t('contact')}
               </a>
               <a className="p-2 px-3" href="supplement">

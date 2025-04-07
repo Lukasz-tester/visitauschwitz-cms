@@ -18,8 +18,8 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
 
   return (
     <footer className="border-t border-border bg-black dark:bg-card">
-      <div className="container py-8 gap-8 flex flex-col">
-        <nav className="flex gap-6 text-lg">
+      <div className="container gap-8 flex flex-col">
+        <nav className="pt-5 pl-2 flex gap-6 text-lg">
           {navItems.map(({ link }, i) => {
             return (
               <CMSLink
@@ -36,7 +36,7 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
               <Logo />
             </Link>
           </>
-          <>© {year} All Rights Reserved</>
+          <div className="pl-1">© {year} All Rights Reserved</div>
         </div>
       </div>
     </footer>
