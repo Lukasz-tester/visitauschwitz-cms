@@ -62,6 +62,6 @@ export default async function Page({ params }: Args) {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Visit Auschwitz Info Posts`,
+    title: `Visiting Auschwitz - Posts`,
   }
 }

@@ -159,7 +159,7 @@ export const CallToActionBlock: React.FC<
                     >
                       {icon && !enableMedia && (
                         <div
-                          className={`sm:w-fit ${title ? 'place-self-center py-2' : ''} ${tiles.length === 5 ? 'px-6' : ''}`}
+                          className={`sm:w-fit ${title ? 'place-self-center py-2' : ''} ${tiles.length === 5 ? 'px-5' : ''}`}
                         >
                           {icons[icon]}
                         </div>
@@ -169,13 +169,13 @@ export const CallToActionBlock: React.FC<
                           className={cn(
                             'text-2xl opacity-85 font-semibold ',
                             {
-                              'text-center py-3': gridSize === '3',
+                              'text-center py-3': gridSize === '3' && tiles.length !== 5,
                             },
                             {
                               'text-3xl md:text-4xl mt-5': tiles.length === 1,
                             },
                             {
-                              'text-3xl': tiles.length === 5,
+                              'text-3xl p-3 px-5': tiles.length === 5,
                             },
                           )}
                         >
@@ -195,7 +195,7 @@ export const CallToActionBlock: React.FC<
                   </a>
                   {/* Custom style when 5 tiles */}
                   <div
-                    className={`${tiles.length === 5 ? 'p-5 rounded-3xl bg-card/50' : 'hidden'}`}
+                    className={`${tiles.length === 5 ? 'p-4 rounded-3xl bg-card/50' : 'hidden'}`}
                   >
                     {richText && (
                       <RichText

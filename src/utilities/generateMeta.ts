@@ -13,9 +13,10 @@ export const generateMeta = async (args: { doc: Page | Post }): Promise<Metadata
     'url' in doc.meta.image &&
     `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
+  const date = new Date()
   const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Visit Auschwitz Info'
-    : 'Visit Auschwitz Info'
+    ? `${doc.meta.title} | ${date.getFullYear()}`
+    : `Auschwitz Visitor Information | ${date.getFullYear()}`
 
   return {
     description: doc?.meta?.description,

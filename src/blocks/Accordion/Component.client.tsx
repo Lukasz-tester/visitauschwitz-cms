@@ -15,7 +15,7 @@ export const AccordionBlock: React.FC<
     id?: string
   } & Props
 > = (props) => {
-  const { accordionItems, changeBackground } = props
+  const { accordionItems, changeBackground, addPaddingBottom } = props
 
   const [activeIndex, setActiveIndex] = useState(null)
   const handleItemClick = (inndex) => {
@@ -32,7 +32,10 @@ export const AccordionBlock: React.FC<
         className="container"
         id={props.blockName || undefined}
       >
-        <div className="md:px-[17.3%]">
+        <div
+          className={`md:px-[17.3%]
+          ${addPaddingBottom ? 'pb-24' : ''}`}
+        >
           {accordionItems &&
             accordionItems.length > 0 &&
             accordionItems.map((item, index) => {

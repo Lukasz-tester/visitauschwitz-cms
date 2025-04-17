@@ -204,7 +204,7 @@ export const Luggage = ({ fill = '#64748b', size = '80', viewBox = '-7 -20 80 80
   </svg>
 )
 
-export const Map = ({ fill = '#b45309', size = '110', viewBox = '-3 -6 30 30' }) => (
+export const Map = ({ fill = '#b45309', size = '80', viewBox = '1 1 22 22' }) => (
   <svg
     width={size}
     height={size}
@@ -251,7 +251,7 @@ export const MapPlaceholder = ({
   </svg>
 )
 
-export const MassageQuestion = ({ fill = '#b45309', size = '110', viewBox = '-3 -6 30 30' }) => (
+export const MassageQuestion = ({ fill = '#b45309', size = '80', viewBox = '1 1 22 22' }) => (
   <svg
     width={size}
     height={size}
@@ -297,7 +297,7 @@ export const PlaceholderOnMap = ({ fill = '#64748b', size = '110', viewBox = '-8
   </svg>
 )
 
-export const PlaceholderHouse = ({ fill = '#b45309', size = '110', viewBox = '-3 -6 30 30' }) => (
+export const PlaceholderHouse = ({ fill = '#b45309', size = '80', viewBox = '1 1 22 22' }) => (
   <svg
     width={size}
     height={size}
@@ -339,7 +339,7 @@ export const Plane = ({ fill = '#64748b', w = '140', h = '100', viewBox = '0 120
   </svg>
 )
 
-export const Route = ({ fill = '#b45309', size = '110', viewBox = '-3 -6 30 30' }) => (
+export const Route = ({ fill = '#b45309', size = '80', viewBox = '1 1 22 22' }) => (
   <svg
     width={size}
     height={size}
@@ -422,7 +422,7 @@ export const TicketIDsmall = ({ fill = '#64748b', size = '80', viewBox = '-7 -20
   </svg>
 )
 
-export const Tickets = ({ fill = '#b45309', size = '110', viewBox = '-3 -6 30 30' }) => (
+export const Tickets = ({ fill = '#b45309', size = '80', viewBox = '1 1 22 22' }) => (
   <svg
     width={size}
     height={size}

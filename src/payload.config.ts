@@ -146,7 +146,8 @@ export default buildConfig({
       resolvers: [
         openAIResolver({
           apiKey: process.env.OPENAI_KEY!,
-          model: 'gpt-4o',
+          // model: 'gpt-4o',
+          model: 'gpt-4.1',
           prompt: ({ localeFrom, localeTo, texts }) => {
             // console.log('>>>>>>>>>>>> JSON ', texts)
             // console.log('>>>>>>>>>>>> FROM ', localeFrom)

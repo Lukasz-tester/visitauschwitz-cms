@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-// import PageTemplate from './[slug]/page'
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'

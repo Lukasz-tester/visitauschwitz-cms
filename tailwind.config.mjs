@@ -110,11 +110,11 @@ export default {
             '--tw-prose-body': 'var(--text)',
             '--tw-prose-headings': 'var(--text)',
             h1: {
-              fontSize: '3.2rem',
+              fontSize: '2.5rem',
               marginBottom: '0.5rem',
             },
             h2: {
-              fontSize: '2.5rem',
+              fontSize: '2.2rem',
               marginTop: '0rem',
               marginBottom: '0rem',
               paddingTop: '1.2rem',

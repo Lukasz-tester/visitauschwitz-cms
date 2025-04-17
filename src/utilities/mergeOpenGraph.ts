@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description:
+    'Plan your visit to the Auschwitz-Birkenau Memorial. Discover practical tips, tour options, regulations, and everything you need to know for a meaningful experience.',
   images: [
     {
       url: process.env.NEXT_PUBLIC_SERVER_URL
@@ -10,8 +11,8 @@ const defaultOpenGraph: Metadata['openGraph'] = {
         : '/website-template-OG.webp',
     },
   ],
-  siteName: 'Visit Auschwitz Info',
-  title: 'Visit Auschwitz Info',
+  siteName: 'Visit Auschwitz Memorial Guide',
+  title: 'Visit Auschwitz - Memorial Visitor Guide & Tips',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {

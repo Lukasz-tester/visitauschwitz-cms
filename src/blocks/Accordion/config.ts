@@ -11,6 +11,10 @@ export const Accordion: Block = {
       type: 'checkbox',
     },
     {
+      name: 'addPaddingBottom',
+      type: 'checkbox',
+    },
+    {
       name: 'accordionItems',
       type: 'array',
       fields: [
