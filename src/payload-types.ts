@@ -130,7 +130,6 @@ export interface Page {
     | FormBlock
     | OpeningHoursBlock
     | AccordionBlock
-    | TilesBlock
   )[];
   meta?: {
     title?: string | null;
@@ -715,40 +714,6 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TilesBlock".
- */
-export interface TilesBlock {
-  tiles?:
-    | {
-        size?: ('half' | 'oneThird' | 'oneForth' | 'oneSixth') | null;
-        enableMedia?: boolean | null;
-        media?: (string | null) | Media;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        linkTo?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  changeBackground?: boolean | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'tilesBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -943,7 +908,6 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         oh?: T | OpeningHoursBlockSelect<T>;
         accordion?: T | AccordionBlockSelect<T>;
-        tilesBlock?: T | TilesBlockSelect<T>;
       };
   meta?:
     | T
@@ -1079,25 +1043,6 @@ export interface AccordionBlockSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TilesBlock_select".
- */
-export interface TilesBlockSelect<T extends boolean = true> {
-  tiles?:
-    | T
-    | {
-        size?: T;
-        enableMedia?: T;
-        media?: T;
-        richText?: T;
-        linkTo?: T;
-        id?: T;
-      };
-  changeBackground?: T;
   id?: T;
   blockName?: T;
 }

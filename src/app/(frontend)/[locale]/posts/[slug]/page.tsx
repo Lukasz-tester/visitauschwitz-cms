@@ -78,7 +78,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const { slug = '', locale = 'en' } = await paramsPromise
   const post = await queryPost({ slug, locale })
 
-  return generateMeta({ doc: post })
+  return generateMeta({ doc: post, locale })
 }
 
 const queryPost = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {

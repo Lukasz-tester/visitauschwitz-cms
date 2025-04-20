@@ -10,7 +10,6 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component.client'
 import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component.client'
 import { AccordionBlock } from './Accordion/Component.client'
-// import { TilesBlock } from './Tiles/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,7 +19,6 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
-  // tilesBlock: TilesBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -38,7 +36,7 @@ export const RenderBlocks: React.FC<{
           const { blockType } = block
 
           if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType] // as any
+            const Block = blockComponents[blockType] as any // as any was added to avoid locale error
 
             if (Block) {
               return (

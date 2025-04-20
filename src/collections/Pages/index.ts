@@ -15,7 +15,6 @@ import { revalidatePage } from './hooks/revalidatePage'
 
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
-import { Tiles } from '@/blocks/Tiles/config'
 
 import {
   MetaDescriptionField,
@@ -85,7 +84,6 @@ export const Pages: CollectionConfig = {
                 FormBlock,
                 OpeningHours,
                 Accordion,
-                Tiles,
               ],
               required: true,
             },

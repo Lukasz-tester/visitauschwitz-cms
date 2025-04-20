@@ -61,13 +61,13 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               <a className="pt-2 pb-1 px-3 text-amber-700/90 text-xl lg:text-2xl" href="contact">
                 {t('contact')}
               </a>
-              <a className="p-2 px-3" href="supplement">
-                Supplement
+              <a className="p-2 px-3 text-xl lg:text-2xl" href="supplement">
+                {t('tips')}
               </a>
               <div>
                 <Settings className="m-2 mb-1 mt-6 h-11 w-11 opacity-50" strokeWidth={1.5} />
               </div>
-              <div className="p-1" onClick={(e) => e.stopPropagation()}>
+              <div className="p-1 pl-0.5" onClick={(e) => e.stopPropagation()}>
                 <LocaleSwitcher />
               </div>
               <div onClick={(e) => e.stopPropagation()}>
