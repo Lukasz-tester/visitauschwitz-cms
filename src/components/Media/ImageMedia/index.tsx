@@ -49,11 +49,21 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   }
 
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
-  const sizes = sizeFromProps
-    ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value}px`)
-        .join(', ')
+  // const sizes = sizeFromProps
+  //   ? sizeFromProps
+  //   : Object.entries(breakpoints)
+  //       .map(([, value]) => `(max-width: ${value}px) ${value}px`)
+  //       .join(', ')
+
+  // below is a new version suggested by AI
+  const sizes =
+    sizeFromProps ||
+    `
+    (max-width: 768px) 100vw,
+    (max-width: 1024px) 100vw,
+    (max-width: 1440px) 90vw,
+    1440px
+  `.trim()
 
   return (
     <NextImage

@@ -23,13 +23,24 @@ export async function generateStaticParams() {
     overrideAccess: false,
   })
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  // const params = pages.docs
+  //   ?.filter((doc) => {
+  //     return doc.slug !== 'home'
+  //   })
+  //   .map(({ slug }) => {
+  //     return { slug }
+  //   })
+
+  const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+
+  const params = locales.flatMap((locale) =>
+    pages.docs
+      .filter((doc) => doc.slug !== 'home')
+      .map(({ slug }) => ({
+        slug,
+        locale,
+      })),
+  )
 
   return params
 }
@@ -51,23 +62,22 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug,
     locale,
   })
-
   if (!page) {
     return <PayloadRedirects url={url} />
+  } else {
+    // If page is found, render the content and trigger the second redirect if needed
+    const { hero, layout } = page
+
+    return (
+      <article className="pt-16 pb-24">
+        <PageClient />
+        {/* This second PayloadRedirects will only be triggered if the page exists */}
+        <PayloadRedirects disableNotFound url={url} />
+        <RenderHero {...hero} />
+        <RenderBlocks blocks={layout} locale={locale} />
+      </article>
+    )
   }
-
-  const { hero, layout } = page
-
-  return (
-    <article className="pt-16 pb-24">
-      <PageClient />
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
-
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} locale={locale} />
-    </article>
-  )
 }
 
 export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {

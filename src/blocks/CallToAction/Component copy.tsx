@@ -114,58 +114,6 @@ export const CallToActionBlock: React.FC<
             tiles.map((col, index) => {
               const { icon, enableMedia, media, title, richText, linkTo } = col
 
-              const commonInnerContent = (
-                <>
-                  {enableMedia && (
-                    <ImageMedia
-                      imgClassName={`${linkTo ? 'rounded-t-xl' : 'rounded'}`}
-                      resource={media}
-                    />
-                  )}
-                  <div
-                    className={cn(
-                      {
-                        'px-6': linkTo,
-                      },
-                      {
-                        'place-self-center': icon && title && gridSize === '3',
-                      },
-                    )}
-                  >
-                    {icon && !enableMedia && (
-                      <div
-                        className={`sm:w-fit ${title ? 'place-self-center py-2' : ''} ${
-                          tiles.length === 5 ? 'px-5' : ''
-                        }`}
-                      >
-                        {icons[icon]}
-                      </div>
-                    )}
-                    {title && (
-                      <div
-                        className={cn('text-2xl opacity-85 font-semibold ', {
-                          'text-center py-3': gridSize === '3' && tiles.length !== 5,
-                          'text-3xl md:text-4xl mt-5': tiles.length === 1,
-                          'text-3xl p-3 px-5': tiles.length === 5,
-                        })}
-                      >
-                        {title}
-                      </div>
-                    )}
-                    {richText && tiles.length !== 5 && (
-                      <RichText
-                        className={`${
-                          richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-3'
-                        }`}
-                        content={richText}
-                        enableGutter={false}
-                        styleH3={false}
-                      />
-                    )}
-                  </div>
-                </>
-              )
-
               return (
                 <div
                   key={index}
@@ -188,19 +136,64 @@ export const CallToActionBlock: React.FC<
                     },
                   )}
                 >
-                  {linkTo ? (
-                    <a
-                      className="place-self-center"
-                      href={linkTo}
-                      target={linkTo.includes('http') ? '_blank' : undefined}
-                      rel={linkTo.includes('http') ? 'noopener noreferrer' : undefined}
+                  <a
+                    className="place-self-center"
+                    href={linkTo || undefined}
+                    target={linkTo?.includes('http') ? '_blank' : undefined}
+                  >
+                    {enableMedia && (
+                      <ImageMedia
+                        imgClassName={`${linkTo ? 'rounded-t-xl' : 'rounded'}`}
+                        resource={media}
+                      />
+                    )}
+                    <div
+                      className={cn(
+                        {
+                          'px-6': linkTo,
+                        },
+                        {
+                          'place-self-center': icon && title && gridSize === '3',
+                        },
+                      )}
                     >
-                      {commonInnerContent}
-                    </a>
-                  ) : (
-                    <div className="place-self-center">{commonInnerContent}</div>
-                  )}
+                      {icon && !enableMedia && (
+                        <div
+                          className={`sm:w-fit ${title ? 'place-self-center py-2' : ''} ${tiles.length === 5 ? 'px-5' : ''}`}
+                        >
+                          {icons[icon]}
+                        </div>
+                      )}
+                      {title && (
+                        <div
+                          className={cn(
+                            'text-2xl opacity-85 font-semibold ',
+                            {
+                              'text-center py-3': gridSize === '3' && tiles.length !== 5,
+                            },
+                            {
+                              'text-3xl md:text-4xl mt-5': tiles.length === 1,
+                            },
+                            {
+                              'text-3xl p-3 px-5': tiles.length === 5,
+                            },
+                          )}
+                        >
+                          {title}
+                        </div>
+                      )}
 
+                      {richText && tiles.length !== 5 && (
+                        <RichText
+                          className={`${richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-3'}`}
+                          content={richText}
+                          enableGutter={false}
+                          styleH3={false}
+                        />
+                      )}
+                    </div>
+                  </a>
+                  {/* Custom style when 5 tiles */}
                   <div
                     className={`${tiles.length === 5 ? 'p-4 rounded-3xl bg-card/50' : 'hidden'}`}
                   >

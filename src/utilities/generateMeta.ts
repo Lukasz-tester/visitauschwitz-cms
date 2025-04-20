@@ -19,12 +19,18 @@ export const generateMeta = async (args: {
     ? `${doc.meta.title} | ${date.getFullYear()}`
     : `Auschwitz Visitor Information | ${date.getFullYear()}`
 
-  const slug = Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/'
+  // const slug = Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/'
+  // const slug = Array.isArray(doc?.slug) && doc?.slug.length > 0 ? doc?.slug.join('/') : ''
+  // const slug = Array.isArray(doc?.slug) && doc?.slug.length > 0 ? `/${doc.slug.join('/')}` : ''
+  const slug = Array.isArray(doc?.slug) && doc.slug.length > 0 ? `/${doc.slug.join('/')}` : ''
+
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://muzeums.vercel.app'
   console.log('Base URL:', process.env.NEXT_PUBLIC_SERVER_URL)
-  const canonicalUrl = `${baseUrl}/${locale}${slug}`
+  // const canonicalUrl = `${baseUrl}/${locale}${slug}`
+  // const canonicalUrl = `${baseUrl}/${locale || 'en'}${slug}`
+  const canonicalUrl = `${baseUrl}/${locale}${slug}`.replace(/([^:]\/)\/+/g, '$1')
 
-  const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'ua'] as const
+  const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk'] as const
 
   return {
     description: doc?.meta?.description,

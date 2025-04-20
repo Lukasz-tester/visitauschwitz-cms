@@ -27,6 +27,9 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  experimental: {
+    optimizeCss: true,
+  },
 }
 
 export default withNextIntl(withPayload(nextConfig))
