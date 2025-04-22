@@ -36,8 +36,11 @@ export const OpeningHoursBlock: React.FC<
         <div className="text-xl rounded border border-slate-500/40 bg-card xl:mr-7">
           <div className="justify-items-end">
             <Select onValueChange={onMonthChange} value={value}>
-              <SelectTrigger className="w-auto bg-card-foreground pl-3 pr-1 border-spacing border-slate-500/40 hover:bg-amber-700/80 hover:text-white/90">
-                <SelectValue placeholder={currentMonth} />
+              <SelectTrigger
+                aria-label="Select month"
+                className="w-auto bg-card-foreground pl-3 pr-1 border-spacing border-slate-500/40 hover:bg-amber-700/80 hover:text-white/90"
+              >
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 {(months || []).map(({ month }, i) => (
