@@ -37,7 +37,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <React.Fragment>
           <ImageMedia
             fill
-            imgClassName="-z-1000 object-cover select-none"
+            imgClassName="-z-1000 object-cover select-none overflow-hidden"
             priority
             resource={media}
           />

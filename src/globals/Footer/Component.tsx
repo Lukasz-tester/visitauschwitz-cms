@@ -1,12 +1,11 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import Link from 'next/link'
 import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import { Logo } from '@/components/ui/Icons'
 import { CMSLink } from '@/components/Link'
 import { TypedLocale } from 'payload'
+import { LogoLink } from '../../components/ui/logoLink'
 
 export async function Footer({ locale }: { locale: TypedLocale }) {
   const footer: Footer = await getCachedGlobal('footer', 1, locale)()
@@ -30,12 +29,9 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
             )
           })}
         </nav>
-        <div className="py-6 gap-5 text-sm text-slate-500 flex-col flex">
-          <>
-            <Link className="flex" href="/">
-              <Logo />
-            </Link>
-          </>
+
+        <div className="py-6 gap-5 text-sm text-white/60 flex-col flex">
+          <LogoLink className="hover:text-amber-700 ease-in-out duration-500" />
           <div className="pl-1">© {year} All Rights Reserved</div>
         </div>
       </div>

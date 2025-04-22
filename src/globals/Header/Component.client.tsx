@@ -1,14 +1,13 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
 
-import { Logo } from '@/components/ui/Icons'
 import { HeaderNav } from './Nav'
 import { usePathname } from '@/i18n/routing'
 import MobileNavCaller from './MobileNav/MobileNavCaller'
+import { LogoLink } from '../../components/ui/logoLink'
 
 interface HeaderClientProps {
   header: Header
@@ -36,9 +35,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <>
-        <Link href="/" className="pl-3 pt-3 md:pl-5 mr-auto">
-          <Logo />
-        </Link>
+        <div className="pl-3 pt-3 md:pl-5 mr-auto">
+          <LogoLink className="text-black/70 dark:text-white/60 hover:text-amber-700 ease-in-out duration-500" />
+        </div>
         <HeaderNav header={header} />
         <MobileNavCaller header={header} />
       </>
