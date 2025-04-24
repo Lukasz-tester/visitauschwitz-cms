@@ -36,7 +36,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
     >
       <>
         <div className="pl-3 pt-3 md:pl-5 mr-auto">
-          <LogoLink className="text-black/70 dark:text-white/60 hover:text-amber-700 ease-in-out duration-500" />
+          <LogoLink className="text-black/70 dark:text-white/60 md:hover:text-amber-700 ease-in-out duration-500" />
         </div>
         <HeaderNav header={header} />
         <MobileNavCaller header={header} />

@@ -1,3 +1,49 @@
+// import { withPayload } from '@payloadcms/next/withPayload'
+// import createNextIntlPlugin from 'next-intl/plugin'
+// import redirects from './redirects.js'
+// import bundleAnalyzer from '@next/bundle-analyzer'
+
+// // Setup analyzer plugin
+// const withBundleAnalyzer = bundleAnalyzer({
+//   enabled: process.env.ANALYZE === 'true',
+// })
+
+// // Setup intl plugin
+// const withNextIntl = createNextIntlPlugin()
+
+// const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+
+// /** @type {import('next').NextConfig} */
+// const baseConfig = {
+//   images: {
+//     remotePatterns: [
+//       ...[
+//         NEXT_PUBLIC_SERVER_URL,
+//         'https://**.vercel-storage.com',
+//         'https://raw.githubusercontent.com',
+//       ].map((item) => {
+//         const url = new URL(item)
+//         return {
+//           hostname: url.hostname,
+//           protocol: url.protocol.replace(':', ''),
+//         }
+//       }),
+//     ],
+//   },
+//   reactStrictMode: true,
+//   redirects,
+//   experimental: {
+//     optimizeCss: true,
+//   },
+// }
+
+// // Compose all wrappers
+// const withPlugins = withBundleAnalyzer(withNextIntl(withPayload(baseConfig)))
+
+// export default withPlugins
+
+// BEFORE CHANGES:
+
 import { withPayload } from '@payloadcms/next/withPayload'
 import createNextIntlPlugin from 'next-intl/plugin'
 
@@ -32,4 +78,4 @@ const nextConfig = {
   },
 }
 
-export default withNextIntl(withPayload(nextConfig))
+export default withPayload(withNextIntl(nextConfig))

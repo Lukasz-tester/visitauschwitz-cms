@@ -1,89 +1,135 @@
 'use client'
-import { useState } from 'react'
 
-import { cn } from 'src/utilities/cn'
-import React from 'react'
-import RichText from '@/components/RichText'
+import { useState, useRef, useEffect, useId } from 'react'
+import dynamic from 'next/dynamic'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-
+import { cn } from 'src/utilities/cn'
 import type { Page } from '@/payload-types'
+
+const LazyRichText = dynamic(() => import('@/components/RichText'), {
+  loading: () => <div>Loading content…</div>,
+  ssr: false,
+})
 
 type Props = Extract<Page['layout'][0], { blockType: 'accordion' }>
 
-export const AccordionBlock: React.FC<
-  {
-    id?: string
-  } & Props
-> = (props) => {
-  const { accordionItems, changeBackground, addPaddingBottom } = props
+export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
+  accordionItems = [],
+  changeBackground = false,
+  addPaddingBottom = false,
+  blockName,
+}) => {
+  const [openIndices, setOpenIndices] = useState<number[]>([])
 
-  const [activeIndex, setActiveIndex] = useState(null)
-  const handleItemClick = (inndex) => {
-    setActiveIndex((prevIndex) => (prevIndex === inndex ? null : inndex))
+  const handleItemClick = (index: number) => {
+    setOpenIndices((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+    )
   }
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: accordionItems?.map((item) => ({
+      '@type': 'Question',
+      name: item.question ?? '',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: (Array.isArray(item.answer) && item.answer[0]?.children?.[0]?.text) || '',
+      },
+    })),
+  }
+
   return (
-    <div
+    <section
       className={cn('w-full m-0 mt-14 place-self-center', {
-        // 'bg-gradient-to-r from-transparent via-slate-800/30 to-transparent': changeBackground,
         'bg-card-foreground mt-0': changeBackground,
       })}
+      aria-labelledby={blockName || undefined}
     >
-      <div //each content block receives unique id = blockName for internal linking
-        className="container"
-        id={props.blockName || undefined}
-      >
-        <div
-          className={`md:px-[17.3%]
-          ${addPaddingBottom ? 'pb-24' : ''}`}
-        >
-          {accordionItems &&
-            accordionItems.length > 0 &&
-            accordionItems.map((item, index) => {
-              return (
-                <div key={index} className="py-1">
-                  <AccordionItem
-                    key={index}
-                    answer={item.answer}
-                    question={item.question}
-                    isOpen={activeIndex === index}
-                    onClick={() => handleItemClick(index)}
-                    changedBackground={changeBackground}
-                  />
-                </div>
-              )
-            })}
+      <div className="container" id={blockName || undefined}>
+        <div className={cn('md:px-[17.3%]', { 'pb-24': addPaddingBottom })}>
+          {accordionItems?.map((item, index) => (
+            <div key={index} className="pb-2">
+              <AccordionItem
+                index={index}
+                answer={item.answer}
+                question={item.question ?? ''}
+                isOpen={openIndices.includes(index)}
+                onClick={() => handleItemClick(index)}
+                changedBackground={!!changeBackground}
+              />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+
+      <script type="application/ld+json" suppressHydrationWarning>
+        {JSON.stringify(faqSchema)}
+      </script>
+    </section>
   )
 }
 
-const AccordionItem = ({ question, answer, isOpen, onClick, changedBackground }) => {
-  const contentHeight = React.useRef<HTMLInputElement>(null)
+type ItemProps = {
+  index: number
+  question: string
+  answer: any
+  isOpen: boolean
+  onClick: () => void
+  changedBackground: boolean
+}
+
+const AccordionItem: React.FC<ItemProps> = ({
+  question,
+  answer,
+  isOpen,
+  onClick,
+  changedBackground,
+}) => {
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [measuredHeight, setMeasuredHeight] = useState(0)
+  const id = useId()
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setMeasuredHeight(contentRef.current.scrollHeight)
+    }
+  }, [isOpen])
 
   return (
-    <div
-      className={`[&_*]:ease-in-out [&_*]:duration-700 overflow-clip rounded-xl border hover:border-amber-600 dark:hover:border-amber-700/70
-        ${isOpen ? 'border-amber-600 dark:border-amber-700/70' : 'border-slate-500/40'}
-        ${changedBackground ? 'bg-background' : 'bg-card'}`}
+    <article
+      className={cn(
+        '[&_*]:ease-in-out [&_*]:duration-700 overflow-hidden rounded-xl border hover:border-amber-600 dark:hover:border-amber-700/70',
+        isOpen ? 'border-amber-600 dark:border-amber-700/70' : 'border-slate-500/40',
+        changedBackground ? 'bg-background' : 'bg-card',
+      )}
     >
       <button
-        className={` w-full p-3 text-start text-xl opacity-85 flex place-content-between
-          ${isOpen ? 'bg-card-foreground' : ''}
-          ${changedBackground ? '' : ''}`}
+        aria-expanded={isOpen}
+        aria-controls={`accordion-content-${id}`}
+        className={cn('w-full p-3 text-start text-xl opacity-85 flex place-content-between', {
+          'bg-card-foreground': isOpen,
+        })}
         onClick={onClick}
+        id={`accordion-header-${id}`}
       >
-        <h3 className="pr-2">{question}</h3>
+        <h3 className="pr-2 text-left">{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
-      <div className={`px-5 ${isOpen ? 'py-5' : ''}`}>
-        <div
-          ref={contentHeight}
-          style={isOpen ? { height: contentHeight.current?.scrollHeight } : { height: '0px' }}
-        >
-          <RichText content={answer} enableGutter={false} />
+
+      <div
+        id={`accordion-content-${id}`}
+        ref={contentRef}
+        className="px-5 overflow-hidden transition-[max-height] duration-500 ease-in-out"
+        role="region"
+        aria-labelledby={`accordion-header-${id}`}
+        style={{ maxHeight: isOpen ? measuredHeight : 0 }}
+      >
+        <div className="py-5">
+          <LazyRichText content={answer} enableGutter={false} />
         </div>
       </div>
-    </div>
+    </article>
   )
 }
