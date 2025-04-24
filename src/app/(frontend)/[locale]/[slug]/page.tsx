@@ -1,18 +1,18 @@
 import type { Metadata } from 'next'
-
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-
-import type { Page as PageType } from '@/payload-types'
-
+import { generateMeta } from '@/utilities/generateMeta'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
-import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
+import type { Page as PageType } from '@/payload-types'
 import { TypedLocale } from 'payload'
+import dynamicImport from 'next/dynamic'
+
+const PageClient = dynamicImport(() => import('./page.client'), { ssr: false })
+
+// Prefer static generation for performance
+export const dynamic = 'force-static'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -23,23 +23,9 @@ export async function generateStaticParams() {
     overrideAccess: false,
   })
 
-  // const params = pages.docs
-  //   ?.filter((doc) => {
-  //     return doc.slug !== 'home'
-  //   })
-  //   .map(({ slug }) => {
-  //     return { slug }
-  //   })
-
   const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
-
   const params = locales.flatMap((locale) =>
-    pages.docs
-      .filter((doc) => doc.slug !== 'home')
-      .map(({ slug }) => ({
-        slug,
-        locale,
-      })),
+    pages.docs.filter((doc) => doc.slug !== 'home').map(({ slug }) => ({ slug, locale })),
   )
 
   return params
@@ -56,57 +42,145 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home', locale = 'en' } = await paramsPromise
   const url = '/' + slug
 
-  let page: PageType | null
+  const page = await queryPage({ slug, locale })
 
-  page = await queryPage({
-    slug,
-    locale,
-  })
-  if (!page) {
-    return <PayloadRedirects url={url} />
-  } else {
-    // If page is found, render the content and trigger the second redirect if needed
-    const { hero, layout } = page
+  if (!page) return <PayloadRedirects url={url} />
 
-    return (
-      <article className="pt-16 pb-24">
-        <PageClient />
-        {/* This second PayloadRedirects will only be triggered if the page exists */}
-        <PayloadRedirects disableNotFound url={url} />
-        <RenderHero {...hero} />
-        <RenderBlocks blocks={layout} locale={locale} />
-      </article>
-    )
-  }
+  const { hero, layout } = page
+
+  return (
+    <article className="pt-16 pb-24">
+      <RenderHero {...hero} />
+      <RenderBlocks blocks={layout} locale={locale} />
+      <PageClient />
+    </article>
+  )
 }
 
-export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = 'home', locale = 'en' } = await paramsPromise
-  const page = await queryPage({
-    slug,
-    locale,
-  })
+  const page = await queryPage({ slug, locale })
 
   return generateMeta({ doc: page, locale })
 }
 
-const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
-  const { isEnabled: draft } = await draftMode()
-
+const queryPage = async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
   const payload = await getPayload({ config: configPromise })
-
   const result = await payload.find({
     collection: 'pages',
-    draft,
+    draft: false,
     limit: 1,
     locale,
-    overrideAccess: draft,
+    overrideAccess: false,
     where: {
-      slug: {
-        equals: slug,
-      },
+      slug: { equals: slug },
     },
   })
-
   return result.docs?.[0] || null
-})
+}
+
+// BEFORE:
+// import type { Metadata } from 'next'
+
+// import { PayloadRedirects } from '@/components/PayloadRedirects'
+// import configPromise from '@payload-config'
+// import { getPayload } from 'payload'
+// import { draftMode } from 'next/headers'
+// import React, { cache } from 'react'
+
+// import type { Page as PageType } from '@/payload-types'
+
+// import { RenderBlocks } from '@/blocks/RenderBlocks'
+// import { RenderHero } from '@/heros/RenderHero'
+// import { generateMeta } from '@/utilities/generateMeta'
+// import PageClient from './page.client'
+// import { TypedLocale } from 'payload'
+
+// export async function generateStaticParams() {
+//   const payload = await getPayload({ config: configPromise })
+//   const pages = await payload.find({
+//     collection: 'pages',
+//     draft: false,
+//     limit: 1000,
+//     overrideAccess: false,
+//   })
+
+//   const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+
+//   const params = locales.flatMap((locale) =>
+//     pages.docs
+//       .filter((doc) => doc.slug !== 'home')
+//       .map(({ slug }) => ({
+//         slug,
+//         locale,
+//       })),
+//   )
+
+//   return params
+// }
+
+// type Args = {
+//   params: Promise<{
+//     slug?: string
+//     locale: TypedLocale
+//   }>
+// }
+
+// export default async function Page({ params: paramsPromise }: Args) {
+//   const { slug = 'home', locale = 'en' } = await paramsPromise
+//   const url = '/' + slug
+
+//   let page: PageType | null
+
+//   page = await queryPage({
+//     slug,
+//     locale,
+//   })
+//   if (!page) {
+//     return <PayloadRedirects url={url} />
+//   } else {
+//     // If page is found, render the content and trigger the second redirect if needed
+//     const { hero, layout } = page
+
+//     return (
+//       <article className="pt-16 pb-24">
+//         <PageClient />
+//         {/* This second PayloadRedirects will only be triggered if the page exists */}
+//         <PayloadRedirects disableNotFound url={url} />
+//         <RenderHero {...hero} />
+//         <RenderBlocks blocks={layout} locale={locale} />
+//       </article>
+//     )
+//   }
+// }
+
+// export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
+//   const { slug = 'home', locale = 'en' } = await paramsPromise
+//   const page = await queryPage({
+//     slug,
+//     locale,
+//   })
+
+//   return generateMeta({ doc: page, locale })
+// }
+
+// const queryPage = cache(async ({ slug, locale }: { slug: string; locale: TypedLocale }) => {
+//   const { isEnabled: draft } = await draftMode()
+
+//   const payload = await getPayload({ config: configPromise })
+
+//   const result = await payload.find({
+//     collection: 'pages',
+//     draft,
+//     limit: 1,
+//     locale,
+//     overrideAccess: draft,
+//     where: {
+//       slug: {
+//         equals: slug,
+//       },
+//     },
+//   })
+
+//   return result.docs?.[0] || null
+// })
