@@ -9,7 +9,7 @@ import type { Page as PageType } from '@/payload-types'
 import { TypedLocale } from 'payload'
 import dynamicImport from 'next/dynamic'
 
-const PageClient = dynamicImport(() => import('./page.client'), { ssr: false })
+const PageClient = dynamicImport(() => import('./page.client'))
 
 // Prefer static generation for performance
 export const dynamic = 'force-static'

@@ -11,7 +11,7 @@ import { TypedLocale } from 'payload'
 import React from 'react'
 
 // Dynamically import PageClient only on the client
-const PageClient = dynamicImport(() => import('./[slug]/page.client'), { ssr: false })
+const PageClient = dynamicImport(() => import('./[slug]/page.client'))
 
 // Static generation preferred for static content
 export const dynamic = 'force-static'
