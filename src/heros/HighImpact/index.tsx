@@ -40,6 +40,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             imgClassName="-z-1000 object-cover select-none overflow-hidden"
             priority
             resource={media}
+            size="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1440px"
           />
           <div
             className="absolute pointer-events-none left-0 bottom-0 w-full h-full

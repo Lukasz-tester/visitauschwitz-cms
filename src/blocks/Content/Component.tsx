@@ -2,21 +2,16 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { cn } from 'src/utilities/cn'
 import type { Page } from '@/payload-types'
+import RichText from '@/components/RichText'
 
-const RichText = dynamic(() => import('@/components/RichText'))
 const ImageMedia = dynamic(() =>
   import('@/components/Media/ImageMedia').then((mod) => mod.ImageMedia),
 )
 
 type Props = Extract<Page['layout'][0], { blockType: 'content' }>
 
-// Type safety helper for content prop
-const safeContent = (content: unknown): Record<string, any> => {
-  return typeof content === 'object' && content !== null ? (content as Record<string, any>) : {}
-}
-
 export const ContentBlock: React.FC<{ id?: string } & Props> = ({
-  columns = [] as NonNullable<typeof columns>,
+  columns,
   heading,
   changeBackground,
   addMarginTop,
@@ -40,15 +35,19 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
         'mt-14': addMarginTop,
         'mb-14': addMarginBottom,
         'pb-14': addPaddingBottom,
-        'pt-24': heading?.root?.direction === null && columns.length > 3,
+        'pt-24': heading?.root.direction === null && columns && columns?.length > 3,
       })}
-      // aria-labelledby={blockName || undefined}
     >
       <div className="container">
-        {heading?.root?.direction !== null && (
-          <header className="pt-10 md:px-[17.3%] pb-14">
-            <RichText content={safeContent(heading)} enableGutter={false} />
-          </header>
+        {heading && (
+          <RichText
+            className={cn('md:px-[17.3%] pt-10 ', {
+              'pb-14': heading.root.direction !== null && columns && columns.length > 0,
+              hidden: heading.root.direction === null,
+            })}
+            content={heading}
+            enableGutter={false}
+          />
         )}
 
         <div
@@ -57,7 +56,7 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
             changeBackground ? 'pb-14' : 'mb-14',
           )}
         >
-          {columns.map((col, index) => {
+          {columns?.map((col, index) => {
             const { enableMedia, richText, richTextEnd, size, media } = col
             const colSpan = colsSpanClasses[size!] || '4'
 
@@ -70,26 +69,30 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
                   'hidden lg:block': size === 'oneSixth',
                 })}
               >
-                {richText?.root?.direction !== null && (
+                {richText && (
                   <RichText
-                    content={safeContent(richText)}
-                    enableGutter={false}
-                    styleLink
                     className={cn({
                       'prose-a:bg-card': changeBackground,
-                      'mb-6': enableMedia,
-                      'pb-1 md:pb-0': true,
+                      'mb-6': richText.root.direction !== null && enableMedia,
+                      'pb-1 md:pb-0': richText.root.direction !== null,
+                      hidden: richText.root.direction === null,
                     })}
+                    content={richText}
+                    enableGutter={false}
+                    styleLink={true}
                   />
                 )}
 
                 {enableMedia && <ImageMedia imgClassName="rounded" resource={media} />}
 
-                {richTextEnd?.root?.direction !== null && (
+                {richTextEnd && (
                   <RichText
-                    content={safeContent(richTextEnd)}
+                    className={cn({
+                      'mt-4': enableMedia,
+                      hidden: richTextEnd.root.direction === null,
+                    })}
+                    content={richTextEnd}
                     enableGutter={false}
-                    className="mt-4"
                   />
                 )}
               </article>

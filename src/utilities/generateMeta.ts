@@ -19,10 +19,7 @@ export const generateMeta = async (args: {
     ? `${doc.meta.title} | ${date.getFullYear()}`
     : `Auschwitz Visitor Information | ${date.getFullYear()}`
 
-  console.log('slug is now:', doc?.slug)
-
   const rawSlug = Array.isArray(doc?.slug) ? doc?.slug.join('/') : doc?.slug
-  // console.log('slug is now:', slug)
   const slug = rawSlug === 'home' ? '' : rawSlug
 
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://muzeums.vercel.app'

@@ -48,6 +48,10 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
   }
 
+  if (!alt) {
+    console.warn('ImageMedia rendered without alt text:', src)
+  }
+
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
   // const sizes = sizeFromProps
   //   ? sizeFromProps
@@ -80,7 +84,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       }}
       priority={priority}
       quality={50}
-      // missing the "blurDataURL" property if wanna use: placeholder="blur"
       sizes={sizes}
       src={src}
       width={!fill ? width : undefined}

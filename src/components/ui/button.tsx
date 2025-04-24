@@ -21,18 +21,14 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-slate-800/50 text-white/90 border border-white/80 hover:bg-amber-700/80 dark:hover:text-white/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        ghost: 'hover:bg-card hover:text-accent-foreground',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline decoration-amber-700',
+
         outline:
           'bg-background/80 dark:bg-white/80 text-slate-800 dark:text-black/90 hover:text-white/90 border border-white/80 hover:bg-amber-700/80',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
       },
     },
   },
 )
-
-// prose-a:bg-card-foreground prose-a:text-nowrap prose-a:p-2 prose-a:mx-0.5 prose-a:font-normal prose-a:no-underline prose-a:rounded-xl prose-a:text-xl prose-a:leading-[2.6] gap-9 prose-a:border prose-a:border-slate-500/40 dark:hover:prose-a:border-white/85 hover:prose-a:text-primary-foreground/90 dark:hover:prose-a:text-white/90
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
