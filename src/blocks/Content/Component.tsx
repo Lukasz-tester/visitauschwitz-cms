@@ -42,7 +42,7 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
         'pb-14': addPaddingBottom,
         'pt-24': heading?.root?.direction === null && columns.length > 3,
       })}
-      aria-labelledby={blockName || undefined}
+      // aria-labelledby={blockName || undefined}
     >
       <div className="container">
         {heading?.root?.direction !== null && (

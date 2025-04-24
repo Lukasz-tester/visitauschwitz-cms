@@ -45,7 +45,7 @@ export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
       className={cn('w-full m-0 mt-14 place-self-center', {
         'bg-card-foreground mt-0': changeBackground,
       })}
-      aria-labelledby={blockName || undefined}
+      // aria-labelledby={blockName || undefined}
     >
       <div className="container" id={blockName || undefined}>
         <div className={cn('md:px-[17.3%]', { 'pb-24': addPaddingBottom })}>
@@ -106,8 +106,8 @@ const AccordionItem: React.FC<ItemProps> = ({
       )}
     >
       <button
-        aria-expanded={isOpen}
-        aria-controls={`accordion-content-${id}`}
+        // aria-expanded={isOpen}
+        // aria-controls={`accordion-content-${id}`}
         className={cn('w-full p-3 text-start text-xl opacity-85 flex place-content-between', {
           'bg-card-foreground': isOpen,
         })}
@@ -123,7 +123,7 @@ const AccordionItem: React.FC<ItemProps> = ({
         ref={contentRef}
         className="px-5 overflow-hidden transition-[max-height] duration-500 ease-in-out"
         role="region"
-        aria-labelledby={`accordion-header-${id}`}
+        // aria-labelledby={`accordion-header-${id}`}
         style={{ maxHeight: isOpen ? measuredHeight : 0 }}
       >
         <div className="py-5">
