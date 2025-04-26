@@ -18,9 +18,7 @@
     --card: 240 8% 91%;
     --card-foreground: 233 14% 85%;
 
-    /* --border: 233 14% 85%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%; */
+    --border: 233 14% 85%;
   }
 
   [data-theme='dark'] {
@@ -30,9 +28,7 @@
     --card: 200 6% 10%;
     --card-foreground: 210 14% 14%;
 
-    /* --success: 12 100% 14%;
-    --warning: 34 51% 25%;
-    --error: 10 39% 43%; */
+    --border: 240 4% 16%;
   }
 }
 

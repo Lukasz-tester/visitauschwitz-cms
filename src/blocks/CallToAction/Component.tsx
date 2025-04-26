@@ -85,7 +85,7 @@ export const CallToActionBlock: React.FC<Props & { id?: string }> = ({
     <section
       id={blockName || undefined}
       className={cn('mt-7', {
-        'bg-gradient-to-b from-card-foreground to-transparent py-7 my-0': changeBackground,
+        'bg-gradient-to-b from-card-foreground to-transparent pb-7 my-0': changeBackground,
         'md:px-[17.3%]': tiles?.length === 1,
       })}
     >
@@ -141,7 +141,7 @@ export const CallToActionBlock: React.FC<Props & { id?: string }> = ({
                   {richText && tiles.length !== 5 && (
                     <RichText
                       className={cn(
-                        richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-3',
+                        richText.root.direction === null ? 'hidden' : 'prose-h3:text-3xl my-5',
                       )}
                       content={richText}
                       enableGutter={false}
