@@ -50,10 +50,13 @@ const layers = [
       <>
         <Marker position={entranceAuschwitz}>
           <Popup>
-            <h4>Auschwitz I Main Camp</h4>Start your tour here and continue in{' '}
+            <h4>Auschwitz I Main Camp</h4>
+            Start your tour here and
+            <br />
+            continue in{' '}
             <a
-              href="https://visitauschwitz.info/auschwitz-birkenau/#get-to-birkenau"
-              target="_blank"
+              href="/arrival#get-to-birkenau"
+              // target="_blank"
             >
               Birkenau.
             </a>
@@ -86,8 +89,8 @@ export default function MapModal() {
   return (
     <div className="w-full h-full relative">
       <MapContainer
-        center={[50.0272008, 19.2040681]} // Set initial center to Auschwitz I entrance
-        zoom={17} // Set an appropriate zoom level
+        center={[50.027063, 19.20411]}
+        zoom={16} // Set an appropriate zoom level
         scrollWheelZoom={true}
         style={{ height: '100%', width: '100%' }}
       >
