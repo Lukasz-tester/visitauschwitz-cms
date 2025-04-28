@@ -1,12 +1,8 @@
 'use client'
 
-// START: Preserve spaces to avoid auto-sorting
 import 'leaflet/dist/leaflet.css'
-
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-
 import 'leaflet-defaulticon-compatibility'
-// END: Preserve spaces to avoid auto-sorting
 import {
   CircleMarker,
   LayerGroup,
@@ -21,34 +17,32 @@ import {
 
 import { LatLngExpression } from 'leaflet'
 import { buildings } from './buildings'
-import { routes } from './routes'
-import { LocateMeButton } from './myLocation-NOT-USED'
+import { routes } from './routes' // Import the updated routes with 'amber' color
+import { LocateMeButton } from './LocateMeButton'
+import { parkingLots, carparkRadius, carparkColor } from './parkingLots' // Import parking lots
 
 const entranceAuschwitz: LatLngExpression = [50.02949, 19.20553]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
 
-const carparkMuzeum: LatLngExpression = [50.02997, 19.20587]
-const carparkSzajny: LatLngExpression = [50.02717, 19.19931]
-const carparkBirkenau1: LatLngExpression = [50.03555, 19.18403]
-const carparkBirkenau2: LatLngExpression = [50.04003, 19.18164]
-const carparkImperiale: LatLngExpression = [50.02856, 19.1986]
-const carparkRide: LatLngExpression = [50.04275, 19.20224]
-const carparkJaracza: LatLngExpression = [50.03236, 19.19818]
-const carparkRadius = 25
-const carparkColor = 'blue'
-
 const layers = [
   {
     name: 'Auschwitz I buildings',
-    // anchors: ["A1"],
     markers: Object.keys(buildings).map((slug) => (
       <Polygon key={slug} positions={buildings[slug]} />
     )),
   },
   {
     name: 'Auschwitz routes',
-    // anchors: ["A1"],
-    markers: Object.keys(routes).map((slug) => <Polyline key={slug} positions={routes[slug]} />),
+    markers: Object.keys(routes).map((slug) => {
+      // Use the route color from the routes object
+      return (
+        <Polyline
+          key={slug}
+          positions={routes[slug].path}
+          pathOptions={{ color: routes[slug].color }}
+        />
+      )
+    }),
   },
   {
     name: 'Museum entrances',
@@ -75,94 +69,25 @@ const layers = [
   },
   {
     name: 'Parking lots',
-    // anchors: ["car", "default"],
-    markers: (
-      <>
-        <CircleMarker
-          center={carparkMuzeum}
-          pathOptions={{ color: carparkColor, fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>
-            Car: 20 PLN
-            <br />
-            Minibus: 30 PLN
-            <br />
-            Bus: 40 PLN
-            <br />
-            Camper: 90 PLN
-            <br />
-            Motorcycle: 15 PLN
-            <br />
-            <h5>
-              <a href="https://visitauschwitz.info/get-ready/#on-site" target="_blank">
-                Learn what is on site.
-              </a>
-            </h5>
-          </Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkSzajny}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>Józefa Szajny Street parking lot.</Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkImperiale}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>Hotel Imperiale parking lot.</Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkBirkenau1}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>40 PLN for vehicles not higher than 240 cm and 80 PLN for others.</Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkBirkenau2}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>
-            Car (up to 20 people): 20 PLN
-            <br />
-            Camper: 30 PLN
-            <br />
-            Bus: 40 PLN
-            <br />
-            Motorcycle: 10 PLN
-          </Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkRide}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>Park & Ride by the railway station.</Popup>
-        </CircleMarker>
-        <CircleMarker
-          center={carparkJaracza}
-          pathOptions={{ color: '', fillColor: carparkColor }}
-          radius={carparkRadius}
-        >
-          <Popup>Stefana Jaracza Street parking lot.</Popup>
-        </CircleMarker>
-      </>
-    ),
+    markers: parkingLots.map((lot, index) => (
+      <CircleMarker
+        key={index}
+        center={lot.center}
+        pathOptions={{ color: carparkColor, fillColor: carparkColor }}
+        radius={carparkRadius}
+      >
+        <Popup>{lot.popupContent}</Popup>
+      </CircleMarker>
+    )),
   },
 ]
 
 export default function MapModal() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative">
       <MapContainer
-        preferCanvas={true}
-        center={entranceAuschwitz}
-        zoom={14}
+        center={[50.0272008, 19.2040681]} // Set initial center to Auschwitz I entrance
+        zoom={17} // Set an appropriate zoom level
         scrollWheelZoom={true}
         style={{ height: '100%', width: '100%' }}
       >
@@ -172,14 +97,21 @@ export default function MapModal() {
         />
         <LayersControl position="topright" collapsed={true}>
           {layers.map((layer) => (
-            <LayersControl.Overlay name={layer.name} key={layer.name}>
+            <LayersControl.Overlay
+              name={layer.name}
+              key={layer.name}
+              checked={
+                layer.name === 'Museum entrances' ||
+                layer.name === 'Auschwitz I buildings' ||
+                layer.name === 'Auschwitz routes'
+              } // Default visibility for these layers
+            >
               <LayerGroup>{layer.markers}</LayerGroup>
             </LayersControl.Overlay>
           ))}
         </LayersControl>
+        <LocateMeButton /> {/* Add LocateMeButton here */}
       </MapContainer>
-
-      <LocateMeButton />
     </div>
   )
 }
