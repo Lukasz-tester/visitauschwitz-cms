@@ -92,6 +92,9 @@ importers:
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
+      leaflet-arrowheads:
+        specifier: ^1.4.0
+        version: 1.4.0
       leaflet-defaulticon-compatibility:
         specifier: ^0.1.2
         version: 0.1.2
@@ -3327,8 +3330,14 @@ packages:
   leac@0.6.0:
     resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
 
+  leaflet-arrowheads@1.4.0:
+    resolution: {integrity: sha512-aIjsmoWe1VJXaGOpKpS6E8EzN2vpx3GGCNP/FxQteLVzAg5xMID7elf9hj/1CWLJo8FuGRjSvKkUQDj7mocrYA==}
+
   leaflet-defaulticon-compatibility@0.1.2:
     resolution: {integrity: sha512-IrKagWxkTwzxUkFIumy/Zmo3ksjuAu3zEadtOuJcKzuXaD76Gwvg2Z1mLyx7y52ykOzM8rAH5ChBs4DnfdGa6Q==}
+
+  leaflet-geometryutil@0.10.3:
+    resolution: {integrity: sha512-Qeas+KsnenE0Km/ydt8km3AqFe7kJhVwuLdbCYM2xe2epsxv5UFEaVJiagvP9fnxS8QvBNbm7DJlDA0tkKo9VA==}
 
   leaflet@1.9.4:
     resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
@@ -9055,7 +9064,16 @@ snapshots:
 
   leac@0.6.0: {}
 
+  leaflet-arrowheads@1.4.0:
+    dependencies:
+      leaflet: 1.9.4
+      leaflet-geometryutil: 0.10.3
+
   leaflet-defaulticon-compatibility@0.1.2: {}
+
+  leaflet-geometryutil@0.10.3:
+    dependencies:
+      leaflet: 1.9.4
 
   leaflet@1.9.4: {}
 

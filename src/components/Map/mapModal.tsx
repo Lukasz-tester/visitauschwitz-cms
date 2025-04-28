@@ -1,9 +1,11 @@
 'use client'
 
+import 'leaflet-arrowheads'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
 import 'leaflet-defaulticon-compatibility'
 import {
+  Circle,
   CircleMarker,
   LayerGroup,
   LayersControl,
@@ -16,10 +18,11 @@ import {
 } from 'react-leaflet'
 
 import { LatLngExpression } from 'leaflet'
-import { buildings } from './buildings'
+import { buildings } from './buildingsPopups'
 import { routes } from './routes' // Import the updated routes with 'amber' color
 import { LocateMeButton } from './LocateMeButton'
 import { parkingLots, carparkRadius, carparkColor } from './parkingLots' // Import parking lots
+import { RouteWithArrows } from './RouteWithArrows'
 
 const entranceAuschwitz: LatLngExpression = [50.02949, 19.20553]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
@@ -27,22 +30,43 @@ const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
 const layers = [
   {
     name: 'Auschwitz I buildings',
-    markers: Object.keys(buildings).map((slug) => (
-      <Polygon key={slug} positions={buildings[slug]} />
-    )),
+    markers: Object.keys(buildings).map((slug) => {
+      const building = buildings[slug]
+      const isPoint = building.positions.length === 1 // Only one coordinate
+
+      if (isPoint) {
+        return (
+          <Circle
+            key={slug}
+            center={building.positions[0] as [number, number]}
+            radius={8}
+            pathOptions={{ color: 'green', fillColor: '', fillOpacity: 0.5 }}
+          >
+            {building.popup && <Popup>{building.popup}</Popup>}
+          </Circle>
+        )
+      } else {
+        return (
+          <Polygon
+            key={slug}
+            positions={building.positions}
+            pathOptions={{ color: 'green', weight: 2, fillOpacity: 0.5 }}
+          >
+            {building.popup && <Popup>{building.popup}</Popup>}
+          </Polygon>
+        )
+      }
+    }),
   },
   {
     name: 'Auschwitz routes',
-    markers: Object.keys(routes).map((slug) => {
-      // Use the route color from the routes object
-      return (
-        <Polyline
-          key={slug}
-          positions={routes[slug].path}
-          pathOptions={{ color: routes[slug].color }}
-        />
-      )
-    }),
+    markers: Object.keys(routes).map((slug) => (
+      <RouteWithArrows
+        key={slug}
+        positions={routes[slug].path}
+        //color={routes[slug].color} // Pass the color property from the routes object
+      />
+    )),
   },
   {
     name: 'Museum entrances',
@@ -53,13 +77,7 @@ const layers = [
             <h4>Auschwitz I Main Camp</h4>
             Start your tour here and
             <br />
-            continue in{' '}
-            <a
-              href="/arrival#get-to-birkenau"
-              // target="_blank"
-            >
-              Birkenau.
-            </a>
+            continue in <a href="arrival#get-to-birkenau">Birkenau.</a>
           </Popup>
         </Marker>
         <Marker position={entranceBirkenau}>
