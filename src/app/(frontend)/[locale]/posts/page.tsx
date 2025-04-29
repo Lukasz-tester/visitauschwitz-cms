@@ -1,5 +1,7 @@
 import type { Metadata } from 'next/types'
 
+export const revalidate = 600
+
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
@@ -9,8 +11,6 @@ import React from 'react'
 // import PageClient from './page.client'
 import { TypedLocale } from 'payload'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-
-export const revalidate = 600
 
 type Args = {
   params: Promise<{

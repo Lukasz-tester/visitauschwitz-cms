@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
+export const revalidate = 600
+
 import { cn } from 'src/utilities/cn'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'

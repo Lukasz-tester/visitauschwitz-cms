@@ -20,7 +20,7 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-slate-800/50 text-white/90 border border-white/80 hover:bg-amber-700/80 dark:hover:text-white/90',
+          'bg-slate-800/80 text-white/90 border border-white/80 hover:bg-amber-700/80 dark:hover:text-white/90',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline decoration-amber-700',
 
         outline:
