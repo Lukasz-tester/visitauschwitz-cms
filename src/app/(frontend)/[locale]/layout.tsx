@@ -24,7 +24,9 @@ import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import MapCaller from '@/components/Map/MapCaller'
 import { CookiePopup } from '@/components/Cookies/cookiePopup'
+
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 type Args = {
   children: React.ReactNode
