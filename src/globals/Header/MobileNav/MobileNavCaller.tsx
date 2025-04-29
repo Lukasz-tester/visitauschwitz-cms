@@ -57,11 +57,11 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             <div className="flex flex-col py-2 pr-36">
               <NavItems header={header} />
             </div>
-            <div className="pl-2 w-full flex flex-col fixed bottom-3 text-lg text-slate-500 font-semibold">
-              <a className="pt-2 pb-1 px-3 text-amber-700/90 text-xl lg:text-2xl" href="contact">
+            <div className="pl-2 w-full flex flex-col fixed bottom-3 text-xl text-slate-500 font-semibold">
+              <a className="pt-2 pb-1 px-3 text-amber-700/90 lg:text-2xl" href="contact">
                 {t('contact')}
               </a>
-              <a className="p-2 px-3 text-xl lg:text-2xl" href="supplement">
+              <a className="p-2 px-3 lg:text-2xl" href="supplement">
                 {t('tips')}
               </a>
               <div>
