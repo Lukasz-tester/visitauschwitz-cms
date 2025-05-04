@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { TypedLocale } from 'payload'
 
-export const revalidate = 600
+// export const revalidate = 600
 
 type Args = {
   params: Promise<{

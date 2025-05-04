@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-export const revalidate = 600
+// export const revalidate = 600
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'

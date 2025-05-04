@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
-export const revalidate = 600
+// export const revalidate = 600
 
 import { cn } from 'src/utilities/cn'
 import { GeistMono } from 'geist/font/mono'
@@ -72,6 +72,7 @@ export default async function RootLayout({ children, params }: Args) {
             <MapCaller />
             <CookiePopup />
             <Analytics />
+            <SpeedInsights />
           </NextIntlClientProvider>
         </Providers>
       </body>
