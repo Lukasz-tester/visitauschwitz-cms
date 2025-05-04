@@ -4,15 +4,18 @@ import { useEffect } from 'react'
 
 export function RestoreHandler() {
   useEffect(() => {
-    const handler = (event: PageTransitionEvent) => {
+    const onRestore = (event: PageTransitionEvent) => {
       if (event.persisted) {
-        // Page was restored from bfcache
+        // Only reload if the page was loaded from bfcache
         window.location.reload()
       }
     }
 
-    window.addEventListener('pageshow', handler)
-    return () => window.removeEventListener('pageshow', handler)
+    window.addEventListener('pageshow', onRestore)
+
+    return () => {
+      window.removeEventListener('pageshow', onRestore)
+    }
   }, [])
 
   return null
