@@ -27,13 +27,18 @@ import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { RestoreHandler } from '@/components/RestoreHandler'
+import { RestoreHandler, useRestoreKey } from '@/components/RestoreHandler'
 
 type Args = {
   children: React.ReactNode
   params: Promise<{
     locale: TypedLocale
   }>
+}
+
+function AppWrapper({ children }: { children: React.ReactNode }) {
+  const key = useRestoreKey()
+  return <div key={key}>{children}</div>
 }
 
 export default async function RootLayout({ children, params }: Args) {
@@ -60,7 +65,23 @@ export default async function RootLayout({ children, params }: Args) {
       </head>
       <body>
         <Providers>
-          <RestoreHandler />
+          <RestoreHandler>
+            <AppWrapper>
+              <NextIntlClientProvider messages={messages}>
+                <AdminBar adminBarProps={{ preview: isEnabled }} />
+                <LivePreviewListener />
+                <Header locale={locale} />
+                {children}
+                <Footer locale={locale} />
+                <MapCaller />
+                <CookiePopup />
+                <Analytics />
+                <SpeedInsights />
+              </NextIntlClientProvider>
+            </AppWrapper>
+          </RestoreHandler>
+        </Providers>
+        {/* <Providers>
           <NextIntlClientProvider messages={messages}>
             <AdminBar
               adminBarProps={{
@@ -76,7 +97,7 @@ export default async function RootLayout({ children, params }: Args) {
             <Analytics />
             <SpeedInsights />
           </NextIntlClientProvider>
-        </Providers>
+        </Providers> */}
       </body>
     </html>
   )

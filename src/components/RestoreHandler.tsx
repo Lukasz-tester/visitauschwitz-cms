@@ -1,22 +1,25 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState, createContext, useContext } from 'react'
 
-export function RestoreHandler() {
+const RestoreContext = createContext(0)
+
+export const useRestoreKey = () => useContext(RestoreContext)
+
+export function RestoreHandler({ children }: { children: React.ReactNode }) {
+  const [key, setKey] = useState(0)
+
   useEffect(() => {
-    const onRestore = (event: PageTransitionEvent) => {
+    const onPageshow = (event: PageTransitionEvent) => {
       if (event.persisted) {
-        // Only reload if the page was loaded from bfcache
-        window.location.reload()
+        // Soft refresh by changing key (no hard reload)
+        setKey((k) => k + 1)
       }
     }
 
-    window.addEventListener('pageshow', onRestore)
-
-    return () => {
-      window.removeEventListener('pageshow', onRestore)
-    }
+    window.addEventListener('pageshow', onPageshow)
+    return () => window.removeEventListener('pageshow', onPageshow)
   }, [])
 
-  return null
+  return <RestoreContext.Provider value={key}>{children}</RestoreContext.Provider>
 }
