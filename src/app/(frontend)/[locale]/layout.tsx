@@ -28,17 +28,13 @@ import { CookiePopup } from '@/components/Cookies/cookiePopup'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { RestoreHandler, useRestoreKey } from '@/components/RestoreHandler'
+import { AppWrapper } from '@/components/AppWrapper'
 
 type Args = {
   children: React.ReactNode
   params: Promise<{
     locale: TypedLocale
   }>
-}
-
-function AppWrapper({ children }: { children: React.ReactNode }) {
-  const key = useRestoreKey()
-  return <div key={key}>{children}</div>
 }
 
 export default async function RootLayout({ children, params }: Args) {
