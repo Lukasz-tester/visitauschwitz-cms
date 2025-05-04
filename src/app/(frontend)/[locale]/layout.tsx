@@ -27,6 +27,7 @@ import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { RestoreHandler } from '@/components/RestoreHandler'
 
 type Args = {
   children: React.ReactNode
@@ -59,6 +60,7 @@ export default async function RootLayout({ children, params }: Args) {
       </head>
       <body>
         <Providers>
+          <RestoreHandler />
           <NextIntlClientProvider messages={messages}>
             <AdminBar
               adminBarProps={{
