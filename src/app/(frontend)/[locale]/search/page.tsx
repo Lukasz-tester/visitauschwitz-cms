@@ -1,6 +1,6 @@
 import type { Metadata } from 'next/types'
 
-export const revalidate = 300
+// export const revalidate = 600
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 import configPromise from '@payload-config'

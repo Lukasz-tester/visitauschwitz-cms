@@ -1,10 +1,9 @@
 'use client'
-import { ComponentProps, useState } from 'react'
+import { useState } from 'react'
 import LocaleSwitcher from '../LocaleSwitcher'
 import Link from 'next/link'
 
 import { SearchIcon } from 'lucide-react'
-// import { Favicion } from '@/components/ui/Icons'
 
 import type { Header as HeaderType } from '@/payload-types'
 import NavItems from '../NavItems'
@@ -20,10 +19,10 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
   useLockBodyScroll(modalOpen)
 
   const links = {
-    '/posts': 'posts',
     '/supplement': 'tips',
-    '/contact': 'contact',
+    '/posts': 'posts',
     '/#created-by': 'author',
+    '/contact': 'contact',
   }
 
   return (
@@ -59,13 +58,11 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             <Link
               className="ease-in-out duration-1000 w-16 h-16 flex items-center justify-center fixed top-0"
               href="/search"
+              onClick={() => setModalOpen(!modalOpen)}
             >
               <SearchIcon className="ease-in-out duration-1000 w-fit text-primary" />
             </Link>
-            {/* <Link className="fixed top-48 right-6 opacity-35" href="/">
-              <Favicion />
-            </Link> */}
-            <div className="flex flex-col my-36 py-2 pr-36">
+            <div className="flex flex-col my-28 py-2 pr-36">
               <NavItems header={header} onClick={() => setModalOpen(false)} />
               <div className="pl-2 mt-2 w-full flex flex-col text-xl text-slate-500 font-semibold ">
                 {Object.entries(links).map(([href, label]) => (
@@ -79,21 +76,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
                     {t(label as any)}
                   </Link>
                 ))}
-                {/* <Link className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="posts">
-                  {t('posts')}
-                </Link>
-                <Link
-                  className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90"
-                  href="/#created-by"
-                >
-                  {t('author')}
-                </Link>
-                <Link className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="contact">
-                  {t('contact')}
-                </Link> */}
               </div>
             </div>
-            <div className="pl-2 w-full flex flex-col text-xl text-slate-500 fixed bottom-2 font-semibold">
+            <div className="pl-2 w-full flex flex-col text-xl text-slate-500 fixed bottom-3 font-semibold">
               <div className="p-1 pl-0.5">
                 <LocaleSwitcher />
               </div>
