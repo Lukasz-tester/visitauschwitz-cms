@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { ComponentProps, useState } from 'react'
 import LocaleSwitcher from '../LocaleSwitcher'
 import Link from 'next/link'
 
@@ -10,7 +10,7 @@ import type { Header as HeaderType } from '@/payload-types'
 import NavItems from '../NavItems'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
-import { useTranslations } from 'next-intl'
+import { MessageKeys, useTranslations } from 'next-intl'
 import { scrolledFromTop, useLockBodyScroll } from '@/utilities/helpers'
 
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
@@ -18,6 +18,13 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
 
   const t = useTranslations()
   useLockBodyScroll(modalOpen)
+
+  const links = {
+    '/posts': 'posts',
+    '/supplement': 'tips',
+    '/contact': 'contact',
+    '/#created-by': 'author',
+  }
 
   return (
     <div>
@@ -59,23 +66,31 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
               <Favicion />
             </Link> */}
             <div className="flex flex-col my-36 py-2 pr-36">
-              <NavItems header={header} />
+              <NavItems header={header} onClick={() => setModalOpen(false)} />
               <div className="pl-2 mt-2 w-full flex flex-col text-xl text-slate-500 font-semibold ">
-                <a className="p-2 px-3 lg:text-2xl hover:text-amber-700/90" href="supplement">
-                  {t('tips')}
-                </a>
-                <a className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="posts">
+                {Object.entries(links).map(([href, label]) => (
+                  <Link
+                    key={href}
+                    className="p-2 px-3 lg:text-2xl hover:text-amber-700/90"
+                    onClick={() => setModalOpen(false)}
+                    href={href}
+                  >
+                    {/* TODO remove any */}
+                    {t(label as any)}
+                  </Link>
+                ))}
+                {/* <Link className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="posts">
                   {t('posts')}
-                </a>
-                <a
+                </Link>
+                <Link
                   className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90"
                   href="/#created-by"
                 >
                   {t('author')}
-                </a>
-                <a className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="contact">
+                </Link>
+                <Link className="pt-3 pb-1 px-3 lg:text-2xl hover:text-amber-700/90" href="contact">
                   {t('contact')}
-                </a>
+                </Link> */}
               </div>
             </div>
             <div className="pl-2 w-full flex flex-col text-xl text-slate-500 fixed bottom-2 font-semibold">

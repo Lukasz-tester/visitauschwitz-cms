@@ -36,6 +36,7 @@ import {
   Umbrella,
   UmbrellaDrops,
 } from '@/components/ui/Icons'
+import Link from 'next/link'
 
 const icons = {
   food: <Food />,
@@ -168,15 +169,15 @@ export const CallToActionBlock: React.FC<Props & { id?: string }> = ({
                 )}
               >
                 {linkTo ? (
-                  <a
+                  <Link
                     className="place-self-center"
                     href={linkTo}
                     aria-label={`Call to action: ${title}`}
-                    target={linkTo.includes('http') ? '_blank' : undefined}
-                    rel={linkTo.includes('http') ? 'noopener noreferrer' : undefined}
+                    target={linkTo.startsWith('http') ? '_blank' : undefined}
+                    rel={linkTo.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
                     {content}
-                  </a>
+                  </Link>
                 ) : (
                   <div className="place-self-center">{content}</div>
                 )}

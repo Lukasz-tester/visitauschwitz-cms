@@ -23,6 +23,7 @@ import { routes } from './routes' // Import the updated routes with 'amber' colo
 import { LocateMeButton } from './LocateMeButton'
 import { parkingLots, carparkRadius, carparkColor } from './parkingLots' // Import parking lots
 import { RouteWithArrows } from './RouteWithArrows'
+import Link from 'next/link'
 
 const entranceAuschwitz: LatLngExpression = [50.02949, 19.20553]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
@@ -77,7 +78,7 @@ const layers = [
             <h4>Auschwitz I Main Camp</h4>
             Start your tour here and
             <br />
-            continue in <a href="arrival#get-to-birkenau">Birkenau.</a>
+            continue in <Link href="arrival#get-to-birkenau">Birkenau.</Link>
           </Popup>
         </Marker>
         <Marker position={entranceBirkenau}>

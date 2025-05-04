@@ -1,4 +1,5 @@
 import { LatLngExpression } from 'leaflet'
+import Link from 'next/link'
 
 export const carparkMuzeum: LatLngExpression = [50.02997, 19.20587]
 export const carparkSzajny: LatLngExpression = [50.02717, 19.19931]
@@ -27,9 +28,10 @@ export const parkingLots = [
         Motorcycle: 15 PLN
         <br />
         <h5>
-          <a href="https://visitauschwitz.info/get-ready/#on-site" target="_blank">
+          {/* TODO poprawić */}
+          <Link href="get-ready#on-site" target="_blank">
             Learn what is on site.
-          </a>
+          </Link>
         </h5>
       </>
     ),
