@@ -1,8 +1,22 @@
 'use client'
 
-import { useRestoreKey } from '@/components/RestoreHandler'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const key = useRestoreKey()
-  return <div key={key}>{children}</div>
+  const router = useRouter()
+
+  useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        // Trigger a soft refresh (refetches RSC, respects cache)
+        router.replace(window.location.pathname)
+      }
+    }
+
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [router])
+
+  return <>{children}</>
 }
