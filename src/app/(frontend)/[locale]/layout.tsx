@@ -29,6 +29,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { RestoreHandler, useRestoreKey } from '@/components/RestoreHandler'
 import { AppWrapper } from '@/components/AppWrapper'
+import BfcacheFixer from '@/components/BfcacheFixer'
 
 type Args = {
   children: React.ReactNode
@@ -60,6 +61,7 @@ export default async function RootLayout({ children, params }: Args) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
+        <BfcacheFixer />
         <Providers>
           <RestoreHandler>
             <AppWrapper>
