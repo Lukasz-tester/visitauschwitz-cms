@@ -1,25 +1,23 @@
 'use client'
 
-import { useEffect, useState, createContext, useContext } from 'react'
+import { useEffect } from 'react'
 
-const RestoreContext = createContext(0)
-
-export const useRestoreKey = () => useContext(RestoreContext)
-
-export function RestoreHandler({ children }: { children: React.ReactNode }) {
-  const [key, setKey] = useState(0)
-
+export function RestoreHandler() {
   useEffect(() => {
-    const onPageshow = (event: PageTransitionEvent) => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      console.log('[RestoreHandler] pageshow detected. Persisted:', event.persisted)
+
       if (event.persisted) {
-        // Soft refresh by changing key (no hard reload)
-        setKey((k) => k + 1)
+        // ✅ Force reload to rehydrate React
+        // ⚠️ Use reload with `window.location.reload()` or soft navigation
+        window.location.reload()
       }
     }
 
-    window.addEventListener('pageshow', onPageshow)
-    return () => window.removeEventListener('pageshow', onPageshow)
+    window.addEventListener('pageshow', onPageShow)
+
+    return () => window.removeEventListener('pageshow', onPageShow)
   }, [])
 
-  return <RestoreContext.Provider value={key}>{children}</RestoreContext.Provider>
+  return null
 }
