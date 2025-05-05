@@ -27,9 +27,6 @@ import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-// import { RestoreHandler } from '@/components/RestoreHandler'
-// import { AppWrapper } from '@/components/AppWrapper'
-// import BfcacheFixer from '@/components/BfcacheFixer'
 
 type Args = {
   children: React.ReactNode
@@ -61,24 +58,6 @@ export default async function RootLayout({ children, params }: Args) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
-        {/* <BfcacheFixer /> */}
-        {/* <Providers> */}
-        {/* <RestoreHandler /> */}
-        {/* <AppWrapper> */}
-        {/* <NextIntlClientProvider messages={messages}>
-            <AdminBar adminBarProps={{ preview: isEnabled }} />
-            <LivePreviewListener />
-            <Header locale={locale} />
-            {children}
-            <Footer locale={locale} />
-            <MapCaller />
-            <CookiePopup />
-            <Analytics />
-            <SpeedInsights />
-          </NextIntlClientProvider> */}
-        {/* </AppWrapper> */}
-        {/* </RestoreHandler> */}
-        {/* </Providers> */}
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <AdminBar
