@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 // export const revalidate = 600
 
 import { cn } from 'src/utilities/cn'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
+// import { GeistMono } from 'geist/font/mono'
+// import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -48,7 +48,7 @@ export default async function RootLayout({ children, params }: Args) {
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable)}
+      // className={cn(GeistSans.variable, GeistMono.variable)}
       lang={locale}
       suppressHydrationWarning
     >

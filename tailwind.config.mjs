@@ -43,20 +43,20 @@ export default {
       },
     },
     extend: {
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
+      // animation: {
+      //   'accordion-down': 'accordion-down 0.2s ease-out',
+      //   'accordion-up': 'accordion-up 0.2s ease-out',
+      // },
+      // borderRadius: {
+      //   lg: 'var(--radius)',
+      //   md: 'calc(var(--radius) - 2px)',
+      //   sm: 'calc(var(--radius) - 4px)',
+      // },
       colors: {
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
+        // accent: {
+        //   DEFAULT: 'hsl(var(--accent))',
+        //   foreground: 'hsl(var(--accent-foreground))',
+        // },
         background: 'hsl(var(--background))',
         border: 'hsl(var(--border))',
         card: {
@@ -71,14 +71,19 @@ export default {
         },
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        sans: ['system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'monospace'],
       },
+      // fontFamily: {
+      //   mono: ['var(--font-geist-mono)'],
+      //   sans: ['var(--font-geist-sans)'],
+      // },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
             '--tw-prose-body': 'var(--text)',
             '--tw-prose-headings': 'var(--text)',
+            flexShrink: '0',
             h1: {
               fontSize: '2.5rem',
               marginBottom: '0.5rem',

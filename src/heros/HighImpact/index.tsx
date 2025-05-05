@@ -22,7 +22,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             />
           )}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex pl-2 md:pl-4 gap-4 mb-3">
+            <ul className="flex flex-wrap pl-2 md:pl-4 gap-4 mb-3">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
