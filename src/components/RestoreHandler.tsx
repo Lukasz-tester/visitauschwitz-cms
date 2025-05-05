@@ -1,23 +1,32 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export function RestoreHandler() {
-  useEffect(() => {
-    const onPageShow = (event: PageTransitionEvent) => {
-      console.log('[RestoreHandler] pageshow detected. Persisted:', event.persisted)
+  const [status, setStatus] = useState('Waiting for pageshow event...')
 
+  useEffect(() => {
+    const handler = (event: PageTransitionEvent) => {
       if (event.persisted) {
-        // ✅ Force reload to rehydrate React
-        // ⚠️ Use reload with `window.location.reload()` or soft navigation
-        window.location.reload()
+        setStatus('BFCache restore detected!')
+        document.body.innerHTML = '<h1 style="color:red;">BFCache restore detected!</h1>'
+      } else {
+        setStatus('Normal navigation (not from bfcache)')
       }
     }
 
-    window.addEventListener('pageshow', onPageShow)
+    window.addEventListener('pageshow', handler)
 
-    return () => window.removeEventListener('pageshow', onPageShow)
+    return () => {
+      window.removeEventListener('pageshow', handler)
+    }
   }, [])
 
-  return null
+  return (
+    <div
+      style={{ position: 'fixed', bottom: 10, left: 10, background: 'white', padding: '0.5rem' }}
+    >
+      <strong>RestoreHandler:</strong> {status}
+    </div>
+  )
 }
