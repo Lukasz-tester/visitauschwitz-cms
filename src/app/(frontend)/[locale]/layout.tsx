@@ -27,9 +27,9 @@ import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { RestoreHandler } from '@/components/RestoreHandler'
-import { AppWrapper } from '@/components/AppWrapper'
-import BfcacheFixer from '@/components/BfcacheFixer'
+// import { RestoreHandler } from '@/components/RestoreHandler'
+// import { AppWrapper } from '@/components/AppWrapper'
+// import BfcacheFixer from '@/components/BfcacheFixer'
 
 type Args = {
   children: React.ReactNode
@@ -62,10 +62,10 @@ export default async function RootLayout({ children, params }: Args) {
       </head>
       <body>
         {/* <BfcacheFixer /> */}
-        <Providers>
-          <RestoreHandler />
-          {/* <AppWrapper> */}
-          <NextIntlClientProvider messages={messages}>
+        {/* <Providers> */}
+        {/* <RestoreHandler /> */}
+        {/* <AppWrapper> */}
+        {/* <NextIntlClientProvider messages={messages}>
             <AdminBar adminBarProps={{ preview: isEnabled }} />
             <LivePreviewListener />
             <Header locale={locale} />
@@ -75,11 +75,11 @@ export default async function RootLayout({ children, params }: Args) {
             <CookiePopup />
             <Analytics />
             <SpeedInsights />
-          </NextIntlClientProvider>
-          {/* </AppWrapper> */}
-          {/* </RestoreHandler> */}
-        </Providers>
-        {/* <Providers>
+          </NextIntlClientProvider> */}
+        {/* </AppWrapper> */}
+        {/* </RestoreHandler> */}
+        {/* </Providers> */}
+        <Providers>
           <NextIntlClientProvider messages={messages}>
             <AdminBar
               adminBarProps={{
@@ -95,7 +95,7 @@ export default async function RootLayout({ children, params }: Args) {
             <Analytics />
             <SpeedInsights />
           </NextIntlClientProvider>
-        </Providers> */}
+        </Providers>
       </body>
     </html>
   )
