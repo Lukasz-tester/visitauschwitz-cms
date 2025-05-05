@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
-import { useLockBodyScroll } from '@/utilities/helpers'
 
 function setCookie(name, value, days = 365) {
   var expires = ''
@@ -36,13 +35,12 @@ export const CookiePopup = () => {
   }, [])
 
   const t = useTranslations()
-  useLockBodyScroll(show)
 
   if (!show) return null
 
   return (
-    <div className="place-content-center bg-background/30 text-primary bottom-0 w-full h-full flex fixed z-[100001] text-xl">
-      <div className="place-self-center items-center flex flex-col bg-background w-fit h-fit p-5 m-6 gap-5 rounded">
+    <div className="fixed bottom-0 w-full z-[100001] flex place-content-center text-primary text-xl">
+      <div className="flex flex-col sm:flex-row bg-background w-fit h-fit p-5 gap-5 items-start sm:items-center justify-between">
         <span>{t('cookie-message')}</span>
         <Button
           className="w-fit"

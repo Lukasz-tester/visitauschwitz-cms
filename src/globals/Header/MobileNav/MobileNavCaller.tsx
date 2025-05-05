@@ -9,7 +9,7 @@ import type { Header as HeaderType } from '@/payload-types'
 import NavItems from '../NavItems'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
-import { MessageKeys, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { scrolledFromTop, useLockBodyScroll } from '@/utilities/helpers'
 
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
@@ -62,9 +62,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             >
               <SearchIcon className="ease-in-out duration-1000 w-fit text-primary" />
             </Link>
-            <div className="flex flex-col my-28 py-2 pr-36">
+            <div className="flex flex-col my-20 py-2 pr-36">
               <NavItems header={header} onClick={() => setModalOpen(false)} />
-              <div className="pl-2 mt-2 w-full flex flex-col text-xl text-slate-500 font-semibold ">
+              <div className="pl-2 mt-2 w-full flex flex-col text-xl text-slate-600 dark:text-slate-400 font-semibold ">
                 {Object.entries(links).map(([href, label]) => (
                   <Link
                     key={href}
@@ -78,12 +78,12 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
                 ))}
               </div>
             </div>
-            <div className="pl-2 w-full flex flex-col text-xl text-slate-500 fixed bottom-3 font-semibold">
-              <div className="p-1 pl-0.5">
-                <LocaleSwitcher />
-              </div>
+            <div className="flex text-xl text-slate-600 dark:text-slate-400 bottom-0 fixed font-semibold">
               <div>
                 <ThemeSelector />
+              </div>
+              <div className="place-content-center">
+                <LocaleSwitcher />
               </div>
             </div>
           </div>

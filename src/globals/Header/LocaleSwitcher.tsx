@@ -32,19 +32,42 @@ function LocaleSwitcher() {
     })
   }
 
+  // return (
+  //   <Select onValueChange={onSelectChange} value={locale}>
+  //     <SelectTrigger className="w-auto bg-transparent border-none px-2">
+  //       <SelectValue placeholder="Theme" />
+  //     </SelectTrigger>
+  //     <SelectContent>
+  //       {localization.locales
+  //         .sort((a, b) => a.label.localeCompare(b.label)) // Ordenar por label
+  //         .map((locale) => (
+  //           <SelectItem value={locale.code} key={locale.code}>
+  //             <div className={`flex ${locale.code === 'it' ? 'gap-3.5' : 'gap-2'}`}>
+  //               <div className="uppercase">{locale.code}</div>
+  //               <div className="">{locale.label}</div>
+  //             </div>
+  //           </SelectItem>
+  //         ))}
+  //     </SelectContent>
+  //   </Select>
+  // )
+
   return (
     <Select onValueChange={onSelectChange} value={locale}>
-      <SelectTrigger className="w-auto bg-transparent border-none px-2">
-        <SelectValue placeholder="Theme" />
+      <SelectTrigger
+        className="bg-transparent border-none uppercase w-auto p-1 pr-3"
+        title={localization.locales.find((l) => l.code === locale)?.label}
+      >
+        {locale.toUpperCase()}
       </SelectTrigger>
       <SelectContent>
         {localization.locales
-          .sort((a, b) => a.label.localeCompare(b.label)) // Ordenar por label
+          .sort((a, b) => a.label.localeCompare(b.label))
           .map((locale) => (
             <SelectItem value={locale.code} key={locale.code}>
-              <div className={`flex ${locale.code === 'it' ? 'gap-3.5' : 'gap-2'}`}>
+              <div className="flex gap-2">
                 <div className="uppercase">{locale.code}</div>
-                <div className="">{locale.label}</div>
+                <div>{locale.label}</div>
               </div>
             </SelectItem>
           ))}

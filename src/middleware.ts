@@ -18,7 +18,8 @@ export default function middleware(request: NextRequest) {
   const response = intlMiddleware(request)
 
   if (isLocalizedHome) {
-    response.headers.set('Cache-Control', 'no-cache, must-revalidate')
+    // Apply no-store only for localized homepages to fix RSC bug
+    response.headers.set('Cache-Control', 'no-store')
   }
 
   return response
