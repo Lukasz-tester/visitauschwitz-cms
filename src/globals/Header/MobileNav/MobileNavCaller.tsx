@@ -10,7 +10,7 @@ import NavItems from '../NavItems'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 import { useTranslations } from 'next-intl'
-import { scrolledFromTop, useLockBodyScroll } from '@/utilities/helpers'
+import { useLockBodyScroll } from '@/utilities/helpers'
 
 export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -27,13 +27,8 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
 
   return (
     <div>
-      <div
-        className={`${scrolledFromTop() && modalOpen ? 'z-[10000] fixed bottom-16 right-4 opacity-50' : 'hidden'}`}
-      >
-        MAP
-      </div>
       <button
-        className={`top-0 right-0 ease-in-out duration-1000 ${modalOpen ? 'w-16 h-16' : 'bg-background/70 md:hover:bg-card-foreground lg:bottom-0 lg:right-0 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`z-30 top-0 right-0 ease-in-out duration-1000 ${modalOpen ? 'w-16 h-16' : 'bg-background/70 md:hover:bg-card-foreground lg:bottom-0 lg:right-0 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -49,10 +44,9 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         </div>
       </button>
       {modalOpen && (
-        //
-        <div className="fixed inset-0 w-full" onClick={() => setModalOpen(false)}>
+        <div className="fixed inset-0 w-full z-20 bg-black/40" onClick={() => setModalOpen(false)}>
           <div
-            className="pt-2 bg-card z-[1000] h-screen gap-6 md:w-fit md:absolute md:right-0 md:bg-card/95"
+            className="pt-2 bg-card h-screen gap-6 md:w-fit md:absolute md:right-0 md:bg-card/95"
             onClick={(e) => e.stopPropagation()}
           >
             <Link
@@ -62,7 +56,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             >
               <SearchIcon size={26} className="opacity-85" />
             </Link>
-            {/* jak ponizej daje opacity-85 to powyzej lupka przestaje byc linkiem... */}
+            {/* jak ponizej daje opacity-85 to powyzej lupka przestaje byc linkiem...? */}
             <div className="flex place-items-center text-xl top-0 ">
               <div className="pl-4 py-2 flex items-center justify-center gap-1 ">
                 <LocaleSwitcher />

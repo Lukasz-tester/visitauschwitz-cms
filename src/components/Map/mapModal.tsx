@@ -106,7 +106,7 @@ const layers = [
 
 export default function MapModal() {
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative z-40">
       <MapContainer
         center={[50.027063, 19.20411]}
         zoom={16} // Set an appropriate zoom level

@@ -8,6 +8,7 @@ import { HeaderNav } from './Nav'
 import { usePathname } from '@/i18n/routing'
 import MobileNavCaller from './MobileNav/MobileNavCaller'
 import { LogoLink } from '../../components/ui/logoLink'
+import MapCaller from '@/components/Map/MapCaller'
 
 interface HeaderClientProps {
   header: Header
@@ -40,6 +41,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
         </div>
         <HeaderNav header={header} />
         <MobileNavCaller header={header} />
+        <MapCaller />
       </>
     </header>
   )

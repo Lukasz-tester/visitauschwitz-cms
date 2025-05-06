@@ -22,7 +22,6 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
-import MapCaller from '@/components/Map/MapCaller'
 import { CookiePopup } from '@/components/Cookies/cookiePopup'
 
 import { Analytics } from '@vercel/analytics/react'
@@ -47,11 +46,7 @@ export default async function RootLayout({ children, params }: Args) {
   const messages = await getMessages()
 
   return (
-    <html
-      // className={cn(GeistSans.variable, GeistMono.variable)}
-      lang={locale}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
@@ -69,7 +64,7 @@ export default async function RootLayout({ children, params }: Args) {
             <Header locale={locale} />
             {children}
             <Footer locale={locale} />
-            <MapCaller />
+
             <CookiePopup />
             <Analytics />
             <SpeedInsights />
