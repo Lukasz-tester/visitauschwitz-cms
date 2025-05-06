@@ -33,7 +33,7 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
         MAP
       </div>
       <button
-        className={`top-0 right-0 ease-in-out duration-1000 ${modalOpen ? 'w-16 h-16' : 'bg-background/70 hover:bg-card-foreground lg:bottom-0 lg:right-0 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
+        className={`top-0 right-0 ease-in-out duration-1000 ${modalOpen ? 'w-16 h-16' : 'bg-background/70 md:hover:bg-card-foreground lg:bottom-0 lg:right-0 rounded-bl-3xl w-16 h-16'} flex items-center justify-center fixed z-[10000] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div
@@ -56,13 +56,22 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
             onClick={(e) => e.stopPropagation()}
           >
             <Link
-              className="ease-in-out duration-1000 w-16 h-16 flex items-center justify-center fixed top-0"
+              className="w-12 h-16 flex items-center justify-center fixed top-0 right-16 "
               href="/search"
               onClick={() => setModalOpen(!modalOpen)}
             >
-              <SearchIcon className="ease-in-out duration-1000 w-fit text-primary" />
+              <SearchIcon size={26} className="opacity-85" />
             </Link>
-            <div className="flex flex-col my-20 py-2 pr-36">
+            {/* jak ponizej daje opacity-85 to powyzej lupka przestaje byc linkiem... */}
+            <div className="flex place-items-center text-xl top-0 ">
+              <div className="pl-4 py-2 flex items-center justify-center gap-1 ">
+                <LocaleSwitcher />
+              </div>
+              <div>
+                <ThemeSelector />
+              </div>
+            </div>
+            <div className="flex flex-col my-16 py-2 pr-36">
               <NavItems header={header} onClick={() => setModalOpen(false)} />
               <div className="pl-2 mt-2 w-full flex flex-col text-xl text-slate-600 dark:text-slate-400 font-semibold ">
                 {Object.entries(links).map(([href, label]) => (
@@ -76,14 +85,6 @@ export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) =>
                     {t(label as any)}
                   </Link>
                 ))}
-              </div>
-            </div>
-            <div className="flex text-xl text-slate-600 dark:text-slate-400 bottom-0 fixed font-semibold">
-              <div>
-                <ThemeSelector />
-              </div>
-              <div className="place-content-center">
-                <LocaleSwitcher />
               </div>
             </div>
           </div>

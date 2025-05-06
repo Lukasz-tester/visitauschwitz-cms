@@ -11,7 +11,7 @@ import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component.client'
 import { AccordionBlock } from './Accordion/Component.client'
 
-const blockComponents = {
+const blockComponents: Record<string, React.FC<{ locale: TypedLocale } & any>> = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
@@ -36,7 +36,7 @@ export const RenderBlocks: React.FC<{
           const { blockType } = block
 
           if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType] as any // as any was added to avoid locale error
+            const Block = blockComponents[blockType] // as any was added to avoid locale error
 
             if (Block) {
               return (

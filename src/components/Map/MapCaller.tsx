@@ -16,7 +16,7 @@ function MapCaller(props) {
   return (
     <div className={`ease-in-out duration-1000 visible ${scrolledFromTop() ? '' : 'hidden'}`}>
       <button
-        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card bottom-4 right-0 w-14 h-14 rounded-s-3xl' : 'pb-2 bg-background/70 bottom-0 right-0 rounded-tl-3xl w-16 h-16 hover:bg-card-foreground'} pr-1 flex items-center justify-center font-thin fixed z-[10001] dark:text-white/80 text-3xl`}
+        className={`ease-in-out duration-1000 ${modalOpen ? 'bg-card bottom-4 right-0 w-14 h-14 rounded-s-3xl' : 'pb-2 bg-background/70 bottom-0 right-0 rounded-tl-3xl w-16 h-16 md:hover:bg-card-foreground'} pr-1 flex items-center justify-center font-thin fixed z-[10001] dark:text-white/80 text-3xl`}
         onClick={() => setModalOpen(!modalOpen)}
       >
         <div

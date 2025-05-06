@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Globe } from 'lucide-react'
 
 function LocaleSwitcher() {
   // inspired by https://github.com/amannn/next-intl/blob/main/examples/example-app-router/src/components/LocaleSwitcherSelect.tsx
@@ -35,10 +36,11 @@ function LocaleSwitcher() {
   return (
     <Select onValueChange={onSelectChange} value={locale}>
       <SelectTrigger
-        className="bg-transparent border-none uppercase w-auto p-1 pr-3"
+        className="bg-transparent border-none uppercase w-auto opacity-85"
         title={localization.locales.find((l) => l.code === locale)?.label}
       >
-        {locale.toUpperCase()}
+        <Globe size={24} /> {/* Globe Icon */}
+        <span className="pl-2">{locale.toUpperCase()}</span> {/* Current Language Code */}
       </SelectTrigger>
       <SelectContent>
         {localization.locales

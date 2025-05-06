@@ -7,12 +7,7 @@ export const LogoLink = ({ className }: { className?: string }) => {
   const label = t('go-home')
 
   return (
-    <Link
-      href="/"
-      aria-label={label}
-      className={className}
-      // className="text-white/60 hover:text-amber-700 transition-colors ease-in-out duration-500"
-    >
+    <Link href="/" aria-label={label} className={className}>
       <Logo title={label} />
     </Link>
   )
