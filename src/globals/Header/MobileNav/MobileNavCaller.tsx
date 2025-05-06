@@ -12,9 +12,17 @@ import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { useTranslations } from 'next-intl'
 import { useLockBodyScroll } from '@/utilities/helpers'
 
-export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
-  const [modalOpen, setModalOpen] = useState(false)
+// export const MobileNavCaller: React.FC<{ header: HeaderType }> = ({ header }) => {
+//   const [modalOpen, setModalOpen] = useState(false)
 
+//   const t = useTranslations()
+//   useLockBodyScroll(modalOpen)
+
+export const MobileNavCaller: React.FC<{
+  header: HeaderType
+  modalOpen: boolean
+  setModalOpen: (open: boolean) => void
+}> = ({ header, modalOpen, setModalOpen }) => {
   const t = useTranslations()
   useLockBodyScroll(modalOpen)
 
