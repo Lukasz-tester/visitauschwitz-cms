@@ -10,7 +10,7 @@
     font-size: auto;
     font-weight: auto;
   }
-
+/* 
   :root {
     --background: 56 76% 98%;
     --foreground: 222.2 84% 4.9%;
@@ -19,9 +19,22 @@
     --card-foreground: 233 14% 85%;
 
     --border: 233 14% 85%;
+  } */
+
+  :root {
+    --background: 42 80% 95%; /* warm, soft beige instead of cold blue */
+    --foreground: 222.2 47% 11%; /* darker and a bit less saturated for contrast */
+  
+    /* --card: 42 60% 98%; /* warm off-white for cards 
+    --card-foreground: 210 20% 85%; */
+    /* --card: 240 10% 12%;         
+    --card-foreground: 210 20% 85%; */
+     --card: 240 8% 91%;
+    --card-foreground: 233 14% 85%;
+    --border: 222 30% 80%; /* subtle neutral for borders */
   }
 
-  [data-theme='dark'] {
+  /* [data-theme='dark'] {
     --background: 0 0% 4%;
     --foreground: 210 40% 98%;
 
@@ -29,8 +42,20 @@
     --card-foreground: 210 14% 14%;
 
     --border: 240 4% 16%;
+  } */
+  [data-theme='dark'] {
+    --background: 220 14% 10%; /* very dark neutral blue-gray */
+    --foreground: 210 20% 92%; /* light gray-blue, easier on eyes */
+  
+    --card-foreground: 200 11% 16%;
+    --card: 230 14% 13%;
+
+    --border: 220 9% 25%;
   }
+
 }
+
+
 
 @layer base {
   * {
@@ -48,4 +73,11 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+.marker-icon {
+  justify-content: center;
+  align-items: center;
+  font-size: 36px; /* Adjust size if needed */
+
 }

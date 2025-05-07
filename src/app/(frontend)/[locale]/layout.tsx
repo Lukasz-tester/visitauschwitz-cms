@@ -66,8 +66,8 @@ export default async function RootLayout({ children, params }: Args) {
             <Footer locale={locale} />
 
             <CookiePopup />
-            <Analytics />
-            <SpeedInsights />
+            {/* <Analytics />
+            <SpeedInsights /> */}
           </NextIntlClientProvider>
         </Providers>
       </body>

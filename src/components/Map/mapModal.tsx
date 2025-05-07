@@ -2,8 +2,8 @@
 
 import 'leaflet-arrowheads'
 import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-import 'leaflet-defaulticon-compatibility'
+// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
+// import 'leaflet-defaulticon-compatibility'
 import {
   Circle,
   CircleMarker,
@@ -24,8 +24,10 @@ import { LocateMeButton } from './LocateMeButton'
 import { parkingLots, carparkRadius, carparkColor } from './parkingLots' // Import parking lots
 import { RouteWithArrows } from './RouteWithArrows'
 import Link from 'next/link'
+import { markerIcon } from './customIcons'
+import MapLink from './MapLink'
 
-const entranceAuschwitz: LatLngExpression = [50.02949, 19.20553]
+const entranceAuschwitz: LatLngExpression = [50.0294894, 19.2053725]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
 
 const layers = [
@@ -73,15 +75,15 @@ const layers = [
     name: 'Museum entrances',
     markers: (
       <>
-        <Marker position={entranceAuschwitz}>
+        <Marker position={entranceAuschwitz} icon={markerIcon}>
           <Popup>
             <h4>Auschwitz I Main Camp</h4>
             Start your tour here and
             <br />
-            continue in <Link href="arrival#get-to-birkenau">Birkenau.</Link>
+            continue in <MapLink url="arrival#get-to-birkenau">Birkenau.</MapLink>
           </Popup>
         </Marker>
-        <Marker position={entranceBirkenau}>
+        <Marker position={entranceBirkenau} icon={markerIcon}>
           <Popup>
             <h4>Auschwitz II Birkenau</h4>You start the second part of your tour here.
           </Popup>
