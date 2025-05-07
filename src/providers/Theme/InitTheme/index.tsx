@@ -1,43 +1,19 @@
+//BELOW version which sets theme initially to dark:
 // import Script from 'next/script'
 // import React from 'react'
-
 // import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types'
 
 // export const InitTheme: React.FC = () => {
 //   return (
-//     // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
 //     <Script
 //       dangerouslySetInnerHTML={{
 //         __html: `
-//   (function () {
-//     function getImplicitPreference() {
-//       var mediaQuery = '(prefers-color-scheme: dark)'
-//       var mql = window.matchMedia(mediaQuery)
-//       var hasImplicitPreference = typeof mql.matches === 'boolean'
-
-//       if (hasImplicitPreference) {
-//         return mql.matches ? 'dark' : 'light'
-//       }
-
-//       return null
-//     }
-
-//     function themeIsValid(theme) {
-//       return theme === 'light' || theme === 'dark'
-//     }
-
-//     var preference = window.localStorage.getItem('${themeLocalStorageKey}')
-// var themeToSet = null
-
-// if (themeIsValid(preference)) {
-//   themeToSet = preference
-// } else {
-//   themeToSet = '${defaultTheme}' || getImplicitPreference() || 'light'
-// }
-
-//     document.documentElement.setAttribute('data-theme', themeToSet)
-//   })();
-//   `,
+//           (function () {
+//             var preference = window.localStorage.getItem('${themeLocalStorageKey}');
+//             var themeToSet = preference === 'light' ? 'light' : '${defaultTheme}';
+//             document.documentElement.setAttribute('data-theme', themeToSet);
+//           })();
+//         `,
 //       }}
 //       id="theme-script"
 //       strategy="beforeInteractive"
@@ -55,9 +31,27 @@ export const InitTheme: React.FC = () => {
       dangerouslySetInnerHTML={{
         __html: `
           (function () {
-            var preference = window.localStorage.getItem('${themeLocalStorageKey}');
-            var themeToSet = preference === 'light' ? 'light' : '${defaultTheme}';
+            function getImplicitPreference() {
+              var mediaQuery = '(prefers-color-scheme: dark)'
+              var mql = window.matchMedia(mediaQuery)
+              if (mql.matches) {
+                return 'dark'
+              } else {
+                return 'light'
+              }
+            }
+
+            var theme = window.localStorage.getItem('${themeLocalStorageKey}');
+            var themeToSet = null;
+
+            if (theme === 'light' || theme === 'dark') {
+              themeToSet = theme; // Use the theme stored in localStorage
+            } else {
+              themeToSet = getImplicitPreference(); // If no theme, fall back to system preference
+            }
+
             document.documentElement.setAttribute('data-theme', themeToSet);
+            window.localStorage.setItem('${themeLocalStorageKey}', themeToSet); // Save the theme to localStorage
           })();
         `,
       }}
