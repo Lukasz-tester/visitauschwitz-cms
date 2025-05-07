@@ -81,6 +81,8 @@ const layers = [
             Start your tour here and
             <br />
             continue in <MapLink url="arrival#get-to-birkenau">Birkenau.</MapLink>
+            <br />
+            <MapLink url="https://www.google.com/">or go google.</MapLink>
           </Popup>
         </Marker>
         <Marker position={entranceBirkenau} icon={markerIcon}>

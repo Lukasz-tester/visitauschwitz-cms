@@ -1,5 +1,4 @@
-'use client'
-import { useState } from 'react'
+// 'use client'
 import LocaleSwitcher from '../LocaleSwitcher'
 import Link from 'next/link'
 
