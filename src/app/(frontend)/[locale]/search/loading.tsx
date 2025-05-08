@@ -7,7 +7,7 @@ export default function Loading() {
       {/* Grid of placeholder cards */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="rounded-md bg-card aspect-[4/3] animate-pulse" />
+          <div key={i} className="rounded-md bg-card-foreground aspect-[4/3] animate-pulse" />
         ))}
       </div>
     </div>

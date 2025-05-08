@@ -1,5 +1,6 @@
 import { LatLngExpression } from 'leaflet'
 import Link from 'next/link'
+import MapLink from './MapLink'
 
 export const carparkMuzeum: LatLngExpression = [50.02997, 19.20587]
 export const carparkSzajny: LatLngExpression = [50.02717, 19.19931]
@@ -29,9 +30,7 @@ export const parkingLots = [
         <br />
         <h5>
           {/* TODO poprawić */}
-          <Link href="get-ready#on-site" target="_blank">
-            Learn what is on site.
-          </Link>
+          <MapLink url="get-ready#on-site">Learn what is on site.</MapLink>
         </h5>
       </>
     ),

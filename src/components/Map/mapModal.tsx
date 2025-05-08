@@ -2,8 +2,6 @@
 
 import 'leaflet-arrowheads'
 import 'leaflet/dist/leaflet.css'
-// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-// import 'leaflet-defaulticon-compatibility'
 import {
   Circle,
   CircleMarker,
@@ -18,21 +16,17 @@ import {
   useMap,
 } from 'react-leaflet'
 
-import { Control, LatLngExpression } from 'leaflet'
+import { LatLngExpression } from 'leaflet'
 import { buildings } from './buildingsPopups'
-import { routes } from './routes' // Import the updated routes with 'amber' color
+import { routes } from './routes'
 import { LocateMeButton } from './LocateMeButton'
 import { parkingLots, carparkRadius, carparkColor } from './parkingLots' // Import parking lots
 import { RouteWithArrows } from './RouteWithArrows'
-import Link from 'next/link'
-import { markerIcon } from './customIcons'
+import { placeholderIcon } from './customIcons'
 import MapLink from './MapLink'
-import { useEffect } from 'react'
-import L from 'leaflet'
 
 const entranceAuschwitz: LatLngExpression = [50.0294894, 19.2053725]
-const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
-
+const entranceBirkenau: LatLngExpression = [50.0343937, 19.1809423]
 const layers = [
   {
     name: 'Auschwitz I buildings',
@@ -74,7 +68,7 @@ const layers = [
     name: 'Museum entrances',
     markers: (
       <>
-        <Marker position={entranceAuschwitz} icon={markerIcon}>
+        <Marker position={entranceAuschwitz} icon={placeholderIcon}>
           <Popup>
             <h4>Auschwitz I Main Camp</h4>
             Start your tour here and
@@ -84,7 +78,7 @@ const layers = [
             <MapLink url="https://www.google.com/">or go google.</MapLink>
           </Popup>
         </Marker>
-        <Marker position={entranceBirkenau} icon={markerIcon}>
+        <Marker position={entranceBirkenau} icon={placeholderIcon}>
           <Popup>
             <h4>Auschwitz II Birkenau</h4>You start the second part of your tour here.
           </Popup>

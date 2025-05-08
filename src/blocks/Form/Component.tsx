@@ -162,7 +162,7 @@ export const FormBlock: React.FC<
                 })}
             </div>
 
-            <Button form={formID} type="submit" variant="default">
+            <Button form={formID} type="submit" variant="default" aria-label="Submit Contact Form">
               {submitButtonLabel}
             </Button>
           </form>

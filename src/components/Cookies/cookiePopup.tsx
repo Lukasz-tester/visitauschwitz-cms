@@ -40,7 +40,7 @@ export const CookiePopup = () => {
 
   return (
     <div className="fixed bottom-0 w-full z-[100001] flex place-content-center text-primary text-xl">
-      <div className="flex flex-col sm:flex-row bg-background w-fit h-fit p-5 gap-5 items-start sm:items-center justify-between">
+      <div className="flex flex-col sm:flex-row bg-background w-fit h-fit p-6 pb-8 md:rounded-t-3xl gap-5 items-start sm:items-center justify-between">
         <span>{t('cookie-message')}</span>
         <Button
           className="w-fit"
