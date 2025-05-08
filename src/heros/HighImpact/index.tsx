@@ -1,14 +1,13 @@
 import React from 'react'
 
 import type { Page } from '@/payload-types'
-
-import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
 import { ImageMedia } from '@/components/Media/ImageMedia'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   return (
-    // <div className="relative -mt-[10.4rem] flex items-end text-white min-h-screen">
     <div className="relative -mt-[10.4rem] flex items-end text-white min-h-screen pb-[max(1.5rem,env(safe-area-inset-bottom))]">
       <div className="container mb-8 z-10 relative">
         <div className="max-w-[32rem]">
@@ -26,7 +25,9 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
-                    <CMSLink {...link} />
+                    <Button variant={link.appearance}>
+                      {link.url && <Link href={link.url}>{link.label}</Link>}
+                    </Button>
                   </li>
                 )
               })}

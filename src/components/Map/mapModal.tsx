@@ -15,9 +15,10 @@ import {
   Polyline,
   Popup,
   TileLayer,
+  useMap,
 } from 'react-leaflet'
 
-import { LatLngExpression } from 'leaflet'
+import { Control, LatLngExpression } from 'leaflet'
 import { buildings } from './buildingsPopups'
 import { routes } from './routes' // Import the updated routes with 'amber' color
 import { LocateMeButton } from './LocateMeButton'
@@ -26,6 +27,8 @@ import { RouteWithArrows } from './RouteWithArrows'
 import Link from 'next/link'
 import { markerIcon } from './customIcons'
 import MapLink from './MapLink'
+import { useEffect } from 'react'
+import L from 'leaflet'
 
 const entranceAuschwitz: LatLngExpression = [50.0294894, 19.2053725]
 const entranceBirkenau: LatLngExpression = [50.03439, 19.18107]
@@ -64,11 +67,7 @@ const layers = [
   {
     name: 'Auschwitz routes',
     markers: Object.keys(routes).map((slug) => (
-      <RouteWithArrows
-        key={slug}
-        positions={routes[slug].path}
-        //color={routes[slug].color} // Pass the color property from the routes object
-      />
+      <RouteWithArrows key={slug} positions={routes[slug].path} />
     )),
   },
   {
@@ -108,6 +107,12 @@ const layers = [
   },
 ]
 
+const CustomAttribution = () => {
+  const map = useMap()
+  map.attributionControl.setPrefix(false)
+  return null
+}
+
 export default function MapModal() {
   return (
     <div className="w-full h-full relative z-40">
@@ -118,8 +123,8 @@ export default function MapModal() {
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; <a target='_blank' rel='noopener noreferrer' href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
         />
         <LayersControl position="topright" collapsed={true}>
           {layers.map((layer) => (
@@ -133,10 +138,11 @@ export default function MapModal() {
               } // Default visibility for these layers
             >
               <LayerGroup>{layer.markers}</LayerGroup>
+              <CustomAttribution />
             </LayersControl.Overlay>
           ))}
         </LayersControl>
-        <LocateMeButton /> {/* Add LocateMeButton here */}
+        <LocateMeButton />
       </MapContainer>
     </div>
   )

@@ -106,15 +106,13 @@ const AccordionItem: React.FC<ItemProps> = ({
       )}
     >
       <button
-        // aria-expanded={isOpen}
-        // aria-controls={`accordion-content-${id}`}
         className={cn('w-full p-3 text-start text-xl opacity-85 flex place-content-between', {
           'bg-card-foreground': isOpen,
         })}
         onClick={onClick}
         id={`accordion-header-${id}`}
       >
-        <h3 className="pr-2 text-left">{question}</h3>
+        <h3 className="pr-2 text-left font-semibold">{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
 
@@ -123,7 +121,6 @@ const AccordionItem: React.FC<ItemProps> = ({
         ref={contentRef}
         className="px-5 overflow-hidden transition-[max-height] duration-500 ease-in-out"
         role="region"
-        // aria-labelledby={`accordion-header-${id}`}
         style={{ maxHeight: isOpen ? measuredHeight : 0 }}
       >
         <div className="py-5">
