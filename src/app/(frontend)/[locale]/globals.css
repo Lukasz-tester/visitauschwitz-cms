@@ -29,28 +29,19 @@
     --card-foreground: 210 20% 85%; */
     /* --card: 240 10% 12%;         
     --card-foreground: 210 20% 85%; */
-    --card: 240 8% 91%;
-    --card-foreground: 233 14% 85%;
+    --card: 4 9% 95%;
+    --card-foreground: 0 3% 88%;
     --border: 222 30% 80%; /* subtle neutral for borders */
   }
 
-  /* [data-theme='dark'] {
-    --background: 0 0% 4%;
+  [data-theme='dark'] {
+    --background: 0 20% 6%;
     --foreground: 210 40% 98%;
 
-    --card: 200 6% 10%;
-    --card-foreground: 210 14% 14%;
+    --card: 0 7% 9%;
+    --card-foreground: 30 1% 13%;
 
     --border: 240 4% 16%;
-  } */
-  [data-theme='dark'] {
-    --background: 220 14% 10%; /* very dark neutral blue-gray */
-    --foreground: 210 20% 92%; /* light gray-blue, easier on eyes */
-
-    --card-foreground: 200 11% 16%;
-    --card: 230 14% 13%;
-
-    --border: 220 9% 25%;
   }
 }
 

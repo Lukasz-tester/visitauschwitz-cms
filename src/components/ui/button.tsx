@@ -18,11 +18,11 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-slate-800/80 text-white/90 border border-white/80 hover:bg-amber-700/80 dark:hover:text-white/90',
+          'bg-slate-800/90 text-white/90 border border-white/80 hover:bg-amber-700/80 dark:hover:text-white/90',
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline decoration-amber-700',
 
         outline:
-          'bg-background/80 dark:bg-white/80 text-slate-800 dark:text-black/90 hover:text-white/90 border border-white/80 hover:bg-amber-700/80',
+          'bg-background/90 dark:bg-white/90 text-slate-800 dark:text-black/90 hover:text-white/90 border border-white/80 hover:bg-amber-700/70',
       },
     },
   },

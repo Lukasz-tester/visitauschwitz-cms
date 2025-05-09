@@ -43,20 +43,7 @@ export default {
       },
     },
     extend: {
-      // animation: {
-      //   'accordion-down': 'accordion-down 0.2s ease-out',
-      //   'accordion-up': 'accordion-up 0.2s ease-out',
-      // },
-      // borderRadius: {
-      //   lg: 'var(--radius)',
-      //   md: 'calc(var(--radius) - 2px)',
-      //   sm: 'calc(var(--radius) - 4px)',
-      // },
       colors: {
-        // accent: {
-        //   DEFAULT: 'hsl(var(--accent))',
-        //   foreground: 'hsl(var(--accent-foreground))',
-        // },
         background: 'hsl(var(--background))',
         border: 'hsl(var(--border))',
         card: {
@@ -85,7 +72,7 @@ export default {
             '--tw-prose-headings': 'var(--text)',
             flexShrink: '0',
             h1: {
-              fontSize: '2.5rem',
+              fontSize: '2.7rem',
               marginBottom: '0.5rem',
             },
             h2: {
