@@ -1,7 +1,86 @@
+// import { Metadata } from 'next'
+
+// // export const revalidate = 600
+
+// import configPromise from '@payload-config'
+// import { getPayload } from 'payload'
+// import { draftMode } from 'next/headers'
+// import React, { cache } from 'react'
+// import { generateMeta } from '@/utilities/generateMeta'
+// import { TypedLocale } from 'payload'
+// import { PayloadRedirects } from '@/components/PayloadRedirects'
+// import type { Page as PageType } from '@/payload-types'
+// import { RenderBlocks } from '@/blocks/RenderBlocks'
+// import { RenderHero } from '@/heros/RenderHero'
+// import PageClient from './[slug]/page.client'
+
+// type Args = {
+//   params: Promise<{
+//     slug?: string
+//     locale: TypedLocale
+//   }>
+// }
+
+// export default async function Page({ params: paramsPromise }: Args) {
+//   const { slug = 'home', locale = 'en' } = await paramsPromise
+//   const url = '/' + slug
+
+//   let page: PageType | null
+
+//   page = await queryPage({
+//     slug,
+//     locale,
+//   })
+
+//   if (!page) {
+//     return <PayloadRedirects url={url} />
+//   }
+
+//   const { hero, layout } = page
+
+//   return (
+//     <article className="pt-16 pb-24">
+//       <PageClient />
+//       <PayloadRedirects disableNotFound url={url} />
+
+//       <RenderHero {...hero} />
+//       <RenderBlocks blocks={layout} locale={locale} />
+//     </article>
+//   )
+// }
+
+// export async function generateMetadata({ params }: Args): Promise<Metadata> {
+//   const { locale = 'en', slug = 'home' } = await params
+//   const page = await queryPage({
+//     locale,
+//     slug,
+//   })
+
+//   return generateMeta({ doc: page, locale })
+// }
+
+// const queryPage = cache(async ({ locale, slug }: { locale: TypedLocale; slug: string }) => {
+//   const { isEnabled: draft } = await draftMode()
+
+//   const payload = await getPayload({ config: configPromise })
+
+//   const result = await payload.find({
+//     collection: 'pages',
+//     draft,
+//     limit: 1,
+//     overrideAccess: draft,
+//     locale: locale,
+//     where: {
+//       slug: {
+//         equals: slug,
+//       },
+//     },
+//   })
+
+//   return result.docs?.[0] || null
+// })
+
 import { Metadata } from 'next'
-
-// export const revalidate = 600
-
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
@@ -13,6 +92,7 @@ import type { Page as PageType } from '@/payload-types'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import PageClient from './[slug]/page.client'
+import { headers } from 'next/headers'
 
 type Args = {
   params: Promise<{
@@ -24,6 +104,10 @@ type Args = {
 export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home', locale = 'en' } = await paramsPromise
   const url = '/' + slug
+
+  // Get the full URL in a SSR-safe way
+  const host = (await headers()).get('host')
+  const fullUrl = `${process.env.PAYLOAD_PUBLIC_SERVER_URL ?? `https://${host}`}${slug === 'home' ? '' : `/${slug}`}`
 
   let page: PageType | null
 
@@ -44,7 +128,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
 
       <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} locale={locale} />
+      <RenderBlocks blocks={layout} locale={locale} url={fullUrl} />
     </article>
   )
 }

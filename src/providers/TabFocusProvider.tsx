@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const REFRESH_THRESHOLD = 10 * 60 * 1000 // 10 minutes
+const REFRESH_THRESHOLD = 8 * 60 * 1000 // 10 minutes
 
 export const TabFocusProvider = ({ children }: { children: React.ReactNode }) => {
   const [lastFocus, setLastFocus] = useState(Date.now())

@@ -53,7 +53,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={finalHref} {...newTabProps} onClick={props.onClick}>
+      <Link
+        rel="noopener noreferrer"
+        className={cn(className)}
+        href={finalHref}
+        {...newTabProps}
+        onClick={props.onClick}
+      >
         {label && label}
         {children && children}
       </Link>

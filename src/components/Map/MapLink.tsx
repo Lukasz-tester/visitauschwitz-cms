@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMapModal } from '@/providers/MapModalContext'
+import Link from 'next/link'
 
 interface MapLinkProps {
   url: string
@@ -24,8 +25,8 @@ const MapLink: React.FC<MapLinkProps> = ({ url, children }) => {
     return null
   }
 
-  // Check if the URL is external by looking for 'http' or 'https'
-  const isExternal = url.startsWith('http://') || url.startsWith('https://')
+  // Check if the URL is external by looking for 'http'
+  const isExternal = url.startsWith('http')
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -36,7 +37,6 @@ const MapLink: React.FC<MapLinkProps> = ({ url, children }) => {
     } else {
       // For internal links, use Next.js router and close the map modal
       router.push(url)
-      console.log('[MapLink] clicked — setting currentUrl to null')
       setCurrentUrl(null) // Close the map modal by setting the current URL to null
     }
   }
@@ -44,17 +44,22 @@ const MapLink: React.FC<MapLinkProps> = ({ url, children }) => {
   // If the link is external, we don't need to prevent the default behavior
   if (isExternal) {
     return (
-      <a href={url} target="_blank" rel="noopener noreferrer" className="text-green-500 underline">
+      <Link
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-green-500 underline"
+      >
         {children}
-      </a>
+      </Link>
     )
   }
 
   // If the link is internal, handle it using Next.js router
   return (
-    <a href={url} onClick={handleClick} className="text-green-500 underline">
+    <Link href={url} onClick={handleClick} className="text-green-500 underline">
       {children}
-    </a>
+    </Link>
   )
 }
 

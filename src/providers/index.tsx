@@ -13,15 +13,3 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     </ThemeProvider>
   )
 }
-
-// import { RouteTransitionWrapper } from '../components/RouteTransitionWrapper' // Adjust the path as needed
-
-// export const Providers: React.FC<{
-//   children: React.ReactNode
-// }> = ({ children }) => {
-//   return (
-//     <ThemeProvider>
-//       <HeaderThemeProvider>{children}</HeaderThemeProvider>
-//     </ThemeProvider>
-//   )
-// }

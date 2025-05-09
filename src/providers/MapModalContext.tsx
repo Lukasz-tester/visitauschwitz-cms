@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+import { createContext, useContext, useState, ReactNode } from 'react'
 
 type MapModalContextType = {
   currentUrl: string | null
@@ -15,10 +15,6 @@ type MapModalProviderProps = {
 
 export const MapModalProvider = ({ children }: MapModalProviderProps) => {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null)
-
-  useEffect(() => {
-    console.log('[MapModalProvider] Initial currentUrl:', currentUrl)
-  }, [currentUrl])
 
   return (
     <MapModalContext.Provider value={{ currentUrl, setCurrentUrl }}>

@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
+import { draftMode, headers } from 'next/headers'
 import React, { cache } from 'react'
 
 import type { Page as PageType } from '@/payload-types'
@@ -50,6 +50,10 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home', locale = 'en' } = await paramsPromise
   const url = '/' + slug
 
+  // Get the full URL in a SSR-safe way
+  const host = (await headers()).get('host')
+  const fullUrl = `${process.env.PAYLOAD_PUBLIC_SERVER_URL ?? `https://${host}`}${slug === 'home' ? '' : `/${slug}`}`
+
   let page: PageType | null
 
   page = await queryPage({
@@ -68,7 +72,7 @@ export default async function Page({ params: paramsPromise }: Args) {
         {/* This second PayloadRedirects will only be triggered if the page exists */}
         <PayloadRedirects disableNotFound url={url} />
         <RenderHero {...hero} />
-        <RenderBlocks blocks={layout} locale={locale} />
+        <RenderBlocks blocks={layout} locale={locale} url={fullUrl} />
       </article>
     )
   }

@@ -24,8 +24,9 @@ const blockComponents: Record<string, React.FC<{ locale: TypedLocale } & any>> =
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
   locale: TypedLocale
+  url: string
 }> = (props) => {
-  const { blocks, locale } = props
+  const { blocks, locale, url } = props
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
@@ -41,7 +42,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div key={index}>
-                  <Block {...block} locale={locale} />
+                  <Block {...block} locale={locale} fullUrl={url} />
                 </div>
               )
             }

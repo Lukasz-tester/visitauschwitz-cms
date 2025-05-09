@@ -72,7 +72,7 @@ export default {
             '--tw-prose-headings': 'var(--text)',
             flexShrink: '0',
             h1: {
-              fontSize: '2.7rem',
+              fontSize: '2.6rem',
               marginBottom: '0.5rem',
             },
             h2: {
