@@ -10,28 +10,13 @@
     font-size: auto;
     font-weight: auto;
   }
-  /* 
-  :root {
-    --background: 56 76% 98%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 240 8% 91%;
-    --card-foreground: 233 14% 85%;
-
-    --border: 233 14% 85%;
-  } */
 
   :root {
-    --background: 42 80% 95%; /* warm, soft beige instead of cold blue */
-    --foreground: 222.2 47% 11%; /* darker and a bit less saturated for contrast */
-
-    /* --card: 42 60% 98%; /* warm off-white for cards 
-    --card-foreground: 210 20% 85%; */
-    /* --card: 240 10% 12%;         
-    --card-foreground: 210 20% 85%; */
+    --background: 30 80% 98%;
+    --foreground: 222.2 47% 11%;
     --card: 4 9% 95%;
     --card-foreground: 0 3% 88%;
-    --border: 222 30% 80%; /* subtle neutral for borders */
+    --border: 222 30% 80%;
   }
 
   [data-theme='dark'] {
