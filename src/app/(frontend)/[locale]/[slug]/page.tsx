@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 
-// export const revalidate = 600
-
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode, headers } from 'next/headers'
+import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 
 import type { Page as PageType } from '@/payload-types'
@@ -50,9 +48,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home', locale = 'en' } = await paramsPromise
   const url = '/' + slug
 
-  // Get the full URL in a SSR-safe way
-  const host = (await headers()).get('host')
-  const fullUrl = `${process.env.PAYLOAD_PUBLIC_SERVER_URL ?? `https://${host}`}${slug === 'home' ? '' : `/${slug}`}`
+  const fullUrl = `${process.env.PAYLOAD_PUBLIC_SERVER_URL ?? 'https://example.com'}/${slug}`
 
   let page: PageType | null
 
@@ -63,13 +59,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   if (!page) {
     return <PayloadRedirects url={url} />
   } else {
-    // If page is found, render the content and trigger the second redirect if needed
     const { hero, layout } = page
 
     return (
       <article className="pt-16 pb-24">
         <PageClient />
-        {/* This second PayloadRedirects will only be triggered if the page exists */}
         <PayloadRedirects disableNotFound url={url} />
         <RenderHero {...hero} />
         <RenderBlocks blocks={layout} locale={locale} url={fullUrl} />

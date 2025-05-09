@@ -138,17 +138,39 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
     oneSixth: '2',
   }
 
-  // 📝 Generate Schema for ContentBlock
-  const mainEntity = columns?.map((col, index) => {
-    const uniqueId = `${col.id}` // : `accordion-item-${index}`
-    const extractedText = extractTextFromRichText(col.richText)
-    const cleanText = extractedText.trim() !== '' ? extractedText : 'No content available.'
+  const mainEntity: {
+    '@type': string
+    name: string
+    url: string
+    description: string
+  }[] = []
 
-    return {
-      '@type': 'WebPageElement',
-      name: `Content Item ${index + 1}`,
-      url: `${fullUrl}#${uniqueId}`,
-      description: cleanText,
+  // 📝 Add Heading to Schema if it exists and is not empty
+  if (heading && heading.root.direction !== null) {
+    const headingText = extractTextFromRichText(heading)
+    if (headingText.trim() !== '') {
+      mainEntity.push({
+        '@type': 'WebPageElement',
+        name: headingText,
+        url: `${fullUrl}#${blockName}`,
+        description: headingText,
+      })
+    }
+  }
+
+  // 📝 Add Columns to Schema if they are not empty and not "oneSixth"
+  columns?.forEach((col, index) => {
+    if (col.size !== 'oneSixth' && col?.richText?.root.direction !== null) {
+      const uniqueId = `${col.id}`
+      const extractedText = extractTextFromRichText(col.richText)
+      const cleanText = extractedText.trim() !== '' ? extractedText : 'No content available.'
+
+      mainEntity.push({
+        '@type': 'WebPageElement',
+        name: `Content Item ${index + 1}`,
+        url: `${fullUrl}#${uniqueId}`,
+        description: cleanText,
+      })
     }
   })
 
@@ -160,7 +182,7 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
     mainEntity: mainEntity,
   }
 
-  // console.log('Generated contentSchema:', JSON.stringify(pageSchema, null, 2))
+  console.log('Generated contentSchema:', JSON.stringify(pageSchema, null, 2))
 
   return (
     <section
