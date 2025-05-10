@@ -26,11 +26,12 @@ export default function middleware(request: NextRequest) {
 
   const response = intlMiddleware(request)
 
-  // const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+  const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
 
-  // if (isLocalizedHome) {
-  //   response.headers.set('Cache-Control', 'no-store')
-  // }
+  if (isLocalizedHome) {
+    // response.headers.set('Cache-Control', 'no-store')
+    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+  }
 
   return response
 }
