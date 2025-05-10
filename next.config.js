@@ -74,7 +74,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
-  // turbopack: {},
 }
 
 export default withNextIntl(withPayload(nextConfig))

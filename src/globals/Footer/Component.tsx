@@ -18,7 +18,7 @@ export async function Footer({ locale }: { locale: TypedLocale }) {
   return (
     <footer className="border-t border-border bg-black dark:bg-card">
       <div className="container gap-8 flex flex-col">
-        <nav className="pt-5 pl-2 flex gap-6 text-xl">
+        <nav className="pt-5 pl-2 flex flex-wrap gap-6 text-xl">
           {navItems.map(({ link }, i) => {
             return (
               <CMSLink

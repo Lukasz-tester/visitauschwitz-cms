@@ -1,24 +1,25 @@
 import createMiddleware from 'next-intl/middleware'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { routing } from './i18n/routing'
 
 const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
 
 const intlMiddleware = createMiddleware({
   ...routing,
-  localeDetection: true,
 })
 
 export default function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, searchParams } = request.nextUrl
 
-  // Match localized homepage like /en, /pl, etc.
+  if (searchParams.has('_rsc')) {
+    return NextResponse.redirect(pathname)
+  }
+
   const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
 
   const response = intlMiddleware(request)
 
   if (isLocalizedHome) {
-    // Apply no-store only for localized homepages to fix RSC bug
     response.headers.set('Cache-Control', 'no-store')
   }
 

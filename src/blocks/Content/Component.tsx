@@ -182,7 +182,7 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
     mainEntity: mainEntity,
   }
 
-  console.log('Generated contentSchema:', JSON.stringify(pageSchema, null, 2))
+  // console.log('Generated contentSchema:', JSON.stringify(pageSchema, null, 2))
 
   return (
     <section
