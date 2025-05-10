@@ -9,28 +9,34 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
 
-  // Check for the '_rsc' query parameter and rewrite the URL if present
   if (searchParams.has('_rsc')) {
     searchParams.delete('_rsc')
     const newUrl = `${pathname}?${searchParams.toString()}`
     return NextResponse.rewrite(newUrl)
   }
 
-  // Check for the 'NEXT_LOCALE' cookie and redirect if necessary
-  const localeCookie = request.cookies.get('NEXT_LOCALE')
-  if (localeCookie && !pathname.startsWith(`/${localeCookie}`)) {
-    const url = request.nextUrl.clone()
-    url.pathname = `/${localeCookie}${pathname}`
-    return NextResponse.redirect(url)
-  }
-
-  // Apply internationalization middleware
   const response = intlMiddleware(request)
+
+  // BELOW comment is not letting home be cached which is good for bfcache raw json response, but not good for performance
+  // if neede add there as well search page which misbehaves when pasting full url .../search or changing locale while in search page (code for that is in very bottom)
+  // instead of the _rsc deleting strategy above which fixes raw json rsc after opening tab after some longer time consider uncommenting TabFocusProvider in providers which worked in a similar way
+  // const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+  // const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+
+  // if (isLocalizedHome) {
+  //   response.headers.set('Cache-Control', 'no-store')
+  // }
+
   return response
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|admin|next|.*\\..*).*)'],
+  matcher: [
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
+  ],
 }
 
 // BELOW is some cookie for langs however langs work well enough with autodetection now so why bother?
@@ -44,8 +50,7 @@ export const config = {
 //   return NextResponse.redirect(url)
 // }
 
-// BELOW is the logic for not caching home to avoid bfcache issue and RSC raw json response
-
+// BELOW is the logic for not caching home with extention to search page
 // const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
 // const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
 
