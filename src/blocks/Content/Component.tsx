@@ -240,9 +240,9 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = ({
                     styleLink={true}
                   />
                 )}
-
-                {enableMedia && <ImageMedia imgClassName="rounded" resource={media} />}
-
+                {enableMedia && (
+                  <ImageMedia loading="lazy" imgClassName="rounded" resource={media} />
+                )}
                 {richTextEnd && (
                   <RichText
                     className={cn({

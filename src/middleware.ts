@@ -2,8 +2,6 @@ import createMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
 import { routing } from './i18n/routing'
 
-const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
-
 const intlMiddleware = createMiddleware({
   ...routing,
 })
@@ -11,61 +9,61 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
 
-  // BEFORE - ended in fast Timeout on vercel
-  // if (searchParams.has('_rsc')) {
-  //   return NextResponse.redirect(pathname)
-  // }
-  // router.replace replaces the current entry in the browser's history stack, meaning users won't be able to use the browser's back button to navigate to the previous page. This can disrupt the user's navigation flow, especially when switching locales, as it alters the expected history behavior.
-  // router.push, on the other hand, adds a new entry to the history stack, allowing users to navigate back to the previous page using the back button. This approach aligns better with user expectations when changing locales, as it maintains the natural navigation flow.
-
+  // Check for the '_rsc' query parameter and rewrite the URL if present
   if (searchParams.has('_rsc')) {
     searchParams.delete('_rsc')
     const newUrl = `${pathname}?${searchParams.toString()}`
     return NextResponse.rewrite(newUrl)
   }
 
-  const response = intlMiddleware(request)
-
-  const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
-
-  if (isLocalizedHome) {
-    // response.headers.set('Cache-Control', 'no-store')
-    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+  // Check for the 'NEXT_LOCALE' cookie and redirect if necessary
+  const localeCookie = request.cookies.get('NEXT_LOCALE')
+  if (localeCookie && !pathname.startsWith(`/${localeCookie}`)) {
+    const url = request.nextUrl.clone()
+    url.pathname = `/${localeCookie}${pathname}`
+    return NextResponse.redirect(url)
   }
 
+  // Apply internationalization middleware
+  const response = intlMiddleware(request)
   return response
 }
 
 export const config = {
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
-  ],
+  matcher: ['/((?!api|_next|_vercel|admin|next|.*\\..*).*)'],
 }
 
-// BEFORE:
-// https://www.reddit.com/r/nextjs/comments/184zfz1/rsc_raw_json_response_on_page_load/
-// import createMiddleware from 'next-intl/middleware'
-// import { routing } from './i18n/routing'
+// BELOW is some cookie for langs however langs work well enough with autodetection now so why bother?
+// // Check for NEXT_LOCALE cookie
+// const localeCookie = request.cookies.get('NEXT_LOCALE')
 
-// export default createMiddleware({
-//   ...routing,
-//   localeDetection: true,
-// })
-
-// // see https://next-intl-docs.vercel.app/docs/routing/middleware
-// export const config = {
-//   matcher: [
-//     // Match all pathnames except for
-//     // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
-//     // - … the ones containing a dot (e.g. `favicon.ico`)
-//     '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
-//   ],
+// // If cookie exists and pathname doesn't start with a locale, redirect
+// if (localeCookie && !pathname.startsWith(`/${localeCookie}`)) {
+//   const url = request.nextUrl.clone()
+//   url.pathname = `/${localeCookie}${pathname}`
+//   return NextResponse.redirect(url)
 // }
 
-// Less aggressive cache policy than `no-store`
-// response.headers.set('Cache-Control', 'no-cache, must-revalidate')
+// BELOW is the logic for not caching home to avoid bfcache issue and RSC raw json response
 
-// ok, now i would like to fix my hero as when opening pages i see only half of the buttons in the screen bottom - they are behind the mobile android navigation bar, the hero component at the moment is: ""
+// const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+// const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+
+// if (isLocalizedHome) {
+//   response.headers.set('Cache-Control', 'no-store')
+// solution below does not fix raw json rsc response, the one aboce does but removes cache totally
+// response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+// }
+
+// BELOW is an extention to include search as not cached which is explained below too
+
+// const response = createMiddleware({
+//   ...routing,
+// })(req)
+// const isHomePage = pathname === '/' //bfcache event still happens for home, no matter what magic I try
+// const isHome = pathname === '/home'
+// const isSearchPage = pathname.endsWith('/search') //adding the _rsc magic search page throws "Serverless Function has timed out." when you change lang on it, or paste the whole url; I tried to add /search to matcher but it timed out all the time
+// const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+// if (isHomePage || isHome || isSearchPage || isLocalizedHome) {
+//   response.headers.set('Cache-Control', 'no-store') // not ideal as it removes caching benefits }
+// return response }

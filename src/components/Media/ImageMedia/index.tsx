@@ -23,6 +23,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     resource,
     size: sizeFromProps,
     src: srcFromProps,
+    loading,
   } = props
 
   const [isLoading, setIsLoading] = React.useState(true)
@@ -87,6 +88,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       sizes={sizes}
       src={src}
       width={!fill ? width : undefined}
+      loading={loading}
     />
   )
 }
