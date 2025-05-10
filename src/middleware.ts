@@ -11,17 +11,26 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
 
-  if (searchParams.has('_rsc')) {
-    return NextResponse.redirect(pathname)
-  }
+  // BEFORE - ended in fast Timeout on vercel
+  // if (searchParams.has('_rsc')) {
+  //   return NextResponse.redirect(pathname)
+  // }
+  // router.replace replaces the current entry in the browser's history stack, meaning users won't be able to use the browser's back button to navigate to the previous page. This can disrupt the user's navigation flow, especially when switching locales, as it alters the expected history behavior.
+  // router.push, on the other hand, adds a new entry to the history stack, allowing users to navigate back to the previous page using the back button. This approach aligns better with user expectations when changing locales, as it maintains the natural navigation flow.
 
-  const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+  if (searchParams.has('_rsc')) {
+    searchParams.delete('_rsc')
+    const newUrl = `${pathname}?${searchParams.toString()}`
+    return NextResponse.rewrite(newUrl)
+  }
 
   const response = intlMiddleware(request)
 
-  if (isLocalizedHome) {
-    response.headers.set('Cache-Control', 'no-store')
-  }
+  // const isLocalizedHome = locales.some((locale) => pathname === `/${locale}`)
+
+  // if (isLocalizedHome) {
+  //   response.headers.set('Cache-Control', 'no-store')
+  // }
 
   return response
 }

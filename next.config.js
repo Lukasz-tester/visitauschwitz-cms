@@ -74,6 +74,19 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Vary',
+            value: 'RSC',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 export default withNextIntl(withPayload(nextConfig))
