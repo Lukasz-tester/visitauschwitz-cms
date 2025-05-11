@@ -835,8 +835,9 @@ export interface Search {
   categories?:
     | {
         relationTo?: string | null;
-        id?: string | null;
+        categoryID?: string | null;
         title?: string | null;
+        id?: string | null;
       }[]
     | null;
   updatedAt: string;
@@ -1371,8 +1372,9 @@ export interface SearchSelect<T extends boolean = true> {
     | T
     | {
         relationTo?: T;
-        id?: T;
+        categoryID?: T;
         title?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

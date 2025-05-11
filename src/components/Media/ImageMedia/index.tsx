@@ -1,4 +1,3 @@
-// BEFORE
 'use client'
 
 import type { StaticImageData } from 'next/image'
@@ -8,10 +7,6 @@ import NextImage from 'next/image'
 import React from 'react'
 
 import type { Props as MediaProps } from '../types'
-
-import cssVariables from '@/cssVariables'
-
-const { breakpoints } = cssVariables
 
 export const ImageMedia: React.FC<MediaProps> = (props) => {
   const {
@@ -24,7 +19,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     resource,
     size: sizeFromProps,
     src: srcFromProps,
-    loading,
   } = props
 
   const [isLoading, setIsLoading] = React.useState(true)
@@ -61,11 +55,9 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     (max-width: 1440px) 90vw,
     1440px
   `.trim()
-
+  console.log('sizes', src, height, width)
   return (
-    <div>
-      {/* TODO linijka ponizej nowa! */}
-      {isLoading && <div className="z-40 bg-card-foreground animate-pulse" />}
+    <div className="'animate-none'">
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
@@ -83,7 +75,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         sizes={sizes}
         src={src}
         width={!fill ? width : undefined}
-        loading={loading}
+        loading={priority ? 'eager' : 'lazy'}
       />
     </div>
   )

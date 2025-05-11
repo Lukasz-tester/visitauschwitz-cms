@@ -74,28 +74,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Vary',
-            value: 'RSC',
-          },
-        ],
-      },
-      {
-        source: '/api/media/file/',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ]
-  },
 }
 
 export default withNextIntl(withPayload(nextConfig))

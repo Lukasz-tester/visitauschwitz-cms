@@ -247,9 +247,26 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                       styleLink={true}
                     />
                   )}
+                  {/* // this is only static image placeholder for loading:
                   {enableMedia && (
-                    <ImageMedia loading="lazy" imgClassName="rounded" resource={media} />
-                  )}
+                    <div
+                      className={`relative w-full h-auto bg-gradient-to-b rounded ${changeBackground ? 'from-card' : 'from-card-foreground'}`}
+                    >
+                      <ImageMedia imgClassName="rounded" resource={media} />
+                    </div>
+                  )} */}
+                  <div className={`relative w-full h-auto rounded overflow-hidden`}>
+                    {/* Animated background layer (only visible when needed) */}
+
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-b animate-pulse z-0 ${changeBackground ? 'from-card' : 'from-card-foreground'}`}
+                    />
+
+                    {/* Actual image (placed above the animated layer) */}
+                    <div className="relative z-10">
+                      <ImageMedia imgClassName="rounded" resource={media} />
+                    </div>
+                  </div>
                   {richTextEnd && (
                     <RichText
                       className={cn({
