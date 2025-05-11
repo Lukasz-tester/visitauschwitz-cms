@@ -4,8 +4,6 @@ import type { Metadata } from 'next'
 // export const revalidate = 600
 
 import { cn } from 'src/utilities/cn'
-// import { GeistMono } from 'geist/font/mono'
-// import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -50,7 +48,6 @@ export default async function RootLayout({ children, params }: Args) {
       <head>
         <InitTheme />
         <link href="/icon.ico" rel="icon" sizes="32x32" />
-        {/* <link href="/favicon.svg" rel="icon" type="image/svg+xml" /> */}
       </head>
       <body>
         <Providers>

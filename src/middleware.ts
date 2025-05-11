@@ -9,6 +9,10 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
 
+  if (pathname.includes('/search')) {
+    return NextResponse.next() // Bypass the rewriting logic for the search page
+  }
+
   if (searchParams.has('_rsc')) {
     searchParams.delete('_rsc')
     const newUrl = `${pathname}?${searchParams.toString()}`

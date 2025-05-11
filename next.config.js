@@ -74,9 +74,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
-  // async headers() {
-  //   return []
-  // },
 }
 
 export default withNextIntl(withPayload(nextConfig))
