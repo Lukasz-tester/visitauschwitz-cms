@@ -235,9 +235,11 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                   {richText && (
                     <RichText
                       className={cn({
+                        // TODO: Ensure links wrap properly and behave as block elements
+
                         'prose-a:bg-card': changeBackground,
                         'mb-6': richText.root.direction !== null && enableMedia,
-                        'pb-1 md:pb-0': richText.root.direction !== null,
+                        'pb-1 md:pb-0 flex flex-wrap': richText.root.direction !== null,
                         hidden: richText.root.direction === null,
                       })}
                       content={richText}
