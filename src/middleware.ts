@@ -17,6 +17,8 @@ export default function middleware(request: NextRequest) {
 
   const response = intlMiddleware(request)
 
+  response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+
   // BELOW comment is not letting home be cached which is good for bfcache raw json response, but not good for performance
   // if neede add there as well search page which misbehaves when pasting full url .../search or changing locale while in search page (code for that is in very bottom)
   // instead of the _rsc deleting strategy above which fixes raw json rsc after opening tab after some longer time consider uncommenting TabFocusProvider in providers which worked in a similar way
