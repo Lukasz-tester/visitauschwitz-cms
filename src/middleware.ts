@@ -21,7 +21,14 @@ export default function middleware(request: NextRequest) {
 
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
+  // response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
+
+  // ❗ Do NOT cache search page aggressively
+  if (request.nextUrl.pathname.includes('/search')) {
+    response.headers.set('Cache-Control', 'no-store')
+  } else {
+    response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
+  }
 
   return response
 }
