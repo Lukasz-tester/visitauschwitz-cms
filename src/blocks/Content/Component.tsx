@@ -235,11 +235,9 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                   {richText && (
                     <RichText
                       className={cn({
-                        // TODO: Ensure links wrap properly and behave as block elements
-
                         'prose-a:bg-card': changeBackground,
                         'mb-6': richText.root.direction !== null && enableMedia,
-                        'pb-1 md:pb-0 flex flex-wrap': richText.root.direction !== null,
+                        'pb-1 md:pb-0': richText.root.direction !== null,
                         hidden: richText.root.direction === null,
                       })}
                       content={richText}
@@ -255,18 +253,16 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                       <ImageMedia imgClassName="rounded" resource={media} />
                     </div>
                   )} */}
-                  <div className={`relative w-full h-auto rounded overflow-hidden`}>
-                    {/* Animated background layer (only visible when needed) */}
-
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-b animate-pulse z-0 ${changeBackground ? 'from-card' : 'from-card-foreground'}`}
-                    />
-
-                    {/* Actual image (placed above the animated layer) */}
-                    <div className="relative z-10">
-                      <ImageMedia imgClassName="rounded" resource={media} />
+                  {enableMedia && (
+                    <div className={`relative w-full h-auto rounded overflow-hidden`}>
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-b animate-pulse z-0 ${changeBackground ? 'from-card' : 'from-card-foreground'}`}
+                      />
+                      <div className="relative z-10">
+                        <ImageMedia imgClassName="rounded" resource={media} />
+                      </div>
                     </div>
-                  </div>
+                  )}
                   {richTextEnd && (
                     <RichText
                       className={cn({

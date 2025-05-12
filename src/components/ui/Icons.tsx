@@ -144,8 +144,8 @@ export const Hotel = ({ fill = '#b45309', size = '110', viewBox = '0 -7 80 80' }
 
 export const Logo = ({ title = 'Logo' }: { title?: string }) => (
   <svg
-    width="190"
-    height="30"
+    width="180"
+    height="27"
     viewBox="0 0 190 32"
     fill="currentColor" // 👈 Inherit color from CSS
     xmlns="http://www.w3.org/2000/svg"

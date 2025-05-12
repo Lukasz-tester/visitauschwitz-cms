@@ -9,6 +9,7 @@ import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 import { useTranslations } from 'next-intl'
 import { useLockBodyScroll } from '@/utilities/helpers'
+import { LogoLink } from '@/components/ui/logoLink'
 
 export const MobileNavCaller: React.FC<{
   header: HeaderType
@@ -61,7 +62,7 @@ export const MobileNavCaller: React.FC<{
             {/* TODO: jak ponizej daje opacity-85 to powyzej lupka przestaje byc linkiem...? */}
             <div className="flex place-items-center text-xl top-0">
               <div
-                className="pl-4 py-2 flex items-center justify-center gap-1"
+                className="pl-5 py-2 flex items-center justify-center gap-1"
                 aria-label="Select Language"
               >
                 <LocaleSwitcher />
@@ -90,6 +91,9 @@ export const MobileNavCaller: React.FC<{
                   </Link>
                 ))}
               </div>
+            </div>
+            <div className="absolute bottom-5 left-1" onClick={() => setModalOpen(false)}>
+              <LogoLink className="text-slate-700 dark:text-slate-400 hover:text-amber-700/90" />
             </div>
           </div>
         </div>

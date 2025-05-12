@@ -55,28 +55,26 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     (max-width: 1440px) 90vw,
     1440px
   `.trim()
-  console.log('sizes', src, height, width)
+  console.log('Image:', src, alt)
   return (
-    <div className="'animate-none'">
-      <NextImage
-        alt={alt || ''}
-        className={cn(imgClassName)}
-        fill={fill}
-        height={!fill ? height : undefined}
-        onClick={onClick}
-        onLoad={() => {
-          setIsLoading(false)
-          if (typeof onLoadFromProps === 'function') {
-            onLoadFromProps()
-          }
-        }}
-        priority={priority}
-        quality={50}
-        sizes={sizes}
-        src={src}
-        width={!fill ? width : undefined}
-        loading={priority ? 'eager' : 'lazy'}
-      />
-    </div>
+    <NextImage
+      alt={alt || ''}
+      className={cn(imgClassName)}
+      fill={fill}
+      height={!fill ? height : undefined}
+      onClick={onClick}
+      onLoad={() => {
+        setIsLoading(false)
+        if (typeof onLoadFromProps === 'function') {
+          onLoadFromProps()
+        }
+      }}
+      priority={priority}
+      quality={50}
+      sizes={sizes}
+      src={src}
+      width={!fill ? width : undefined}
+      loading={priority ? 'eager' : 'lazy'}
+    />
   )
 }
