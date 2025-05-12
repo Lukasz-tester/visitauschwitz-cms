@@ -13,20 +13,23 @@ import { getTranslations } from 'next-intl/server'
 import { TypedLocale } from 'payload'
 import Loading from './loading'
 
-type Args = {
-  searchParams: Promise<{
-    q: string
-  }>
-  params: Promise<{
-    locale: TypedLocale
-  }>
-}
+// type Args = {
+//   searchParams: Promise<{
+//     q: string
+//   }>
+//   params: Promise<{
+//     locale: TypedLocale
+//   }>
+// }
 export default async function Page({
-  searchParams: searchParamsPromise,
-  params: paramsPromise,
-}: Args) {
-  const { q: query } = await searchParamsPromise
-  const { locale } = await paramsPromise
+  searchParams,
+  params,
+}: {
+  searchParams: { q?: string }
+  params: { locale: TypedLocale }
+}) {
+  const query = searchParams.q
+  const locale = params.locale
   const payload = await getPayload({ config: configPromise })
   const t = await getTranslations()
 
@@ -74,13 +77,6 @@ export default async function Page({
           <Search />
         </div>
       </div>
-      {/*
-      {posts.totalDocs > 0 ? (
-        <CollectionArchive posts={posts.docs as unknown as Post[]} />
-      ) : (
-        <div className="container">No results found.</div>
-      )} */}
-      {/* Wrapping CollectionArchive component with Suspense */}
       {/* <Suspense fallback={<Loading />}> */}
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as unknown as Post[]} />
