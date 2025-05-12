@@ -40,8 +40,8 @@ type Args = {
   }
 }
 
-export default async function Post({ params: paramsPromise }: Args) {
-  const { slug = '', locale = 'en' } = await paramsPromise
+export default async function Post({ params: params }: Args) {
+  const { slug = '', locale = 'en' } = params
   const url = '/posts/' + slug
   const post = await queryPost({ slug, locale })
 
@@ -76,8 +76,8 @@ export default async function Post({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = '', locale = 'en' } = await paramsPromise
+export async function generateMetadata({ params: params }: Args): Promise<Metadata> {
+  const { slug = '', locale = 'en' } = params
   const post = await queryPost({ slug, locale })
 
   return generateMeta({ doc: post, locale })

@@ -20,8 +20,8 @@ type Args = {
   }
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
-  const { pageNumber, locale } = await paramsPromise
+export default async function Page({ params: params }: Args) {
+  const { pageNumber, locale } = params
   const payload = await getPayload({ config: configPromise })
   const t = await getTranslations()
 
@@ -67,8 +67,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { pageNumber } = await paramsPromise
+export async function generateMetadata({ params: params }: Args): Promise<Metadata> {
+  const { pageNumber } = params
   return {
     title: `Visiting Auschwitz - Posts Page ${pageNumber || ''}`,
   }
