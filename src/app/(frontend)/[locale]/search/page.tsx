@@ -81,13 +81,13 @@ export default async function Page({
         <div className="container">No results found.</div>
       )} */}
       {/* Wrapping CollectionArchive component with Suspense */}
-      <Suspense fallback={<Loading />}>
-        {posts.totalDocs > 0 ? (
-          <CollectionArchive posts={posts.docs as unknown as Post[]} />
-        ) : (
-          <div className="container">No results found.</div>
-        )}
-      </Suspense>
+      {/* <Suspense fallback={<Loading />}> */}
+      {posts.totalDocs > 0 ? (
+        <CollectionArchive posts={posts.docs as unknown as Post[]} />
+      ) : (
+        <div className="container">No results found.</div>
+      )}
+      {/* </Suspense> */}
     </div>
   )
 }
