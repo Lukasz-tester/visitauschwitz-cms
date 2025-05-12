@@ -1,45 +1,30 @@
 import createMiddleware from 'next-intl/middleware'
+import { NextRequest, NextResponse } from 'next/server'
 import { routing } from './i18n/routing'
 
-export default createMiddleware(routing)
+const intlMiddleware = createMiddleware({
+  ...routing,
+})
 
-// see https://next-intl-docs.vercel.app/docs/routing/middleware
-export const config = {
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
-  ],
+export default function middleware(request: NextRequest) {
+  const { pathname, searchParams } = request.nextUrl
+
+  console.log('Middleware triggered for path:', pathname)
+
+  if (searchParams.has('_rsc')) {
+    searchParams.delete('_rsc')
+    const newUrl = `${pathname}?${searchParams.toString()}`
+    return NextResponse.rewrite(newUrl)
+  }
+
+  const response = intlMiddleware(request)
+
+  const existingVary = response.headers.get('Vary')
+  response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
+  response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
+
+  return response
 }
-
-// import createMiddleware from 'next-intl/middleware'
-// import { NextRequest, NextResponse } from 'next/server'
-// import { routing } from './i18n/routing'
-
-// const intlMiddleware = createMiddleware({
-//   ...routing,
-// })
-
-// export default function middleware(request: NextRequest) {
-//   const { pathname, searchParams } = request.nextUrl
-
-//   console.log('Middleware triggered for path:', pathname)
-
-//   if (searchParams.has('_rsc')) {
-//     searchParams.delete('_rsc')
-//     const newUrl = `${pathname}?${searchParams.toString()}`
-//     return NextResponse.rewrite(newUrl)
-//   }
-
-//   const response = intlMiddleware(request)
-
-//   const existingVary = response.headers.get('Vary')
-//   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-//   response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
-
-//   return response
-// }
 
 // export const config = {
 //   matcher: [
