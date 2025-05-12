@@ -27,17 +27,18 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 type Args = {
   children: React.ReactNode
-  params: Promise<{
+  params: {
     locale: TypedLocale
-  }>
+  }
 }
 
 export default async function RootLayout({ children, params }: Args) {
-  const { locale } = await params
+  const { locale } = params
 
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale)) {
     notFound()
   }
+
   setRequestLocale(locale)
 
   const { isEnabled } = await draftMode()

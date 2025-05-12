@@ -13,9 +13,9 @@ import { TypedLocale } from 'payload'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 type Args = {
-  params: Promise<{
+  params: {
     locale: TypedLocale
-  }>
+  }
 }
 
 export default async function Page({ params }: Args) {

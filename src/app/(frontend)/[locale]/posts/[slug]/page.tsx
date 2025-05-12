@@ -34,10 +34,10 @@ export async function generateStaticParams() {
 }
 
 type Args = {
-  params: Promise<{
+  params: {
     slug?: string
     locale?: TypedLocale
-  }>
+  }
 }
 
 export default async function Post({ params: paramsPromise }: Args) {

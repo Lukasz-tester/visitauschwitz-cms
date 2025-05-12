@@ -21,6 +21,7 @@ import Loading from './loading'
 //     locale: TypedLocale
 //   }>
 // }
+
 export default async function Page({
   searchParams,
   params,

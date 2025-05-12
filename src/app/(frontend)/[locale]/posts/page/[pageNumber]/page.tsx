@@ -14,10 +14,10 @@ import { TypedLocale } from 'payload'
 // export const revalidate = 600
 
 type Args = {
-  params: Promise<{
+  params: {
     pageNumber: string
     locale: TypedLocale
-  }>
+  }
 }
 
 export default async function Page({ params: paramsPromise }: Args) {

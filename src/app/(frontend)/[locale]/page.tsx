@@ -12,14 +12,14 @@ import { RenderHero } from '@/heros/RenderHero'
 import PageClient from './[slug]/page.client'
 
 type Args = {
-  params: Promise<{
+  params: {
     slug?: string
     locale: TypedLocale
-  }>
+  }
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
-  const { slug = 'home', locale = 'en' } = await paramsPromise
+export default async function Page({ params }: Args) {
+  const { slug = 'home', locale = 'en' } = params
   const url = '/' + slug
 
   const fullUrl = `${process.env.PAYLOAD_PUBLIC_SERVER_URL ?? 'https://example.com'}/`
