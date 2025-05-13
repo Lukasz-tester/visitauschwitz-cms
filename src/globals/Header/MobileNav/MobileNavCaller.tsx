@@ -86,8 +86,8 @@ export const MobileNavCaller: React.FC<{
                     onClick={() => setModalOpen(false)}
                     href={href}
                   >
-                    {/* TODO remove any */}
-                    {t(label as any)}
+                    {t(label)}
+                    {label === 'tips' && ' FAQ'}
                   </Link>
                 ))}
               </div>

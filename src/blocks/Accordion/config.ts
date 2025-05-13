@@ -7,6 +7,10 @@ export const Accordion: Block = {
   interfaceName: 'AccordionBlock',
   fields: [
     {
+      name: 'isFAQ',
+      type: 'checkbox',
+    },
+    {
       name: 'changeBackground',
       type: 'checkbox',
     },

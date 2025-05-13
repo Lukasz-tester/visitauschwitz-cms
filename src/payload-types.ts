@@ -742,6 +742,7 @@ export interface OpeningHoursBlock {
  * via the `definition` "AccordionBlock".
  */
 export interface AccordionBlock {
+  isFAQ?: boolean | null;
   changeBackground?: boolean | null;
   addPaddingBottom?: boolean | null;
   accordionItems?:
@@ -1092,6 +1093,7 @@ export interface OpeningHoursBlockSelect<T extends boolean = true> {
  * via the `definition` "AccordionBlock_select".
  */
 export interface AccordionBlockSelect<T extends boolean = true> {
+  isFAQ?: T;
   changeBackground?: T;
   addPaddingBottom?: T;
   accordionItems?:

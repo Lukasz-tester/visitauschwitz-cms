@@ -5,13 +5,12 @@ import type { Metadata } from 'next/types'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { Post } from '@/payload-types'
 import { Search } from '@/search/Component'
 import PageClient from './page.client'
 import { getTranslations } from 'next-intl/server'
 import { TypedLocale } from 'payload'
-// import Loading from './loading'
 
 type Args = {
   searchParams: Promise<{
@@ -74,19 +73,17 @@ export default async function Page({
           <Search />
         </div>
       </div>
-      {/* <Suspense fallback={<Loading />}> */}
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as unknown as Post[]} />
       ) : (
         <div className="container">No results found.</div>
       )}
-      {/* </Suspense> */}
     </div>
   )
 }
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Visiting Auschwitz - Search`,
+    title: `Auschwitz Visitor Info - Search Page`,
   }
 }

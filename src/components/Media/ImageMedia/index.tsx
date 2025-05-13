@@ -55,7 +55,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     (max-width: 1440px) 90vw,
     1440px
   `.trim()
-  console.log('Image:', src, alt)
   return (
     <NextImage
       alt={alt || ''}

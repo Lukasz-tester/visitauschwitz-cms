@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
+  title: 'Auschwitz Visitor Guidelines & Tips',
   description:
     'Plan your visit to the Auschwitz-Birkenau Memorial. Discover practical tips, tour options, regulations, and everything you need to know for a meaningful experience.',
   images: [
@@ -11,8 +12,7 @@ const defaultOpenGraph: Metadata['openGraph'] = {
         : '/website-template-OG.webp',
     },
   ],
-  siteName: 'Visit Auschwitz Memorial Guide',
-  title: 'Visit Auschwitz - Memorial Visitor Guide & Tips',
+  siteName: 'Auschwitz Visiting Guide',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {
