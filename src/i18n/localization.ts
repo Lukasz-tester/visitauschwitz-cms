@@ -2,10 +2,10 @@ const localization = {
   defaultLocale: 'en',
   fallback: true,
   locales: [
-    {
-      code: 'de',
-      label: 'Deutsch',
-    },
+    // {
+    //   code: 'de',
+    //   label: 'Deutsch',
+    // },
     {
       code: 'en',
       // Regarding the label, we are using the syntax "{lang. in English} - ({lang. in native})".
@@ -14,34 +14,34 @@ const localization = {
       // such as the user type, and the order of languages. See https://ux.stackexchange.com/q/3592/144485
       label: 'English',
     },
-    {
-      code: 'es',
-      label: 'Español',
-    },
-    {
-      code: 'it',
-      label: 'Italiano',
-    },
-    {
-      code: 'fr',
-      label: 'Français',
-    },
-    {
-      code: 'nl',
-      label: 'Nederlands',
-    },
+    // {
+    //   code: 'es',
+    //   label: 'Español',
+    // },
+    // {
+    //   code: 'it',
+    //   label: 'Italiano',
+    // },
+    // {
+    //   code: 'fr',
+    //   label: 'Français',
+    // },
+    // {
+    //   code: 'nl',
+    //   label: 'Nederlands',
+    // },
     {
       code: 'pl',
       label: 'Polski',
     },
-    {
-      code: 'ru',
-      label: 'Русский',
-    },
-    {
-      code: 'uk',
-      label: 'Українська',
-    },
+    // {
+    //   code: 'ru',
+    //   label: 'Русский',
+    // },
+    // {
+    //   code: 'uk',
+    //   label: 'Українська',
+    // },
   ],
 }
 

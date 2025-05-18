@@ -102,9 +102,9 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                       <div
                         className={`absolute inset-0 bg-gradient-to-b animate-pulse z-0 ${changeBackground ? 'from-card' : 'from-card-foreground'}`}
                       />
-                      <div className="relative z-10">
+                      {/* <div className="relative z-10">
                         <ImageMedia imgClassName="rounded" resource={media} />
-                      </div>
+                      </div> */}
                     </div>
                   )}
                   {richTextEnd && (

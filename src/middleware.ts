@@ -11,11 +11,23 @@ export default function middleware(request: NextRequest) {
 
   console.log('Middleware triggered for path:', pathname)
 
+  // ✅ Prevent infinite rewrite loop
   if (searchParams.has('_rsc')) {
+    // Remove _rsc and redirect instead of rewrite to break the cycle
     searchParams.delete('_rsc')
-    const newUrl = `${pathname}?${searchParams.toString()}`
-    return NextResponse.rewrite(newUrl)
+
+    const newUrl = request.nextUrl.clone()
+    newUrl.search = searchParams.toString()
+
+    // Redirect to remove _rsc from URL instead of rewriting
+    return NextResponse.redirect(newUrl)
   }
+
+  // if (searchParams.has('_rsc')) {
+  //   searchParams.delete('_rsc')
+  //   const newUrl = `${pathname}?${searchParams.toString()}`
+  //   return NextResponse.rewrite(newUrl)
+  // }
 
   const response = intlMiddleware(request)
 
