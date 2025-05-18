@@ -5,6 +5,8 @@
 // https://muzeums.vercel.app/api/revalidate?secret=432432ggrwgeVERVregevalatiorrey&path=/en/tickets
 // app/api/revalidate/route.ts
 
+//TODO add env secret for protection
+
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
     }
 
     // revalidate the specific path
-    await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/revalidate-on-demand?path=${path}`)
+    await fetch(`${req.nextUrl.origin}/api/revalidate-on-demand?path=${path}`)
 
     return NextResponse.json({ revalidated: true, path })
   } catch (err) {

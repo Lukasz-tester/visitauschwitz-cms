@@ -33,7 +33,7 @@ export default function middleware(request: NextRequest) {
 
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')
+  // response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate') // TODO uncomment when ready
 
   return response
 }
