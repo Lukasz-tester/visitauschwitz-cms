@@ -23,19 +23,31 @@ export async function generateStaticParams() {
     overrideAccess: false,
   })
 
-  const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
-
-  const params = locales.flatMap((locale) =>
-    pages.docs
-      .filter((doc) => doc.slug !== 'home')
-      .map(({ slug }) => ({
-        slug,
-        locale,
-      })),
-  )
+  const params = pages.docs
+    ?.filter((doc) => {
+      return doc.slug !== 'home'
+    })
+    .map(({ slug }) => {
+      return { slug }
+    })
 
   return params
 }
+
+// TODO - check if commented still ok
+//   const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+
+//   const params = locales.flatMap((locale) =>
+//     pages.docs
+//       .filter((doc) => doc.slug !== 'home')
+//       .map(({ slug }) => ({
+//         slug,
+//         locale,
+//       })),
+//   )
+
+//   return params
+// }
 
 type Args = {
   params: Promise<{
