@@ -4,6 +4,7 @@ import { routing } from './i18n/routing'
 
 const intlMiddleware = createMiddleware({
   ...routing,
+  localeDetection: true,
 })
 
 export default function middleware(request: NextRequest) {
@@ -11,14 +12,24 @@ export default function middleware(request: NextRequest) {
 
   console.log('Middleware triggered for path:', pathname)
 
-  if (searchParams.has('_rsc')) {
-    searchParams.delete('_rsc')
-    const newUrl = `${pathname}?${searchParams.toString()}`
-    return NextResponse.rewrite(newUrl)
+  // TODO test with this commented if the RAW RSC response still happens
+  // if (searchParams.has('_rsc')) {
+  //   searchParams.delete('_rsc')
+  //   const newUrl = `${pathname}?${searchParams.toString()}`
+  //   return NextResponse.rewrite(newUrl)
+  // }
+  // Preserve existing Vary header and add RSC
+  // Handle static media files
+  if (pathname.startsWith('/api/media/')) {
+    const response = NextResponse.next()
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+    return response
   }
 
+  // Let intlMiddleware handle everything else (including setting headers)
   const response = intlMiddleware(request)
 
+  // Optionally enhance headers here
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
   response.headers.set('Cache-Control', 'public, max-age=2592000, must-revalidate')

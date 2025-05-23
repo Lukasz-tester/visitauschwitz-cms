@@ -32,9 +32,6 @@
 //   },
 //   reactStrictMode: true,
 //   redirects,
-//   experimental: {
-//     optimizeCss: true,
-//   },
 // }
 
 // // Compose all wrappers
