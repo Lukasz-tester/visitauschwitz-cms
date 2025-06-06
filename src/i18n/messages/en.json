@@ -15,7 +15,9 @@
   "more-pages": "More pages",
   "contact": "Contact",
 
-  "cookie-message": "This site uses cookies to provide a better browsing experience.",
-  "hide-message": "Hide message",
+  "cookie-message": "We use essential cookies required for the site to work, and with your consent, additional cookies for analytics and performance. Read more in: ",
+  "accept": "Accept",
+  "decline": "Decline",
+  "privacy-policy": "Privacy policy",
   "tips": "Tips"
 }

@@ -134,7 +134,7 @@ export default buildConfig({
   plugins: [
     translator({
       // collections with the enabled translator in the admin UI
-      collections: ['posts', 'pages'],
+      collections: ['posts', 'pages', 'forms'],
       // globals with the enabled translator in the admin UI
       globals: ['header', 'footer'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers

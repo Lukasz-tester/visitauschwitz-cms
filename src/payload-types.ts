@@ -523,6 +523,22 @@ export interface FormBlock {
     };
     [k: string]: unknown;
   } | null;
+  enableOutro?: boolean | null;
+  outroContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'formBlock';
@@ -1064,6 +1080,8 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  enableOutro?: T;
+  outroContent?: T;
   id?: T;
   blockName?: T;
 }

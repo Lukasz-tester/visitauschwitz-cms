@@ -25,8 +25,12 @@ export type FormBlockType = {
   blockName?: string
   blockType?: 'formBlock'
   enableIntro: boolean
+  enableOutro: boolean
   form: FormType
   introContent?: {
+    [k: string]: unknown
+  }[]
+  outroContent?: {
     [k: string]: unknown
   }[]
 }
@@ -38,9 +42,11 @@ export const FormBlock: React.FC<
 > = (props) => {
   const {
     enableIntro,
+    enableOutro,
     form: formFromProps,
     form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
     introContent,
+    outroContent,
   } = props
 
   const formMethods = useForm({
@@ -166,6 +172,9 @@ export const FormBlock: React.FC<
               {submitButtonLabel}
             </Button>
           </form>
+        )}
+        {enableOutro && outroContent && !hasSubmitted && (
+          <RichText className="mt-8" content={outroContent} enableGutter={false} />
         )}
       </FormProvider>
     </div>

@@ -15,7 +15,9 @@
   "more-pages": "Meer pagina's",
   "contact": "Contact",
 
-  "cookie-message": "Deze site gebruikt cookies voor een betere browse-ervaring.",
-  "hide-message": "Bericht verbergen",
+  "cookie-message": "We gebruiken essentiële cookies die nodig zijn voor het functioneren van de site en, met uw toestemming, aanvullende cookies voor analyse en prestaties. Meer informatie in de: ",
+  "accept": "Accepteren",
+  "decline": "Weigeren",
+  "privacy-policy": "Privacybeleid",
   "tips": "Tips"
 }

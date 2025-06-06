@@ -21,9 +21,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { CookiePopup } from '@/components/Cookies/cookiePopup'
-
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { ConditionalCookies } from '@/components/Cookies/conditionalCookies'
 
 type Args = {
   children: React.ReactNode
@@ -61,10 +59,8 @@ export default async function RootLayout({ children, params }: Args) {
             <Header locale={locale} />
             {children}
             <Footer locale={locale} />
-
             <CookiePopup />
-            {/* <Analytics />
-            <SpeedInsights /> */}
+            <ConditionalCookies />
           </NextIntlClientProvider>
         </Providers>
       </body>
@@ -73,11 +69,19 @@ export default async function RootLayout({ children, params }: Args) {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://payloadcms.com'),
+  icons: {
+    // icon: [
+    //   { url: '/favicon.ico' }, // default fallback
+    //   { url: '/favicon.png' },
+    //   { url: '/icon.ico', sizes: '32x32', type: 'image/png' },
+    // ],
+    apple: '/apple-touch-icon.png',
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'visitauschwitz.info'),
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@visitauschwitz',
   },
 }
 
