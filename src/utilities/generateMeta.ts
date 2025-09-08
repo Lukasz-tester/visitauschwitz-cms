@@ -2,8 +2,10 @@ import { Metadata } from 'next'
 import { mergeOpenGraph } from './mergeOpenGraph'
 import type { Page, Post } from '../payload-types'
 
-const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://muzeums.vercel.app'
-const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk'] as const
+const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
+const locales = ['en', 'pl'] as const
+// TODO - add locales when translated!
+// const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
 
 // Helper to match sitemap-style slug formatting
 const getSafeSlug = (doc: Page | Post): string => {
@@ -83,7 +85,7 @@ export const generateMeta = async ({
 //   const rawSlug = Array.isArray(doc?.slug) ? doc?.slug.join('/') : doc?.slug
 //   const slug = rawSlug === 'home' ? '' : rawSlug
 
-//   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://muzeums.vercel.app'
+//   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
 
 //   const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk'] as const
 

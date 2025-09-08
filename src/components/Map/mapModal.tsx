@@ -1,5 +1,6 @@
 'use client'
 
+// import 'globals.css'
 import 'leaflet-arrowheads'
 import 'leaflet/dist/leaflet.css'
 import {
@@ -10,7 +11,6 @@ import {
   MapContainer,
   Marker,
   Polygon,
-  Polyline,
   Popup,
   TileLayer,
   useMap,
@@ -27,6 +27,13 @@ import MapLink from './MapLink'
 
 const entranceAuschwitz: LatLngExpression = [50.0294894, 19.2053725]
 const entranceBirkenau: LatLngExpression = [50.0343937, 19.1809423]
+// TODO - enlarge text for popups!!!
+// const MyPopUp = ({ children }) => (
+//   <Popup>
+//     <div className="!text-lg">{children}</div>
+//   </Popup>
+// )
+
 const layers = [
   {
     name: 'Auschwitz I buildings',
@@ -70,17 +77,25 @@ const layers = [
       <>
         <Marker position={entranceAuschwitz} icon={placeholderIcon}>
           <Popup>
-            <h4>Auschwitz I Main Camp</h4>
-            Start your tour here and
+            <strong>Auschwitz I Main Camp</strong>
             <br />
-            continue in <MapLink url="arrival#get-to-birkenau">Birkenau.</MapLink>
+            Start your tour here and continue in Birkenau. <br />
             <br />
-            <MapLink url="https://www.google.com/">or go google.</MapLink>
+            <strong>
+              <MapLink url="arrival#get-to-birkenau">Get to Birkenau →</MapLink>
+            </strong>
           </Popup>
         </Marker>
         <Marker position={entranceBirkenau} icon={placeholderIcon}>
           <Popup>
-            <h4>Auschwitz II Birkenau</h4>You start the second part of your tour here.
+            <strong>Auschwitz II-Birkenau</strong>
+            <br />
+            You start the second part of your tour by the main Birkenau gate.
+            <br />
+            <br />
+            <strong>
+              <MapLink url="tour#birkenau-gate">See Birkenau gate →</MapLink>
+            </strong>
           </Popup>
         </Marker>
       </>

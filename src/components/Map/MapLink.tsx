@@ -57,7 +57,8 @@ const MapLink: React.FC<MapLinkProps> = ({ url, children }) => {
 
   // If the link is internal, handle it using Next.js router
   return (
-    <Link href={url} onClick={handleClick} className="text-green-500 underline">
+    //TODO improve the lonk looks!
+    <Link href={url} onClick={handleClick} className="font-bold text-lg">
       {children}
     </Link>
   )

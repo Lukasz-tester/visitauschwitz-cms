@@ -63,6 +63,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { getCookie } from '@/utilities/helpersSsr'
 
 function setCookie(name, value, days = 365) {
   let expires = ''
@@ -72,18 +73,6 @@ function setCookie(name, value, days = 365) {
     expires = '; expires=' + date.toUTCString()
   }
   document.cookie = `${name}=${value || ''}${expires}; path=/`
-}
-
-function getCookie(name) {
-  if (typeof document === 'undefined') return null
-  const nameEQ = name + '='
-  const ca = document.cookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length)
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length)
-  }
-  return null
 }
 
 export const CookiePopup = () => {
@@ -111,8 +100,8 @@ export const CookiePopup = () => {
   if (!show) return null
 
   return (
-    <div className="fixed bottom-0 w-full z-[100001] flex justify-center text-primary text-xl">
-      <div className="flex flex-col sm:flex-row bg-background w-fit h-fit p-6 pb-8 gap-5 items-start sm:items-center justify-between">
+    <div className="fixed bottom-0 w-full z-[100001] flex justify-center bg-black/90 text-white/90 text-xl">
+      <div className="flex flex-col sm:flex-row w-fit h-fit p-6 pb-8 gap-5 items-start sm:items-center justify-between">
         <span>
           {t('cookie-message')}
           <Link href="/privacy-policy" className="underline">
@@ -120,7 +109,7 @@ export const CookiePopup = () => {
           </Link>
         </span>
 
-        <div className="flex gap-2">
+        <div className="flex gap-6">
           <Button className="w-fit" variant="outline" onClick={acceptCookies}>
             {t('accept')}
           </Button>

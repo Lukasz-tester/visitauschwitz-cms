@@ -152,7 +152,7 @@ const AccordionItem: React.FC<ItemProps> = ({
           transition: 'max-height 0.5s ease-in-out',
         }}
       >
-        <div className="py-5">
+        <div className="py-2 mb-4">
           <LazyRichText content={answer} enableGutter={false} />
         </div>
       </div>

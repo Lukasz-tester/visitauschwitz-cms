@@ -28,10 +28,10 @@ export const parkingLots = [
         <br />
         Motorcycle: 15 PLN
         <br />
-        <h5>
-          {/* TODO poprawić */}
-          <MapLink url="get-ready#on-site">Learn what is on site.</MapLink>
-        </h5>
+        <br />
+        <strong>
+          <MapLink url="museum#main-entry">See the location →</MapLink>
+        </strong>
       </>
     ),
   },

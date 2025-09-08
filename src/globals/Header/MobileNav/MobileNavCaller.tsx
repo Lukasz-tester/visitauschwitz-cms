@@ -21,9 +21,11 @@ export const MobileNavCaller: React.FC<{
 
   const links = {
     '/supplement': 'tips',
-    '/posts': 'posts',
-    '/#created-by': 'author',
-    '/contact': 'contact',
+    // '/posts': 'posts',
+    '/#about-me': 'about',
+    // '/contact': 'contact',
+    // TODO - odkomentuj ponizej i dodaj odpowiedni link jak bedzie
+    // '/': 'books',
   }
 
   return (

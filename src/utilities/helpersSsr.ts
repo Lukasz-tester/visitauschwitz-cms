@@ -1,3 +1,15 @@
+export function getCookie(name) {
+  if (typeof document === 'undefined') return null
+  const nameEQ = name + '='
+  const ca = document.cookie.split(';')
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i]
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length)
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length)
+  }
+  return null
+}
+
 export const removeSpecialChars = (text: string) => {
   let cleanedText = text.replace(/[\p{So}\p{C}]|\u200B|\u200C|\u200D|↓/gu, '')
   cleanedText = cleanedText.trim()
@@ -5,7 +17,6 @@ export const removeSpecialChars = (text: string) => {
   return cleanedText
 }
 
-//BELOW this old version:
 export const extractTextFromRichText = (richText: any, maxLength: number = 250) => {
   if (!richText || !richText.root || !Array.isArray(richText.root.children)) {
     return ''

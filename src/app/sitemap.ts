@@ -2,8 +2,10 @@ import type { MetadataRoute } from 'next'
 
 export const dynamic = 'force-dynamic' //This tells Next.js: “Don’t try to pre-render this during build — always generate it at runtime.”
 
-const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://muzeums.vercel.app'
-const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
+const locales = ['en', 'pl']
+// TODO - add locales when translated!
+// const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { docs: pages } = await fetch(`${serverUrl}/api/pages?limit=0`).then((res) => res.json())

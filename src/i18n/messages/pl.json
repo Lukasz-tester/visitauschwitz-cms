@@ -13,11 +13,13 @@
   "previous": "Poprzednia",
   "next": "Następna",
   "more-pages": "Więcej stron",
-  "contact": "Kontakt",
 
   "cookie-message": "Używamy niezbędnych plików cookie wymaganych do działania strony, a za Twoją zgodą także dodatkowych plików cookie do analityki i wydajności. Dowiedz się więcej w: ",
   "accept": "Akceptuj",
   "decline": "Odrzuć",
   "privacy-policy": "Polityka Prywatności",
-  "tips": "Wskazówki"
+  "tips": "Wskazówki",
+  "about": "O mnie",
+  "contact": "Kontakt",
+  "books": "KSIĄŻKI →"
 }

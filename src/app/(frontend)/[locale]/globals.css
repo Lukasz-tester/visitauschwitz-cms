@@ -60,3 +60,25 @@ html[data-theme='light'] {
   width: 100%;
   height: 100%;
 }
+
+/* TODO improve popups!
+
+.leaflet-popup-content {
+  font-size: 1.5rem !important;
+  line-height: 1.625rem !important;
+  color: #1f2937 !important;
+} */
+
+/* .leaflet-popup-content {
+  @apply text-2xl leading-relaxed text-gray-800;
+} */
+
+/* 
+.leaflet-popup-content {
+  @apply text-xl leading-relaxed; Use text-lg or text-xl for larger size }
+
+.leaflet-popup-content {
+  font-size: 48px;
+  line-height: 1.5;
+  font-family: system-ui, sans-serif;
+} */
