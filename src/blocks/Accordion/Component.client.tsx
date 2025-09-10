@@ -9,11 +9,22 @@ import { extractTextFromRichText, removeSpecialChars } from '@/utilities/helpers
 
 const LazyRichText = dynamic(() => import('@/components/RichText'), {
   loading: () => <div>Loading content…</div>,
-  ssr: true, // Enabled SSR for better SEO and crawlability
+  ssr: true,
 })
+
+type FAQItem = {
+  '@type': 'Question'
+  name: string
+  acceptedAnswer: {
+    '@type': 'Answer'
+    text: string
+  }
+}
 
 type Props = Extract<Page['layout'][0], { blockType: 'accordion' }> & {
   fullUrl?: string
+  collectFAQSchema?: boolean
+  setFAQItems?: (items: FAQItem[]) => void
 }
 
 export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
@@ -23,34 +34,9 @@ export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
   addPaddingBottom = false,
   blockName,
   fullUrl,
+  collectFAQSchema = false,
+  setFAQItems,
 }) => {
-  // SCHEMA generation for SEO:
-  const pageSchema = isFAQ
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: accordionItems?.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: removeSpecialChars(extractTextFromRichText(item.answer)),
-          },
-        })),
-      }
-    : {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        name: 'Auschwitz Tour Expert Tips',
-        url: fullUrl,
-        mainEntity: accordionItems?.map((item) => ({
-          '@type': 'WebPageElement',
-          headline: removeSpecialChars(item.question ?? 'Untitled Item'),
-          url: `${fullUrl}#accordion-item-${item.id}`,
-          description: removeSpecialChars(extractTextFromRichText(item.answer)),
-        })),
-      }
-
   const [openIndices, setOpenIndices] = useState<number[]>([])
 
   const handleItemClick = (index: number) => {
@@ -58,6 +44,38 @@ export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     )
   }
+
+  // ✅ Collect FAQ schema data upward if needed
+  useEffect(() => {
+    if (isFAQ && collectFAQSchema && setFAQItems && accordionItems) {
+      const faqItems: FAQItem[] = accordionItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question ?? 'Untitled Question',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: removeSpecialChars(extractTextFromRichText(item.answer)),
+        },
+      }))
+      setFAQItems(faqItems)
+    }
+  }, [isFAQ, collectFAQSchema, setFAQItems, accordionItems])
+
+  // ✅ Build schema for non-FAQ sections
+  const nonFAQSchema =
+    !isFAQ && fullUrl
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: blockName || 'Accordion Section',
+          url: fullUrl,
+          mainEntity: accordionItems?.map((item) => ({
+            '@type': 'WebPageElement',
+            headline: removeSpecialChars(item.question ?? 'Untitled Item'),
+            url: `${fullUrl}#accordion-item-${item.id}`,
+            description: removeSpecialChars(extractTextFromRichText(item.answer)),
+          })),
+        }
+      : null
 
   return (
     <section
@@ -68,12 +86,12 @@ export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
       <div className="container" id={blockName || undefined}>
         <div className={cn('md:px-[17.3%]', { 'pb-24': addPaddingBottom })}>
           {accordionItems?.map((item, index) => {
-            const uniqueId = `accordion-item-${item.id}` // : `accordion-item-${index}`
+            const uniqueId = `accordion-item-${item.id}`
             return (
               <div key={index} className="pb-2">
                 <AccordionItem
                   index={index}
-                  uniqueId={uniqueId} // Pass uniqueId as a prop
+                  uniqueId={uniqueId}
                   answer={item.answer}
                   question={item.question ?? ''}
                   isOpen={openIndices.includes(index)}
@@ -86,9 +104,12 @@ export const AccordionBlock: React.FC<{ id?: string } & Props> = ({
         </div>
       </div>
 
-      <script type="application/ld+json" suppressHydrationWarning>
-        {JSON.stringify(pageSchema)}
-      </script>
+      {/* ✅ Only inject schema when NOT FAQ */}
+      {!isFAQ && nonFAQSchema && (
+        <script type="application/ld+json" suppressHydrationWarning>
+          {JSON.stringify(nonFAQSchema)}
+        </script>
+      )}
     </section>
   )
 }
@@ -136,7 +157,7 @@ const AccordionItem: React.FC<ItemProps> = ({
           },
         )}
         onClick={onClick}
-        id={`${uniqueId}`}
+        id={uniqueId}
       >
         <h3 className="pr-2 text-left font-semibold">{question}</h3>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
