@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { mergeOpenGraph } from './mergeOpenGraph'
 import type { Page, Post } from '../payload-types'
 
-const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
+const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.visitauschwitz.info'
 const locales = ['en', 'pl'] as const
 // TODO - add locales when translated!
 // const locales = ['en', 'pl', 'de', 'fr', 'es', 'it', 'nl', 'ru', 'uk']
