@@ -8,9 +8,19 @@ const intlMiddleware = createMiddleware({
 })
 
 export default function middleware(request: NextRequest) {
-  const { pathname, searchParams } = request.nextUrl
+  const { pathname } = request.nextUrl
+  const ua = request.headers.get('user-agent') || 'unknown'
 
-  console.log('Middleware triggered for path:', pathname)
+  // Log Edge requests (non-standard browsers)
+  if (!/Chrome|Safari|Firefox|Edge/i.test(ua)) {
+    console.log(`[Edge request] ${pathname} - UA: ${ua}`)
+  }
+
+  // Block bad bots globally
+  const badBots = [/ahrefs/i, /semrush/i, /mj12/i]
+  if (badBots.some((bot) => bot.test(ua))) {
+    return new Response('Blocked', { status: 403 })
+  }
 
   // TODO test with this commented if the RAW RSC response still happens
   // if (searchParams.has('_rsc')) {
@@ -42,7 +52,8 @@ export const config = {
     // Match all pathnames except for
     // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
     // - … the ones containing a dot (e.g. `favicon.ico`)
-    '/((?!api|_next|_vercel|admin|next|.*\\..*).*)',
+    // the regex below can be shorter but there were some icon.ico problems so...
+    '/((?!api|_next|_next/static|_next/image|favicon.ico|icon.ico|robots.txt|sitemap.xml|_vercel|admin|next|.*\\..*).*)',
   ],
 }
 

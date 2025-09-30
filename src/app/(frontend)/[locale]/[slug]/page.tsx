@@ -1,3 +1,5 @@
+export const revalidate = false
+
 import type { Metadata } from 'next'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
