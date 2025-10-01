@@ -1,14 +1,18 @@
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
 
 export async function GET() {
-  // Crawl-delay: [seconds] -> limit aggressive crawlers
-  const content = `User-agent: *
-  Allow: /
-Crawl-delay: 10
-Disallow: /search
-Disallow: /admin 
-Disallow: /_next/
-Disallow: /api/
+  const content = `
+# Allow Googlebot
+User-agent: Googlebot
+Disallow:
+
+# Allow Bingbot
+User-agent: Bingbot
+Disallow:
+
+# Block all other bots
+User-agent: *
+Disallow: /
 
 Sitemap: ${serverUrl}/sitemap.xml`
 
@@ -18,3 +22,12 @@ Sitemap: ${serverUrl}/sitemap.xml`
     },
   })
 }
+
+// Crawl-delay: [seconds] -> limit aggressive crawlers
+// User-agent: *
+//   Allow: /
+// Crawl-delay: 10
+// Disallow: /search
+// Disallow: /admin
+// Disallow: /_next/
+// Disallow: /api/

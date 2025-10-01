@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse, userAgent } from 'next/server'
 import { routing } from './i18n/routing'
 
 const intlMiddleware = createMiddleware({
@@ -8,6 +8,9 @@ const intlMiddleware = createMiddleware({
 })
 
 export default function middleware(request: NextRequest) {
+  const uaInfo = userAgent(request)
+  if (uaInfo.isBot) return new Response('Blocked', { status: 403 })
+
   const { pathname } = request.nextUrl
   const ua = request.headers.get('user-agent') || 'unknown'
 
@@ -17,17 +20,12 @@ export default function middleware(request: NextRequest) {
   }
 
   // Block bad bots globally
-  const badBots = [
-    /ahrefs/i,
-    /semrush/i,
-    /mj12/i,
-    /ChatGPT-User/i,
-    /facebookexternalhit/i,
-    /chrome\/140/i,
-  ]
+  const badBots = [/ahrefs/i, /semrush/i, /mj12/i, /ChatGPT-User/i, /facebookexternalhit/i]
   if (badBots.some((bot) => bot.test(ua))) {
     return new Response('Blocked', { status: 403 })
   }
+
+  // Also now it gets through cloudflare forewall check for bots
 
   // TODO test with this commented if the RAW RSC response still happens
   // if (searchParams.has('_rsc')) {
