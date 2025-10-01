@@ -19,6 +19,11 @@ export default function middleware(request: NextRequest) {
     console.log(`[Edge request] ${pathname} - UA: ${ua}`)
   }
 
+  // Block suspicious UA: contains BOTH "Mozilla/5.0" AND "Mac OS X"
+  if (ua.includes('Mozilla/5.0') && ua.includes('Mac OS X')) {
+    return new Response('Blocked', { status: 403 })
+  }
+
   // Block bad bots globally
   const badBots = [
     /ahrefs/i,
