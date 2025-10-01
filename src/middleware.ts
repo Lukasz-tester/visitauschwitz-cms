@@ -17,7 +17,14 @@ export default function middleware(request: NextRequest) {
   }
 
   // Block bad bots globally
-  const badBots = [/ahrefs/i, /semrush/i, /mj12/i, /ChatGPT-User/i, /facebookexternalhit/i]
+  const badBots = [
+    /ahrefs/i,
+    /semrush/i,
+    /mj12/i,
+    /ChatGPT-User/i,
+    /facebookexternalhit/i,
+    /chrome\/140/i,
+  ]
   if (badBots.some((bot) => bot.test(ua))) {
     return new Response('Blocked', { status: 403 })
   }
@@ -101,3 +108,75 @@ export const config = {
 // if (isHomePage || isHome || isSearchPage || isLocalizedHome) {
 //   response.headers.set('Cache-Control', 'no-store') // not ideal as it removes caching benefits }
 // return response }
+
+// OPTION FOR FUTURE ???
+
+// // middleware.ts
+// import createMiddleware from 'next-intl/middleware'
+// import { NextRequest, NextResponse } from 'next/server'
+// import { routing } from './i18n/routing'
+
+// const intlMiddleware = createMiddleware({
+//   ...routing,
+//   localeDetection: true,
+// })
+
+// export default function middleware(request: NextRequest) {
+//   const { pathname } = request.nextUrl
+//   const ua = (request.headers.get('user-agent') || '').toLowerCase()
+
+//   // --------- 1️⃣ Block known bad bots ----------
+//   const badBots = [
+//     /ahrefs/i,
+//     /semrush/i,
+//     /mj12/i,
+//     /chatgpt-user/i,
+//     /facebookexternalhit/i,
+//     /pingdom/i,
+//     /uptimebot/i,
+//   ]
+//   if (badBots.some((bot) => bot.test(ua))) {
+//     return new Response('Blocked', { status: 403 })
+//   }
+
+//   // --------- 2️⃣ Allow only real browsers ----------
+//   const allowedBrowsers = [/chrome/i, /safari/i, /firefox/i, /edge/i, /mozilla/i]
+//   if (!allowedBrowsers.some((b) => b.test(ua))) {
+//     return new Response('Blocked', { status: 403 })
+//   }
+
+//   // --------- 3️⃣ Cache static media aggressively ----------
+//   if (pathname.startsWith('/api/media/')) {
+//     const res = NextResponse.next()
+//     res.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+//     return res
+//   }
+
+//   // --------- 4️⃣ Protect expensive API endpoints ----------
+//   if (pathname.startsWith('/api/users/me')) {
+//     // return cached empty object for bots
+//     if (/vercel-screenshot|chatgpt-user/i.test(ua)) {
+//       return NextResponse.json(
+//         { user: null },
+//         { status: 200, headers: { 'Cache-Control': 'public, max-age=60' } }
+//       )
+//     }
+//   }
+
+//   // --------- 5️⃣ Let next-intl handle locales ----------
+//   const response = intlMiddleware(request)
+
+//   // Enhance caching headers for static pages
+//   const existingVary = response.headers.get('Vary')
+//   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
+//   response.headers.set('Cache-Control', 'public, max-age=600000, must-revalidate')
+
+//   return response
+// }
+
+// // --------- 6️⃣ Matcher: all pages except /api, _next, _vercel, /admin ----------
+// export const config = {
+//   matcher: [
+//     '/((?!api|_next|_next/static|_next/image|favicon.ico|icon.ico|apple-touch-icon.png|robots.txt|sitemap.xml|_vercel|admin|next|.*\\..*).*)',
+//   ],
+// }
