@@ -14,6 +14,12 @@ Disallow:
 User-agent: *
 Disallow: /
 
+Crawl-delay: 10
+Disallow: /search
+Disallow: /admin
+Disallow: /_next/
+Disallow: /api/
+
 Sitemap: ${serverUrl}/sitemap.xml`
 
   return new Response(content, {
@@ -26,8 +32,3 @@ Sitemap: ${serverUrl}/sitemap.xml`
 // Crawl-delay: [seconds] -> limit aggressive crawlers
 // User-agent: *
 //   Allow: /
-// Crawl-delay: 10
-// Disallow: /search
-// Disallow: /admin
-// Disallow: /_next/
-// Disallow: /api/

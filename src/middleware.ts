@@ -20,7 +20,16 @@ export default function middleware(request: NextRequest) {
   }
 
   // Block bad bots globally
-  const badBots = [/ahrefs/i, /semrush/i, /mj12/i, /ChatGPT-User/i, /facebookexternalhit/i]
+  const badBots = [
+    /ahrefs/i,
+    /semrush/i,
+    /mj12/i,
+    /ChatGPT-User/i,
+    /facebookexternalhit/i,
+    /chrome\/140/i,
+    /pingdom/i,
+    /uptimebot/i,
+  ]
   if (badBots.some((bot) => bot.test(ua))) {
     return new Response('Blocked', { status: 403 })
   }
