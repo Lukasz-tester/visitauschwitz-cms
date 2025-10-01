@@ -17,7 +17,7 @@ export default function middleware(request: NextRequest) {
   }
 
   // Block bad bots globally
-  const badBots = [/ahrefs/i, /semrush/i, /mj12/i]
+  const badBots = [/ahrefs/i, /semrush/i, /mj12/i, /ChatGPT-User/i, /facebookexternalhit/i]
   if (badBots.some((bot) => bot.test(ua))) {
     return new Response('Blocked', { status: 403 })
   }
@@ -53,7 +53,7 @@ export const config = {
     // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
     // - … the ones containing a dot (e.g. `favicon.ico`)
     // the regex below can be shorter but there were some icon.ico problems so...
-    '/((?!api|_next|_next/static|_next/image|favicon.ico|icon.ico|robots.txt|sitemap.xml|_vercel|admin|next|.*\\..*).*)',
+    '/((?!api|_next|_next/static|_next/image|favicon.ico|icon.ico|apple-touch-icon.png|robots.txt|sitemap.xml|_vercel|admin|next|.*\\..*).*)',
   ],
 }
 

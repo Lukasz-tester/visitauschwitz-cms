@@ -8,8 +8,8 @@ const defaultOpenGraph: Metadata['openGraph'] = {
   images: [
     {
       url: process.env.NEXT_PUBLIC_SERVER_URL
-        ? `${process.env.NEXT_PUBLIC_SERVER_URL}/website-template-OG.webp`
-        : '/website-template-OG.webp',
+        ? `${process.env.NEXT_PUBLIC_SERVER_URL}/website-template-OG.jpg`
+        : '/website-template-OG.jpg',
     },
   ],
   siteName: 'Auschwitz Visiting Guide',

@@ -69,6 +69,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         }
       }}
       priority={priority}
+      // unoptimized={true} // TODO use this if usage limits are an issue
       quality={50}
       sizes={sizes}
       src={src}
