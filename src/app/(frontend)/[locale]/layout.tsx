@@ -2,8 +2,10 @@ import './globals.css'
 import type { Metadata } from 'next'
 
 // export const revalidate = 600
+export const revalidate = false
+export const dynamic = 'force-static'
 
-import { cn } from 'src/utilities/cn'
+// import { cn } from 'src/utilities/cn'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'

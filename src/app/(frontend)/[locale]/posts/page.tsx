@@ -2,6 +2,7 @@ import type { Metadata } from 'next/types'
 
 // export const revalidate = 600
 export const revalidate = false
+export const dynamic = 'force-static'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 // export const revalidate = 600
 
 export const revalidate = false
+export const dynamic = 'force-static'
 
 import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'

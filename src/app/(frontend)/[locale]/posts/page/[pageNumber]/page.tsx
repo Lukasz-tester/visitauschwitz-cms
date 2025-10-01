@@ -13,6 +13,7 @@ import { TypedLocale } from 'payload'
 
 // export const revalidate = 600
 export const revalidate = false
+export const dynamic = 'force-static'
 
 type Args = {
   params: Promise<{

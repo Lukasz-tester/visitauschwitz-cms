@@ -1,4 +1,5 @@
 export const revalidate = false
+export const dynamic = 'force-static'
 
 import { Metadata } from 'next'
 import configPromise from '@payload-config'
