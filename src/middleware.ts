@@ -13,17 +13,26 @@ export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // ----------------------
-  // 1. Whitelist dobrych botów
+  // 1. Whitelist dobrych botów i legalnych UA Google
   // ----------------------
-  const allowedBots = [/googlebot/i, /bingbot/i, /yandexbot/i, /duckduckbot/i, /applebot/i]
+  const allowedBots = [
+    /googlebot/i,
+    /bingbot/i,
+    /yandexbot/i,
+    /duckduckbot/i,
+    /applebot/i,
+    /google-inspectiontool/i, // Google Search Console / PageSpeed
+    /google/i, // catch-all Google UA variants
+  ]
 
+  // jeśli UA pasuje do whitelisty → przepuszczamy
   if (allowedBots.some((bot) => bot.test(ua))) {
-    console.log(`[ALLOW] Good bot: ${ua}`)
+    console.log(`[ALLOW] Good bot or Google UA: ${ua}`)
     return intlMiddleware(request)
   }
 
   // ----------------------
-  // 2. Blokada złych botów
+  // 2. Blokada złych botów (agresywna)
   // ----------------------
   const badBots = [
     /ahrefs/i,
@@ -31,7 +40,40 @@ export default function middleware(request: NextRequest) {
     /mj12/i,
     /ChatGPT-User/i,
     /facebookexternalhit/i,
-    /chrome\/140/i,
+    /chrome\/140/i, //TODO - to kiedys trzeba bedzie zmienic jak ta wersja wejdzie do uzytku
+    /python-urllib/i,
+    /pinterest/i,
+    /slurp/i,
+    /baiduspider/i,
+    /sogou/i,
+    /exabot/i,
+    /ia_archiver/i,
+    /seznambot/i,
+    /rogerbot/i,
+    /dotbot/i,
+    /gigabot/i,
+    /heritrix/i,
+    /ltx71/i,
+    /proximic/i,
+    /surveybot/i,
+    /wotbox/i,
+    /yeti/i,
+    /zoominfobot/i,
+    /curlbot/i,
+    /trendictionbot/i,
+    /tweetmemebot/i,
+    /unwindfetchor/i,
+    /urlappendbot/i,
+    /vagabondo/i,
+    /wbsearchbot/i,
+    /yanga/i,
+    /yioop/i,
+    /zealbot/i,
+    /zipbot/i,
+    /zyborg/i,
+    /mj12bot/i,
+    /netcraft/i,
+    /uptimebot/i,
     /pingdom/i,
     /uptimebot/i,
     /crawler/i,
@@ -39,19 +81,25 @@ export default function middleware(request: NextRequest) {
     /scrapy/i,
     /curl/i,
     /python-requests/i,
+    /wget/i,
+    /httpie/i,
+    /libwww-perl/i,
   ]
 
   if (badBots.some((bot) => bot.test(ua))) {
     console.warn(`[BLOCK] Bad bot detected: ${ua}`)
-    return new Response('Blocked', { status: 403 })
+    return new Response('Blocked - Bad bot detected', { status: 403 })
   }
 
   // ----------------------
-  // 3. Blokada wszystkich "isBot", które nie są w whitelist
+  // 3. Blokada UA oznaczonych jako bot przez Next.js, które nie są w whitelist
   // ----------------------
   if (uaInfo.isBot) {
-    console.warn(`[BLOCK] Detected as bot by Next.js: ${ua}`)
-    return new Response('Blocked', { status: 403 })
+    // dopuszczamy tylko przeglądarki desktop/mobile
+    if (!/chrome|safari|firefox|edge|opr|opera|webkit/i.test(ua)) {
+      console.warn(`[BLOCK] Detected as bot by Next.js: ${ua}`)
+      return new Response('Blocked - Detected as bot by Next.js', { status: 403 })
+    }
   }
 
   // ----------------------
