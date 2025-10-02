@@ -39,10 +39,8 @@ export default function middleware(request: NextRequest) {
     /semrush/i,
     /mj12/i,
     /ChatGPT-User/i,
-    /facebookexternalhit/i,
-    /chrome\/140/i, //TODO - to kiedys trzeba bedzie zmienic jak ta wersja wejdzie do uzytku
+    // /chrome\/140/i, //TODO - bardzo kiepski bot ale to tez blokuje moj browser
     /python-urllib/i,
-    /pinterest/i,
     /slurp/i,
     /baiduspider/i,
     /sogou/i,
