@@ -9,22 +9,17 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const uaInfo = userAgent(request)
-  if (uaInfo.isBot) return new Response('Blocked', { status: 403 })
-
-  const { pathname } = request.nextUrl
   const ua = request.headers.get('user-agent') || 'unknown'
+  const { pathname } = request.nextUrl
 
-  // Log Edge requests (non-standard browsers)
-  if (!/Chrome|Safari|Firefox|Edge/i.test(ua)) {
-    console.log(`[Edge request] ${pathname} - UA: ${ua}`)
+  // ❌ Blokuj jeśli Next.js rozpozna że to bot (ale z wyjątkiem Google itp.)
+  if (uaInfo.isBot) {
+    if (!/googlebot|bingbot|yandexbot|duckduckbot|applebot/i.test(ua)) {
+      return new Response('Blocked', { status: 403 })
+    }
   }
 
-  // Block suspicious UA: contains BOTH "Mozilla/5.0" AND "Mac OS X"
-  if (ua.includes('Mozilla/5.0') && ua.includes('Mac OS X')) {
-    return new Response('Blocked', { status: 403 })
-  }
-
-  // Block bad bots globally
+  // 🔎 Agresywna lista złych botów
   const badBots = [
     /ahrefs/i,
     /semrush/i,
@@ -34,44 +29,36 @@ export default function middleware(request: NextRequest) {
     /chrome\/140/i,
     /pingdom/i,
     /uptimebot/i,
+    /crawler/i,
+    /spider/i,
+    /scrapy/i,
+    /curl/i,
+    /python-requests/i,
   ]
   if (badBots.some((bot) => bot.test(ua))) {
     return new Response('Blocked', { status: 403 })
   }
 
-  // Also now it gets through cloudflare forewall check for bots
-
-  // TODO test with this commented if the RAW RSC response still happens
-  // if (searchParams.has('_rsc')) {
-  //   searchParams.delete('_rsc')
-  //   const newUrl = `${pathname}?${searchParams.toString()}`
-  //   return NextResponse.rewrite(newUrl)
-  // }
-  // Preserve existing Vary header and add RSC
-  // Handle static media files
+  // 📁 Cache static media
   if (pathname.startsWith('/api/media/')) {
     const response = NextResponse.next()
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
     return response
   }
 
-  // Let intlMiddleware handle everything else (including setting headers)
+  // 🌍 intl middleware (locale handling)
   const response = intlMiddleware(request)
 
-  // Optionally enhance headers here
+  // Headers optymalizacyjne
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, max-age=600000, must-revalidate')
+  response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
 
   return response
 }
 
 export const config = {
   matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next`, `/_vercel`, or `/admin`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    // the regex below can be shorter but there were some icon.ico problems so...
     '/((?!api|_next|_next/static|_next/image|favicon.ico|icon.ico|apple-touch-icon.png|robots.txt|sitemap.xml|_vercel|admin|next|.*\\..*).*)',
   ],
 }
