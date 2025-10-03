@@ -7,6 +7,13 @@ const intlMiddleware = createMiddleware({
   localeDetection: true,
 })
 
+// ----------------------
+// Burst Protection
+// ----------------------
+const ipMap = new Map<string, number[]>()
+const BURST_WINDOW = 2000 // 2 sekundy
+const BURST_LIMIT = 3 // max 3 requesty w 2 sekundy
+
 export default function middleware(request: NextRequest) {
   const uaInfo = userAgent(request)
   const ua = request.headers.get('user-agent') || 'unknown'
@@ -39,7 +46,6 @@ export default function middleware(request: NextRequest) {
     /semrush/i,
     /mj12/i,
     /ChatGPT-User/i,
-    // /chrome\/140/i, //TODO - bardzo kiepski bot ale to tez blokuje moj browser
     /python-urllib/i,
     /slurp/i,
     /baiduspider/i,
@@ -111,13 +117,31 @@ export default function middleware(request: NextRequest) {
   }
 
   // ----------------------
-  // 5. Normalny ruch (ludzie + dozwolone boty)
+  // 5. Burst Protection (3 req / 2s)
+  // ----------------------
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  const now = Date.now()
+  const timestamps = ipMap.get(ip) || []
+  const recent = timestamps.filter((t) => now - t < BURST_WINDOW)
+  recent.push(now)
+  ipMap.set(ip, recent)
+
+  if (recent.length > BURST_LIMIT) {
+    console.warn(`[BLOCK] Burst detected from ${ip} -> ${pathname}`)
+    return new Response('Too many requests', { status: 429 })
+  }
+
+  // ----------------------
+  // 6. Normalny ruch (ludzie + dozwolone boty)
   // ----------------------
   const response = intlMiddleware(request)
 
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
+  response.headers.set('Cache-Control', 'public, max-age=3600') // Cloudflare HTML cache
+
+  // kiedys bylo tak:
+  // response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
 
   console.log(`[ALLOW] Human/Browser: ${ua} -> ${pathname}`)
 
