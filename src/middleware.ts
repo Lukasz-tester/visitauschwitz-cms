@@ -96,20 +96,18 @@ export default function middleware(request: NextRequest) {
   }
 
   // ----------------------
-  // 3. Blokada UA oznaczonych jako bot przez Next.js, które nie są w whitelist
+  // 3. Block bots detected by Next.js UA
   // ----------------------
-  if (uaInfo.isBot) {
-    // dopuszczamy tylko przeglądarki desktop/mobile
-    if (!/chrome|safari|firefox|edge|opr|opera|webkit/i.test(ua)) {
-      console.warn(`[BLOCK] Detected as bot by Next.js: ${ua}`)
-      return new Response('Blocked - Detected as bot by Next.js', { status: 403 })
-    }
+  if (uaInfo.isBot && !/chrome|safari|firefox|edge|opr|opera|webkit/i.test(ua)) {
+    console.warn(`[BLOCK] Detected as bot by Next.js: ${ua}`)
+    return new Response('Blocked - Detected as bot by Next.js', { status: 403 })
   }
 
   // ----------------------
-  // 4. Obsługa statycznych plików (media)
+  // 4. Static media / _next/image caching
   // ----------------------
-  if (pathname.startsWith('/api/media/')) {
+  const isCacheable = pathname.startsWith('/_next/image') || pathname.startsWith('/api/media/')
+  if (isCacheable) {
     const response = NextResponse.next()
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
     console.log(`[CACHE] Media file cached: ${pathname}`)
@@ -117,32 +115,37 @@ export default function middleware(request: NextRequest) {
   }
 
   // ----------------------
-  // 5. Burst Protection (3 req / 2s)
+  // 5. Ignore _rsc fetches
   // ----------------------
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const now = Date.now()
-  const timestamps = ipMap.get(ip) || []
-  const recent = timestamps.filter((t) => now - t < BURST_WINDOW)
-  recent.push(now)
-  ipMap.set(ip, recent)
-
-  if (recent.length > BURST_LIMIT) {
-    console.warn(`[BLOCK] Burst detected from ${ip} -> ${pathname}`)
-    return new Response('Too many requests', { status: 429 })
+  if (request.nextUrl.searchParams.has('_rsc')) {
+    return NextResponse.next()
   }
 
   // ----------------------
-  // 6. Normalny ruch (ludzie + dozwolone boty)
+  // 6. Burst Protection only for dynamic HTML
+  // ----------------------
+  if (!isCacheable) {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    const now = Date.now()
+    const timestamps = ipMap.get(ip) || []
+    const recent = timestamps.filter((t) => now - t < BURST_WINDOW)
+    recent.push(now)
+    ipMap.set(ip, recent)
+
+    if (recent.length > BURST_LIMIT) {
+      console.warn(`[BLOCK] Burst detected from ${ip} -> ${pathname}`)
+      return new Response('Too many requests', { status: 429 })
+    }
+  }
+
+  // ----------------------
+  // 7. Normalny ruch (ludzie + dozwolone boty)
   // ----------------------
   const response = intlMiddleware(request)
 
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, max-age=3600') // Cloudflare HTML cache
-
-  // kiedys bylo tak:
-  // response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
-
+  response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
   console.log(`[ALLOW] Human/Browser: ${ua} -> ${pathname}`)
 
   return response

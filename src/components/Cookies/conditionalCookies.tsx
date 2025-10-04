@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+// import { SpeedInsights } from '@vercel/speed-insights/next'
 import { getCookie } from '@/utilities/helpersSsr'
 
 export function ConditionalCookies() {
@@ -18,7 +18,7 @@ export function ConditionalCookies() {
   return enabled ? (
     <>
       <Analytics />
-      <SpeedInsights />
+      {/* <SpeedInsights /> */}
     </>
   ) : null
 }
