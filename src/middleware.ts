@@ -17,7 +17,32 @@ const BURST_LIMIT = 3 // max 3 requesty w 2 sekundy
 export default function middleware(request: NextRequest) {
   const uaInfo = userAgent(request)
   const ua = request.headers.get('user-agent') || 'unknown'
-  const { pathname } = request.nextUrl
+  const { pathname, searchParams } = request.nextUrl // searchParams not used for now
+  const accept = request.headers.get('accept') || ''
+
+  // ----------------------
+  // 4. Static media / _next/image caching
+  // ----------------------
+  const isCacheable = pathname.startsWith('/_next/image') || pathname.startsWith('/api/media/')
+  if (isCacheable) {
+    const response = NextResponse.next()
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+    console.log(`[CACHE] Media file cached: ${pathname}`)
+    return response
+  }
+
+  // // ----------------------
+  // // 5. Ignore _rsc fetches
+  // // ----------------------
+  // if (searchParams.has('_rsc')) {
+  //   return NextResponse.next()
+  // }
+
+  // if (searchParams.has('_rsc')) {
+  //   searchParams.delete('_rsc')
+  //   const newUrl = `${pathname}?${searchParams.toString()}`
+  //   return NextResponse.rewrite(newUrl)
+  // }
 
   // ----------------------
   // 1. Whitelist dobrych botów i legalnych UA Google
@@ -104,27 +129,9 @@ export default function middleware(request: NextRequest) {
   }
 
   // ----------------------
-  // 4. Static media / _next/image caching
-  // ----------------------
-  const isCacheable = pathname.startsWith('/_next/image') || pathname.startsWith('/api/media/')
-  if (isCacheable) {
-    const response = NextResponse.next()
-    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
-    console.log(`[CACHE] Media file cached: ${pathname}`)
-    return response
-  }
-
-  // ----------------------
-  // 5. Ignore _rsc fetches
-  // ----------------------
-  if (request.nextUrl.searchParams.has('_rsc')) {
-    return NextResponse.next()
-  }
-
-  // ----------------------
   // 6. Burst Protection only for dynamic HTML
   // ----------------------
-  if (!isCacheable) {
+  if (!isCacheable && !searchParams.has('_rsc')) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
     const now = Date.now()
     const timestamps = ipMap.get(ip) || []
@@ -142,10 +149,19 @@ export default function middleware(request: NextRequest) {
   // 7. Normalny ruch (ludzie + dozwolone boty)
   // ----------------------
   const response = intlMiddleware(request)
-
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
+
+  // If response is HTML (or client requested HTML), set edge caching
+  const contentType = (response.headers.get('content-type') || '').toLowerCase()
+  if (contentType.includes('text/html') || accept.includes('text/html')) {
+    response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
+  } else {
+    // ensure that non-HTML (JSON/RSC) isn't cached accidentally
+    if (searchParams.has('_rsc')) {
+      response.headers.set('Cache-Control', 'no-store')
+    }
+  }
   console.log(`[ALLOW] Human/Browser: ${ua} -> ${pathname}`)
 
   return response
