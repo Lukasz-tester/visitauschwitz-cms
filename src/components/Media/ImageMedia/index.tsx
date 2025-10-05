@@ -66,6 +66,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       sizes={sizes}
       src={src}
       loading={priority ? 'eager' : 'lazy'}
+      unoptimized={true}
     />
   )
 }
