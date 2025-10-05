@@ -7,6 +7,10 @@ const intlMiddleware = createMiddleware({
   localeDetection: true,
 })
 
+const ipMap = new Map<string, number[]>()
+const BURST_WINDOW = 2000 // 2 sekundy
+const BURST_LIMIT = 3 // max 3 requesty w 2 sekundy
+
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const ua = request.headers.get('user-agent') || 'unknown'
@@ -16,24 +20,98 @@ export default function middleware(request: NextRequest) {
     console.log(`[Edge request] ${pathname} - UA: ${ua}`)
   }
 
-  // Block bad bots globally
-  const badBots = [/ahrefs/i, /semrush/i, /mj12/i]
-  if (badBots.some((bot) => bot.test(ua))) {
-    return new Response('Blocked', { status: 403 })
-  }
-
-  // TODO test with this commented if the RAW RSC response still happens
-  // if (searchParams.has('_rsc')) {
-  //   searchParams.delete('_rsc')
-  //   const newUrl = `${pathname}?${searchParams.toString()}`
-  //   return NextResponse.rewrite(newUrl)
-  // }
-  // Preserve existing Vary header and add RSC
-  // Handle static media files
-  if (pathname.startsWith('/api/media/')) {
+  if (pathname.startsWith('/_next/image') || pathname.startsWith('/api/media/')) {
     const response = NextResponse.next()
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
     return response
+  } else {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    const now = Date.now()
+    const timestamps = ipMap.get(ip) || []
+    const recent = timestamps.filter((t) => now - t < BURST_WINDOW)
+    recent.push(now)
+    ipMap.set(ip, recent)
+
+    if (recent.length > BURST_LIMIT) {
+      console.warn(`[BLOCK] Burst detected from ${ip} -> ${pathname}`)
+      return new Response('Too many requests', { status: 429 })
+    }
+  }
+
+  // ----------------------
+  // 1. Whitelist dobrych botów i legalnych UA Google
+  // ----------------------
+  const allowedBots = [
+    /googlebot/i,
+    /bingbot/i,
+    /yandexbot/i,
+    /duckduckbot/i,
+    /applebot/i,
+    /google-inspectiontool/i, // Google Search Console / PageSpeed
+    /google/i, // catch-all Google UA variants
+  ]
+
+  // jeśli UA pasuje do whitelisty → przepuszczamy
+  if (allowedBots.some((bot) => bot.test(ua))) {
+    console.log(`[ALLOW] Good bot or Google UA: ${ua}`)
+    return intlMiddleware(request)
+  }
+
+  // ----------------------
+  // 2. Blokada złych botów (agresywna)
+  // ----------------------
+  const badBots = [
+    /ahrefs/i,
+    /semrush/i,
+    /mj12/i,
+    /ChatGPT-User/i,
+    /python-urllib/i,
+    /slurp/i,
+    /baiduspider/i,
+    /sogou/i,
+    /exabot/i,
+    /ia_archiver/i,
+    /seznambot/i,
+    /rogerbot/i,
+    /dotbot/i,
+    /gigabot/i,
+    /heritrix/i,
+    /ltx71/i,
+    /proximic/i,
+    /surveybot/i,
+    /wotbox/i,
+    /yeti/i,
+    /zoominfobot/i,
+    /curlbot/i,
+    /trendictionbot/i,
+    /tweetmemebot/i,
+    /unwindfetchor/i,
+    /urlappendbot/i,
+    /vagabondo/i,
+    /wbsearchbot/i,
+    /yanga/i,
+    /yioop/i,
+    /zealbot/i,
+    /zipbot/i,
+    /zyborg/i,
+    /mj12bot/i,
+    /netcraft/i,
+    /uptimebot/i,
+    /pingdom/i,
+    /uptimebot/i,
+    /crawler/i,
+    /spider/i,
+    /scrapy/i,
+    /curl/i,
+    /python-requests/i,
+    /wget/i,
+    /httpie/i,
+    /libwww-perl/i,
+  ]
+
+  if (badBots.some((bot) => bot.test(ua))) {
+    console.warn(`[BLOCK] Bad bot detected: ${ua}`)
+    return new Response('Blocked - Bad bot detected', { status: 403 })
   }
 
   // Let intlMiddleware handle everything else (including setting headers)
@@ -42,7 +120,7 @@ export default function middleware(request: NextRequest) {
   // Optionally enhance headers here
   const existingVary = response.headers.get('Vary')
   response.headers.set('Vary', [existingVary, 'RSC'].filter(Boolean).join(', '))
-  response.headers.set('Cache-Control', 'public, max-age=600000, must-revalidate')
+  response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=300')
 
   return response
 }

@@ -1,11 +1,9 @@
 'use client'
 
 import type { StaticImageData } from 'next/image'
-
-import { cn } from 'src/utilities/cn'
 import NextImage from 'next/image'
 import React from 'react'
-
+import { cn } from 'src/utilities/cn'
 import type { Props as MediaProps } from '../types'
 
 export const ImageMedia: React.FC<MediaProps> = (props) => {
@@ -29,24 +27,19 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
 
   if (!src && resource && typeof resource === 'object') {
-    const {
-      alt: altFromResource,
-      filename: fullFilename,
-      height: fullHeight,
-      url,
-      width: fullWidth,
-    } = resource
+    const { alt: altFromResource, filename, height: h, width: w } = resource
 
-    width = fullWidth!
-    height = fullHeight!
+    width = w ?? undefined
+    height = h ?? undefined
     alt = altFromResource
 
-    src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
+    // Serve WebP from Cloudflare R2
+    const webpFilename = filename?.replace(/\.(jpg|jpeg)$/i, '.webp')
+    src = `${process.env.NEXT_PUBLIC_CF_R2_URL}${webpFilename}`
   }
 
-  if (!alt) {
-    console.warn('ImageMedia rendered without alt text:', src)
-  }
+  if (!alt) console.warn('ImageMedia rendered without alt text:', src)
+
   const sizes =
     sizeFromProps ||
     `
@@ -55,25 +48,23 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     (max-width: 1440px) 90vw,
     1440px
   `.trim()
+
   return (
     <NextImage
       alt={alt || ''}
       className={cn(imgClassName)}
       fill={fill}
       height={!fill ? height : undefined}
+      width={!fill ? width : undefined}
       onClick={onClick}
       onLoad={() => {
         setIsLoading(false)
-        if (typeof onLoadFromProps === 'function') {
-          onLoadFromProps()
-        }
+        if (typeof onLoadFromProps === 'function') onLoadFromProps()
       }}
       priority={priority}
-      // unoptimized={true} // TODO use this if usage limits are an issue
       quality={50}
       sizes={sizes}
       src={src}
-      width={!fill ? width : undefined}
       loading={priority ? 'eager' : 'lazy'}
     />
   )

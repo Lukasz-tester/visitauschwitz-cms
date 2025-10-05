@@ -69,6 +69,9 @@ const nextConfig = {
       }),
     ],
   },
+  images: {
+    domains: ['images.visitauschwitz.info'],
+  },
   reactStrictMode: true,
   redirects,
 }
