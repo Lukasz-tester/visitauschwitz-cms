@@ -7,6 +7,8 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { Code } from '@/blocks/Code/config'
+import { Banner } from '@/blocks/Banner/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -83,6 +85,8 @@ export const Pages: CollectionConfig = {
                 Archive,
                 FormBlock,
                 OpeningHours,
+                Code,
+                Banner,
                 Accordion,
               ],
               required: true,
