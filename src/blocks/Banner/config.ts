@@ -2,22 +2,22 @@ import type { Block } from 'payload'
 
 import {
   FixedToolbarFeature,
+  HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
 export const Banner: Block = {
-  slug: 'banner',
+  slug: 'Text',
   fields: [
     {
       name: 'style',
       type: 'select',
-      defaultValue: 'info',
+      defaultValue: 'text',
       options: [
-        { label: 'Info', value: 'info' },
-        { label: 'Warning', value: 'warning' },
-        { label: 'Error', value: 'error' },
-        { label: 'Success', value: 'success' },
+        { label: 'Text', value: 'text' },
+        { label: 'Quote', value: 'quote' },
+        { label: 'Emphasis', value: 'emphasis' },
       ],
       required: true,
     },
@@ -27,7 +27,12 @@ export const Banner: Block = {
       localized: true,
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+          return [
+            ...rootFeatures,
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          ]
         },
       }),
       label: false,

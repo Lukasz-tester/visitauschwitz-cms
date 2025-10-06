@@ -1,33 +1,21 @@
 import type { Block } from 'payload'
 
 export const Code: Block = {
-  slug: 'code',
+  slug: 'Image',
   interfaceName: 'CodeBlock',
   fields: [
     {
-      name: 'language',
-      type: 'select',
-      defaultValue: 'typescript',
-      options: [
-        {
-          label: 'Typescript',
-          value: 'typescript',
-        },
-        {
-          label: 'Javascript',
-          value: 'javascript',
-        },
-        {
-          label: 'CSS',
-          value: 'css',
-        },
-      ],
+      name: 'media',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
     },
     {
-      name: 'code',
-      type: 'code',
-      label: false,
-      required: true,
+      name: 'caption',
+      type: 'richText',
+      localized: true,
+      label: 'Caption',
+      required: false,
     },
   ],
 }

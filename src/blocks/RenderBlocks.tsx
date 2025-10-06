@@ -9,6 +9,8 @@ import { TypedLocale } from 'payload'
 import { OpeningHoursBlock } from './OpeningHours/Component.client'
 import { AccordionBlock } from './Accordion/Component.client'
 import { extractTextFromRichText, removeSpecialChars } from '@/utilities/helpersSsr'
+import { CodeBlock } from './Code/Component'
+import { BannerBlock } from './Banner/Component'
 
 type FAQItem = {
   '@type': 'Question'
@@ -23,6 +25,8 @@ const blockComponents: Record<string, React.FC<{ locale: TypedLocale } & any>> =
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  Image: CodeBlock,
+  Text: BannerBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,

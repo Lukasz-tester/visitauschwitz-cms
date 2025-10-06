@@ -10,9 +10,10 @@ import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-// import PageClient from './page.client'
+
 import { TypedLocale } from 'payload'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import PageClient from '../[slug]/page.client'
 
 type Args = {
   params: Promise<{
@@ -35,7 +36,7 @@ export default async function Page({ params }: Args) {
 
   return (
     <div className="pt-24 pb-24">
-      {/* <PageClient /> */}
+      <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none md:prose-h1:text-6xl opacity-90">
           <h1>{t('posts')}</h1>

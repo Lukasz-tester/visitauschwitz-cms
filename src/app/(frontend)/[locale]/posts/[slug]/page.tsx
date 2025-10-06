@@ -17,8 +17,10 @@ import type { Post } from '@/payload-types'
 
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
-// import PageClient from './page.client'
+
 import { TypedLocale } from 'payload'
+import PageClient from '../../[slug]/page.client'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -50,31 +52,27 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  const { layout } = post
+
   return (
     <article className="pt-16 pb-16">
-      {/* <PageClient /> */}
+      <PageClient />
 
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
       <PostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container lg:mx-0 lg:grid lg:grid-cols-[1fr_48rem_1fr] grid-rows-[1fr]">
-          <RichText
-            className="lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[1fr]"
-            content={post.content}
-            enableGutter={false}
-          />
-        </div>
-
-        {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <RelatedPosts
-            className="mt-12"
-            docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-          />
-        )}
+      <div className="container max-w-[50rem] pt-8">
+        <RenderBlocks blocks={layout} locale={locale} url={url} />
       </div>
+
+      {post.relatedPosts && post.relatedPosts.length > 0 && (
+        <RelatedPosts
+          className="mt-12"
+          docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+        />
+      )}
     </article>
   )
 }
