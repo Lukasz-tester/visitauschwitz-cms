@@ -9,7 +9,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { authenticated } from '../../access/authenticated'
+import { authenticated, authenticatedAdmin } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
@@ -30,10 +30,10 @@ import { revalidateHome } from './hooks/revalidateHome'
 export const Posts: CollectionConfig = {
   slug: 'posts',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: authenticatedAdmin,
+    delete: authenticatedAdmin,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: authenticatedAdmin,
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],

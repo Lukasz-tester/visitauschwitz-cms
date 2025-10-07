@@ -1,6 +1,6 @@
 import type { CollectionConfig, TypedLocale } from 'payload'
 
-import { authenticated } from '../../access/authenticated'
+import { authenticated, authenticatedAdmin } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
@@ -29,10 +29,10 @@ import {
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: authenticatedAdmin,
+    delete: authenticatedAdmin,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: authenticatedAdmin,
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
