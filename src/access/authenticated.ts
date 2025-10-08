@@ -10,5 +10,5 @@ export const authenticated: isAuthenticated = ({ req: { user } }) => {
 
 // zalogowany i admin
 export const authenticatedAdmin: isAuthenticated = ({ req: { user } }) => {
-  return Boolean(user) && user.role === 'admin'
+  return Boolean(user) && user?.role === 'admin'
 }
