@@ -82,15 +82,15 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         // NOTE: Hacky fix for
         // https://github.com/facebook/lexical/blob/d10c4e6e55261b2fdd7d1845aed46151d0f06a8c/packages/lexical-list/src/LexicalListItemNode.ts#L133
         // which does not return checked: false (only true - i.e. there is no prop for false)
-        const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
+        const serializedChildrenFn = (node: NodeTypes & { children: unknown[] }): JSX.Element | null => {
           if (node.children == null) {
             return null
           } else {
             if (node?.type === 'list' && node?.listType === 'check') {
               for (const item of node.children) {
-                if ('checked' in item) {
-                  if (!item?.checked) {
-                    item.checked = false
+                if ('checked' in (item as object)) {
+                  if (!(item as { checked?: boolean })?.checked) {
+                    (item as unknown as { checked: boolean }).checked = false
                   }
                 }
               }
@@ -99,7 +99,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           }
         }
 
-        const serializedChildren = 'children' in node ? serializedChildrenFn(node) : ''
+        const serializedChildren = 'children' in node ? serializedChildrenFn(node as NodeTypes & { children: unknown[] }) : ''
 
         if (node.type === 'block') {
           const block = node.fields
