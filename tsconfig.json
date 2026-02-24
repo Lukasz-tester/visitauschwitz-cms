@@ -36,6 +36,13 @@
       "@/*": [
         "./src/*"
       ],
+      "@payload-enchants/translator": ["./src/lib/translator/dist/index"],
+      "@payload-enchants/translator/client": ["./src/lib/translator/dist/exports/client"],
+      "@payload-enchants/translator/types": ["./src/lib/translator/dist/types"],
+      "@payload-enchants/translator/resolvers/openAI": ["./src/lib/translator/dist/resolvers/openAI"],
+      "@payload-enchants/translator/resolvers/google": ["./src/lib/translator/dist/resolvers/google"],
+      "@payload-enchants/translator/resolvers/copy": ["./src/lib/translator/dist/resolvers/copy"],
+      "@payload-enchants/translator/resolvers/types": ["./src/lib/translator/dist/resolvers/types"]
     }
   },
   "include": [

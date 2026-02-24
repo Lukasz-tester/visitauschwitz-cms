@@ -44,6 +44,7 @@
 
 import { withPayload } from '@payloadcms/next/withPayload'
 import createNextIntlPlugin from 'next-intl/plugin'
+import path from 'path'
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -74,6 +75,10 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  webpack: (config) => {
+    config.resolve.alias['@payload-enchants/translator'] = path.resolve('./src/lib/translator')
+    return config
+  },
 }
 
 export default withNextIntl(withPayload(nextConfig))

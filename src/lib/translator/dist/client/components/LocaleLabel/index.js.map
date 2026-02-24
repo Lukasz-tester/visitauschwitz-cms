@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/client/components/LocaleLabel/index.ts"],"sourcesContent":["export * from './LocaleLabel';\n"],"names":[],"mappings":"AAAA,cAAc,gBAAgB"}

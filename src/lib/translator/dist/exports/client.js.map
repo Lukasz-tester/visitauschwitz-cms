@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/exports/client.ts"],"sourcesContent":["export { CustomButtonWithTranslator } from '../client/components/CustomButton/CustomButtonWithTranslator';\n"],"names":["CustomButtonWithTranslator"],"mappings":"AAAA,SAASA,0BAA0B,QAAQ,+DAA+D"}

@@ -1,0 +1,81 @@
+{
+  "name": "@payload-enchants/translator",
+  "version": "1.3.0",
+  "private": false,
+  "bugs": "https://github.com/r1tsuu/payload-enchants/issues",
+  "repository": "https://github.com/r1tsuu/payload-enchants",
+  "license": "MIT",
+  "author": "r1tsuu",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "require": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./resolvers/types": {
+      "import": "./dist/resolvers/types.js",
+      "require": "./dist/resolvers/types.js",
+      "types": "./dist/resolvers/types.d.ts"
+    },
+    "./resolvers/google": {
+      "import": "./dist/resolvers/google.js",
+      "require": "./dist/resolvers/google.js",
+      "types": "./dist/resolvers/google.d.ts"
+    },
+    "./resolvers/copy": {
+      "import": "./dist/resolvers/copy.js",
+      "require": "./dist/resolvers/copy.js",
+      "types": "./dist/resolvers/copy.d.ts"
+    },
+    "./resolvers/openAI": {
+      "import": "./dist/resolvers/openAI.js",
+      "require": "./dist/resolvers/openAI.js",
+      "types": "./dist/resolvers/openAI.d.ts"
+    },
+    "./client": {
+      "import": "./dist/exports/client.js",
+      "require": "./dist/exports/client.js",
+      "types": "./dist/exports/client.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "bson-objectid": "^2.0.4",
+    "he": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/he": "^1.2.3",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "typescript": "5.7.2"
+  },
+  "peerDependencies": {
+    "@payloadcms/translations": "^3.1.0",
+    "@payloadcms/ui": "^3.1.0",
+    "payload": "^3.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "pnpm copyfiles && pnpm build:swc && pnpm build:types",
+    "build:swc": "swc ./src -d ./dist --config-file .swcrc",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
+    "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png,json}\" dist/",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix --ext .ts,.tsx src"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}
