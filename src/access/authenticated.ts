@@ -8,7 +8,7 @@ export const authenticated: isAuthenticated = ({ req: { user } }) => {
   return Boolean(user)
 }
 
-// zalogowany i admin
+// zalogowany i admin (or no role set — treat as admin for backwards compat)
 export const authenticatedAdmin: isAuthenticated = ({ req: { user } }) => {
-  return Boolean(user) && user?.role === 'admin'
+  return Boolean(user) && (user?.role === 'admin' || !user?.role)
 }

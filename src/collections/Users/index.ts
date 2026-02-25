@@ -14,7 +14,9 @@ const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'role'], // dodaj role do kolumn
     useAsTitle: 'name',
   },
-  auth: true,
+  auth: {
+    useSessions: false,
+  },
   fields: [
     {
       name: 'name',

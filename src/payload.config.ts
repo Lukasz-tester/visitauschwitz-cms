@@ -40,6 +40,7 @@ import { resendAdapter } from '@payloadcms/email-resend'
 
 import { translator, openAIResolver } from '@payload-enchants/translator'
 import { payloadSyncAiTranslations } from 'payload-sync-ai-translations'
+import { mcpPlugin } from '@payloadcms/plugin-mcp'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -246,6 +247,14 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
         apiKey: process.env.OPENAI_KEY || '',
       },
     }) as unknown as Plugin,
+    mcpPlugin({
+      collections: {
+        posts: { enabled: true },
+        pages: { enabled: true },
+        media: { enabled: true },
+        categories: { enabled: true },
+      },
+    }),
     payloadCloudPlugin(), // storage-adapter-placeholder
   ],
   localization,

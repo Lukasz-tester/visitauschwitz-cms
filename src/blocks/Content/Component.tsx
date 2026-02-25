@@ -5,6 +5,12 @@ import type { Page } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { extractContentSchema } from './extractContentSchema'
 
+function hasRichTextContent(rt: { root: { children?: Array<any> } } | null | undefined): boolean {
+  return !!rt?.root?.children?.some((node: any) =>
+    node?.children?.some((child: any) => !!child?.text)
+  )
+}
+
 const ImageMedia = dynamic(() =>
   import('@/components/Media/ImageMedia').then((mod) => mod.ImageMedia),
 )
@@ -49,15 +55,15 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
           'mt-14': addMarginTop,
           'mb-14': addMarginBottom,
           'pb-14': addPaddingBottom,
-          'pt-24': heading?.root.direction === null && columns && columns?.length > 3,
+          'pt-24': !hasRichTextContent(heading) && columns && columns?.length > 3,
         })}
       >
         <div className="container">
           {heading && (
             <RichText
               className={cn('md:px-[17.3%] pt-10 ', {
-                'pb-14': heading.root.direction !== null && columns && columns.length > 0,
-                hidden: heading.root.direction === null,
+                'pb-14': hasRichTextContent(heading) && columns && columns.length > 0,
+                hidden: !hasRichTextContent(heading),
               })}
               content={heading}
               enableGutter={false}
@@ -88,9 +94,9 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                     <RichText
                       className={cn({
                         'prose-a:bg-card': changeBackground,
-                        'mb-6': richText.root.direction !== null && enableMedia,
-                        'pb-1 md:pb-0': richText.root.direction !== null,
-                        hidden: richText.root.direction === null,
+                        'mb-6': hasRichTextContent(richText) && enableMedia,
+                        'pb-1 md:pb-0': hasRichTextContent(richText),
+                        hidden: !hasRichTextContent(richText),
                       })}
                       content={richText}
                       enableGutter={false}
@@ -111,7 +117,7 @@ export const ContentBlock: React.FC<{ id?: string } & Props> = React.memo(
                     <RichText
                       className={cn({
                         'mt-4': enableMedia,
-                        hidden: richTextEnd.root.direction === null,
+                        hidden: !hasRichTextContent(richTextEnd),
                       })}
                       content={richTextEnd}
                       enableGutter={false}
