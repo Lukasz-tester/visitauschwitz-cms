@@ -10,5 +10,6 @@ export const authenticated: isAuthenticated = ({ req: { user } }) => {
 
 // zalogowany i admin (or no role set — treat as admin for backwards compat)
 export const authenticatedAdmin: isAuthenticated = ({ req: { user } }) => {
-  return Boolean(user) && (user?.role === 'admin' || !user?.role)
+  if (!user || !('role' in user)) return false
+  return user.role === 'admin' || !user.role
 }

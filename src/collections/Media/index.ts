@@ -8,8 +8,11 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { anyone } from '../access/anyone'
-import { authenticated, authenticatedAdmin } from '../access/authenticated'
+import { anyone } from '../../access/anyone'
+import { authenticatedAdmin } from '../../access/authenticated'
+
+import { syncMediaToR2 } from './hooks/syncMediaToR2'
+import { deleteMediaFromR2 } from './hooks/deleteMediaFromR2'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,6 +24,10 @@ export const Media: CollectionConfig = {
     delete: authenticatedAdmin,
     read: anyone,
     update: authenticatedAdmin,
+  },
+  hooks: {
+    afterChange: [syncMediaToR2],
+    afterDelete: [deleteMediaFromR2],
   },
   fields: [
     {
@@ -42,6 +49,6 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/media'),
+    staticDir: path.resolve(dirname, '../../../public/media'),
   },
 }
