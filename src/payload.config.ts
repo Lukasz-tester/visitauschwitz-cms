@@ -1,6 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
@@ -229,13 +229,7 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
         },
       },
     }),
-    vercelBlobStorage({
-      collections: {
-        media: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
-    payloadSyncAiTranslations({
+payloadSyncAiTranslations({
       collections: {
         // clientProps.locales overrides the plugin default which passes full locale objects.
         // The server endpoint expects plain string codes — this is a bug in the plugin.

@@ -21,7 +21,6 @@ import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloa
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { BulkTranslateGlobal as BulkTranslateGlobal_2043071721ce9b13e636c3dacf801366 } from 'payload-sync-ai-translations/client'
 import { SyncLinksGlobal as SyncLinksGlobal_2043071721ce9b13e636c3dacf801366 } from 'payload-sync-ai-translations/client'
-import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
@@ -48,6 +47,5 @@ export const importMap = {
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "payload-sync-ai-translations/client#BulkTranslateGlobal": BulkTranslateGlobal_2043071721ce9b13e636c3dacf801366,
   "payload-sync-ai-translations/client#SyncLinksGlobal": SyncLinksGlobal_2043071721ce9b13e636c3dacf801366,
-  "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
