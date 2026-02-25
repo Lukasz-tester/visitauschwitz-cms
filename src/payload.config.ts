@@ -18,7 +18,7 @@ import {
 import sharp from 'sharp' // editor-import
 import { UnderlineFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { buildConfig, type Plugin } from 'payload'
 import { fileURLToPath } from 'url'
 
 import Categories from './collections/Categories'
@@ -39,6 +39,7 @@ import localization from './i18n/localization'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { translator, openAIResolver } from '@payload-enchants/translator'
+import { payloadSyncAiTranslations } from 'payload-sync-ai-translations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -233,6 +234,18 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
+    payloadSyncAiTranslations({
+      collections: {
+        // clientProps.locales overrides the plugin default which passes full locale objects.
+        // The server endpoint expects plain string codes — this is a bug in the plugin.
+        posts: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
+        pages: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
+        categories: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
+      },
+      openai: {
+        apiKey: process.env.OPENAI_KEY || '',
+      },
+    }) as unknown as Plugin,
     payloadCloudPlugin(), // storage-adapter-placeholder
   ],
   localization,
