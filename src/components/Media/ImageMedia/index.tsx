@@ -33,9 +33,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     height = h ?? undefined
     alt = altFromResource
 
-    // Serve WebP from Cloudflare R2
-    const webpFilename = filename?.replace(/\.(jpg|jpeg|png|gif|tiff|bmp|avif)$/i, '.webp')
-    src = `${process.env.NEXT_PUBLIC_CF_R2_URL}${webpFilename}`
+    src = `${process.env.NEXT_PUBLIC_CF_R2_URL}${filename}`
   }
 
   if (!alt) console.warn('ImageMedia rendered without alt text:', src)

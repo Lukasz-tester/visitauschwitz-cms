@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
@@ -229,7 +230,19 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
         },
       },
     }),
-payloadSyncAiTranslations({
+s3Storage({
+      collections: { media: true },
+      bucket: process.env.R2_BUCKET!,
+      config: {
+        region: 'auto',
+        endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
+        },
+      },
+    }),
+    payloadSyncAiTranslations({
       collections: {
         // clientProps.locales overrides the plugin default which passes full locale objects.
         // The server endpoint expects plain string codes — this is a bug in the plugin.
