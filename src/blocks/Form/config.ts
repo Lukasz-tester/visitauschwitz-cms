@@ -42,9 +42,13 @@ export const FormBlock: Block = {
       label: 'Intro Content',
     },
     {
+      name: 'changeBackground',
+      type: 'checkbox',
+    },
+    {
       name: 'enableOutro',
       type: 'checkbox',
-      label: 'Enable Intro Content',
+      label: 'Enable Ontro Content',
     },
     {
       name: 'outroContent',

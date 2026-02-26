@@ -589,6 +589,7 @@ export interface FormBlock {
     };
     [k: string]: unknown;
   } | null;
+  changeBackground?: boolean | null;
   enableOutro?: boolean | null;
   outroContent?: {
     root: {
@@ -1278,6 +1279,7 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  changeBackground?: T;
   enableOutro?: T;
   outroContent?: T;
   id?: T;
