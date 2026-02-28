@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export const dynamic = 'force-dynamic' //This tells Next.js: “Don’t try to pre-render this during build — always generate it at runtime.”
 
-const serverUrl = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'https://visitauschwitz.info'
+const serverUrl = 'https://visitauschwitz.info'
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://auschwitz.vercel.app'
 const locales = ['en', 'pl']
 // TODO - add locales when translated!
@@ -21,13 +21,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: updatedAt,
       changeFrequency: 'monthly' as const,
       priority: 1,
-      alternates: locales.reduce(
-        (acc, lang) => {
-          acc[lang] = `${serverUrl}/${lang}/${safeSlug}`
-          return acc
-        },
-        {} as Record<string, string>,
-      ),
+      alternates: {
+        languages: locales.reduce(
+          (acc, lang) => {
+            acc[lang] = `${serverUrl}/${lang}/${safeSlug}`
+            return acc
+          },
+          {} as Record<string, string>,
+        ),
+      },
     }))
   }
 
