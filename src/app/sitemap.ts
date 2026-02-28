@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export const dynamic = 'force-dynamic' //This tells Next.js: “Don’t try to pre-render this during build — always generate it at runtime.”
 
-const serverUrl = 'https://visitauschwitz.info'
+const serverUrl = 'https://www.visitauschwitz.info'
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://auschwitz.vercel.app'
 const locales = ['en', 'pl']
 // TODO - add locales when translated!
