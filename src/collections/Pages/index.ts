@@ -57,8 +57,24 @@ export const Pages: CollectionConfig = {
       return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
     },
     useAsTitle: 'title',
+    components: {
+      edit: {
+        beforeDocumentControls: [
+          '@/components/admin/SidebarLocaleSwitcher#SidebarLocaleSwitcher',
+        ],
+      },
+    },
   },
   fields: [
+    {
+      name: '_documentMeta',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/DocumentMeta#DocumentMeta',
+        },
+      },
+    },
     {
       name: 'title',
       localized: true,

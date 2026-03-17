@@ -8,6 +8,15 @@ export const Header: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    components: {
+      elements: {
+        beforeDocumentControls: [
+          '@/components/admin/SidebarLocaleSwitcher#SidebarLocaleSwitcher',
+        ],
+      },
+    },
+  },
   fields: [
     {
       name: 'navItems',
