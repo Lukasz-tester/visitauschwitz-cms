@@ -228,7 +228,7 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
         },
       },
     }),
-s3Storage({
+    s3Storage({
       collections: { media: true },
       bucket: process.env.R2_BUCKET!,
       config: {
@@ -254,10 +254,26 @@ s3Storage({
     }) as unknown as Plugin,
     mcpPlugin({
       collections: {
-        posts: { enabled: true },
-        pages: { enabled: true },
-        media: { enabled: true },
-        categories: { enabled: true },
+        posts: {
+          enabled: true,
+          description:
+            'Blog posts with localized title, slug, and block-based layout (Text and Image blocks). Related to categories, authors, and other posts. Supports draft/published versioning and SEO metadata.',
+        },
+        pages: {
+          enabled: true,
+          description:
+            'Site pages with localized title, slug, a hero section (none/low/medium/high impact with rich text, links, and media), and block-based layout (CallToAction, Content, MediaBlock, Archive, Form, OpeningHours, Image, Text, Accordion). Supports draft/published versioning and SEO metadata.',
+        },
+        media: {
+          enabled: true,
+          description:
+            'Uploaded media files (images) with localized alt text and optional caption.',
+        },
+        categories: {
+          enabled: true,
+          description:
+            'Post categories with localized title. Supports nested hierarchy via nestedDocs plugin.',
+        },
       },
     }),
     payloadCloudPlugin(), // storage-adapter-placeholder
