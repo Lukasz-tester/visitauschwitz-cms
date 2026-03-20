@@ -1,9 +1,3 @@
-/* Hide default locale switcher from header (moved to document sidebar) */
-.app-header__localizer,
-.app-header__localizer-spacing {
-  display: none !important;
-}
-
 /* Hide status/dates meta from sticky doc-controls (moved to scrollable area above fields) */
 .doc-controls__content {
   display: none !important;

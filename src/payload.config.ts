@@ -125,8 +125,14 @@ export default buildConfig({
     transactionOptions: false,
   }),
   collections: [Pages, Posts, Media, Categories, Users],
-  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  cors: [
+    process.env.PAYLOAD_PUBLIC_SERVER_URL,
+    process.env.FRONTEND_URL,
+  ].filter(Boolean) as string[],
+  csrf: [
+    process.env.PAYLOAD_PUBLIC_SERVER_URL,
+    process.env.FRONTEND_URL,
+  ].filter(Boolean) as string[],
   globals: [Header, Footer],
   logger: {
     destination: process.stdout,
@@ -220,7 +226,7 @@ Preserve leading and trailing whitespace " " exactly as in the source text.
       },
     }),
     searchPlugin({
-      collections: ['posts'],
+      collections: ['posts', 'pages'],
       beforeSync: beforeSyncWithSearch,
       searchOverrides: {
         fields: ({ defaultFields }) => {

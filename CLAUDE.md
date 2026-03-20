@@ -49,9 +49,9 @@ These rules apply to **SEO title tags**, **H1**, and **H2/H3** headings — titl
 - Clear, unique, relevant, engaging; primary keywords placed in front for better CTR
 - **Title tag:** primary keyword front-loaded, < 53 characters; include numbers where relevant — this is the first thing users see in SERPs
 - **H1:** one per page, primary keyword front-loaded, < 60 characters
-- **H2/H3:** use question format where natural — e.g. "How to get to Auschwitz from Krakow?" — matches AI search queries and triggers featured snippets
-- Include numbers in titles/headings where appropriate — e.g. "3 routes through Auschwitz I" — improves CTR
-- Include current year in **headings** where relevant as a freshness signal — but **not** in SEO title tags or meta descriptions, as the frontend appends `| {currentYear}` to every title automatically
+- **H2/H3:** use question format only when it genuinely matches search intent and adds value — e.g. "Can You Visit Auschwitz Without a Guide?" triggers featured snippets because people actually search that question. Do **not** force questions when a descriptive or number-based heading is stronger (e.g. "Driving to Auschwitz: Routes & Parking", "5 Booking Tips to Avoid Sold-Out Dates"). Never change the heading's topic to fit a question — the heading must match the content below it.
+- Include numbers in titles/headings where appropriate — e.g. "5 Memorial Sites Near Auschwitz Worth Visiting" — improves CTR
+- **Current year** — include only in the **homepage H1** as a freshness signal (e.g. "How to Visit Auschwitz-Birkenau in 2026"). Do **not** add the year to subpage H1s, H2/H3 headings, SEO title tags, or meta descriptions — the frontend already appends `| {currentYear}` to every rendered title tag automatically
 - **English titles:** Title Case — **Polish titles:** sentence case, only first word and proper nouns capitalised
 
 ### AI Search & Rich Results
@@ -115,6 +115,7 @@ When translating content between locales ("default locale" = source, "target loc
 - **`richText`** (above image) = regular inline links (amber underline)
 - **`richTextEnd`** (below image) = styled pill/button links via CSS. Best for CTA lists.
 - Always add an empty paragraph after headings (frontend uses `padding-top`, not `margin-bottom`)
+- **Lead answer block** — `addMarginTop: false`, `addMarginBottom: false` — the block sits directly below the hero without extra spacing
 
 ### Posts — Layout Blocks
 
