@@ -116,77 +116,250 @@ interface MongoOpUpdate {
 
 type Update = LocaleUpdate | MongoOpUpdate
 
+// Helper: path to heading text node within a block's heading richText field
+const bh = (id: string, loc: string) =>
+  `layout.$[${id}].heading.${loc}.root.children.0.children.0.text`
+
+// Helper: path to heading text node within a column's richText/richTextEnd field
+const ch = (bid: string, cid: string, field: string, loc: string) =>
+  `layout.$[${bid}].columns.$[${cid}].${field}.${loc}.root.children.0.children.0.text`
+
+// Helper: path to heading text node within a CTA tile's richText field
+const th = (bid: string, tid: string, loc: string) =>
+  `layout.$[${bid}].tiles.$[${tid}].richText.${loc}.root.children.0.children.0.text`
+
 const updates: Update[] = [
-  // Step 1: Remove tickets-2026-policy block from its current position
+  // ─── Post: Auschwitz Tickets Online Only (69bd353e99188628cbda9f97) ──
   {
-    collection: 'pages',
-    documentId: '677dc19bcafe44e5e9560d03',
-    operation: '$pull',
+    collection: 'posts',
+    documentId: '69bd353e99188628cbda9f97',
+    locale: 'en',
     fields: {
-      layout: { blockName: 'tickets-2026-policy' },
-    },
-  },
-  // Step 2: Re-insert it at position 1 (after lead-answer)
-  {
-    collection: 'pages',
-    documentId: '677dc19bcafe44e5e9560d03',
-    operation: '$push',
-    fields: {
-      layout: {
-        $each: [
-          {
-            blockType: 'content',
-            columns: [
-              {
-                size: 'oneSixth',
-                id: new ObjectId().toString(),
-              },
-              {
-                size: 'twoThirds',
-                richText: {
-                  en: richText([
-                    heading('Are Auschwitz Tickets Online Only in 2026?', 'h2'),
-                    paragraph([]),
-                    paragraph([
-                      textNode(
-                        'Yes. From March 1, 2026, all entry passes to the Auschwitz-Birkenau Memorial must be booked online. On-site ticket sales have been permanently discontinued.',
-                      ),
-                    ]),
-                    paragraph([
-                      textNode(
-                        'Book your free individual entry or guided tour exclusively through the official museum website. Be cautious of third-party sites charging inflated prices \u2014 the official booking system is the only legitimate source.',
-                      ),
-                    ]),
-                  ]),
-                  pl: richText([
-                    heading('Czy bilety do Auschwitz w 2026 są tylko online?', 'h2'),
-                    paragraph([]),
-                    paragraph([
-                      textNode(
-                        'Tak. Od 1 marca 2026 roku wszystkie wejściówki do Miejsca Pamięci Auschwitz-Birkenau można rezerwować wyłącznie online. Sprzedaż biletów na miejscu została trwale zakończona.',
-                      ),
-                    ]),
-                    paragraph([
-                      textNode(
-                        'Zarezerwuj bezpłatne wejście indywidualne lub zwiedzanie z przewodnikiem wyłącznie na oficjalnej stronie Muzeum. Uważaj na zewnętrzne serwisy pobierające zawyżone opłaty \u2014 jedynym wiarygodnym źródłem jest oficjalny system rezerwacji.',
-                      ),
-                    ]),
-                  ]),
-                },
-                id: new ObjectId().toString(),
-              },
-            ],
-            changeBackground: false,
-            addMarginTop: false,
-            addMarginBottom: false,
-            addPaddingBottom: false,
-            id: new ObjectId().toString(),
-            blockName: 'tickets-2026-policy',
+      layout: [
+        // Block 1: Emphasis Intro
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'intro',
+          style: 'emphasis',
+          content: {
+            en: richText([
+              paragraph([
+                textNode(
+                  'Since March 1, 2026, entry cards to the Auschwitz-Birkenau Memorial are available exclusively online at ',
+                ),
+                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
+                  newTab: true,
+                  format: 8,
+                }),
+                textNode(
+                  '. The Museum ended all on-site ticket sales to combat unethical tour operators who misled visitors into paying inflated prices.',
+                ),
+              ]),
+            ]),
           },
-        ],
-        $position: 1,
-      },
+        },
+        // Block 2: Why the Change
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'why-online-only',
+          style: 'text',
+          content: {
+            en: richText([
+              heading('Why the Museum Ended On-Site Ticket Sales', 'h2'),
+              paragraph([]),
+              paragraph([
+                textNode(
+                  'For years, unethical tour operators exploited the on-site ticket system at the Memorial. They fabricated stories about sold-out dates to pressure visitors into purchasing overpriced packages — sometimes at several times the actual cost.',
+                ),
+              ]),
+              paragraph([
+                textNode(
+                  'The problem escalated to the point where visitors queued from 3–4 AM to secure entry cards, leading to conflicts that required police intervention. The Museum received a growing number of complaints about misleading practices and inflated prices charged by third-party operators.',
+                ),
+              ]),
+            ]),
+          },
+        },
+        // Block 3: Quote — Kacorzyk
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'quote-kacorzyk',
+          style: 'quote',
+          content: {
+            en: richText([
+              paragraph([
+                textNode(
+                  'Unethical practices by these entities became a kind of business model based on generating false information about the difficulty of getting to the Memorial and exploiting the emotions of people from around the world who want to visit this important place of remembrance.',
+                  2,
+                ),
+              ]),
+              paragraph([
+                textNode('— Andrzej Kacorzyk,', 1),
+                textNode(' Deputy Director, Auschwitz-Birkenau Memorial'),
+              ]),
+            ]),
+          },
+        },
+        // Block 4: Image — Old ticket sales
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Image',
+          media: new ObjectId('67d62b26e4565760a9cc6892'),
+          caption: {
+            en: richText([
+              paragraph([
+                textNode(
+                  'On-site entry card sales at Auschwitz I, before the system was discontinued in March 2026.',
+                ),
+              ]),
+            ]),
+          },
+        },
+        // Block 5: How to Book
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'how-to-book',
+          style: 'text',
+          content: {
+            en: richText([
+              heading('How to Book Through visit.auschwitz.org', 'h2'),
+              paragraph([]),
+              paragraph([
+                textNode('The '),
+                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
+                  newTab: true,
+                  format: 8,
+                }),
+                textNode(
+                  ' platform is the only official reservation system for the Memorial. Visitors can reserve entry cards up to three months in advance. Free individual entry cards become available seven days before each visit date. Guided tour tickets are released progressively and remain available until sold out.',
+                ),
+              ]),
+              heading('Real-Time Availability for Last-Minute Visits', 'h3'),
+              paragraph([]),
+              paragraph([
+                textNode(
+                  'Same-day booking is possible. The system displays real-time availability, so visitors can check open time slots directly from their mobile device — even on the way to the Memorial.',
+                ),
+              ]),
+            ]),
+          },
+        },
+        // Block 6: Quote — Bartyzel
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'quote-bartyzel',
+          style: 'quote',
+          content: {
+            en: richText([
+              paragraph([
+                textNode(
+                  'visit.auschwitz.org is the only official system for booking entry cards to the Auschwitz Memorial. The Museum does not cooperate with any external booking entities and bears no responsibility for services offered through other websites.',
+                  2,
+                ),
+              ]),
+              paragraph([
+                textNode('— Bartosz Bartyzel,', 1),
+                textNode(' Spokesman, Auschwitz-Birkenau Memorial'),
+              ]),
+            ]),
+          },
+        },
+        // Block 7: Image — Scanning tickets
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Image',
+          media: new ObjectId('67d791077d7f6cbd8c6d4747'),
+          caption: {
+            en: richText([
+              paragraph([
+                textNode('Visitors scanning entry cards at the Memorial entrance.'),
+              ]),
+            ]),
+          },
+        },
+        // Block 8: Avoid Scams
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'avoid-scams',
+          style: 'text',
+          content: {
+            en: richText([
+              heading('3 Rules to Avoid Auschwitz Ticket Scams', 'h2'),
+              paragraph([]),
+              paragraph([
+                textNode('1. Book only at visit.auschwitz.org.', 1),
+                textNode(
+                  ' This is the sole official platform. Entry cards purchased elsewhere carry no Museum guarantee.',
+                ),
+              ]),
+              paragraph([
+                textNode('2. Ignore "sold out" claims from third parties.', 1),
+                textNode(
+                  ' Operators routinely fabricate scarcity to push expensive packages. Always check availability yourself on the official site.',
+                ),
+              ]),
+              paragraph([
+                textNode('3. Report misleading operators.', 1),
+                textNode(
+                  ' If you encounter websites or agencies making false claims about ticket availability, report them to the Museum directly.',
+                ),
+              ]),
+            ]),
+          },
+        },
+        // Block 9: Emphasis Callout
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Text',
+          blockName: 'callout-book',
+          style: 'emphasis',
+          content: {
+            en: richText([
+              paragraph([
+                textNode('Book your entry cards at '),
+                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
+                  newTab: true,
+                  format: 8,
+                }),
+                textNode(
+                  ' — the only official reservation system for the Auschwitz-Birkenau Memorial.',
+                ),
+              ]),
+              paragraph([
+                textNode('Source: '),
+                linkNode(
+                  'Official Museum announcement',
+                  'https://www.auschwitz.org/en/museum/news/visit-auschwitz-org-entry-cards-to-the-memorial-available-only-online-from-1-march,1819.html',
+                  { newTab: true, format: 8 },
+                ),
+              ]),
+            ]),
+          },
+        },
+        // Block 10: Image — Entrance
+        {
+          id: new ObjectId().toHexString(),
+          blockType: 'Image',
+          media: new ObjectId('67d62c80e4565760a9cc68df'),
+          caption: {
+            en: richText([
+              paragraph([
+                textNode(
+                  'The reception building at Auschwitz I, where visitors now enter with pre-booked electronic entry cards.',
+                ),
+              ]),
+            ]),
+          },
+        },
+      ],
     },
+    arrayFilters: [],
   },
 ]
 

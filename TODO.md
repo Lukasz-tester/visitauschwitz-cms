@@ -4,115 +4,6 @@
 **Status:** 6 pages, 1 blog post, 2 locales (en/pl)
 **Goal:** Maximize email collection for commercial products (books, edu apps) and exploit unique position as licensed Auschwitz guide since 2006.
 
----
-
-## 1. CRITICAL: 2026 Online-Only Ticket Policy (Urgent)
-
-From March 1, 2026 ALL tickets must be booked online — no more on-site sales. This is generating massive search confusion right now.
-
-- [ ] Add dedicated content block on /tickets page explaining the policy change
-- [ ] Create blog post: "Auschwitz Tickets Online Only in 2026: What Changed"
-- [ ] Target queries:
-  - "auschwitz tickets online only 2026"
-  - "auschwitz ticket scam"
-  - "can I buy auschwitz tickets on site 2026"
-  - "auschwitz online tickets 2026"
-  - "auschwitz cennik 2026" (PL)
-
----
-
-## 2. SEO Title & Meta Audit (Per Page)
-
-Rules: title < 53 chars, description 140–155 chars, keywords front-loaded.
-
-| Page | Title | Chars | Description | Chars | Issues |
-|------|-------|-------|-------------|-------|--------|
-| /home | _check current_ | | | | Year in H1 only, not title tag |
-| /tickets | | | | | Needs "2026" keyword in content |
-| /arrival | | | | | |
-| /museum | | | | | |
-| /supplement | | | | | |
-| /tour | | | | | |
-| Post 1 | | | | | |
-
-- [ ] Audit each page's actual title/meta against rules
-- [ ] Fix any titles > 53 chars
-- [ ] Fix any descriptions outside 140–155 chars
-- [ ] Front-load primary keywords in all titles
-
----
-
-## 3. H2/H3 Heading Rewrite Plan
-
-Rewrite headings to improve AI search and featured snippets. Use question format only when it matches real search intent and adds value. Use descriptive/number formats when they're stronger. Never change the topic — the heading must still match the content below it.
-
-### /tickets page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| How to Get Auschwitz Tickets | How to Get Auschwitz Tickets? | Already a how-to; just add "?" — no year per CLAUDE.md rule |
-| Visit Auschwitz Without a Guide | Can You Visit Auschwitz Without a Guide? | Matches top search query exactly |
-| Guided Tours of Auschwitz | What Are Guided Tours of Auschwitz Like? | Question triggers snippet for "what are guided tours" |
-| Join Auschwitz Guided Tour | How to Join an Auschwitz Guided Tour? | How-to question matches search intent |
-| Private Auschwitz Guided Tour | How to Book a Private Auschwitz Tour? | Question format, keeps topic on the tour itself (not just cost) |
-| Organized Tour of Auschwitz | Are Organized Auschwitz Tours Worth It? | "Worth it" is a high-volume search modifier |
-| Disadvantages of Organized Tours | Disadvantages of Organized Auschwitz Tours | Keep as statement — already clear, adding "?" adds nothing. Front-load "Auschwitz" |
-| Booking Tips for Visiting Auschwitz | 5 Booking Tips to Avoid Sold-Out Dates | Number + specific benefit — stronger than a question here |
-
-### /arrival page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| Find Your Way to the Museum | How to Navigate Between Auschwitz I and Birkenau? | Specific question, matches real visitor confusion |
-| How to Get to Birkenau | How to Get from Auschwitz I to Birkenau? | More specific — people search "from Auschwitz I to Birkenau" |
-| How to Get to Auschwitz by Car | Driving to Auschwitz: Routes & Parking | Descriptive + keywords — stronger than a question |
-| Direct Bus Kraków → Auschwitz | Kraków to Auschwitz by Bus: Schedule & Price | Descriptive + high-value keywords (schedule, price) |
-| How to Get to Auschwitz by Train | Can You Take a Train to Auschwitz? | Matches common doubt — many visitors aren't sure trains go there |
-| Airports near Auschwitz | Which Airport Is Closest to Auschwitz? | Specific question matches exact search query |
-
-### /museum page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| Auschwitz Visitor Service Center | What to Expect at the Visitor Service Center? | Useful question — visitors don't know what the center is |
-| Auschwitz Exhibition Admission | How Does Auschwitz Admission Work? | Clarifies a confusing topic (free vs paid, timed entry) |
-| Auschwitz Memorial Vicinity | What Is There to See Near Auschwitz? | Question matches "near Auschwitz" searches |
-| Key Sites Related to the History of Auschwitz | 5 Memorial Sites Near Auschwitz Worth Visiting | Number + clearer than the vague original |
-| The City of Oświęcim | Is Oświęcim Worth Exploring? | Question addresses real visitor doubt |
-| Essential on Site | What Facilities Are Available at Auschwitz? | Specific question, original heading is too vague |
-| Nature Around Auschwitz | Nature & Walking Trails Near the Memorial | Descriptive — no one searches this as a question |
-
-### /supplement page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| Arranging Auschwitz Sightseeing | How to Arrange Your Auschwitz Visit? | Question + tone fix ("visit" not "sightseeing") |
-| What to Expect When Visiting Auschwitz | What to Expect When Visiting Auschwitz? | Already question-shaped — just add "?" and keep the topic |
-| Auschwitz Memorial Regulations | What Are the Auschwitz Memorial Rules? | Question matches "auschwitz rules" searches |
-| Tips to Fully Appreciate Your Visit | How to Make the Most of Your Auschwitz Visit? | Question format, keeps the same topic (appreciation tips during visit) |
-| Works of Auschwitz Survivors | Art by Auschwitz Survivors: 6 Artists You Should Know | Number + engaging — stronger as a statement |
-
-### /tour page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| Auschwitz Route Overview | What Does the Auschwitz Tour Route Cover? | Question adds value — visitors want to know what's included |
-| Places to Visit at Auschwitz | Key Places to Visit at Auschwitz | Keep as statement — adding "which" doesn't improve search match. "Key" adds specificity |
-
-### /home page
-
-| Current | Proposed | Rationale |
-|---------|----------|-----------|
-| Key Information for Auschwitz Visit | 6 Things to Know Before Visiting Auschwitz | Number + actionable — proven CTR boost |
-| Auschwitz Then and Now | Auschwitz in 1944 vs Today: What Changed? | Comparison + question — engaging and specific |
-| Created by an Experienced Guide | Why Trust This Guide? 20 Years at the Memorial | Trust-building question + credential number |
-
-- [ ] Implement heading rewrites on highest-traffic pages first (/tickets, /arrival)
-- [ ] Verify all rewritten headings target long-tail keywords
-- [ ] Ensure each heading still matches the content below it
-
----
-
 ## 4. Missing Pages & Blog Posts
 
 ### Must-Create Pages
@@ -213,38 +104,38 @@ The interactive map is the site's unique asset. Expand it:
 
 ### English
 
-| Query | Intent | Target |
-|-------|--------|--------|
-| is auschwitz free to visit | informational | /tickets H2 |
-| how long does auschwitz take | informational | /tour or /faq H2 |
-| auschwitz dress code / what to wear | informational | /supplement H2 or new post |
-| can you take photos at auschwitz | informational | /supplement H2 + /faq |
-| visiting auschwitz with children | informational | new post + /faq |
-| auschwitz I vs birkenau difference | informational | /tour H2 |
-| auschwitz skip the line tickets | transactional | /tickets H2 |
-| best time to visit auschwitz | informational | /tickets or /supplement H2 |
-| how far in advance to book auschwitz | informational | /tickets H2 + /faq |
-| auschwitz self-guided tour worth it | informational | /tickets H2 or post |
-| krakow to auschwitz day trip | transactional | /arrival H2 or post |
-| auschwitz virtual tour | informational | future product |
-| auschwitz audio guide | informational | /tickets or /tour H2 |
-| where to eat near auschwitz | informational | /museum H2 (exists but heading weak) |
-| auschwitz winter visit | informational | new post |
-| auschwitz accessibility wheelchair | informational | new post + /faq |
-| auschwitz emotional preparation | informational | /supplement or new post |
-| what to read before visiting auschwitz | informational | new post (lead magnet CTA) |
-| auschwitz online tickets 2026 | transactional | /tickets (URGENT) |
-| auschwitz ticket scam | informational | /tickets or post (URGENT) |
+| Query                                  | Intent        | Target                               |
+| -------------------------------------- | ------------- | ------------------------------------ |
+| is auschwitz free to visit             | informational | /tickets H2                          |
+| how long does auschwitz take           | informational | /tour or /faq H2                     |
+| auschwitz dress code / what to wear    | informational | /supplement H2 or new post           |
+| can you take photos at auschwitz       | informational | /supplement H2 + /faq                |
+| visiting auschwitz with children       | informational | new post + /faq                      |
+| auschwitz I vs birkenau difference     | informational | /tour H2                             |
+| auschwitz skip the line tickets        | transactional | /tickets H2                          |
+| best time to visit auschwitz           | informational | /tickets or /supplement H2           |
+| how far in advance to book auschwitz   | informational | /tickets H2 + /faq                   |
+| auschwitz self-guided tour worth it    | informational | /tickets H2 or post                  |
+| krakow to auschwitz day trip           | transactional | /arrival H2 or post                  |
+| auschwitz virtual tour                 | informational | future product                       |
+| auschwitz audio guide                  | informational | /tickets or /tour H2                 |
+| where to eat near auschwitz            | informational | /museum H2 (exists but heading weak) |
+| auschwitz winter visit                 | informational | new post                             |
+| auschwitz accessibility wheelchair     | informational | new post + /faq                      |
+| auschwitz emotional preparation        | informational | /supplement or new post              |
+| what to read before visiting auschwitz | informational | new post (lead magnet CTA)           |
+| auschwitz online tickets 2026          | transactional | /tickets (URGENT)                    |
+| auschwitz ticket scam                  | informational | /tickets or post (URGENT)            |
 
 ### Polish
 
-| Query | Target |
-|-------|--------|
+| Query                         | Target        |
+| ----------------------------- | ------------- |
 | ile trwa zwiedzanie auschwitz | /tour or /faq |
-| co zabrac do auschwitz | /supplement |
-| auschwitz z dziecmi | post + /faq |
-| auschwitz zima | post |
-| auschwitz cennik 2026 | /tickets |
+| co zabrac do auschwitz        | /supplement   |
+| auschwitz z dziecmi           | post + /faq   |
+| auschwitz zima                | post          |
+| auschwitz cennik 2026         | /tickets      |
 
 ---
 
@@ -254,13 +145,13 @@ Current: en, pl only. 1.95M visitors in 2025.
 
 All locales already configured but commented out in `src/i18n/localization.ts`. AI translation pipeline exists. Activate 1 locale per month.
 
-| Priority | Locale | Rationale |
-|----------|--------|-----------|
-| 1 | **Italian (it)** | Top-5 visitor nationality |
-| 2 | **Spanish (es)** | Top-5 visitor nationality |
-| 3 | **German (de)** | Top-5, huge educational tourism market |
-| 4 | **French (fr)** | Significant visitor base |
-| 5 | **Dutch (nl)** | Strong per-capita interest |
+| Priority | Locale           | Rationale                              |
+| -------- | ---------------- | -------------------------------------- |
+| 1        | **Italian (it)** | Top-5 visitor nationality              |
+| 2        | **Spanish (es)** | Top-5 visitor nationality              |
+| 3        | **German (de)**  | Top-5, huge educational tourism market |
+| 4        | **French (fr)**  | Significant visitor base               |
+| 5        | **Dutch (nl)**   | Strong per-capita interest             |
 
 - [ ] Activate Italian locale (Month 1)
 - [ ] Activate Spanish locale (Month 2)
