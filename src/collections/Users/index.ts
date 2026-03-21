@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
-import { authenticated, authenticatedAdmin } from '../../access/authenticated'
+import { authenticatedAdmin } from '../../access/authenticated'
+import { authenticated } from '../../access/authenticated'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -32,6 +33,24 @@ const Users: CollectionConfig = {
       defaultValue: 'admin',
       admin: {
         position: 'sidebar', // można wyświetlić w panelu bocznym
+      },
+    },
+    {
+      name: 'bio',
+      type: 'textarea',
+      label: 'Short Bio',
+      localized: true,
+      admin: {
+        description: 'A short biography displayed at the end of posts authored by this user.',
+      },
+    },
+    {
+      name: 'photo',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Author Photo',
+      admin: {
+        description: 'Portrait photo displayed alongside the author bio in post footers.',
       },
     },
   ],

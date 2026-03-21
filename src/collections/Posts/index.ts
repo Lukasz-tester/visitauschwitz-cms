@@ -60,9 +60,7 @@ export const Posts: CollectionConfig = {
     useAsTitle: 'title',
     components: {
       edit: {
-        beforeDocumentControls: [
-          '@/components/admin/SidebarLocaleSwitcher#SidebarLocaleSwitcher',
-        ],
+        beforeDocumentControls: ['@/components/admin/SidebarLocaleSwitcher#SidebarLocaleSwitcher'],
       },
     },
   },
@@ -206,6 +204,15 @@ export const Posts: CollectionConfig = {
         {
           name: 'name',
           type: 'text',
+        },
+        {
+          name: 'bio',
+          type: 'textarea',
+        },
+        {
+          name: 'photo',
+          type: 'upload',
+          relationTo: 'media',
         },
       ],
     },

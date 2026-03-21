@@ -489,6 +489,8 @@ export interface Post {
     | {
         id?: string | null;
         name?: string | null;
+        bio?: string | null;
+        photo?: (string | null) | Media;
       }[]
     | null;
   slug?: string | null;
@@ -555,6 +557,14 @@ export interface User {
   id: string;
   name?: string | null;
   role?: ('admin' | 'editor') | null;
+  /**
+   * A short biography displayed at the end of posts authored by this user.
+   */
+  bio?: string | null;
+  /**
+   * Portrait photo displayed alongside the author bio in post footers.
+   */
+  photo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1377,6 +1387,8 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         id?: T;
         name?: T;
+        bio?: T;
+        photo?: T;
       };
   slug?: T;
   slugLock?: T;
@@ -1428,6 +1440,8 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  bio?: T;
+  photo?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

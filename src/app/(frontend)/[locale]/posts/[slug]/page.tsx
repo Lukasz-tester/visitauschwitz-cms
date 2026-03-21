@@ -17,6 +17,7 @@ import type { Post } from '@/payload-types'
 
 import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
+import { AuthorBio } from '@/components/AuthorBio'
 
 import { TypedLocale } from 'payload'
 import PageClient from '../../[slug]/page.client'
@@ -66,6 +67,10 @@ export default async function Post({ params: paramsPromise }: Args) {
       <div className="container max-w-[50rem] pt-8">
         <RenderBlocks blocks={layout} locale={locale} url={url} />
       </div>
+
+      {post.populatedAuthors && post.populatedAuthors.length > 0 && (
+        <AuthorBio authors={post.populatedAuthors} />
+      )}
 
       {post.relatedPosts && post.relatedPosts.length > 0 && (
         <RelatedPosts

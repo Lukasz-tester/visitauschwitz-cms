@@ -52,7 +52,7 @@ export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: 
       const authorDoc = await payload.findByID({
         id: typeof author === 'object' ? author?.id : author,
         collection: 'users',
-        depth: 0,
+        depth: 1, // depth 1 so the photo media object is resolved
         req,
       })
 
@@ -62,6 +62,8 @@ export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: 
     doc.populatedAuthors = authorDocs.map((authorDoc) => ({
       id: authorDoc.id,
       name: authorDoc.name,
+      bio: authorDoc.bio ?? null,
+      photo: authorDoc.photo ?? null,
     }))
   }
 
