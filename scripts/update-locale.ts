@@ -120,6 +120,9 @@ type Update = LocaleUpdate | MongoOpUpdate
 const bh = (id: string, loc: string) =>
   `layout.$[${id}].heading.${loc}.root.children.0.children.0.text`
 
+// Helper: path to full heading richText field on a content block
+const hf = (id: string, loc: string) => `layout.$[${id}].heading.${loc}`
+
 // Helper: path to heading text node within a column's richText/richTextEnd field
 const ch = (bid: string, cid: string, field: string, loc: string) =>
   `layout.$[${bid}].columns.$[${cid}].${field}.${loc}.root.children.0.children.0.text`
@@ -128,238 +131,189 @@ const ch = (bid: string, cid: string, field: string, loc: string) =>
 const th = (bid: string, tid: string, loc: string) =>
   `layout.$[${bid}].tiles.$[${tid}].richText.${loc}.root.children.0.children.0.text`
 
+// Helper: path to full richText field on a CTA tile
+const tf = (bid: string, tid: string, loc: string) =>
+  `layout.$[${bid}].tiles.$[${tid}].richText.${loc}`
+
+// Shortcut: create a richText object containing a single h2 heading
+const h2 = (text: string) => richText([heading(text, 'h2')])
+
 const updates: Update[] = [
-  // ─── Post: Auschwitz Tickets Online Only (69bd353e99188628cbda9f97) ──
+  // ─── /tickets (9 headings) ────────────────────────────────────────
   {
-    collection: 'posts',
-    documentId: '69bd353e99188628cbda9f97',
-    locale: 'en',
+    collection: 'pages',
+    documentId: '677dc19bcafe44e5e9560d03',
+    locale: 'all',
     fields: {
-      layout: [
-        // Block 1: Emphasis Intro
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'intro',
-          style: 'emphasis',
-          content: {
-            en: richText([
-              paragraph([
-                textNode(
-                  'Since March 1, 2026, entry cards to the Auschwitz-Birkenau Memorial are available exclusively online at ',
-                ),
-                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
-                  newTab: true,
-                  format: 8,
-                }),
-                textNode(
-                  '. The Museum ended all on-site ticket sales to combat unethical tour operators who misled visitors into paying inflated prices.',
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 2: Why the Change
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'why-online-only',
-          style: 'text',
-          content: {
-            en: richText([
-              heading('Why the Museum Ended On-Site Ticket Sales', 'h2'),
-              paragraph([]),
-              paragraph([
-                textNode(
-                  'For years, unethical tour operators exploited the on-site ticket system at the Memorial. They fabricated stories about sold-out dates to pressure visitors into purchasing overpriced packages — sometimes at several times the actual cost.',
-                ),
-              ]),
-              paragraph([
-                textNode(
-                  'The problem escalated to the point where visitors queued from 3–4 AM to secure entry cards, leading to conflicts that required police intervention. The Museum received a growing number of complaints about misleading practices and inflated prices charged by third-party operators.',
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 3: Quote — Kacorzyk
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'quote-kacorzyk',
-          style: 'quote',
-          content: {
-            en: richText([
-              paragraph([
-                textNode(
-                  'Unethical practices by these entities became a kind of business model based on generating false information about the difficulty of getting to the Memorial and exploiting the emotions of people from around the world who want to visit this important place of remembrance.',
-                  2,
-                ),
-              ]),
-              paragraph([
-                textNode('— Andrzej Kacorzyk,', 1),
-                textNode(' Deputy Director, Auschwitz-Birkenau Memorial'),
-              ]),
-            ]),
-          },
-        },
-        // Block 4: Image — Old ticket sales
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Image',
-          media: new ObjectId('67d62b26e4565760a9cc6892'),
-          caption: {
-            en: richText([
-              paragraph([
-                textNode(
-                  'On-site entry card sales at Auschwitz I, before the system was discontinued in March 2026.',
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 5: How to Book
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'how-to-book',
-          style: 'text',
-          content: {
-            en: richText([
-              heading('How to Book Through visit.auschwitz.org', 'h2'),
-              paragraph([]),
-              paragraph([
-                textNode('The '),
-                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
-                  newTab: true,
-                  format: 8,
-                }),
-                textNode(
-                  ' platform is the only official reservation system for the Memorial. Visitors can reserve entry cards up to three months in advance. Free individual entry cards become available seven days before each visit date. Guided tour tickets are released progressively and remain available until sold out.',
-                ),
-              ]),
-              heading('Real-Time Availability for Last-Minute Visits', 'h3'),
-              paragraph([]),
-              paragraph([
-                textNode(
-                  'Same-day booking is possible. The system displays real-time availability, so visitors can check open time slots directly from their mobile device — even on the way to the Memorial.',
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 6: Quote — Bartyzel
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'quote-bartyzel',
-          style: 'quote',
-          content: {
-            en: richText([
-              paragraph([
-                textNode(
-                  'visit.auschwitz.org is the only official system for booking entry cards to the Auschwitz Memorial. The Museum does not cooperate with any external booking entities and bears no responsibility for services offered through other websites.',
-                  2,
-                ),
-              ]),
-              paragraph([
-                textNode('— Bartosz Bartyzel,', 1),
-                textNode(' Spokesman, Auschwitz-Birkenau Memorial'),
-              ]),
-            ]),
-          },
-        },
-        // Block 7: Image — Scanning tickets
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Image',
-          media: new ObjectId('67d791077d7f6cbd8c6d4747'),
-          caption: {
-            en: richText([
-              paragraph([
-                textNode('Visitors scanning entry cards at the Memorial entrance.'),
-              ]),
-            ]),
-          },
-        },
-        // Block 8: Avoid Scams
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'avoid-scams',
-          style: 'text',
-          content: {
-            en: richText([
-              heading('3 Rules to Avoid Auschwitz Ticket Scams', 'h2'),
-              paragraph([]),
-              paragraph([
-                textNode('1. Book only at visit.auschwitz.org.', 1),
-                textNode(
-                  ' This is the sole official platform. Entry cards purchased elsewhere carry no Museum guarantee.',
-                ),
-              ]),
-              paragraph([
-                textNode('2. Ignore "sold out" claims from third parties.', 1),
-                textNode(
-                  ' Operators routinely fabricate scarcity to push expensive packages. Always check availability yourself on the official site.',
-                ),
-              ]),
-              paragraph([
-                textNode('3. Report misleading operators.', 1),
-                textNode(
-                  ' If you encounter websites or agencies making false claims about ticket availability, report them to the Museum directly.',
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 9: Emphasis Callout
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Text',
-          blockName: 'callout-book',
-          style: 'emphasis',
-          content: {
-            en: richText([
-              paragraph([
-                textNode('Book your entry cards at '),
-                linkNode('visit.auschwitz.org', 'https://visit.auschwitz.org', {
-                  newTab: true,
-                  format: 8,
-                }),
-                textNode(
-                  ' — the only official reservation system for the Auschwitz-Birkenau Memorial.',
-                ),
-              ]),
-              paragraph([
-                textNode('Source: '),
-                linkNode(
-                  'Official Museum announcement',
-                  'https://www.auschwitz.org/en/museum/news/visit-auschwitz-org-entry-cards-to-the-memorial-available-only-online-from-1-march,1819.html',
-                  { newTab: true, format: 8 },
-                ),
-              ]),
-            ]),
-          },
-        },
-        // Block 10: Image — Entrance
-        {
-          id: new ObjectId().toHexString(),
-          blockType: 'Image',
-          media: new ObjectId('67d62c80e4565760a9cc68df'),
-          caption: {
-            en: richText([
-              paragraph([
-                textNode(
-                  'The reception building at Auschwitz I, where visitors now enter with pre-booked electronic entry cards.',
-                ),
-              ]),
-            ]),
-          },
-        },
-      ],
+      [bh('b1', 'en')]: 'How to Book Auschwitz Tickets in 2026?',
+      [bh('b1', 'pl')]: 'Jak zarezerwować bilety do Auschwitz w 2026?',
+      [hf('b2', 'en')]: richText([heading('Practical Tips Before Booking Auschwitz Tickets', 'h2'), paragraph([])]),
+      [hf('b2', 'pl')]: richText([heading('Praktyczne porady przed rezerwacją biletów do Auschwitz', 'h2'), paragraph([])]),
+      [bh('b3', 'pl')]: 'Czy bilety do Auschwitz są tylko online w 2026?', // PL only
+      [bh('b4', 'en')]: 'Can You Visit Auschwitz Without a Guide?',
+      [bh('b4', 'pl')]: 'Czy można zwiedzać Auschwitz bez przewodnika?',
+      [bh('b5', 'en')]: 'What Are Auschwitz-Birkenau Guided Tours Like?',
+      [bh('b5', 'pl')]: 'Jak wygląda zwiedzanie Auschwitz-Birkenau z przewodnikiem?',
+      [bh('b6', 'en')]: 'How to Join a Guided Auschwitz Tour?',
+      [bh('b6', 'pl')]: 'Jak dołączyć do wycieczki z przewodnikiem do Auschwitz?',
+      [bh('b7', 'en')]: 'Is a Private Auschwitz Tour Worth It?',
+      [bh('b7', 'pl')]: 'Czy warto wybrać prywatne zwiedzanie Auschwitz-Birkenau?',
+      [bh('b8', 'en')]: 'Are Organized Auschwitz Tours from Krakow Worth It?',
+      [bh('b8', 'pl')]: 'Czy zorganizowane wycieczki do Auschwitz z Krakowa się opłacają?',
+      [bh('b9', 'en')]: 'Disadvantages of Organized Auschwitz-Birkenau Tours',
+      [bh('b9', 'pl')]: 'Wady zorganizowanych wycieczek do Auschwitz-Birkenau',
     },
-    arrayFilters: [],
+    arrayFilters: [
+      { 'b1.id': '67a2568bfa49aa6e12a0920a' },
+      { 'b2.id': '680f5a776630e6f377b4b12a' },
+      { 'b3.id': '69bca2cc03c41f967f4281ae' },
+      { 'b4.id': '67ae0a9a394065e7e6204fa5' },
+      { 'b5.id': '67ae0c86f1dc305c2c147ec0' },
+      { 'b6.id': '67ae0e91f1dc305c2c147ed1' },
+      { 'b7.id': '67ae0f48f1dc305c2c147ed8' },
+      { 'b8.id': '67ae0fb1f1dc305c2c147edf' },
+      { 'b9.id': '67ae1006f1dc305c2c147ee6' },
+    ],
+  },
+
+  // ─── /arrival (6 headings) ────────────────────────────────────────
+  {
+    collection: 'pages',
+    documentId: '677e7baff3320b6091e3bc29',
+    locale: 'all',
+    fields: {
+      [th('b1', 't1', 'pl')]: 'Jak dojechać do Muzeum?', // CTA, PL only
+      [bh('b2', 'en')]: 'How to Get from Auschwitz I to Birkenau?',
+      [bh('b2', 'pl')]: 'Jak dostać się z Auschwitz I do Birkenau?',
+      [bh('b3', 'en')]: 'Driving to Auschwitz: Best Routes, Parking & Tips',
+      [bh('b3', 'pl')]: 'Dojazd samochodem do Auschwitz: trasy, parking i porady',
+      [bh('b4', 'en')]: 'Kraków to Auschwitz Bus: Schedule, Prices & Stops',
+      [bh('b4', 'pl')]: 'Autobus Kraków → Auschwitz: rozkład, ceny i przystanki',
+      [bh('b5', 'en')]: 'Can You Get to Auschwitz by Train from Krakow?',
+      [bh('b5', 'pl')]: 'Czy da się dojechać pociągiem do Auschwitz z Krakowa?',
+      [bh('b6', 'en')]: 'Which Airports Are Closest to Auschwitz?',
+      [bh('b6', 'pl')]: 'Które lotniska są najbliżej Auschwitz?',
+    },
+    arrayFilters: [
+      { 'b1.id': '67c8b0e6d01c930d4956eeca' },
+      { 't1.id': '67c8b0ead01c930d4956eecc' },
+      { 'b2.id': '67c72ebbf2626643efd00528' },
+      { 'b3.id': '67b50540234a38723d17d71a' },
+      { 'b4.id': '67b5cb1b75d34d25e38f7ec7' },
+      { 'b5.id': '67b3715b8215f64cf67b600b' },
+      { 'b6.id': '678975d0e9ea8c8cf094bd4d' },
+    ],
+  },
+
+  // ─── /museum (7 headings) ─────────────────────────────────────────
+  {
+    collection: 'pages',
+    documentId: '67819798793515a2ea090884',
+    locale: 'all',
+    fields: {
+      [bh('b1', 'en')]: 'What to Expect at the Auschwitz Visitor Center?',
+      [bh('b1', 'pl')]: 'Czego spodziewać się w Centrum Obsługi Odwiedzających?',
+      [hf('b2', 'en')]: richText([heading('How to Enter Auschwitz Memorial Site?', 'h2'), paragraph([])]),
+      [hf('b2', 'pl')]: richText([heading('Jak wejść na teren Miejsca Pamięci Auschwitz?', 'h2'), paragraph([])]),
+      [bh('b3', 'en')]: 'What to See Near Auschwitz-Birkenau Memorial in One Day?',
+      [bh('b3', 'pl')]: 'Co warto zobaczyć w okolicy Auschwitz-Birkenau w jeden dzień?',
+      [hf('b4', 'en')]: richText([heading('5 Important Memorial Sites Near Auschwitz Worth Visiting', 'h2'), paragraph([])]),
+      [hf('b4', 'pl')]: richText([heading('5 ważnych miejsc pamięci w pobliżu Auschwitz', 'h2'), paragraph([])]),
+      [bh('b5', 'en')]: 'Is Oświęcim Town Worth Visiting After Auschwitz?',
+      [bh('b5', 'pl')]: 'Czy Oświęcim warto zwiedzić po Auschwitz?',
+      [th('b6', 't1', 'en')]: 'What Facilities & Services Are Available at Auschwitz?', // CTA
+      [th('b6', 't1', 'pl')]: 'Jakie udogodnienia są na terenie Auschwitz?',
+      [bh('b7', 'en')]: 'Nature Near Auschwitz Memorial',
+      [bh('b7', 'pl')]: 'Przyroda w okolicy Miejsca Pamięci Auschwitz',
+    },
+    arrayFilters: [
+      { 'b1.id': '67d6f52e7d212c58b0a8a1cd' },
+      { 'b2.id': '67dc89155489df140f9bcfad' },
+      { 'b3.id': '67be697defd490714bffaa5b' },
+      { 'b4.id': '67aca4d5a571e8fac47e63e2' },
+      { 'b5.id': '67abd166953aa4c0ca1dfd24' },
+      { 'b6.id': '67c0f2e93c07892e54d6413b' },
+      { 't1.id': '67c0f2f43c07892e54d6413d' },
+      { 'b7.id': '67abd77c2b859414d9646739' },
+    ],
+  },
+
+  // ─── /supplement (7 headings) ─────────────────────────────────────
+  {
+    collection: 'pages',
+    documentId: '6795fe0b07dd1cffb589c118',
+    locale: 'all',
+    fields: {
+      [bh('b1', 'en')]: 'How to Plan Your Auschwitz-Birkenau Visit Step by Step?',
+      [bh('b1', 'pl')]: 'Jak zaplanować wizytę w Auschwitz-Birkenau krok po kroku?',
+      [ch('b2', 'c1', 'richText', 'en')]: 'What to Expect During Your Auschwitz Visit?',
+      [ch('b2', 'c1', 'richText', 'pl')]: 'Czego spodziewać się podczas wizyty w Auschwitz?',
+      [bh('b3', 'en')]: 'What Are the Official Auschwitz Visiting Rules?',
+      [bh('b3', 'pl')]: 'Jakie są oficjalne zasady zwiedzania Auschwitz?',
+      [bh('b4', 'en')]: 'Tips to Make the Most of Your Auschwitz Visit',
+      [bh('b4', 'pl')]: 'Porady, jak w pełni docenić wizytę w Auschwitz',
+      [bh('b5', 'pl')]: 'Wesprzyj moją działalność', // PL only
+      [bh('b6', 'en')]: 'Works of Auschwitz-Birkenau Survivors',
+      [bh('b6', 'pl')]: 'Dzieła ocalałych z Auschwitz-Birkenau',
+      [bh('b7', 'pl')]: 'Źródła i atrybucje', // PL only
+    },
+    arrayFilters: [
+      { 'b1.id': '67fa8bb518cef83b703cbe67' },
+      { 'b2.id': '67dc991b5489df140f9bcfc7' },
+      { 'c1.id': '6802258e41dceb08e77b0464' },
+      { 'b3.id': '67deb15af5d8b5084b167b37' },
+      { 'b4.id': '67aead6a9e7e248cfe2888b0' },
+      { 'b5.id': '67bfd1e6b8310e0bd7fc3b88' },
+      { 'b6.id': '67dbf734e06cd25a6f7260af' },
+      { 'b7.id': '67bf9db20abd253bbcaea9db' },
+    ],
+  },
+
+  // ─── /tour (4 headings) ───────────────────────────────────────────
+  {
+    collection: 'pages',
+    documentId: '6781983f793515a2ea090c6a',
+    locale: 'all',
+    fields: {
+      [bh('b1', 'en')]: 'What Does the Full Auschwitz-Birkenau Tour Route Include?',
+      [bh('b1', 'pl')]: 'Co obejmuje pełna trasa zwiedzania Auschwitz-Birkenau?',
+      [bh('b2', 'en')]: 'Most Important Sites to Visit at Auschwitz-Birkenau',
+      [bh('b2', 'pl')]: 'Najważniejsze miejsca do zwiedzenia w Auschwitz-Birkenau',
+      [bh('b3', 'pl')]: 'Auschwitz I – obóz główny', // PL only
+      [bh('b4', 'pl')]: 'Auschwitz II-Birkenau', // PL only
+    },
+    arrayFilters: [
+      { 'b1.id': '69bd7805e40066e9a11f673e' },
+      { 'b2.id': '678d6735344965a1ce2e0559' },
+      { 'b3.id': '678cebe7bc03e85682f74213' },
+      { 'b4.id': '67d30bcc4048af38ffefc1ca' },
+    ],
+  },
+
+  // ─── /home (5 headings) ───────────────────────────────────────────
+  {
+    collection: 'pages',
+    documentId: '676c7b8613f815400b9f3711',
+    locale: 'all',
+    fields: {
+      [th('b1', 't1', 'pl')]: 'Zasady zwiedzania Auschwitz', // CTA, PL only
+      [bh('b2', 'en')]: 'Why Trust Me? 20+ Years as Auschwitz-Birkenau Official Guide',
+      [bh('b2', 'pl')]: 'Dlaczego warto mi zaufać? 20+ lat jako oficjalny przewodnik po Auschwitz-Birkenau',
+      [bh('b3', 'en')]: 'Auschwitz-Birkenau Then vs Now – What Has Changed?',
+      [bh('b3', 'pl')]: 'Auschwitz-Birkenau wtedy i dziś – co się zmieniło?',
+      [bh('b4', 'en')]: '6 Essential Things to Know Before Visiting Auschwitz',
+      [bh('b4', 'pl')]: '6 najważniejszych rzeczy, które musisz wiedzieć przed wizytą w Auschwitz',
+      [th('b5', 't2', 'pl')]: 'Najnowsze wpisy', // CTA, PL only
+    },
+    arrayFilters: [
+      { 'b1.id': '6825b8ba4675f0840f86facd' },
+      { 't1.id': '6825b8ba4675f0840f86facc' },
+      { 'b2.id': '6825b8ba4675f0840f86fad6' },
+      { 'b3.id': '6825b8ba4675f0840f86fadb' },
+      { 'b4.id': '6825b8ba4675f0840f86fae3' },
+      { 'b5.id': '6825b8ba4675f0840f86faf2' },
+      { 't2.id': '6825b8ba4675f0840f86faf1' },
+    ],
   },
 ]
 

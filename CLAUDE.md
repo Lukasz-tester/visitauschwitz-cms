@@ -36,6 +36,8 @@ Auschwitz-Birkenau is a memorial and place of remembrance, not a tourist attract
 | **German** | `Gedenkstättenbesuch`, `Besuch der Gedenkstätte`             | `Ausflug`, `Reise`                                   |
 | **French** | `visite commémorative`, `visite du Mémorial`                 | `excursion`, `sortie`                                |
 
+**"Book" = "reserve" (not "buy/purchase")** — Auschwitz entry cards can be free. In all languages, translate "book" as "reserve" (`zarezerwować` in Polish, not `kupić`).
+
 ### SEO Metadata Rules
 
 - **Title tag:** < 53 characters
@@ -81,13 +83,15 @@ These rules apply to **SEO title tags**, **H1**, and **H2/H3** headings — titl
 
 **Block IDs:** When the user provides a block ID (e.g. `69b82f6c82e7f12ebd4a1938`), it refers to the `blockName` field in the CMS, not the MongoDB `_id`. Use `blockName` to locate blocks, then use the actual `id` field for partial updates.
 
-`updatePages`/`updatePosts` support **partial updates** via `DeepPartial`. Pass only the block `id` and the changed fields:
+**WARNING — Layout arrays are REPLACED, not merged.** MCP `updatePages`/`updatePosts` passes `layout` to MongoDB via `$set`, which **replaces the entire array**. Sending a partial layout (only some blocks) **deletes all blocks not included**. The `DeepPartial` TypeScript type only makes fields optional at compile time — it does NOT merge arrays by `id` at runtime.
 
-```json
-{ "layout": [{ "id": "block-id", "columns": [{ "id": "col-id", "richText": { ... } }] }] }
-```
+**Safe approaches for layout field updates:**
 
-- **Never fetch or re-upload entire layout arrays.** Only send the block(s) you're changing.
+1. **Full array:** Fetch the complete layout, modify in-place, send back the full array. Use for MCP-based updates.
+2. **MongoDB positional filters:** Use `scripts/update-locale.ts` with `$[identifier]` array filters to target specific fields within specific blocks without touching the array. Use for bulk field updates (e.g. translating headings across many blocks).
+
+**For non-array fields** (title, slug, meta, hero), MCP partial updates work fine — send only the fields you want to change.
+
 - Always use `select` param to limit response size (e.g., `select: { "layout": true }`).
 
 ### MCP Layout — Patched
@@ -109,11 +113,9 @@ When translating content between locales ("default locale" = source, "target loc
 3. **Plan:** Output a translation table: block `id` | field name | default locale text | target locale status
 4. **Translate:** Translate each string, preserving Lexical JSON structure (nodes, links, formatting codes)
    - **Context-aware links:** Link text is often part of a sentence — translate the entire paragraph as a unit, then split back into `textNode` / `linkNode` segments. Never translate link text in isolation.
-5. **Update:** `update*` with `locale: "<target>"` — one call per block, only changed fields + block `id`
+5. **Update:** For **non-layout fields** (title, meta, hero): use MCP `update*` with `locale: "<target>"`. For **layout fields** (headings, richText within blocks): use `scripts/update-locale.ts` with MongoDB positional array filters — MCP replaces the entire layout array and will destroy content.
 
 **Scope rule:** Check the entire content block (heading, richText, richTextEnd, all columns). If a block only has a heading (H2/H3/H4), also check the next block(s) for untranslated content in the same section.
-
-**Target: ~5 MCP calls** for a typical translation task (1 find + N updates).
 
 ### Pages — Content Block Layout
 
@@ -140,6 +142,41 @@ When translating content between locales ("default locale" = source, "target loc
 - Heading tag: `tag: "h2"` / `"h3"`
 - Bold: `format: 1`, Italic: `format: 2`, Underline: `format: 8`
 - Links: `type: "link"` wrapping text, `fields: { url, newTab, linkType: "custom" }`
+
+### Content Block `heading` Field — Update Rules
+
+The block-level `heading` richText field on Content blocks is a **section intro area**, not just a heading container. It typically holds:
+- `[0]` heading node (h2/h3/h4)
+- `[1]` empty paragraph (spacing)
+- `[2+]` optional intro/description paragraphs with real text
+
+**NEVER replace the entire heading field** with `hf()` to change heading text — this destroys intro content below the heading.
+
+**To change heading text on an existing heading:**
+Use `bh()` — text-only path that targets ONLY the text node inside the heading:
+```
+layout.$[id].heading.{locale}.root.children.0.children.0.text
+```
+This preserves all other nodes (empty paragraphs, description text).
+
+**When the block heading field is empty** (first child is an empty paragraph):
+The heading may live in column `richText` instead. Check the first column's richText for an h2 node. If found, update column text using `ch()`:
+```
+layout.$[bid].columns.$[cid].richText.{locale}.root.children.0.children.0.text
+```
+
+**For genuinely new headings** (no heading exists anywhere):
+Use `hf()` to set the full block heading field. Include an empty paragraph after the heading node:
+```ts
+richText([heading(text, 'h2'), paragraph([])])
+```
+
+**Pre-flight check (mandatory before batch updates):**
+1. For each target block, query its `heading.en.root.children` — if childCount > 1, the field has intro content → use text-only `bh()`
+2. If childCount = 1 and child is an empty paragraph → heading field is empty, check column richText for h2
+3. If no heading anywhere → genuinely new, use `hf()` with full richText structure
+
+**Array filter identifiers:** Hex IDs from plan tables are the block `id` field. Use `{ 'b1.id': '...' }` not `{ 'b1.blockName': '...' }`. Human-readable names like "booking" are `blockName`.
 
 ### Continuous Improvement
 
