@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { TextFieldClientProps } from 'payload'
 
-import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from '@payloadcms/ui'
+import { useField, Button, TextInput, FieldLabel, useFormFields, useForm, useLocale } from '@payloadcms/ui'
 
 import { formatSlug } from './formatSlug'
 import './index.scss'
@@ -20,6 +20,8 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
   readOnly: readOnlyFromProps,
 }) => {
   const { label } = field
+  const locale = useLocale()
+  const isDefaultLocale = locale.code === 'en'
 
   const checkboxFieldPath = path?.includes('.')
     ? `${path}.${checkboxFieldPathFromProps}`
@@ -41,7 +43,7 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
   })
 
   useEffect(() => {
-    if (checkboxValue) {
+    if (checkboxValue && isDefaultLocale) {
       if (targetFieldValue) {
         const formattedSlug = formatSlug(targetFieldValue)
 
@@ -50,7 +52,7 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
         if (value !== '') setValue('')
       }
     }
-  }, [targetFieldValue, checkboxValue, setValue, value])
+  }, [targetFieldValue, checkboxValue, setValue, value, isDefaultLocale])
 
   const handleLock = useCallback(
     (e) => {

@@ -17,8 +17,46 @@ export const SidebarLocaleSwitcher: React.FC = () => {
   const { locales } = localization
 
   return (
-    <div style={{ marginBottom: '1rem' }}>
-      <select
+    <div style={{
+      paddingRight: '1rem',
+      display: 'flex',
+      flexDirection: 'row',
+      gap: '5px',
+    }}>
+      {locales.map((localeOption) => {
+        const label = getTranslation(localeOption.label, i18n);
+        const isSelected = localeOption.code === locale.code;
+
+        return (
+          <button
+            style={{
+              width: '100%',
+              padding: '0.3rem 0.6rem',
+              borderRadius: 'var(--style-radius-s)',
+              border: 'none',
+              boxShadow: 'inset 0 0 0 0.5px #343434',
+              background: isSelected ? '#454545' : 'transparent',
+              fontSize: 'var(--base-body-size)',
+              lineHeight: 'calc(var(--base) * 1.2)',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+            }}
+            key={localeOption.code}
+            value={localeOption.code}
+            onClick={() => {
+              const scrollY = window.scrollY;
+              const searchParams = new URLSearchParams(window.location.search);
+              searchParams.set('locale', localeOption.code);
+              router.push(`?${searchParams.toString()}`, { scroll: false });
+              requestAnimationFrame(() => window.scrollTo(0, scrollY));
+              setTimeout(() => window.scrollTo(0, scrollY), 150);
+            }}
+          >
+            {localeOption.code}
+          </button>
+        );
+      })}
+      {/* <select
         value={locale.code}
         onChange={(e) => {
           const searchParams = new URLSearchParams(window.location.search)
@@ -53,7 +91,7 @@ export const SidebarLocaleSwitcher: React.FC = () => {
             </option>
           )
         })}
-      </select>
+      </select> */}
     </div>
   )
 }

@@ -8,6 +8,9 @@ export const formatSlug = (val: string): string =>
 
 export const formatSlugHook =
   (fallback: string): FieldHook =>
-  ({ originalDoc, value }) => {
-    return value ? formatSlug(value) : originalDoc.slug
+  ({ originalDoc, value, req }) => {
+    if (req?.locale && req.locale !== 'en' && originalDoc?.slug) {
+      return originalDoc.slug
+    }
+    return value ? formatSlug(value) : originalDoc?.slug
   }

@@ -46,8 +46,11 @@ import { mcpPlugin } from '@payloadcms/plugin-mcp'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
+const generateTitle: GenerateTitle<Post | Page> = ({ doc, collectionConfig }) => {
   const date = new Date()
+  if (collectionConfig?.slug === 'posts') {
+    return doc?.title || `Auschwitz Visitor Information | ${date.getFullYear()}`
+  }
   return doc?.title
     ? `${doc.title} | ${date.getFullYear()}`
     : `Auschwitz Visitor Information | ${date.getFullYear()}`
