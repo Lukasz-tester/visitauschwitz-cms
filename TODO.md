@@ -1,10 +1,10 @@
-# visitauschwitz.info — Full Site Audit & Action Plan
+## moje:
+- powysylaj przypomnienia zeby mnie dodac na stronkach!
+- awesome claude code - fajne narzedzie, pewnie sa tez podobne? https://github.com/claude-ai/awesome-claude-code
+- Usun konto Pinterest, sprawdzić twittera
+- wyslij nowa stronke do lajkonika to rozpromuja!!! pytaj o Adama, jest grafikiem
 
-**Date:** 2026-03-20
-**Status:** 6 pages, 1 blog post, 2 locales (en/pl)
-**Goal:** Maximize email collection for commercial products (books, edu apps) and exploit unique position as licensed Auschwitz guide since 2006.
 
-## 4. Missing Pages & Blog Posts
 
 ### Must-Create Pages
 
@@ -17,7 +17,6 @@
 
 Priority order:
 
-1. [ ] **"Auschwitz Tickets Online Only in 2026: What Changed"** — URGENT, high search confusion
 2. [ ] "Can You Visit Auschwitz Without a Guide? Honest Comparison"
 3. [ ] "What to Wear to Auschwitz: Complete Dress Code Guide"
 4. [ ] "Visiting Auschwitz with Children: Age Guide & Preparation"
@@ -28,6 +27,12 @@ Priority order:
 9. [ ] "Auschwitz Accessibility Guide: Wheelchair & Mobility Info"
 10. [ ] "10 Things Most Visitors Miss at Auschwitz"
 11. [ ] "Auschwitz from Warsaw: Is It Worth a Day Trip?"
+
+- nowy post o Polski blok 15
+- nowy post o rasizm na grupie (kiedys)
+- Polish exhibit: https://www.auschwitz.org/en/museum/news/new-permanent-exhibition-dedicated-to-the-fate-of-poles-at-kl-auschwitz,1787.html.   /.   https://www.auschwitz.org/en/museum/news/poles-in-kl-auschwitz-the-next-stage-of-work-on-the-exhibition-,1692.html
+- Search tools: https://www.auschwitz.org/en/museum/news/new-online-tool-allows-searching-for-information-about-auschwitz-victims-and-transports-to-the-camp,1734.html
+- aukcja https://wydarzenia.interia.pl/zagranica/news-dokumenty-i-listy-z-czasow-holokaustu-na-sprzedaz-cyniczne-i,nId,22454576
 
 ---
 
@@ -137,28 +142,6 @@ The interactive map is the site's unique asset. Expand it:
 | auschwitz zima                | post          |
 | auschwitz cennik 2026         | /tickets      |
 
----
-
-## 9. Locale Expansion Priority
-
-Current: en, pl only. 1.95M visitors in 2025.
-
-All locales already configured but commented out in `src/i18n/localization.ts`. AI translation pipeline exists. Activate 1 locale per month.
-
-| Priority | Locale           | Rationale                              |
-| -------- | ---------------- | -------------------------------------- |
-| 1        | **Italian (it)** | Top-5 visitor nationality              |
-| 2        | **Spanish (es)** | Top-5 visitor nationality              |
-| 3        | **German (de)**  | Top-5, huge educational tourism market |
-| 4        | **French (fr)**  | Significant visitor base               |
-| 5        | **Dutch (nl)**   | Strong per-capita interest             |
-
-- [ ] Activate Italian locale (Month 1)
-- [ ] Activate Spanish locale (Month 2)
-- [ ] Activate German locale (Month 3)
-- [ ] Activate French locale (Month 4)
-- [ ] Activate Dutch locale (Month 5)
-- [ ] Add hreflang tags when more locales activate
 
 ---
 
@@ -185,21 +168,10 @@ All locales already configured but commented out in `src/i18n/localization.ts`. 
 - [ ] Week 3: "Auschwitz Accessibility: Wheelchair & Mobility Guide"
 - [ ] Week 4: "After Auschwitz: Processing Your Visit & Further Learning"
 
----
-
-## 11. Technical SEO Notes
-
-### Already Strong
-
-- Comprehensive JSON-LD schema (Organization, Person, Museum, TouristTrip, Event, HowTo, FAQPage, SpeakableSpecification)
-- E-E-A-T signals well implemented (licensed guide credential, author bio)
-- Sitemap with proper priorities
-- Honeypot spam protection on forms
 
 ### To Improve
 
 - [ ] Deploy the popup newsletter variant (code exists, not active)
-- [ ] Add `FAQPage` schema to more pages via accordion blocks with `isFAQ: true`
 - [ ] Add `HowTo` schema to /arrival page (step-by-step transport guides)
 - [ ] Consider `VideoObject` schema when YouTube content launches
 - [ ] Add hreflang tags when more locales activate
@@ -208,9 +180,5 @@ All locales already configured but commented out in `src/i18n/localization.ts`. 
 
 ## 12. Quick Wins (Do This Week)
 
-1. ~~Update museum H1 to include "& Around"~~ Done
-2. [ ] Add 2026 online-only ticket policy to /tickets page (even just 1 paragraph)
-3. [ ] Activate popup newsletter (code exists)
-4. [ ] Add email CTA block to /supplement and /tour pages (reuse homepage variant)
-5. [ ] Convert 5 best H2s to question format (highest-traffic pages first: /tickets, /arrival)
-6. [ ] Create first blog post targeting "auschwitz tickets 2026 online only"
+1. [ ] Activate popup newsletter (code exists)
+2. [ ] Add email CTA block to /supplement and /tour pages (reuse homepage variant)

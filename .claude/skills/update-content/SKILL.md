@@ -5,9 +5,38 @@ description: "TRIGGER when: user asks to translate content between locales, upda
 
 # Update Existing Content
 
-## Translation Workflow
+## Field-Level Translation (Primary Tool)
 
-When translating content between locales ("default locale" = source, "target locale" = destination):
+For finding and translating specific text across documents, use `scripts/find-and-translate.ts`:
+
+```bash
+# Find where English text appears (shows existing translations)
+npx tsx scripts/find-and-translate.ts find "search text"
+
+# Translate to all locales (preview first)
+npx tsx scripts/find-and-translate.ts translate "search text" --dry-run
+
+# Translate to all locales (apply)
+npx tsx scripts/find-and-translate.ts translate "search text"
+
+# Change English text + translate to all locales
+npx tsx scripts/find-and-translate.ts translate "old text" --replace "new text"
+
+# Target specific locales or collections
+npx tsx scripts/find-and-translate.ts translate "text" --locales pl,de --collections pages
+```
+
+The script searches all localized fields (titles, meta, headings, columns, tiles, accordion items), translates via OpenAI with memorial wording guidelines, and updates via MongoDB positional array filters. It handles paragraphs with links using `[LINK:N]` markers to preserve link boundaries during translation.
+
+## Whole-Document Translation
+
+For translating entire documents (all fields at once), use the admin UI translators:
+- **@payload-enchants/translator** — per-document, accessible from admin UI
+- **payload-sync-ai-translations** — batch translation across collections
+
+## Manual Translation Workflow (Fallback)
+
+When the automated tools don't cover a specific case:
 
 1. **Find:** `find*` with `locale: "all"`, `select: { "layout": true }` — fetch only layout data for all locales at once
 2. **Parse:** Identify untranslated fields — target locale is empty/null OR identical to default locale while default locale has content. Skip decorative `oneSixth` columns.

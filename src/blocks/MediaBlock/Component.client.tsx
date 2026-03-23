@@ -71,7 +71,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
     >
-      <div className="h-[50vh] md:h-[90vh] flex items-end justify-center">
+      <div className="relative overflow-hidden h-[50vh] md:h-[90vh] flex items-end justify-center">
         {images.map((image, i) => {
           const { id, title, link, media } = image
           return (
@@ -82,8 +82,8 @@ export const MediaBlock: React.FC<Props> = (props) => {
                 currentSlide !== i ? 'opacity-0' : 'opacity-100 z-10'
               }`}
             >
-              <div className="max-w-[50vh] md:max-w-[90vh] items-center">
-                <ImageMedia resource={media} imgClassName="rounded-3xl p-3" />
+              <div className="w-[min(50vh,90vw)] md:w-[min(90vh,85vw)] items-center">
+                <ImageMedia resource={media} imgClassName="w-full rounded-3xl p-3" />
                 <div className="absolute m-6 md:m-7 inset-0 bg-transparent flex items-end place-content-center ">
                   {title && (
                     <div className="px-4 pb-2 pt-1.5 text-white/90 bg-gradient-to-tr from-5% from-amber-800/60 via-40% via-slate-800/70 to-transparent to-70% rounded-2xl border border-amber-800/50">
@@ -208,7 +208,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
 //                 currentSlide !== i ? 'opacity-0' : 'opacity-100 z-10'
 //               }`}
 //             >
-//               <div className="max-w-[50vh] md:max-w-[90vh] items-center">
+//               <div className="max-w-[90vw] md:max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl items-center">
 //                 <ImageMedia resource={media} imgClassName="rounded-3xl p-3" />
 //                 <div className="absolute m-6 md:m-7 inset-0 bg-transparent flex items-end place-content-center ">
 //                   {title && (

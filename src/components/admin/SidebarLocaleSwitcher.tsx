@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useLocale, useConfig, useTranslation } from '@payloadcms/ui'
+import { useLocale, useConfig, useTranslation, useRouteTransition } from '@payloadcms/ui'
 import { getTranslation } from '@payloadcms/translations'
 import { useRouter } from 'next/navigation.js'
 
@@ -11,6 +11,7 @@ export const SidebarLocaleSwitcher: React.FC = () => {
   const locale = useLocale()
   const router = useRouter()
   const { i18n } = useTranslation()
+  const { startRouteTransition } = useRouteTransition()
 
   if (!localization) return null
 
@@ -29,6 +30,7 @@ export const SidebarLocaleSwitcher: React.FC = () => {
 
         return (
           <button
+            type="button"
             style={{
               width: '100%',
               padding: '0.3rem 0.6rem',
@@ -47,9 +49,11 @@ export const SidebarLocaleSwitcher: React.FC = () => {
               const scrollY = window.scrollY;
               const searchParams = new URLSearchParams(window.location.search);
               searchParams.set('locale', localeOption.code);
-              router.push(`?${searchParams.toString()}`, { scroll: false });
-              requestAnimationFrame(() => window.scrollTo(0, scrollY));
-              setTimeout(() => window.scrollTo(0, scrollY), 150);
+              startRouteTransition(() => {
+                router.push(`?${searchParams.toString()}`, { scroll: false });
+              });
+              const intervalId = setInterval(() => window.scrollTo(0, scrollY), 50);
+              setTimeout(() => clearInterval(intervalId), 1500);
             }}
           >
             {localeOption.code}
