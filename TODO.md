@@ -4,29 +4,63 @@
 - Usun konto Pinterest, sprawdzić twittera
 - wyslij nowa stronke do lajkonika to rozpromuja!!! pytaj o Adama, jest grafikiem
 
+## GSC data
+
+Najczęstsze zapytania | Kliknięcia | Wyświetlenia
+bus from krakow to auschwitz	169	2 008
+auschwitz bilety cennik	124	4 454
+krakow to auschwitz	115	11 739
+krakow to auschwitz bus	108	1 968
+oświęcim bilety	90	3 377
+auschwitz bilety	80	10 088
+bus krakow to auschwitz	66	725
+bus to auschwitz from krakow	60	851
+bilety auschwitz	59	1 321
+how to get to auschwitz from krakow	50	2 987
+visit auschwitz	45	8 398
+how to get from krakow to auschwitz	45	1 822
+oswiecim bilety	42	1 239
+auschwitz bilety bez przewodnika	37	764
+kraków to auschwitz bus timetable	29	234
+auschwitz tickets	26	10 651
+oświęcim bilety online	26	947
+krakow auschwitz bus	22	427
+auschwitz bilety online	21	566
+lajkonik bus krakow to auschwitz	21	463
 
 
 ### Must-Create Pages
 
-- [ ] **`/faq`** — CLAUDE.md mandates this, doesn't exist yet. H2 per question, FAQPage schema via accordion blocks with `isFAQ: true`. Aggregate questions from all pages + keyword gap analysis.
+- [x] **`/faq`** — Created. H2 per question, FAQPage schema via accordion blocks with `isFAQ: true`.
 - [ ] **`/contact`** — Dedicated contact page. Forms currently only embedded, no standalone page.
 - [ ] **`/prepare`** or expand `/supplement` — Emotional + practical preparation as standalone content.
 - [ ] **`/newsletter`** — Landing page for ad campaigns and direct email capture.
 
 ### Must-Create Blog Posts (Content Marketing Engine)
 
-Priority order:
+Done:
 
-2. [ ] "Can You Visit Auschwitz Without a Guide? Honest Comparison"
-3. [ ] "What to Wear to Auschwitz: Complete Dress Code Guide"
-4. [ ] "Visiting Auschwitz with Children: Age Guide & Preparation"
-5. [ ] "Auschwitz in Winter: What to Expect Month by Month"
-6. [ ] "Auschwitz vs Birkenau: Understanding Both Sites"
-7. [ ] "Krakow to Auschwitz Day Trip: Complete Planning Guide"
-8. [ ] "Post-Visit: Books, Films & Resources After Auschwitz"
+- [x] "Can You Visit Auschwitz Without a Guide? Honest Comparison"
+- [x] "What to Wear to Auschwitz: Complete Dress Code Guide"
+- [x] "Visiting Auschwitz with Children: What Parents Need to Know"
+- [x] "Auschwitz vs Birkenau: Understanding Both Sites"
+- [x] "Krakow to Auschwitz Day Trip: Complete Planning Guide"
+- [x] "Auschwitz Tickets Online Only in 2026: What Changed"
+
+Priority order (new from keyword gap analysis):
+
+1. [ ] "How to Get to Auschwitz from Krakow: Bus, Train & Car" — #1 organic cluster (~613 clicks, 22K impressions)
+2. [ ] "Auschwitz Ticket Scams: How to Spot Fake Sites" — URGENT, trust-building
+3. [ ] "Best Time to Visit Auschwitz: Month-by-Month Guide" — covers 2 gaps (best time + how far in advance to book)
+4. [ ] "How Long Does It Take to Visit Auschwitz? Time Planning"
+5. [ ] "Auschwitz Photography Rules: What You Can and Cannot Capture"
+6. [ ] "Auschwitz Emotional Preparation: What to Expect and How to Process" — merged with reading list, lead magnet CTA
+7. [ ] "Where to Eat Near Auschwitz: Restaurants and Cafes"
+8. [ ] "Auschwitz in Winter: Month-by-Month Visitor Guide"
 9. [ ] "Auschwitz Accessibility Guide: Wheelchair & Mobility Info"
 10. [ ] "10 Things Most Visitors Miss at Auschwitz"
-11. [ ] "Auschwitz from Warsaw: Is It Worth a Day Trip?"
+11. [ ] "Post-Visit: Books, Films & Resources After Auschwitz"
+12. [ ] "Auschwitz from Warsaw: Is It Worth a Day Trip?"
 
 - nowy post o Polski blok 15
 - nowy post o rasizm na grupie (kiedys)
@@ -109,64 +143,73 @@ The interactive map is the site's unique asset. Expand it:
 
 ### English
 
-| Query                                  | Intent        | Target                               |
-| -------------------------------------- | ------------- | ------------------------------------ |
-| is auschwitz free to visit             | informational | /tickets H2                          |
-| how long does auschwitz take           | informational | /tour or /faq H2                     |
-| auschwitz dress code / what to wear    | informational | /supplement H2 or new post           |
-| can you take photos at auschwitz       | informational | /supplement H2 + /faq                |
-| visiting auschwitz with children       | informational | new post + /faq                      |
-| auschwitz I vs birkenau difference     | informational | /tour H2                             |
-| auschwitz skip the line tickets        | transactional | /tickets H2                          |
-| best time to visit auschwitz           | informational | /tickets or /supplement H2           |
-| how far in advance to book auschwitz   | informational | /tickets H2 + /faq                   |
-| auschwitz self-guided tour worth it    | informational | /tickets H2 or post                  |
-| krakow to auschwitz day trip           | transactional | /arrival H2 or post                  |
-| auschwitz virtual tour                 | informational | future product                       |
-| auschwitz audio guide                  | informational | /tickets or /tour H2                 |
-| where to eat near auschwitz            | informational | /museum H2 (exists but heading weak) |
-| auschwitz winter visit                 | informational | new post                             |
-| auschwitz accessibility wheelchair     | informational | new post + /faq                      |
-| auschwitz emotional preparation        | informational | /supplement or new post              |
-| what to read before visiting auschwitz | informational | new post (lead magnet CTA)           |
-| auschwitz online tickets 2026          | transactional | /tickets (URGENT)                    |
-| auschwitz ticket scam                  | informational | /tickets or post (URGENT)            |
+| Query                                  | Intent        | Target                               | Status                                      |
+| -------------------------------------- | ------------- | ------------------------------------ | ------------------------------------------- |
+| how to get to auschwitz from krakow    | informational | NEW POST: "How to Get from Krakow"   | **TODO** — #1 priority                      |
+| is auschwitz free to visit             | informational | /tickets H2 + /faq                   | page update                                 |
+| how long does auschwitz take           | informational | NEW POST: "How Long Does It Take"    | **TODO**                                    |
+| auschwitz dress code / what to wear    | informational | post: "What to Wear"                 | DONE                                        |
+| can you take photos at auschwitz       | informational | NEW POST: "Photography Rules"        | **TODO**                                    |
+| visiting auschwitz with children       | informational | post: "With Children"                | DONE                                        |
+| auschwitz I vs birkenau difference     | informational | post: "Auschwitz vs Birkenau"        | DONE                                        |
+| auschwitz skip the line tickets        | transactional | /tickets H2 + /faq                   | page update                                 |
+| best time to visit auschwitz           | informational | NEW POST: "Best Time to Visit"       | **TODO** — also covers "how far in advance" |
+| how far in advance to book auschwitz   | informational | covered by "Best Time to Visit" post | **TODO** (merged)                           |
+| auschwitz self-guided tour worth it    | informational | post: "Without a Guide"              | DONE                                        |
+| krakow to auschwitz day trip           | transactional | post: "Krakow Day Trip"              | DONE                                        |
+| auschwitz virtual tour                 | informational | future product                       | parked                                      |
+| auschwitz audio guide                  | informational | /tour H2 + "Without a Guide" post    | page update + SEO tune existing post        |
+| where to eat near auschwitz            | informational | NEW POST: "Where to Eat"             | **TODO**                                    |
+| auschwitz winter visit                 | informational | NEW POST: "Auschwitz in Winter"      | **TODO**                                    |
+| auschwitz accessibility wheelchair     | informational | NEW POST: "Accessibility Guide"      | **TODO**                                    |
+| auschwitz emotional preparation        | informational | NEW POST: "Emotional Preparation"    | **TODO** — merged with reading list         |
+| what to read before visiting auschwitz | informational | covered by "Emotional Preparation"   | **TODO** (merged, lead magnet CTA)          |
+| auschwitz online tickets 2026          | transactional | post: "Tickets Online Only in 2026"  | DONE                                        |
+| auschwitz ticket scam                  | informational | NEW POST: "Ticket Scams"             | **TODO** — URGENT                           |
 
 ### Polish
 
-| Query                         | Target        |
-| ----------------------------- | ------------- |
-| ile trwa zwiedzanie auschwitz | /tour or /faq |
-| co zabrac do auschwitz        | /supplement   |
-| auschwitz z dziecmi           | post + /faq   |
-| auschwitz zima                | post          |
-| auschwitz cennik 2026         | /tickets      |
+| Query                                    | Target                                    | Status                             |
+| ---------------------------------------- | ----------------------------------------- | ---------------------------------- |
+| jak dojechac do auschwitz z krakowa      | PL translation of "How to Get from Krakow"| **TODO** — translate new post      |
+| ile trwa zwiedzanie auschwitz            | PL translation of "How Long Does It Take" | **TODO** — translate new post      |
+| co zabrac do auschwitz                   | post: "What to Wear" (PL exists)          | DONE — SEO tune PL version         |
+| auschwitz z dziecmi                      | post: "With Children" (PL exists)         | DONE — SEO tune PL version         |
+| auschwitz zima                           | PL translation of "Winter" post           | **TODO** — translate new post      |
+| auschwitz cennik 2026                    | /tickets PL                               | page update — ensure 2026 pricing  |
 
 
 ---
 
 ## 10. Blog Content Calendar (First 3 Months)
 
-### Month 1 (Urgent — March/April 2026)
+### Month 1 (Done — March 2026)
 
-- [ ] Week 1: "Auschwitz Tickets Online Only in 2026: Complete Guide"
-- [ ] Week 2: "Can You Visit Auschwitz Without a Guide? Pros & Cons"
-- [ ] Week 3: "What to Wear to Auschwitz: Dress Code & Practical Tips"
-- [ ] Week 4: "Krakow to Auschwitz: Complete Day Trip Planner"
+- [x] Week 1: "Auschwitz Tickets Online Only in 2026: What Changed"
+- [x] Week 2: "Can You Visit Auschwitz Without a Guide? Honest Comparison"
+- [x] Week 3: "What to Wear to Auschwitz: Complete Dress Code Guide"
+- [x] Week 4: "Krakow to Auschwitz Day Trip: Complete Planning Guide"
 
-### Month 2
+### Month 2 (Done/In Progress)
 
-- [ ] Week 1: "Visiting Auschwitz with Children: Parent's Preparation Guide"
+- [x] Week 1: "Visiting Auschwitz with Children: What Parents Need to Know"
+- [x] Week 2: "Auschwitz vs Birkenau: Understanding Both Sites"
+- [ ] Week 3: "How to Get to Auschwitz from Krakow: Bus, Train & Car"
+- [ ] Week 4: "Auschwitz Ticket Scams: How to Spot Fake Sites" (URGENT)
+
+### Month 3
+
+- [ ] Week 1: "Best Time to Visit Auschwitz: Month-by-Month Guide"
 - [ ] Week 2: "How Long Does It Take to Visit Auschwitz? Time Planning"
 - [ ] Week 3: "Auschwitz Photography Rules: What You Can & Cannot Capture"
 - [ ] Week 4: "10 Hidden Spots Most Visitors Miss at Auschwitz"
 
-### Month 3
+### Month 4
 
-- [ ] Week 1: "Auschwitz in Winter: Month-by-Month Visitor Guide"
-- [ ] Week 2: "Books to Read Before Visiting Auschwitz: Guide's Top Picks"
+- [ ] Week 1: "Auschwitz Emotional Preparation: What to Expect and How to Process"
+- [ ] Week 2: "Where to Eat Near Auschwitz: Restaurants and Cafes"
 - [ ] Week 3: "Auschwitz Accessibility: Wheelchair & Mobility Guide"
-- [ ] Week 4: "After Auschwitz: Processing Your Visit & Further Learning"
+- [ ] Week 4: "Auschwitz in Winter: Month-by-Month Visitor Guide"
 
 
 ### To Improve

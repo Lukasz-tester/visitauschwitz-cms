@@ -137,7 +137,8 @@ export const traverseFields = ({ dataFrom, emptyOnly, fields, localizedParent, s
                     onTranslate: (translated)=>{
                         siblingDataTranslated[field.name] = translated;
                     },
-                    value: siblingDataFrom[field.name]
+                    value: siblingDataFrom[field.name],
+                    fieldName: field.name
                 });
                 break;
             case 'richText':
@@ -158,7 +159,8 @@ export const traverseFields = ({ dataFrom, emptyOnly, fields, localizedParent, s
                                     onTranslate: (translated)=>{
                                         siblingData.text = translated;
                                     },
-                                    value: siblingData.text
+                                    value: siblingData.text,
+                                    fieldName: 'richText'
                                 });
                             },
                             root
@@ -171,7 +173,8 @@ export const traverseFields = ({ dataFrom, emptyOnly, fields, localizedParent, s
                                         onTranslate: (translated)=>{
                                             siblingData.text = translated;
                                         },
-                                        value: siblingData.text
+                                        value: siblingData.text,
+                                        fieldName: 'richText'
                                     });
                                 },
                                 root: root

@@ -55,7 +55,7 @@ export const openAIResolver = ({ apiKey, baseUrl, chunkLength = 100, model = 'gp
                     }).then(async (res)=>{
                         const data = await res.json();
 
-                console.log("dddoooooooooooatatatat ", data.choices.message)
+                console.log("dddoooooooooooatatatat ", data.choices[0].message)
                         if (!res.ok) req.payload.logger.info({
                             message: 'An error occurred when trying to translate the data using OpenAI API',
                             openAIresponse: data

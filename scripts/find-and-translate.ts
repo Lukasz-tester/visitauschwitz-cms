@@ -27,13 +27,12 @@ function loadEnvVar(name: string): string | undefined {
       process.env[name] = match[1]
       return match[1]
     }
-  } catch {}
+  } catch { }
   return undefined
 }
 
-const DATABASE_URI = loadEnvVar('DATABASE_URI')
+const DATABASE_URI = loadEnvVar('DATABASE_URI') ?? (() => { throw new Error('DATABASE_URI not found in environment or .env') })()
 const OPENAI_KEY = loadEnvVar('OPENAI_KEY')
-if (!DATABASE_URI) throw new Error('DATABASE_URI not found in environment or .env')
 
 // ─── Constants ───────────────────────────────────────────────────
 

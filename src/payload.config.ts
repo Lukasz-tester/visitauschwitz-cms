@@ -154,21 +154,40 @@ export default buildConfig({
           // model: 'gpt-4o',
           model: 'gpt-4.1',
           prompt: ({ localeFrom, localeTo, texts }) => {
-            // console.log('>>>>>>>>>>>> JSON ', texts)
-            // console.log('>>>>>>>>>>>> FROM ', localeFrom)
-            // console.log('>>>>>>>>>>>> TO ', localeTo)
-            return `
-You are an expert in Auschwitz tours, specializing in translating texts related to visiting the Auschwitz Memorial.
+            console.log('>>>>>>>>>>>> JSON ', texts)
+            console.log('>>>>>>>>>>>> FROM ', localeFrom)
+            console.log('>>>>>>>>>>>> TO ', localeTo)
+            return `You are a translator for visitauschwitz.info, a practical guide to visiting the Auschwitz-Birkenau Memorial. Translate the
+ following array from locale=${localeFrom} to locale=${localeTo}. Respond with a JSON array of strings only.
 
-Translate me the following array: ${JSON.stringify(texts)} in locale=${localeFrom} to locale ${localeTo}, respond me with the same array structure and follow these translation instructions for each text:
+ Array: ${JSON.stringify(texts)}
 
-Some source texts you are about to translate are fragments of a sentence, split this way because they are link texts or bolded words, which causes them to be sliced into separate parts. They share a single context, so ensure their meaning remains consistent whithin the sentence.
+ RULES:
 
-If the translation naturally causes a fragment to become empty due to content merging or word shifts, maintain the array structure by replacing the empty fragment with an empty string ('') so that indexes from the input array should match output translations in great majority with occassional additional ('').
+ 1. FRAGMENTS: Source texts are Lexical rich-text fragments (link text, bold spans) split from sentences. They share context within the array — translate coherently as parts of the same sentence, not in isolation.
 
-Preserve leading and trailing whitespace " " exactly as in the source text.
+ 2. ARRAY STRUCTURE: Output array must match input length. If a fragment becomes empty due to word shifts, use an empty string (""). Indexes must align.
 
-`
+ 3. TERMINOLOGY (examples are in Polish but applicable to all target languages):
+ - choose words conveying remembrance "pamięć, poznanie historii" — avoid "wycieczka, wypad" unless leisure wording is significantly better for SEO long tail keywords or is clearly implied by context.
+ - "to book" = "zarezerwować" (not "kupić")
+ - "educator" = "edukator" (not "przewodnik")
+ - "tour" = "zwiedzanie" (not "wycieczka")
+ - "self-guided tour" = "zwiedzanie indywidualne"
+ - "Auschwitz" = "Auschwitz" (not "Oświęcim")
+ - "entry pass" = "karta wstępu" (not "wejściówka" or "przejście" or "przepustka")
+
+ 4. CAPITALIZATION: Always use sentence case (only first word and proper nouns capitalized).
+
+ 5. WHITESPACE: Preserve leading and trailing spaces " " exactly as in the source text.
+ 
+ 6. SEO LENGTH:
+    - [META_TITLE] = SEO meta title. HARD LIMIT: ≤55 characters. Aim for 45–55 characters.
+    - [META_DESC] = SEO meta description. HARD LIMIT: ≤155 characters. Aim for 130–150
+ characters (roughly 18–22 words).
+    Keep it compelling with relevant keywords. Remove the prefix tag from output.
+    COUNT CAREFULLY — exceeding these limits means the text gets truncated in Google search
+  results.`
           },
         }),
       ],

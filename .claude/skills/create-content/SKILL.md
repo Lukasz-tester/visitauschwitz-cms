@@ -111,16 +111,25 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 - **H3 spacing:** always add an empty paragraph **before and after** every H3 heading for spacing
 - **Typical pattern:** emphasis intro → text + H2 → image → more text/quote/image → emphasis callout
 
+### Image Placement
+
+- Every post must include **1 hero image** (`meta.image`) + **2–3 Image blocks** spread through the layout
+- Before using the placeholder, check the media collection (`findMedia`) for a relevant existing image
+- If no relevant image exists, use placeholder **`67be70ae35ec329c954f5410`**
+- **Placeholder in Image block:** set the `caption` rich text to describe what the image **should** show (its future contents) — the user will replace the placeholder and use the caption as alt text for the real photo
+- **Placeholder as hero image (`meta.image`):** append ` ALT: <desired image alt text>` at the end of `meta.description` after the real SEO description — the user will swap the hero photo and use this alt text
+
 ## Lexical JSON Conventions
 
 - Empty paragraph after headings: `{ type: "paragraph", children: [], ... }`
 - Heading tag: `tag: "h2"` / `"h3"`
 - Bold: `format: 1`, Italic: `format: 2`, Underline: `format: 8`
 - Links: `type: "link"` wrapping text, `fields: { url, newTab, linkType: "custom" }`
+- **Link punctuation:** if a sentence or its ending part is a link, include the period **inside** the link node (not as a separate text node after it)
 
 ## Global Content Rules
 
-- **Placeholder image:** media ID `67be70ae35ec329c954f5410`. Set alt text to a description of what the real image should be.
+- **Placeholder image:** media ID `67be70ae35ec329c954f5410`
 - **Posts always created as draft**
 - **Author:** always set `authors` to Łukasz (`675f51ab4d074485ad8b59af`) when creating posts
-- **SEO:** title < 53 chars, description 140–155 chars
+- **SEO:** title < 53 chars for pages and < 59 for posts, description 140–152 chars

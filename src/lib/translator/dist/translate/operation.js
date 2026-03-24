@@ -37,11 +37,16 @@ export const translateOperation = async (args)=>{
         translatedData,
         valuesToTranslate
     });
+    const SEO_FIELDS = { title: '[META_TITLE]', description: '[META_DESC]' };
+    const texts = valuesToTranslate.map((each)=>{
+        const prefix = SEO_FIELDS[each.fieldName];
+        return prefix ? `${prefix} ${each.value}` : each.value;
+    });
     const resolveResult = await resolver.resolve({
         localeFrom: args.localeFrom,
         localeTo: args.locale,
         req,
-        texts: valuesToTranslate.map((each)=>each.value)
+        texts
     });
     let result;
     if (!resolveResult.success) {
@@ -50,7 +55,7 @@ export const translateOperation = async (args)=>{
         };
     } else {
         resolveResult.translatedTexts.forEach((translated, index)=>{
-            const formattedValue = he.decode(translated);
+            const formattedValue = he.decode(translated).replace(/^\[META_(TITLE|DESC)\]\s*/, '');
             if (valuesToTranslate[index] && valuesToTranslate[index].onTranslate) {
                 valuesToTranslate[index].onTranslate(formattedValue);
             }
