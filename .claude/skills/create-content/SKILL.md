@@ -27,7 +27,9 @@ Auschwitz-Birkenau is a memorial and place of remembrance, not a tourist attract
 
 ### SEO Metadata Rules
 
-- **Title tag:** < 53 characters
+- **Title tag (pages):** < 53 characters (frontend appends `| {year}`, ~60 visible in SERP)
+- **Title tag (posts):** < 59 characters (no year appended — this IS the full SERP budget)
+- **CTR is the priority** — use the full character budget. A short title wastes prime SERP real estate. Front-load primary keyword, include differentiators (transport modes, numbers, specifics), make every character earn its click.
 - **Meta description:** 140–155 characters
 - Clear, unique, relevant; primary keywords placed naturally — no keyword stuffing
 
@@ -36,7 +38,7 @@ Auschwitz-Birkenau is a memorial and place of remembrance, not a tourist attract
 These rules apply to **SEO title tags**, **H1**, and **H2/H3** headings — title tags are the highest-CTR element in search results, so treat them as a priority.
 
 - Clear, unique, relevant, engaging; primary keywords placed in front for better CTR
-- **Title tag:** primary keyword front-loaded, < 53 characters; include numbers where relevant — this is the first thing users see in SERPs
+- **Title tag:** primary keyword front-loaded; include numbers where relevant — this is the first thing users see in SERPs (see char limits in SEO Metadata Rules above)
 - **H1:** one per page, primary keyword front-loaded, < 60 characters
 - **H2/H3:** use question format only when it genuinely matches search intent and adds value — e.g. "Can You Visit Auschwitz Without a Guide?" triggers featured snippets because people actually search that question. Do **not** force questions when a descriptive or number-based heading is stronger (e.g. "Driving to Auschwitz: Routes & Parking", "5 Booking Tips to Avoid Sold-Out Dates"). Never change the heading's topic to fit a question — the heading must match the content below it.
 - Include numbers in titles/headings where appropriate — e.g. "5 Memorial Sites Near Auschwitz Worth Visiting" — improves CTR
@@ -108,7 +110,10 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
   - `text` = regular prose paragraphs
 - **Image block** (`blockType: "Image"`, `media`: media ID, **`caption`**: richText — not a plain string)
 - **Block source mapping:** `Banner` (import) → slug `"Text"`, `Code` (import) → slug `"Image"` — config files: `src/blocks/Banner/config.ts`, `src/blocks/Code/config.ts`
-- **H3 spacing:** always add an empty paragraph **before and after** every H3 heading for spacing
+- **H2 spacing:** add empty paragraph **after** every H2
+- **H3 spacing:** add empty paragraph **before and after** every H3
+- **Exception:** no spacer paragraph before a heading that starts a block/section
+- **No spacer between paragraphs** — empty paragraphs are only for heading spacing
 - **Typical pattern:** emphasis intro → text + H2 → image → more text/quote/image → emphasis callout
 
 ### Image Placement
@@ -127,9 +132,15 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 - Links: `type: "link"` wrapping text, `fields: { url, newTab, linkType: "custom" }`
 - **Link punctuation:** if a sentence or its ending part is a link, include the period **inside** the link node (not as a separate text node after it)
 
+## Content Accuracy
+
+- **Only use verified information.** When basing content on an existing page, extract actual links, numbers, and details from that page. Never invent URLs, prices, or details. If unsure, ask the user in a `[QUESTION]` comment.
+- **Accordion content is rich.** Always extract and use content from accordion blocks — they contain detailed, verified information (timetables, bus lines, prices, step-by-step directions).
+- **Try token-saving methods first.** Use small targeted commands (regex, jq, grep) before spawning agents or reading entire files. Always prefer the simplest approach.
+
 ## Global Content Rules
 
 - **Placeholder image:** media ID `67be70ae35ec329c954f5410`
 - **Posts always created as draft**
 - **Author:** always set `authors` to Łukasz (`675f51ab4d074485ad8b59af`) when creating posts
-- **SEO:** title < 53 chars for pages and < 59 for posts, description 140–152 chars
+- **SEO:** title < 53 chars for pages, < 59 for posts (see CTR rules in SEO Metadata Rules), description 140–152 chars

@@ -126,6 +126,12 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
     transactionOptions: false,
+    connectOptions: {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 30000,
+      maxIdleTimeMS: 30000,
+      heartbeatFrequencyMS: 10000,
+    },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [
@@ -173,7 +179,7 @@ export default buildConfig({
  - "to book" = "zarezerwować" (not "kupić")
  - "educator" = "edukator" (not "przewodnik")
  - "tour" = "zwiedzanie" (not "wycieczka")
- - "self-guided tour" = "zwiedzanie indywidualne"
+ - "self-guided tour" = "zwiedzanie samodzielne"
  - "Auschwitz" = "Auschwitz" (not "Oświęcim")
  - "entry pass" = "karta wstępu" (not "wejściówka" or "przejście" or "przepustka")
 

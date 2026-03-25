@@ -4,6 +4,8 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
+  UnorderedListFeature,
+  OrderedListFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
@@ -32,6 +34,8 @@ export const Banner: Block = {
             FixedToolbarFeature(),
             InlineToolbarFeature(),
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            UnorderedListFeature(),
+            OrderedListFeature(),
           ]
         },
       }),

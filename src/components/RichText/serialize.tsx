@@ -25,12 +25,12 @@ import type { Page } from '@/payload-types'
 export type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-      | Extract<Page['layout'][0], { blockType: 'cta' }>
-      | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
-      | BannerBlockProps
-      | CodeBlockProps
-      // | OpeningHoursProps
-    >
+    | Extract<Page['layout'][0], { blockType: 'cta' }>
+    | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
+    | BannerBlockProps
+    | CodeBlockProps
+  // | OpeningHoursProps
+  >
 
 type Props = {
   nodes: NodeTypes[]
@@ -157,7 +157,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'list': {
               const Tag = node?.tag
               return (
-                <Tag className="list col-start-2" key={index}>
+                <Tag className="list col-start-2 text-xl" key={index}>
                   {serializedChildren}
                 </Tag>
               )

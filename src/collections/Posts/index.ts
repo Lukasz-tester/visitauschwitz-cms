@@ -25,7 +25,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { revalidateHome } from './hooks/revalidateHome'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -219,7 +218,7 @@ export const Posts: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost, revalidateHome],
+    afterChange: [revalidatePost],
     afterRead: [populateAuthors],
   },
   versions: {
