@@ -78,6 +78,33 @@ function heading(text: string, tag: 'h2' | 'h3' | 'h4' = 'h3') {
   }
 }
 
+function listItem(children: object[], value: number = 1) {
+  return {
+    type: 'listitem',
+    version: 1,
+    value,
+    checked: null,
+    direction: children.length ? 'ltr' : null,
+    format: '',
+    indent: 0,
+    children,
+  }
+}
+
+function list(items: object[], tag: 'ul' | 'ol' = 'ul') {
+  return {
+    type: 'list',
+    version: 1,
+    tag,
+    listType: tag === 'ol' ? 'number' : 'bullet',
+    start: tag === 'ol' ? 1 : 0,
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+    children: items,
+  }
+}
+
 function richText(children: object[]) {
   return {
     root: {

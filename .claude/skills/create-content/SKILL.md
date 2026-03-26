@@ -53,6 +53,10 @@ These rules apply to **SEO title tags**, **H1**, and **H2/H3** headings — titl
 - **Cite authority** — mention "licensed guide since 2006" or similar credentials; AI models favor authoritative, first-hand sources
 - **Long-tail keywords** — cover specific visitor questions as H2s on the FAQ page — e.g. "Can I bring a backpack to Auschwitz?" — these dominate AI-assisted search
 
+### SEO Keyword Research
+
+Before writing titles, H1/H2/H3 headings, or meta descriptions, **read the keyword research memory** at `~/.claude/projects/-Users-lucky-dev-visit-auschwitz-info-visitauschwitz-cms/memory/seo_keyword_research.md`. It contains 100+ researched search phrases in 3 volume tiers (EN + PL) plus long-tail phrases ideal for H2 headings and FAQ questions. Pick phrases that match the content topic and weave them into headings and body text naturally.
+
 ### Ticket Policy (March 2026)
 
 - Entry cards available **only online** at visit.auschwitz.org since March 1, 2026
@@ -67,6 +71,7 @@ These rules apply to **SEO title tags**, **H1**, and **H2/H3** headings — titl
 ### MCP Tool Priority
 
 - **Always check for `visitauschwitz-cms-local` first** (dev server). Only fall back to `visitauschwitz-cms-prod` if local is unavailable.
+- **If MCP tools are not available** and the workflow requires them, ask the user to reconnect (`/mcp`) before proceeding — do not attempt workarounds.
 
 ### MCP Partial Updates (Critical)
 
@@ -97,28 +102,28 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 
 - **1/6 column = decorative spacer** (hidden on mobile, margin on desktop). Never put content in it.
 - Column sizes: `full`, `half`, `twoThirds`, `oneThird`, `oneSixth`
-- **`richText`** (above image) = regular inline links (amber underline)
-- **`richTextEnd`** (below image) = styled pill/button links via CSS. Best for CTA lists.
+- **`richText`** (above image) = regular inline links (amber underline). Supports ordered/unordered lists.
+- **`richTextEnd`** (below image) = styled pill/button links via CSS. Best for CTA lists. Supports ordered/unordered lists.
 - Always add an empty paragraph after headings (frontend uses `padding-top`, not `margin-bottom`)
 - **Lead answer block** — `addMarginTop: false`, `addMarginBottom: false` — the block sits directly below the hero without extra spacing
 
 ## Posts — Layout Blocks
 
 - **Text block** (`blockType: "Text"`, `style`: `text` | `quote` | `emphasis`, rich text field: **`content`**)
-  - `emphasis` = bordered box, semibold, larger text. **Always use as first block** (intro/summary) + mid-article callouts
-  - `quote` = card with large serif quotation mark. Italic quote text, bold attribution.
+  - `emphasis` = bordered box, semibold, larger text. **Always use as first block** (intro/summary) + mid-article callouts. **Never place links inside emphasis blocks** — move links to a regular `text` block instead.
+  - `quote` = card with large serif quotation mark. Italic quote text (format: 2). **Use for credibility if applicable** — spoken quotes from survivors or authorities, but also cited written texts (catalogue introductions, official letters, written statements). **Attribution format:** `— Name,` in bold (format: 1), then `Role, Organisation, Description` in regular (format: 0).
   - `text` = regular prose paragraphs
+- **Lists in Text blocks:** Use **unordered lists** for non-sequential items (rules, tips, what to bring) and **ordered lists** for sequential steps (directions, booking process, itinerary). Lists improve readability and are preferred by AI search and featured snippets. Available in all Text block styles.
 - **Image block** (`blockType: "Image"`, `media`: media ID, **`caption`**: richText — not a plain string)
 - **Block source mapping:** `Banner` (import) → slug `"Text"`, `Code` (import) → slug `"Image"` — config files: `src/blocks/Banner/config.ts`, `src/blocks/Code/config.ts`
 - **H2 spacing:** add empty paragraph **after** every H2
-- **H3 spacing:** add empty paragraph **before and after** every H3
-- **Exception:** no spacer paragraph before a heading that starts a block/section
+- **H3 spacing:** add empty paragraph **before and after** every H3, **exception:** no spacer paragraph before a H3 heading that starts a block
 - **No spacer between paragraphs** — empty paragraphs are only for heading spacing
 - **Typical pattern:** emphasis intro → text + H2 → image → more text/quote/image → emphasis callout
 
 ### Image Placement
 
-- Every post must include **1 hero image** (`meta.image`) + **2–3 Image blocks** spread through the layout
+- Every post must include **1 hero image** (`meta.image`) + **2–4 Image blocks** spread through the layout
 - Before using the placeholder, check the media collection (`findMedia`) for a relevant existing image
 - If no relevant image exists, use placeholder **`67be70ae35ec329c954f5410`**
 - **Placeholder in Image block:** set the `caption` rich text to describe what the image **should** show (its future contents) — the user will replace the placeholder and use the caption as alt text for the real photo
@@ -130,7 +135,10 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 - Heading tag: `tag: "h2"` / `"h3"`
 - Bold: `format: 1`, Italic: `format: 2`, Underline: `format: 8`
 - Links: `type: "link"` wrapping text, `fields: { url, newTab, linkType: "custom" }`
-- **Link punctuation:** if a sentence or its ending part is a link, include the period **inside** the link node (not as a separate text node after it)
+- Unordered list: `type: "list"`, `tag: "ul"`, `listType: "bullet"`, `start: 0`
+- Ordered list: `type: "list"`, `tag: "ol"`, `listType: "number"`, `start: 1`
+- List items: `type: "listitem"`, `value: 1` (increments per item), `checked: null`; children can contain text nodes, formatted text, and link nodes
+
 
 ## Content Accuracy
 
@@ -140,6 +148,7 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 
 ## Global Content Rules
 
+- **Always present full post content for user review before injecting into CMS.** Draft all texts, images, links, SEO metadata, and block structure in the plan/conversation first. Only call `createPosts` after the user approves. Use `[QUESTION]` inline comments for anything uncertain.
 - **Placeholder image:** media ID `67be70ae35ec329c954f5410`
 - **Posts always created as draft**
 - **Author:** always set `authors` to Łukasz (`675f51ab4d074485ad8b59af`) when creating posts

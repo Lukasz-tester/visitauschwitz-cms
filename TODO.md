@@ -49,7 +49,7 @@ Done:
 
 Priority order (new from keyword gap analysis):
 
-1. [ ] "How to Get to Auschwitz from Krakow: Bus, Train & Car" — #1 organic cluster (~613 clicks, 22K impressions)
+1. [x] "How to Get to Auschwitz from Krakow: Bus, Train & Car" — #1 organic cluster (~613 clicks, 22K impressions)
 2. [ ] "Auschwitz Ticket Scams: How to Spot Fake Sites" — URGENT, trust-building
 3. [ ] "Best Time to Visit Auschwitz: Month-by-Month Guide" — covers 2 gaps (best time + how far in advance to book)
 4. [ ] "How Long Does It Take to Visit Auschwitz? Time Planning"

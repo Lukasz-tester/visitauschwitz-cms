@@ -5,6 +5,8 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
@@ -47,6 +49,8 @@ const columnFields: Field[] = [
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          UnorderedListFeature(),
+          OrderedListFeature(),
         ]
       },
     }),
@@ -74,6 +78,8 @@ const columnFields: Field[] = [
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          UnorderedListFeature(),
+          OrderedListFeature(),
         ]
       },
     }),
@@ -96,6 +102,8 @@ export const Content: Block = {
             HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
+            UnorderedListFeature(),
+            OrderedListFeature(),
           ]
         },
       }),

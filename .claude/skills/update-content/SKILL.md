@@ -99,6 +99,7 @@ richText([heading(text, 'h2'), paragraph([])])
 ## MCP Safety
 
 - **Always check for `visitauschwitz-cms-local` first** (dev server). Only fall back to `visitauschwitz-cms-prod` if local is unavailable.
+- **If MCP tools are not available** and the workflow requires them, ask the user to reconnect (`/mcp`) before proceeding — do not attempt workarounds.
 - **WARNING — Layout arrays are REPLACED, not merged.** MCP `updatePages`/`updatePosts` replaces the entire `layout` array. Sending partial layout **deletes all blocks not included**.
 - For **layout field updates**: use `scripts/update-locale.ts` with MongoDB positional array filters (`$[identifier]`). Run with `npx tsx scripts/update-locale.ts`.
 - For **non-array fields** (title, slug, meta, hero): MCP partial updates work fine.
@@ -110,3 +111,6 @@ richText([heading(text, 'h2'), paragraph([])])
 - Heading tag: `tag: "h2"` / `"h3"`
 - Bold: `format: 1`, Italic: `format: 2`, Underline: `format: 8`
 - Links: `type: "link"` wrapping text, `fields: { url, newTab, linkType: "custom" }`
+- Unordered list: `type: "list"`, `tag: "ul"`, `listType: "bullet"`, `start: 0`
+- Ordered list: `type: "list"`, `tag: "ol"`, `listType: "number"`, `start: 1`
+- List items: `type: "listitem"`, `value: 1` (increments per item), `checked: null`; children can contain text nodes, formatted text, and link nodes
