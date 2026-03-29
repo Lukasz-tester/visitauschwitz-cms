@@ -323,6 +323,7 @@ async function main() {
           'Most visitors only see a fraction of Auschwitz-Birkenau. A licensed guide reveals 10 overlooked places that deepen your understanding of the Memorial. ALT: Birkenau railway tracks leading to the gate with ruins of crematoria visible in the distance',
         image: '67be70ae35ec329c954f5410',
       },
+      // layout,
     },
   })
 

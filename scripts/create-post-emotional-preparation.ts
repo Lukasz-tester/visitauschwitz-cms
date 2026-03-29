@@ -397,7 +397,7 @@ async function main() {
           'How to emotionally prepare for visiting Auschwitz. What to expect, how to process the experience, and advice for families \u2014 from a licensed guide. ALT: Visitors walking solemnly through the gate of Auschwitz I main camp',
         image: '67be70ae35ec329c954f5410',
       },
-      layout,
+      // layout,
     },
   })
 

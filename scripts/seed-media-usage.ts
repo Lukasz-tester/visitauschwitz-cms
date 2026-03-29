@@ -25,10 +25,11 @@ async function main() {
 
   const payload = await getPayload({ config: configPromise })
 
-  type UsedInEntry = { document: { relationTo: string; value: string }; location: string }
+  type MediaCollection = 'pages' | 'posts' | 'users'
+  type UsedInEntry = { document: { relationTo: MediaCollection; value: string }; location: string }
   const usageMap = new Map<string, UsedInEntry[]>()
 
-  function addEntry(mediaId: string, docId: string, collection: string, location: string) {
+  function addEntry(mediaId: string, docId: string, collection: MediaCollection, location: string) {
     if (!usageMap.has(mediaId)) usageMap.set(mediaId, [])
     usageMap.get(mediaId)!.push({
       document: { relationTo: collection, value: docId },

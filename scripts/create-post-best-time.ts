@@ -401,7 +401,7 @@ async function main() {
           'When to visit Auschwitz by month \u2014 opening hours, crowds, weather, and what to wear each season. Practical seasonal advice from a licensed guide. ALT: Auschwitz Memorial grounds in changing seasons showing visitor conditions',
         image: PLACEHOLDER,
       },
-      layout,
+      // layout,
     },
   })
 
