@@ -175,7 +175,8 @@ export default buildConfig({
  2. ARRAY STRUCTURE: Output array must match input length. If a fragment becomes empty due to word shifts, use an empty string (""). Indexes must align.
 
  3. TERMINOLOGY (examples are in Polish but applicable to all target languages):
- - choose words conveying remembrance "pamięć, poznanie historii" — avoid "wycieczka, wypad" unless leisure wording is significantly better for SEO long tail keywords or is clearly implied by context.
+ - if applicable, choose wording reflecting search patterns in the target language for best SEO performance (long tail keywords, phrases, etc.)
+ - "Memorial" = "Miejsce Pamięci" (not "Memoriał")
  - "to book" = "zarezerwować" (not "kupić")
  - "educator" = "edukator" (not "przewodnik")
  - "tour" = "zwiedzanie" (not "wycieczka")

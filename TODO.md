@@ -50,22 +50,20 @@ Done:
 Priority order (new from keyword gap analysis):
 
 1. [x] "How to Get to Auschwitz from Krakow: Bus, Train & Car" — #1 organic cluster (~613 clicks, 22K impressions)
-2. [ ] "Auschwitz Ticket Scams: How to Spot Fake Sites" — URGENT, trust-building
-3. [ ] "Best Time to Visit Auschwitz: Month-by-Month Guide" — covers 2 gaps (best time + how far in advance to book)
+2. [x] "Auschwitz Ticket Scams: How to Spot Fake Sites" — URGENT, trust-building
+3. [x] "Best Time to Visit Auschwitz: Month-by-Month Guide" — covers 2 gaps (best time + how far in advance to book)
 4. [ ] "How Long Does It Take to Visit Auschwitz? Time Planning"
 5. [ ] "Auschwitz Photography Rules: What You Can and Cannot Capture"
-6. [ ] "Auschwitz Emotional Preparation: What to Expect and How to Process" — merged with reading list, lead magnet CTA
+6. [x] "Auschwitz Emotional Preparation: What to Expect and How to Process" — merged with reading list, lead magnet CTA
 7. [ ] "Where to Eat Near Auschwitz: Restaurants and Cafes"
 8. [ ] "Auschwitz in Winter: Month-by-Month Visitor Guide"
 9. [ ] "Auschwitz Accessibility Guide: Wheelchair & Mobility Info"
-10. [ ] "10 Things Most Visitors Miss at Auschwitz"
+10. [x] "10 Things Most Visitors Miss at Auschwitz"
 11. [ ] "Post-Visit: Books, Films & Resources After Auschwitz"
 12. [ ] "Auschwitz from Warsaw: Is It Worth a Day Trip?"
 
-- nowy post o Polski blok 15
+
 - nowy post o rasizm na grupie (kiedys)
-- Polish exhibit: https://www.auschwitz.org/en/museum/news/new-permanent-exhibition-dedicated-to-the-fate-of-poles-at-kl-auschwitz,1787.html.   /.   https://www.auschwitz.org/en/museum/news/poles-in-kl-auschwitz-the-next-stage-of-work-on-the-exhibition-,1692.html
-- Search tools: https://www.auschwitz.org/en/museum/news/new-online-tool-allows-searching-for-information-about-auschwitz-victims-and-transports-to-the-camp,1734.html
 - aukcja https://wydarzenia.interia.pl/zagranica/news-dokumenty-i-listy-z-czasow-holokaustu-na-sprzedaz-cyniczne-i,nId,22454576
 
 ---

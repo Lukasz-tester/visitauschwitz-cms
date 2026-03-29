@@ -39,6 +39,27 @@ export const Media: CollectionConfig = {
         },
       }),
     },
+    {
+      name: 'usedIn',
+      type: 'array',
+      admin: {
+        readOnly: true,
+        description: 'Automatically tracked. Shows where this media is referenced.',
+      },
+      fields: [
+        {
+          name: 'document',
+          type: 'relationship',
+          relationTo: ['pages', 'posts', 'users'],
+          required: true,
+        },
+        {
+          name: 'location',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
   ],
   upload: {
     staticDir: path.resolve(dirname, '../../../public/media'),

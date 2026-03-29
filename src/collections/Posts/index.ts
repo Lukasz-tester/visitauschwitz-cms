@@ -16,6 +16,7 @@ import { Code } from '../../blocks/Code/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidatePost } from './hooks/revalidatePost'
+import { syncPostMediaUsage, deletePostMediaUsage } from '../../hooks/syncMediaUsage'
 
 import {
   MetaDescriptionField,
@@ -218,7 +219,8 @@ export const Posts: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
+    afterChange: [revalidatePost, syncPostMediaUsage],
+    afterDelete: [deletePostMediaUsage],
     afterRead: [populateAuthors],
   },
   versions: {

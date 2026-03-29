@@ -111,19 +111,22 @@ The MCP plugin's Zod schema conversion (`json-schema-to-zod@2.6.1`) fails on blo
 
 - **Text block** (`blockType: "Text"`, `style`: `text` | `quote` | `emphasis`, rich text field: **`content`**)
   - `emphasis` = bordered box, semibold, larger text. **Always use as first block** (intro/summary) + mid-article callouts. **Never place links inside emphasis blocks** — move links to a regular `text` block instead.
-  - `quote` = card with large serif quotation mark. Italic quote text (format: 2). **Use for credibility if applicable** — spoken quotes from survivors or authorities, but also cited written texts (catalogue introductions, official letters, written statements). **Attribution format:** `— Name,` in bold (format: 1), then `Role, Organisation, Description` in regular (format: 0).
-  - `text` = regular prose paragraphs
+  - `quote` = card with large serif quotation mark. Italic quote text (format: 2). **Use for credibility if applicable** — spoken quotes from survivors or authorities, but also cited written texts (catalogue introductions, official letters, written statements). **Attribution format:** `— Name,` in bold (format: 1), then `Role, Organisation, Description` and source link in regular (format: 0). **Important:** search for relevant quotes on the official websites: https://www.auschwitz.org/ or similar and add at least 2 per post if possible.
+  - `text` = regular prose paragraphs.
+- **Length of paragraphs:** devide long texts into paragraphs of around **100 words / 600 characters**; **important:** add short descriptive H3 heading for each such paragraph.
 - **Lists in Text blocks:** Use **unordered lists** for non-sequential items (rules, tips, what to bring) and **ordered lists** for sequential steps (directions, booking process, itinerary). Lists improve readability and are preferred by AI search and featured snippets. Available in all Text block styles.
+- **Linking — important:** Every Text block must have a short, descriptive `blockName` (e.g. `getting-there`, `what-to-bring`, `booking-tips`). This serves two purposes: CMS admin readability (blocks are labelled in the sidebar) and anchor targets for internal linking within posts. Links use the simple `#blockName` structure.
+- **Table of contents — important:** Immediately after the lead `emphasis` intro block, add a `text`-style Text block (blockName: `table-of-contents`) containing an unordered list of anchor links to each main H2 section in the post. Each link points to `#blockName` of the corresponding section's Text block. Example: `[Getting There](#getting-there)`. Keep the ToC concise — only H2-level sections, no H3 sub-sections.
 - **Image block** (`blockType: "Image"`, `media`: media ID, **`caption`**: richText — not a plain string)
 - **Block source mapping:** `Banner` (import) → slug `"Text"`, `Code` (import) → slug `"Image"` — config files: `src/blocks/Banner/config.ts`, `src/blocks/Code/config.ts`
 - **H2 spacing:** add empty paragraph **after** every H2
 - **H3 spacing:** add empty paragraph **before and after** every H3, **exception:** no spacer paragraph before a H3 heading that starts a block
 - **No spacer between paragraphs** — empty paragraphs are only for heading spacing
-- **Typical pattern:** emphasis intro → text + H2 → image → more text/quote/image → emphasis callout
+- **Typical pattern:** emphasis intro → **table of contents** → text + H2 → image → more text/quote/image → emphasis callout
 
 ### Image Placement
 
-- Every post must include **1 hero image** (`meta.image`) + **2–4 Image blocks** spread through the layout
+- Every post must include **1 hero image** (`meta.image`) + **3–5 Image blocks** spread through the layout
 - Before using the placeholder, check the media collection (`findMedia`) for a relevant existing image
 - If no relevant image exists, use placeholder **`67be70ae35ec329c954f5410`**
 - **Placeholder in Image block:** set the `caption` rich text to describe what the image **should** show (its future contents) — the user will replace the placeholder and use the caption as alt text for the real photo

@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { authenticatedAdmin } from '../../access/authenticated'
 import { authenticated } from '../../access/authenticated'
+import { syncUserMediaUsage, deleteUserMediaUsage } from '../../hooks/syncMediaUsage'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -54,6 +55,10 @@ const Users: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [syncUserMediaUsage],
+    afterDelete: [deleteUserMediaUsage],
+  },
   timestamps: true,
 }
 

@@ -14,6 +14,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
+import { syncPageMediaUsage, deletePageMediaUsage } from '../../hooks/syncMediaUsage'
 
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
@@ -149,7 +150,8 @@ export const Pages: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePage],
+    afterChange: [revalidatePage, syncPageMediaUsage],
+    afterDelete: [deletePageMediaUsage],
     beforeChange: [populatePublishedAt],
   },
   versions: {
