@@ -107,12 +107,14 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'newsletter-email': NewsletterEmail;
     'ai-bulk-translation': AiBulkTranslation;
     'sync-links': SyncLink;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'newsletter-email': NewsletterEmailSelect<false> | NewsletterEmailSelect<true>;
     'ai-bulk-translation': AiBulkTranslationSelect<false> | AiBulkTranslationSelect<true>;
     'sync-links': SyncLinksSelect<false> | SyncLinksSelect<true>;
   };
@@ -1809,6 +1811,27 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-email".
+ */
+export interface NewsletterEmail {
+  id: string;
+  /**
+   * The email subject line sent in the auto-reply.
+   */
+  subject: string;
+  /**
+   * Introduction/greeting section of the email body.
+   */
+  intro: string;
+  /**
+   * Footer section of the email (e.g., contact details, legal notices).
+   */
+  footer?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ai-bulk-translation".
  */
 export interface AiBulkTranslation {
@@ -1867,6 +1890,18 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-email_select".
+ */
+export interface NewsletterEmailSelect<T extends boolean = true> {
+  subject?: T;
+  intro?: T;
+  footer?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

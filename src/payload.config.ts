@@ -29,6 +29,7 @@ import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
+import { NewsletterEmail } from './globals/NewsletterEmail/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
@@ -142,7 +143,7 @@ export default buildConfig({
     process.env.PAYLOAD_PUBLIC_SERVER_URL,
     process.env.FRONTEND_URL,
   ].filter(Boolean) as string[],
-  globals: [Header, Footer],
+  globals: [Header, Footer, NewsletterEmail],
   logger: {
     destination: process.stdout,
     options: { level: 'info' },
@@ -152,7 +153,7 @@ export default buildConfig({
       // collections with the enabled translator in the admin UI
       collections: ['posts', 'pages', 'forms', 'categories'],
       // globals with the enabled translator in the admin UI
-      globals: ['header', 'footer'],
+      globals: ['header', 'footer', 'newsletter-email'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
       resolvers: [
         openAIResolver({

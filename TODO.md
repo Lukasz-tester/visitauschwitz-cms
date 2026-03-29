@@ -1,3 +1,9 @@
+# newsletter preview
+http://localhost:3000/api/newsletter-email-preview?locale=en
+
+# kill 
+lsof -ti :3000,3002 | xargs kill -9 2>/dev/null; echo "Done" 
+
 ## moje:
 - powysylaj przypomnienia zeby mnie dodac na stronkach!
 - awesome claude code - fajne narzedzie, pewnie sa tez podobne? https://github.com/claude-ai/awesome-claude-code
