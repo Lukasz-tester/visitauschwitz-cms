@@ -95,7 +95,8 @@
       "payload": "3.77.0"
     },
     "patchedDependencies": {
-      "@payloadcms/plugin-mcp@3.77.0": "patches/@payloadcms__plugin-mcp@3.77.0.patch"
+      "@payloadcms/plugin-mcp@3.77.0": "patches/@payloadcms__plugin-mcp@3.77.0.patch",
+      "payload@3.77.0": "patches/payload@3.77.0.patch"
     }
   }
 }
