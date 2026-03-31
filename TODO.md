@@ -1,10 +1,26 @@
 # newsletter preview
+
 http://localhost:3000/api/newsletter-email-preview?locale=en
 
-# kill 
-lsof -ti :3000,3002 | xargs kill -9 2>/dev/null; echo "Done" 
+2.  Open http://localhost:3000/api/confirmation-email-preview — verify English version
+3.  Open http://localhost:3000/api/confirmation-email-preview?locale=pl — verify Polish version
+4.  Compare side-by-side with http://localhost:3000/api/newsletter-email-preview for visual consistency
+
+## double opt-in
+
+- [x] Confirmation email template (`src/email/generateConfirmationEmail.ts`) + i18n keys
+- [x] `Subscribers` collection — fields: `email`, `confirmed`, `token`, `locale`, `confirmedAt`
+- [x] Form submission hook — on newsletter submit: create subscriber, generate token, send confirmation email
+- [ ] `/api/confirm?token=xxx` endpoint — validate token, mark confirmed, send lead magnet email, redirect
+- [ ] Lead magnet email send — trigger the checklist email after confirmation
+- [ ] Thank-you page/redirect after confirm
+
+# kill localhosts
+
+lsof -ti :3000,3002 | xargs kill -9 2>/dev/null; echo "Done"
 
 ## moje:
+
 - powysylaj przypomnienia zeby mnie dodac na stronkach!
 - awesome claude code - fajne narzedzie, pewnie sa tez podobne? https://github.com/claude-ai/awesome-claude-code
 - Usun konto Pinterest, sprawdzić twittera
@@ -13,27 +29,26 @@ lsof -ti :3000,3002 | xargs kill -9 2>/dev/null; echo "Done"
 ## GSC data
 
 Najczęstsze zapytania | Kliknięcia | Wyświetlenia
-bus from krakow to auschwitz	169	2 008
-auschwitz bilety cennik	124	4 454
-krakow to auschwitz	115	11 739
-krakow to auschwitz bus	108	1 968
-oświęcim bilety	90	3 377
-auschwitz bilety	80	10 088
-bus krakow to auschwitz	66	725
-bus to auschwitz from krakow	60	851
-bilety auschwitz	59	1 321
-how to get to auschwitz from krakow	50	2 987
-visit auschwitz	45	8 398
-how to get from krakow to auschwitz	45	1 822
-oswiecim bilety	42	1 239
-auschwitz bilety bez przewodnika	37	764
-kraków to auschwitz bus timetable	29	234
-auschwitz tickets	26	10 651
-oświęcim bilety online	26	947
-krakow auschwitz bus	22	427
-auschwitz bilety online	21	566
-lajkonik bus krakow to auschwitz	21	463
-
+bus from krakow to auschwitz 169 2 008
+auschwitz bilety cennik 124 4 454
+krakow to auschwitz 115 11 739
+krakow to auschwitz bus 108 1 968
+oświęcim bilety 90 3 377
+auschwitz bilety 80 10 088
+bus krakow to auschwitz 66 725
+bus to auschwitz from krakow 60 851
+bilety auschwitz 59 1 321
+how to get to auschwitz from krakow 50 2 987
+visit auschwitz 45 8 398
+how to get from krakow to auschwitz 45 1 822
+oswiecim bilety 42 1 239
+auschwitz bilety bez przewodnika 37 764
+kraków to auschwitz bus timetable 29 234
+auschwitz tickets 26 10 651
+oświęcim bilety online 26 947
+krakow auschwitz bus 22 427
+auschwitz bilety online 21 566
+lajkonik bus krakow to auschwitz 21 463
 
 ### Must-Create Pages
 
@@ -67,7 +82,6 @@ Priority order (new from keyword gap analysis):
 10. [x] "10 Things Most Visitors Miss at Auschwitz"
 11. [ ] "Post-Visit: Books, Films & Resources After Auschwitz"
 12. [ ] "Auschwitz from Warsaw: Is It Worth a Day Trip?"
-
 
 - nowy post o rasizm na grupie (kiedys)
 - aukcja https://wydarzenia.interia.pl/zagranica/news-dokumenty-i-listy-z-czasow-holokaustu-na-sprzedaz-cyniczne-i,nId,22454576
@@ -173,15 +187,14 @@ The interactive map is the site's unique asset. Expand it:
 
 ### Polish
 
-| Query                                    | Target                                    | Status                             |
-| ---------------------------------------- | ----------------------------------------- | ---------------------------------- |
-| jak dojechac do auschwitz z krakowa      | PL translation of "How to Get from Krakow"| **TODO** — translate new post      |
-| ile trwa zwiedzanie auschwitz            | PL translation of "How Long Does It Take" | **TODO** — translate new post      |
-| co zabrac do auschwitz                   | post: "What to Wear" (PL exists)          | DONE — SEO tune PL version         |
-| auschwitz z dziecmi                      | post: "With Children" (PL exists)         | DONE — SEO tune PL version         |
-| auschwitz zima                           | PL translation of "Winter" post           | **TODO** — translate new post      |
-| auschwitz cennik 2026                    | /tickets PL                               | page update — ensure 2026 pricing  |
-
+| Query                               | Target                                     | Status                            |
+| ----------------------------------- | ------------------------------------------ | --------------------------------- |
+| jak dojechac do auschwitz z krakowa | PL translation of "How to Get from Krakow" | **TODO** — translate new post     |
+| ile trwa zwiedzanie auschwitz       | PL translation of "How Long Does It Take"  | **TODO** — translate new post     |
+| co zabrac do auschwitz              | post: "What to Wear" (PL exists)           | DONE — SEO tune PL version        |
+| auschwitz z dziecmi                 | post: "With Children" (PL exists)          | DONE — SEO tune PL version        |
+| auschwitz zima                      | PL translation of "Winter" post            | **TODO** — translate new post     |
+| auschwitz cennik 2026               | /tickets PL                                | page update — ensure 2026 pricing |
 
 ---
 
@@ -215,7 +228,6 @@ The interactive map is the site's unique asset. Expand it:
 - [ ] Week 3: "Auschwitz Accessibility: Wheelchair & Mobility Guide"
 - [ ] Week 4: "Auschwitz in Winter: Month-by-Month Visitor Guide"
 
-
 ### To Improve
 
 - [ ] Deploy the popup newsletter variant (code exists, not active)
@@ -229,3 +241,20 @@ The interactive map is the site's unique asset. Expand it:
 
 1. [ ] Activate popup newsletter (code exists)
 2. [ ] Add email CTA block to /supplement and /tour pages (reuse homepage variant)
+
+## future options for cf builds:
+
+- Local CMS for CF Pages builds — not practical unfortunately. CF Pages builds run on Cloudflare's servers, not your machine. They can't reach localhost. You'd need a tunnel (Cloudflare Tunnel / ngrok) running 24/7, and your machine would need to be on during every build. Fragile.
+- Local build + deploy static output — viable. You could build the frontend locally (hitting localhost:3000 Payload API), then deploy only the static output to CF Pages. Zero Vercel API calls during builds. Downside: manual step (or scripted), and your machine must be on.
+  Strategy (maybe not worth it): Long cache + Deploy Hook to purge
+  1. Set s-maxage to 7 days (or even 30 days)
+  2. Create a Vercel Deploy Hook (Vercel Dashboard → Project → Settings → Git → Deploy Hooks)
+  3. Before deploying CF Pages, curl -X POST <deploy-hook-url> → triggers Vercel redeployment → clears all CDN cache
+  4. Wait ~2 min for Vercel to redeploy
+  5. Deploy CF Pages → gets fresh data
+     Deploy Hooks are free on all plans. It's just a URL you POST to.  
+     But here's the honest math question: With ~0.5% of your 100GB FOT quota used by builds (even with 9 locales), is the extra complexity worth it? The  
+     1-hour cache already:
+  - Deduplicates globals durin builds
+  - Caches between repeat builds
+  - The /api/media/file/\* block saves more FOT than longer caching would

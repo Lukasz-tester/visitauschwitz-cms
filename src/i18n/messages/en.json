@@ -21,5 +21,14 @@
   "privacy-policy": "Privacy policy",
   "tips": "Tips",
   "about": "About Me",
-  "books": "BOOKS →"
+  "books": "BOOKS →",
+
+  "confirmation-email-subject": "Confirm your email address",
+  "confirmation-email-greeting": "Hi there!",
+  "confirmation-email-explanation": "You're receiving this because you subscribed to the visitauschwitz.info newsletter.",
+  "confirmation-email-instruction": "To complete your subscription, please confirm your email:",
+  "confirmation-email-cta": "Confirm my email",
+  "confirmation-email-expiry": "This link expires in 24 hours.",
+  "confirmation-email-ignore": "If you didn't subscribe, you can safely ignore this email.",
+  "confirmation-email-footer": "visitauschwitz.info — Practical guide by a licensed Auschwitz guide since 2006"
 }

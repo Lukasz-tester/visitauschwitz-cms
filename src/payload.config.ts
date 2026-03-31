@@ -27,10 +27,12 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
+import Subscribers from './collections/Subscribers'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { NewsletterEmail } from './globals/NewsletterEmail/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
+import { handleNewsletterSubmission } from './collections/Subscribers/hooks/handleNewsletterSubmission'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
 
@@ -134,7 +136,7 @@ export default buildConfig({
       heartbeatFrequencyMS: 10000,
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, Subscribers],
   cors: [
     process.env.PAYLOAD_PUBLIC_SERVER_URL,
     process.env.FRONTEND_URL,
@@ -177,6 +179,7 @@ export default buildConfig({
 
  3. TERMINOLOGY (examples are in Polish but applicable to all target languages):
  - if applicable, choose wording reflecting search patterns in the target language for best SEO performance (long tail keywords, phrases, etc.)
+ - beware of proper nouns like "Auschwitz" in context: e.g. "How Auschwitz Ticket Scams Work" = "Jak działają oszustwa związane ze sprzedażą biletów do Auschwitz" (not "Jak działają oszustwa biletowe do Auschwitz") etc.
  - "Memorial" = "Miejsce Pamięci" (not "Memoriał")
  - "to book" = "zarezerwować" (not "kupić")
  - "educator" = "edukator" (not "przewodnik")
@@ -232,6 +235,11 @@ export default buildConfig({
     formBuilderPlugin({
       fields: {
         payment: false,
+      },
+      formSubmissionOverrides: {
+        hooks: {
+          afterChange: [handleNewsletterSubmission],
+        },
       },
       formOverrides: {
         fields: ({ defaultFields }) => {
