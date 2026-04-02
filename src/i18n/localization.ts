@@ -1,5 +1,9 @@
+const localeCodes = ['en', 'pl'] as const
+
+export type LocaleCode = (typeof localeCodes)[number]
+
 const localization = {
-  defaultLocale: 'en',
+  defaultLocale: 'en' as LocaleCode,
   fallback: true,
   locales: [
     // {

@@ -34,7 +34,6 @@ const Subscribers: CollectionConfig = {
     {
       name: 'token',
       type: 'text',
-      required: true,
       unique: true,
       index: true,
       admin: {
@@ -56,8 +55,15 @@ const Subscribers: CollectionConfig = {
       required: true,
       defaultValue: 'en',
       options: [
+        { label: 'Deutsch', value: 'de' },
         { label: 'English', value: 'en' },
+        { label: 'Español', value: 'es' },
+        { label: 'Français', value: 'fr' },
+        { label: 'Italiano', value: 'it' },
+        { label: 'Nederlands', value: 'nl' },
         { label: 'Polski', value: 'pl' },
+        { label: 'Русский', value: 'ru' },
+        { label: 'Українська', value: 'uk' },
       ],
     },
     {

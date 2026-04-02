@@ -30,5 +30,12 @@
   "confirmation-email-cta": "Confirm my email",
   "confirmation-email-expiry": "This link expires in 24 hours.",
   "confirmation-email-ignore": "If you didn't subscribe, you can safely ignore this email.",
-  "confirmation-email-footer": "visitauschwitz.info — Practical guide by a licensed Auschwitz guide since 2006"
+  "confirmation-email-footer": "visitauschwitz.info — Practical guide by a licensed Auschwitz guide since 2006",
+
+  "email-unsubscribe": "Unsubscribe",
+  "newsletter-email-checklist-title": "Before You Go — Preparation Checklist",
+  "newsletter-email-checklist-description": "Print it or save it — everything you need to prepare for your visit.",
+  "newsletter-email-checklist-cta": "View & Print Checklist",
+  "unsubscribe-success": "You have been unsubscribed.",
+  "unsubscribe-invalid": "This link is no longer valid."
 }

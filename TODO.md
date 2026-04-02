@@ -1,4 +1,14 @@
-# newsletter preview
+## newsletter building
+
+- [x] 1. Create CMS Page via MCP (slug: `newsletter`, hero + content blocks)
+- [x] 2. Create newsletter page route — reuse `NewsletterSignup` via `insertNode` (same pattern as homepage)
+- [x] 4. Create CF Function proxy (`visitauschwitz-frontend/functions/api/subscribe.js`)
+- [x] 5. Modify `useNewsletterSubmit` hook → POST to `/api/subscribe` instead of `/api/contact`
+- [x] 6. Add i18n keys to `en.json` + `pl.json`
+- [x] 7. Modify FooterNewsletter → add "Learn more" link to `/newsletter`
+- [x] 8. Add newsletter CTA to contact form auto-reply (`functions/api/contact.js`)
+
+## newsletter preview
 
 http://localhost:3000/api/newsletter-email-preview?locale=en
 
@@ -9,11 +19,23 @@ http://localhost:3000/api/newsletter-email-preview?locale=en
 ## double opt-in
 
 - [x] Confirmation email template (`src/email/generateConfirmationEmail.ts`) + i18n keys
-- [x] `Subscribers` collection — fields: `email`, `confirmed`, `token`, `locale`, `confirmedAt`
+- [x] `Subscribers` collection — fields: `email`, `confirmed`, `token`, `locale`, `confirmedAt` (9 locales)
 - [x] Form submission hook — on newsletter submit: create subscriber, generate token, send confirmation email
-- [ ] `/api/confirm?token=xxx` endpoint — validate token, mark confirmed, send lead magnet email, redirect
-- [ ] Lead magnet email send — trigger the checklist email after confirmation
-- [ ] Thank-you page/redirect after confirm
+- [x] `/api/confirm?token=xxx` endpoint — validate token, mark confirmed, send lead magnet email, redirect
+- [x] Lead magnet email (`src/email/generateNewsletterEmail.ts`) — checklist email sent after confirmation
+- [x] Redirect after confirm → `/?confirmed=true`
+- [x] `/api/unsubscribe?token=xxx` endpoint — deletes subscriber, shows confirmation page
+- [x] `List-Unsubscribe` + `List-Unsubscribe-Post` headers on all outgoing emails
+- [x] Unsubscribe link in email footer (confirmation + lead magnet)
+- [x] All email strings in i18n (`en.json`) — ready for translation
+
+## campaign (next steps)
+
+- [ ] `Campaigns` collection — localized `subject` + `body` fields (AI-translated like posts)
+- [ ] Send action — query confirmed subscribers by locale, send via `payload.sendEmail()`
+- [ ] Batch sending with rate limiting (Resend free: 100/day, 3k/month)
+- [ ] Campaign status tracking (draft/sent/sending)
+- [ ] Add i18n translations for email strings (`pl.json` + other locales)
 
 # kill localhosts
 

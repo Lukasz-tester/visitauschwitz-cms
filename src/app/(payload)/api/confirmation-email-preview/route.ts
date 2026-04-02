@@ -7,7 +7,8 @@ export async function GET(request: NextRequest) {
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
   const dummyConfirmUrl = `${baseUrl}/api/confirm?token=preview-test-token&locale=${locale}`
 
-  const { html } = generateConfirmationEmail({ locale, confirmUrl: dummyConfirmUrl })
+  const unsubscribeUrl = `${baseUrl}/api/unsubscribe?token=preview-test-token`
+  const { html } = generateConfirmationEmail({ locale, confirmUrl: dummyConfirmUrl, unsubscribeUrl })
 
   return new Response(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8' },

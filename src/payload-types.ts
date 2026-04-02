@@ -903,8 +903,8 @@ export interface Subscriber {
   /**
    * Confirmation token sent via email.
    */
-  token: string;
-  locale: 'en' | 'pl';
+  token?: string | null;
+  locale: 'de' | 'en' | 'es' | 'fr' | 'it' | 'nl' | 'pl' | 'ru' | 'uk';
   /**
    * When the subscriber confirmed their email.
    */

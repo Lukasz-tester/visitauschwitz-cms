@@ -15,23 +15,24 @@ function escapeHtml(str: string): string {
     .replace(/"/g, '&quot;')
 }
 
-export function generateConfirmationEmail({
+export function generateNewsletterEmail({
   locale,
-  confirmUrl,
+  subject,
+  intro,
+  footer,
+  checklistUrl,
   unsubscribeUrl,
 }: {
-  locale: 'en' | 'pl'
-  confirmUrl: string
+  locale: string
+  subject: string
+  intro: string
+  footer: string
+  checklistUrl: string
   unsubscribeUrl: string
 }): { subject: string; html: string } {
-  const subject = t(locale, 'confirmation-email-subject')
-  const greeting = t(locale, 'confirmation-email-greeting')
-  const explanation = t(locale, 'confirmation-email-explanation')
-  const instruction = t(locale, 'confirmation-email-instruction')
-  const cta = t(locale, 'confirmation-email-cta')
-  const expiry = t(locale, 'confirmation-email-expiry')
-  const ignore = t(locale, 'confirmation-email-ignore')
-  const footer = t(locale, 'confirmation-email-footer')
+  const checklistTitle = t(locale, 'newsletter-email-checklist-title')
+  const checklistDescription = t(locale, 'newsletter-email-checklist-description')
+  const checklistCta = t(locale, 'newsletter-email-checklist-cta')
   const unsubscribe = t(locale, 'email-unsubscribe')
 
   const html = `<!DOCTYPE html>
@@ -52,34 +53,30 @@ export function generateConfirmationEmail({
               <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:600;">visitauschwitz.info</h1>
             </td>
           </tr>
-          <!-- Greeting -->
+          <!-- Subject -->
           <tr>
             <td style="padding:32px 32px 0;">
-              <h2 style="margin:0;font-size:18px;color:#333333;">${escapeHtml(greeting)}</h2>
+              <h2 style="margin:0;font-size:18px;color:#333333;">${escapeHtml(subject)}</h2>
             </td>
           </tr>
-          <!-- Explanation -->
+          <!-- Intro -->
           <tr>
-            <td style="padding:16px 32px 0;font-size:15px;line-height:1.6;color:#555555;">
-              ${escapeHtml(explanation)}
+            <td style="padding:16px 32px 24px;font-size:15px;line-height:1.6;color:#555555;">
+              ${escapeHtml(intro).replace(/\n/g, '<br />')}
             </td>
           </tr>
-          <!-- Instruction -->
+          <!-- Checklist CTA -->
           <tr>
-            <td style="padding:12px 32px 0;font-size:15px;line-height:1.6;color:#555555;">
-              ${escapeHtml(instruction)}
-            </td>
-          </tr>
-          <!-- CTA Button -->
-          <tr>
-            <td style="padding:24px 32px;text-align:center;">
-              <a href="${escapeHtml(confirmUrl)}" target="_blank" style="display:inline-block;padding:14px 36px;background-color:#1a1a1a;color:#ffffff;text-decoration:none;border-radius:4px;font-size:16px;font-weight:600;">${escapeHtml(cta)}</a>
-            </td>
-          </tr>
-          <!-- Expiry note -->
-          <tr>
-            <td style="padding:0 32px 24px;font-size:13px;line-height:1.5;color:#888888;font-style:italic;text-align:center;">
-              ${escapeHtml(expiry)}
+            <td style="padding:0 32px 24px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8f8f8;border-radius:6px;border:1px solid #e0e0e0;">
+                <tr>
+                  <td style="padding:20px 24px;text-align:center;">
+                    <p style="margin:0 0 4px;font-size:16px;font-weight:600;color:#333333;">${escapeHtml(checklistTitle)}</p>
+                    <p style="margin:0 0 14px;font-size:13px;color:#666666;">${escapeHtml(checklistDescription)}</p>
+                    <a href="${escapeHtml(checklistUrl)}" target="_blank" style="display:inline-block;padding:10px 28px;background-color:#1a1a1a;color:#ffffff;text-decoration:none;border-radius:4px;font-size:14px;font-weight:500;">${escapeHtml(checklistCta)}</a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           <!-- Divider -->
@@ -88,16 +85,10 @@ export function generateConfirmationEmail({
               <hr style="border:none;border-top:1px solid #e0e0e0;margin:0;" />
             </td>
           </tr>
-          <!-- Ignore note -->
-          <tr>
-            <td style="padding:16px 32px 8px;font-size:13px;line-height:1.5;color:#999999;">
-              ${escapeHtml(ignore)}
-            </td>
-          </tr>
           <!-- Footer -->
           <tr>
-            <td style="padding:8px 32px 8px;font-size:13px;line-height:1.5;color:#999999;">
-              ${escapeHtml(footer)}
+            <td style="padding:16px 32px 8px;font-size:13px;line-height:1.5;color:#999999;">
+              ${escapeHtml(footer).replace(/\n/g, '<br />')}
             </td>
           </tr>
           <!-- Unsubscribe -->
