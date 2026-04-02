@@ -64,7 +64,15 @@ export default function middleware(request: NextRequest) {
     return handleApiRoute(request)
   }
 
-  // Frontend routes: intl middleware + noindex (Vercel CMS is not the public site)
+  // Frontend routes: only serve to authenticated admin users (live preview, etc.)
+  // Real frontend lives on CF Pages — block public/crawler hits to save serverless invocations.
+  if (
+    process.env.NODE_ENV === 'production' &&
+    !request.cookies.has('payload-token')
+  ) {
+    return new NextResponse(null, { status: 404 })
+  }
+
   const response = intlMiddleware(request)
 
   const existingVary = response.headers.get('Vary')
