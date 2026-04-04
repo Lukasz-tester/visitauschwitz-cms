@@ -7,6 +7,7 @@ import { generateNewsletterEmail } from '@/email/generateNewsletterEmail'
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token')
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+  const frontendUrl = process.env.FRONTEND_URL || baseUrl
 
   if (!token) {
     return new Response('Missing token', { status: 400 })
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
   })
 
   if (result.docs.length === 0) {
-    return NextResponse.redirect(`${baseUrl}/?invalid=true`, 302)
+    return NextResponse.redirect(`${frontendUrl}/newsletter?invalid=true`, 302)
   }
 
   const subscriber = result.docs[0]
@@ -78,5 +79,5 @@ export async function GET(request: NextRequest) {
     payload.logger.info({ email: subscriber.email }, 'Subscriber confirmed')
   }
 
-  return NextResponse.redirect(`${baseUrl}/?confirmed=true`, 302)
+  return NextResponse.redirect(`${frontendUrl}/${subscriber.locale}/newsletter?confirmed=true`, 302)
 }

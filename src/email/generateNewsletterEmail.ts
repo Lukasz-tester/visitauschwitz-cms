@@ -7,6 +7,31 @@ function t(locale: string, key: string): string {
   return messages[locale]?.[key] ?? messages['en']?.[key] ?? key
 }
 
+function linkify(html: string, color = '#999999'): string {
+  const style = `color:${color};text-decoration:underline;`
+  // Replace emails first, using a placeholder to protect them from URL matching
+  const emailPlaceholders: string[] = []
+  let result = html.replace(
+    /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+    (match) => {
+      const idx = emailPlaceholders.length
+      emailPlaceholders.push(`<a href="mailto:${match}" style="${style}">${match}</a>`)
+      return `\x00EMAIL${idx}\x00`
+    },
+  )
+  // Then linkify URLs, skipping placeholders
+  result = result.replace(
+    /\b((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s<]*)?)/g,
+    (match) => {
+      const href = match.startsWith('http') ? match : `https://${match}`
+      return `<a href="${href}" style="${style}">${match}</a>`
+    },
+  )
+  // Restore email placeholders
+  result = result.replace(/\x00EMAIL(\d+)\x00/g, (_, idx) => emailPlaceholders[Number(idx)])
+  return result
+}
+
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, '&amp;')
@@ -62,7 +87,7 @@ export function generateNewsletterEmail({
           <!-- Intro -->
           <tr>
             <td style="padding:16px 32px 24px;font-size:15px;line-height:1.6;color:#555555;">
-              ${escapeHtml(intro).replace(/\n/g, '<br />')}
+              ${linkify(escapeHtml(intro), '#555555').replace(/\n/g, '<br />')}
             </td>
           </tr>
           <!-- Checklist CTA -->
@@ -88,7 +113,7 @@ export function generateNewsletterEmail({
           <!-- Footer -->
           <tr>
             <td style="padding:16px 32px 8px;font-size:13px;line-height:1.5;color:#999999;">
-              ${escapeHtml(footer).replace(/\n/g, '<br />')}
+              ${linkify(escapeHtml(footer)).replace(/\n/g, '<br />')}
             </td>
           </tr>
           <!-- Unsubscribe -->

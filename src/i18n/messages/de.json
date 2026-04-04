@@ -13,11 +13,22 @@
   "previous": "Vorherige",
   "next": "Nächste",
   "more-pages": "Weitere Seiten",
-  "contact": "Kontakt",
 
-  "cookie-message": "Wir verwenden notwendige Cookies für den Betrieb der Website und mit Ihrer Zustimmung zusätzliche Cookies für Analyse und Leistung. Mehr erfahren Sie in der: ",
-  "accept": "Akzeptieren",
-  "decline": "Ablehnen",
-  "privacy-policy": "Datenschutzerklärung",
-  "tips": "Tipps"
+  "confirmation-email-subject": "Bestätigen Sie Ihre E-Mail-Adresse",
+  "confirmation-email-greeting": "Hallo!",
+  "confirmation-email-explanation": "Sie erhalten diese Nachricht, weil Sie den Newsletter von visitauschwitz.info abonniert haben.",
+  "confirmation-email-instruction": "Um Ihr Abonnement abzuschließen, bestätigen Sie bitte Ihre E-Mail-Adresse:",
+  "confirmation-email-cta": "E-Mail bestätigen",
+  "confirmation-email-expiry": "Dieser Link läuft in 24 Stunden ab.",
+  "confirmation-email-ignore": "Falls Sie sich nicht angemeldet haben, können Sie diese E-Mail ignorieren.",
+  "confirmation-email-footer": "visitauschwitz.info — Praktische Tipps von einem lizenzierten Auschwitz-Guide seit 2006",
+
+  "newsletter-email-checklist-title": "Vor Ihrem Besuch — Vorbereitungsliste",
+  "newsletter-email-checklist-description": "Drucken oder speichern — alles, was Sie für Ihren Besuch vorbereiten müssen.",
+  "newsletter-email-checklist-cta": "Checkliste ansehen und drucken",
+  "newsletter-checklist-print-btn": "Drucken / Als PDF speichern",
+  "email-unsubscribe": "Abmelden",
+  "unsubscribe-success": "Sie wurden abgemeldet.",
+  "unsubscribe-invalid": "Dieser Link ist nicht mehr gültig.",
+  "unsubscribe-page-title": "Abgemeldet"
 }

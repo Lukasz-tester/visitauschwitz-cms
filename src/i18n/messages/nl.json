@@ -13,11 +13,22 @@
   "previous": "Vorige",
   "next": "Volgende",
   "more-pages": "Meer pagina's",
-  "contact": "Contact",
 
-  "cookie-message": "We gebruiken essentiële cookies die nodig zijn voor het functioneren van de site en, met uw toestemming, aanvullende cookies voor analyse en prestaties. Meer informatie in de: ",
-  "accept": "Accepteren",
-  "decline": "Weigeren",
-  "privacy-policy": "Privacybeleid",
-  "tips": "Tips"
+  "confirmation-email-subject": "Bevestig je e-mailadres",
+  "confirmation-email-greeting": "Hallo!",
+  "confirmation-email-explanation": "Je ontvangt dit bericht omdat je je hebt aangemeld voor de nieuwsbrief van visitauschwitz.info.",
+  "confirmation-email-instruction": "Om je aanmelding te voltooien, bevestig je e-mailadres:",
+  "confirmation-email-cta": "Mijn e-mail bevestigen",
+  "confirmation-email-expiry": "Deze link verloopt over 24 uur.",
+  "confirmation-email-ignore": "Als je je niet hebt aangemeld, kun je deze e-mail negeren.",
+  "confirmation-email-footer": "visitauschwitz.info — Praktische tips van een erkende Auschwitz-gids sinds 2006",
+
+  "newsletter-email-checklist-title": "Voor je bezoek — Voorbereidingslijst",
+  "newsletter-email-checklist-description": "Print of bewaar — alles wat je nodig hebt om je bezoek voor te bereiden.",
+  "newsletter-email-checklist-cta": "Checklist bekijken en printen",
+  "newsletter-checklist-print-btn": "Printen / Downloaden als PDF",
+  "email-unsubscribe": "Uitschrijven",
+  "unsubscribe-success": "Je bent uitgeschreven.",
+  "unsubscribe-invalid": "Deze link is niet meer geldig.",
+  "unsubscribe-page-title": "Uitgeschreven"
 }

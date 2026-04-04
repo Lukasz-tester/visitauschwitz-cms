@@ -32,7 +32,6 @@ import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { NewsletterEmail } from './globals/NewsletterEmail/config'
 import { revalidateRedirects } from './hooks/revalidateRedirects'
-import { handleNewsletterSubmission } from './collections/Subscribers/hooks/handleNewsletterSubmission'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { Page, Post } from 'src/payload-types'
 
@@ -137,14 +136,12 @@ export default buildConfig({
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users, Subscribers],
-  cors: [
-    process.env.PAYLOAD_PUBLIC_SERVER_URL,
-    process.env.FRONTEND_URL,
-  ].filter(Boolean) as string[],
-  csrf: [
-    process.env.PAYLOAD_PUBLIC_SERVER_URL,
-    process.env.FRONTEND_URL,
-  ].filter(Boolean) as string[],
+  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.FRONTEND_URL].filter(
+    Boolean,
+  ) as string[],
+  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.FRONTEND_URL].filter(
+    Boolean,
+  ) as string[],
   globals: [Header, Footer, NewsletterEmail],
   logger: {
     destination: process.stdout,
@@ -236,11 +233,6 @@ export default buildConfig({
       fields: {
         payment: false,
       },
-      formSubmissionOverrides: {
-        hooks: {
-          afterChange: [handleNewsletterSubmission],
-        },
-      },
       formOverrides: {
         fields: ({ defaultFields }) => {
           return defaultFields.map((field) => {
@@ -288,9 +280,18 @@ export default buildConfig({
       collections: {
         // clientProps.locales overrides the plugin default which passes full locale objects.
         // The server endpoint expects plain string codes — this is a bug in the plugin.
-        posts: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
-        pages: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
-        categories: { excludeFields: ['slug'], clientProps: { locales: localization.locales.map((l) => l.code) } },
+        posts: {
+          excludeFields: ['slug'],
+          clientProps: { locales: localization.locales.map((l) => l.code) },
+        },
+        pages: {
+          excludeFields: ['slug'],
+          clientProps: { locales: localization.locales.map((l) => l.code) },
+        },
+        categories: {
+          excludeFields: ['slug'],
+          clientProps: { locales: localization.locales.map((l) => l.code) },
+        },
       },
       openai: {
         apiKey: process.env.OPENAI_KEY || '',
@@ -329,7 +330,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   email: resendAdapter({
-    defaultFromAddress: 'contact@visitauschwitz.info',
+    defaultFromAddress: 'no-reply@visitauschwitz.info',
     defaultFromName: 'Lukasz',
     apiKey: process.env.RESEND_API || '',
   }),

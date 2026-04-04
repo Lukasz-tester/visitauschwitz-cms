@@ -21,5 +21,23 @@
   "tips": "Wskazówki",
   "about": "O mnie",
   "contact": "Kontakt",
-  "books": "KSIĄŻKI →"
+  "books": "KSIĄŻKI →",
+
+  "confirmation-email-subject": "Potwierdź swój adres email",
+  "confirmation-email-greeting": "Cześć!",
+  "confirmation-email-explanation": "Otrzymujesz tę wiadomość, ponieważ zapisałeś/aś się do newslettera visitauschwitz.info.",
+  "confirmation-email-instruction": "Aby dokończyć subskrypcję, potwierdź swój adres email:",
+  "confirmation-email-cta": "Potwierdź mój email",
+  "confirmation-email-expiry": "Ten link wygasa za 24 godziny.",
+  "confirmation-email-ignore": "Jeśli nie subskrybowałeś/aś, możesz bezpiecznie zignorować tę wiadomość.",
+  "confirmation-email-footer": "visitauschwitz.info — Praktyczny poradnik licencjonowanego przewodnika po Auschwitz od 2006 roku",
+
+  "newsletter-email-checklist-title": "Zanim pojedziesz — Lista przygotowań",
+  "newsletter-email-checklist-description": "Wydrukuj lub zapisz — wszystko, co musisz przygotować przed wizytą.",
+  "newsletter-email-checklist-cta": "Zobacz i wydrukuj listę",
+  "newsletter-checklist-print-btn": "Wydrukuj tę listę",
+  "email-unsubscribe": "Wypisz się",
+  "unsubscribe-success": "Zostałeś/aś wypisany/a z newslettera.",
+  "unsubscribe-invalid": "Ten link nie jest już ważny.",
+  "unsubscribe-page-title": "Wypisano"
 }

@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   })
 
   if (result.docs.length === 0) {
-    return new Response(unsubscribedHtml(t('en', 'unsubscribe-invalid')), {
+    return new Response(unsubscribedHtml(t('en', 'unsubscribe-invalid'), 'en'), {
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     })
   }
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
   payload.logger.info({ email: subscriber.email }, 'Subscriber unsubscribed')
 
-  return new Response(unsubscribedHtml(t(locale, 'unsubscribe-success')), {
+  return new Response(unsubscribedHtml(t(locale, 'unsubscribe-success'), locale), {
     headers: { 'Content-Type': 'text/html; charset=utf-8' },
   })
 }
@@ -52,13 +52,13 @@ export async function POST(request: NextRequest) {
   return GET(request)
 }
 
-function unsubscribedHtml(message: string): string {
+function unsubscribedHtml(message: string, locale: string): string {
   return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unsubscribed</title>
+  <title>${t(locale, 'unsubscribe-page-title')}</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;padding:64px 0;">

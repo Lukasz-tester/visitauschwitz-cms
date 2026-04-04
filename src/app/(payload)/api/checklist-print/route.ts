@@ -1,6 +1,14 @@
 import { NextRequest } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import en from '@/i18n/messages/en.json'
+import pl from '@/i18n/messages/pl.json'
+
+const messages: Record<string, Record<string, string>> = { en, pl }
+
+function t(locale: string, key: string): string {
+  return messages[locale]?.[key] ?? messages['en']?.[key] ?? key
+}
 
 export async function GET(request: NextRequest) {
   const locale = request.nextUrl.searchParams.get('locale') || 'en'
@@ -20,7 +28,9 @@ export async function GET(request: NextRequest) {
   }
 
   const title = escapeHtml(page.title || 'Before You Go — Preparation Checklist')
-  const meta = (page as unknown as Record<string, unknown>).meta as { title?: string; description?: string } | undefined
+  const meta = (page as unknown as Record<string, unknown>).meta as
+    | { title?: string; description?: string }
+    | undefined
   const metaTitle = escapeHtml(meta?.title || '')
   const metaDescription = escapeHtml(meta?.description || '')
   const layout = (page.layout as LayoutBlock[]) || []
@@ -169,12 +179,12 @@ export async function GET(request: NextRequest) {
     <div class="site">visitauschwitz.info</div>
   </div>
 
-  <button class="print-btn" onclick="window.print()">Print this checklist</button>
+  <button class="print-btn" onclick="window.print()">${escapeHtml(t(locale, 'newsletter-checklist-print-btn'))}</button>
 
   ${contentHtml}
 
   <div class="footer">
-    visitauschwitz.info &mdash; Practical guide by a licensed Auschwitz guide since 2006
+    ${escapeHtml(t(locale, 'confirmation-email-footer'))}
   </div>
 </body>
 </html>`

@@ -13,11 +13,22 @@
   "previous": "Precedente",
   "next": "Successivo",
   "more-pages": "Altre pagine",
-  "contact": "Contatto",
 
-  "cookie-message": "Utilizziamo cookie essenziali necessari per il funzionamento del sito e, con il tuo consenso, cookie aggiuntivi per analisi e prestazioni. Scopri di più nella: ",
-  "accept": "Accetta",
-  "decline": "Rifiuta",
-  "privacy-policy": "Informativa sulla privacy",
-  "tips": "Consigli"
+  "confirmation-email-subject": "Conferma il tuo indirizzo e-mail",
+  "confirmation-email-greeting": "Ciao!",
+  "confirmation-email-explanation": "Ricevi questo messaggio perché ti sei iscritto/a alla newsletter di visitauschwitz.info.",
+  "confirmation-email-instruction": "Per completare l'iscrizione, conferma il tuo indirizzo e-mail:",
+  "confirmation-email-cta": "Conferma la mia e-mail",
+  "confirmation-email-expiry": "Questo link scade tra 24 ore.",
+  "confirmation-email-ignore": "Se non ti sei iscritto/a, puoi ignorare questa e-mail.",
+  "confirmation-email-footer": "visitauschwitz.info — Consigli pratici da una guida autorizzata di Auschwitz dal 2006",
+
+  "newsletter-email-checklist-title": "Prima della visita — Lista di preparazione",
+  "newsletter-email-checklist-description": "Stampala o salvala — tutto ciò che serve per prepararsi alla visita.",
+  "newsletter-email-checklist-cta": "Visualizza e stampa la lista",
+  "newsletter-checklist-print-btn": "Stampa / Scarica come PDF",
+  "email-unsubscribe": "Cancella iscrizione",
+  "unsubscribe-success": "La tua iscrizione è stata cancellata.",
+  "unsubscribe-invalid": "Questo link non è più valido.",
+  "unsubscribe-page-title": "Iscrizione cancellata"
 }

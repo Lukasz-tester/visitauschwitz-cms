@@ -13,15 +13,6 @@
   "previous": "Previous",
   "next": "Next",
   "more-pages": "More pages",
-  "contact": "Contact",
-
-  "cookie-message": "We use essential cookies required for the site to work, and with your consent, additional cookies for analytics and performance. Read more in: ",
-  "accept": "Accept",
-  "decline": "Decline",
-  "privacy-policy": "Privacy policy",
-  "tips": "Tips",
-  "about": "About Me",
-  "books": "BOOKS →",
 
   "confirmation-email-subject": "Confirm your email address",
   "confirmation-email-greeting": "Hi there!",
@@ -30,12 +21,14 @@
   "confirmation-email-cta": "Confirm my email",
   "confirmation-email-expiry": "This link expires in 24 hours.",
   "confirmation-email-ignore": "If you didn't subscribe, you can safely ignore this email.",
-  "confirmation-email-footer": "visitauschwitz.info — Practical guide by a licensed Auschwitz guide since 2006",
+  "confirmation-email-footer": "visitauschwitz.info — Practical tips by a licensed Auschwitz guide since 2006",
 
-  "email-unsubscribe": "Unsubscribe",
   "newsletter-email-checklist-title": "Before You Go — Preparation Checklist",
   "newsletter-email-checklist-description": "Print it or save it — everything you need to prepare for your visit.",
   "newsletter-email-checklist-cta": "View & Print Checklist",
+  "newsletter-checklist-print-btn": "Print / Download as PDF",
+  "email-unsubscribe": "Unsubscribe",
   "unsubscribe-success": "You have been unsubscribed.",
-  "unsubscribe-invalid": "This link is no longer valid."
+  "unsubscribe-invalid": "This link is no longer valid.",
+  "unsubscribe-page-title": "Unsubscribed"
 }

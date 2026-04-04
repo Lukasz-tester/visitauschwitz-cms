@@ -13,11 +13,22 @@
   "previous": "Попередній",
   "next": "Наступний",
   "more-pages": "Більше сторінок",
-  "contact": "Контакт",
 
-  "cookie-message": "Ми використовуємо необхідні файли cookie для роботи сайту та, за вашої згоди, додаткові файли cookie для аналітики та продуктивності. Детальніше у: ",
-  "accept": "Прийняти",
-  "decline": "Відхилити",
-  "privacy-policy": "Політика конфіденційності",
-  "tips": "Поради"
+  "confirmation-email-subject": "Підтвердьте вашу електронну адресу",
+  "confirmation-email-greeting": "Вітаємо!",
+  "confirmation-email-explanation": "Ви отримали це повідомлення, тому що підписалися на розсилку visitauschwitz.info.",
+  "confirmation-email-instruction": "Щоб завершити підписку, підтвердьте вашу електронну адресу:",
+  "confirmation-email-cta": "Підтвердити мою пошту",
+  "confirmation-email-expiry": "Це посилання дійсне протягом 24 годин.",
+  "confirmation-email-ignore": "Якщо ви не підписувалися, просто проігноруйте цей лист.",
+  "confirmation-email-footer": "visitauschwitz.info — Практичні поради від ліцензованого гіда по Аушвіцу з 2006 року",
+
+  "newsletter-email-checklist-title": "Перед візитом — Список підготовки",
+  "newsletter-email-checklist-description": "Роздрукуйте або збережіть — усе, що потрібно для підготовки до візиту.",
+  "newsletter-email-checklist-cta": "Переглянути та роздрукувати список",
+  "newsletter-checklist-print-btn": "Роздрукувати / Завантажити як PDF",
+  "email-unsubscribe": "Відписатися",
+  "unsubscribe-success": "Вас було відписано від розсилки.",
+  "unsubscribe-invalid": "Це посилання більше не дійсне.",
+  "unsubscribe-page-title": "Відписано"
 }
