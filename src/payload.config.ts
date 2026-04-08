@@ -3,7 +3,6 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { s3Storage } from '@payloadcms/storage-s3'
 
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
@@ -150,7 +149,7 @@ export default buildConfig({
   plugins: [
     translator({
       // collections with the enabled translator in the admin UI
-      collections: ['posts', 'pages', 'forms', 'categories'],
+      collections: ['posts', 'pages', 'categories'],
       // globals with the enabled translator in the admin UI
       globals: ['header', 'footer', 'newsletter-email'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers
@@ -175,8 +174,7 @@ export default buildConfig({
  2. ARRAY STRUCTURE: Output array must match input length. If a fragment becomes empty due to word shifts, use an empty string (""). Indexes must align.
 
  3. TERMINOLOGY (examples are in Polish but applicable to all target languages):
- - if applicable, choose wording reflecting search patterns in the target language for best SEO performance (long tail keywords, phrases, etc.)
- - beware of proper nouns like "Auschwitz" in context: e.g. "How Auschwitz Ticket Scams Work" = "Jak działają oszustwa związane ze sprzedażą biletów do Auschwitz" (not "Jak działają oszustwa biletowe do Auschwitz") etc.
+ - translate FAITHFULLY — match the length and scope of the source text. Do NOT add extra words, context, keywords, or SEO phrases that are not in the original. A short label must stay short.
  - "Memorial" = "Miejsce Pamięci" (not "Memoriał")
  - "to book" = "zarezerwować" (not "kupić")
  - "educator" = "edukator" (not "przewodnik")
@@ -189,13 +187,13 @@ export default buildConfig({
 
  5. WHITESPACE: Preserve leading and trailing spaces " " exactly as in the source text.
  
- 6. SEO LENGTH:
-    - [META_TITLE] = SEO meta title. HARD LIMIT: ≤55 characters. Aim for 45–55 characters.
+ 6. SEO META FIELDS (only applies to texts prefixed with [META_TITLE] or [META_DESC]):
+    - [META_TITLE] = SEO meta title. HARD LIMIT: ≤55 characters. Aim for 45–55 characters. Use natural target-language search phrasing.
     - [META_DESC] = SEO meta description. HARD LIMIT: ≤155 characters. Aim for 130–150
- characters (roughly 18–22 words).
-    Keep it compelling with relevant keywords. Remove the prefix tag from output.
-    COUNT CAREFULLY — exceeding these limits means the text gets truncated in Google search
-  results.`
+ characters (roughly 18–22 words). Keep it compelling with relevant keywords.
+    Remove the prefix tag from output.
+    COUNT CAREFULLY — exceeding these limits means the text gets truncated in Google search results.
+    These are the ONLY texts where you should optimize for SEO keywords. All other texts: translate faithfully without adding keywords.`
           },
         }),
       ],
@@ -229,32 +227,7 @@ export default buildConfig({
       generateTitle,
       generateURL,
     }),
-    formBuilderPlugin({
-      fields: {
-        payment: false,
-      },
-      formOverrides: {
-        fields: ({ defaultFields }) => {
-          return defaultFields.map((field) => {
-            if ('name' in field && field.name === 'confirmationMessage') {
-              return {
-                ...field,
-                editor: lexicalEditor({
-                  features: ({ rootFeatures }) => {
-                    return [
-                      ...rootFeatures,
-                      FixedToolbarFeature(),
-                      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    ]
-                  },
-                }),
-              }
-            }
-            return field
-          })
-        },
-      },
-    }),
+
     searchPlugin({
       collections: ['posts', 'pages'],
       beforeSync: beforeSyncWithSearch,
@@ -307,7 +280,7 @@ export default buildConfig({
         pages: {
           enabled: true,
           description:
-            'Site pages with localized title, slug, a hero section (none/low/medium/high impact with rich text, links, and media), and block-based layout (CallToAction, Content, MediaBlock, Archive, Form, OpeningHours, Image, Text, Accordion). Supports draft/published versioning and SEO metadata.',
+            'Site pages with localized title, slug, a hero section (none/low/medium/high impact with rich text, links, and media), and block-based layout (CallToAction, Content, MediaBlock, Archive, OpeningHours, Image, Text, Accordion). Supports draft/published versioning and SEO metadata.',
         },
         media: {
           enabled: true,

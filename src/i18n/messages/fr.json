@@ -13,16 +13,14 @@
   "previous": "Précédent",
   "next": "Suivant",
   "more-pages": "Plus de pages",
-
   "confirmation-email-subject": "Confirmez votre adresse e-mail",
   "confirmation-email-greeting": "Bonjour !",
   "confirmation-email-explanation": "Vous recevez ce message car vous vous êtes inscrit(e) à la newsletter de visitauschwitz.info.",
-  "confirmation-email-instruction": "Pour finaliser votre inscription, veuillez confirmer votre adresse e-mail :",
+  "confirmation-email-instruction": "Pour finaliser votre inscription et accéder à la liste de vérification, veuillez confirmer votre adresse e-mail :",
   "confirmation-email-cta": "Confirmer mon e-mail",
   "confirmation-email-expiry": "Ce lien expire dans 24 heures.",
   "confirmation-email-ignore": "Si vous ne vous êtes pas inscrit(e), vous pouvez ignorer cet e-mail.",
   "confirmation-email-footer": "visitauschwitz.info — Conseils pratiques par un guide agréé d'Auschwitz depuis 2006",
-
   "newsletter-email-checklist-title": "Avant votre visite — Liste de préparation",
   "newsletter-email-checklist-description": "Imprimez-la ou enregistrez-la — tout ce dont vous avez besoin pour préparer votre visite.",
   "newsletter-email-checklist-cta": "Voir et imprimer la liste",

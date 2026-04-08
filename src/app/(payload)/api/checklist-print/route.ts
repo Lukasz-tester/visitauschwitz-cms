@@ -47,6 +47,9 @@ export async function GET(request: NextRequest) {
         if (col.richText?.root) {
           contentHtml += renderLexical(col.richText.root)
         }
+        if (col.richTextEnd?.root) {
+          contentHtml += renderLexical(col.richTextEnd.root)
+        }
       }
     }
   }
@@ -161,14 +164,15 @@ export async function GET(request: NextRequest) {
     .print-btn:hover { background: #333; }
 
     @media print {
-      body { padding: 0; font-size: 12px; }
+      @page { margin: 0; padding: 36px; }
+      body { font-size: 12px; }
       .header { margin-bottom: 12px; padding-bottom: 10px; }
       .header h1 { font-size: 18px; }
-      h2 { font-size: 14px; margin-top: 14px; break-after: avoid; }
+      h2 { font-size: 14px; margin-top: 20px; break-after: avoid; }
       ul li { padding: 1px 0; }
       .print-btn { display: none; }
       .footer { font-size: 10px; }
-      a { color: #1a1a1a; }
+      a, u { color: #1a1a1a; text-decoration: none !important; }
     }
   </style>
 </head>
@@ -209,7 +213,7 @@ interface LexicalNode {
 interface LayoutBlock {
   blockType: string
   heading?: { root: LexicalNode }
-  columns?: { richText?: { root: LexicalNode }; size?: string }[]
+  columns?: { richText?: { root: LexicalNode }; richTextEnd?: { root: LexicalNode }; size?: string }[]
 }
 
 // --- Lexical to HTML renderer ---

@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    ".prettierignore": "plaintext",
+    "**/i18n/messages/*.json": "jsonc"
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": false
+  }
+}

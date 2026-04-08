@@ -5,7 +5,6 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { Code } from '@/blocks/Code/config'
 import { Banner } from '@/blocks/Banner/config'
@@ -100,7 +99,6 @@ export const Pages: CollectionConfig = {
                 Content,
                 MediaBlock,
                 Archive,
-                FormBlock,
                 OpeningHours,
                 Code,
                 Banner,

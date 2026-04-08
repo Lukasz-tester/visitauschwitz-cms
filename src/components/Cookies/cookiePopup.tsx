@@ -43,20 +43,20 @@ export const CookiePopup = () => {
   return (
     <div className="fixed bottom-0 w-full z-[100001] flex justify-center bg-black/90 text-white/90 text-xl">
       <div className="flex flex-col sm:flex-row w-fit h-fit p-6 pb-8 gap-5 items-start sm:items-center justify-between">
-        <span>
+        {/* <span>
           {t('cookie-message')}
           <Link href="/privacy-policy" className="underline">
             {t('privacy-policy')}
           </Link>
-        </span>
+        </span> */}
 
         <div className="flex gap-6">
-          <Button className="w-fit" variant="outline" onClick={acceptCookies}>
+          {/* <Button className="w-fit" variant="outline" onClick={acceptCookies}>
             {t('accept')}
           </Button>
           <Button className="w-fit" onClick={declineCookies}>
             {t('decline')}
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

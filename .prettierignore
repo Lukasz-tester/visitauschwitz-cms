@@ -5,10 +5,10 @@
 **/.pnp.*
 **/.svn
 **/.yarn/**
-**/build
+**/build/**
 **/dist/**
 **/node_modules
 **/temp
 **/docs/**
 tsconfig.json
-
+src/i18n/messages/*.json

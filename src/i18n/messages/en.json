@@ -13,16 +13,14 @@
   "previous": "Previous",
   "next": "Next",
   "more-pages": "More pages",
-
   "confirmation-email-subject": "Confirm your email address",
   "confirmation-email-greeting": "Hi there!",
   "confirmation-email-explanation": "You're receiving this because you subscribed to the visitauschwitz.info newsletter.",
-  "confirmation-email-instruction": "To complete your subscription, please confirm your email:",
+  "confirmation-email-instruction": "To complete your subscription and access the checklist, please confirm your email:",
   "confirmation-email-cta": "Confirm my email",
   "confirmation-email-expiry": "This link expires in 24 hours.",
   "confirmation-email-ignore": "If you didn't subscribe, you can safely ignore this email.",
   "confirmation-email-footer": "visitauschwitz.info — Practical tips by a licensed Auschwitz guide since 2006",
-
   "newsletter-email-checklist-title": "Before You Go — Preparation Checklist",
   "newsletter-email-checklist-description": "Print it or save it — everything you need to prepare for your visit.",
   "newsletter-email-checklist-cta": "View & Print Checklist",

@@ -24,3 +24,4 @@ Detailed content workflows live in `.claude/skills/` and are loaded on demand. A
 
 - **Content creation** (new post, new page, write article, add blocks) → `/create-content`
 - **Content updates** (translate, localize, change heading, edit block text, modify existing layout) → `/update-content`
+- **npm patching** (Payload/package bug, admin UI misbehavior, fields closing, block reordering, race conditions) → `/patch-npm`
