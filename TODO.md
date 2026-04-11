@@ -280,3 +280,168 @@ The interactive map is the site's unique asset. Expand it:
   - Deduplicates globals durin builds
   - Caches between repeat builds
   - The /api/media/file/\* block saves more FOT than longer caching would
+
+---
+
+## Future: Eliminating Vercel Fast Origin Transfer on CF Pages Builds
+
+### The problem
+
+Every CF Pages build re-fetches ALL content from the Vercel CMS with `cache: 'no-store'`. This bypasses Vercel's edge cache entirely — every API call hits the Vercel origin, generating Fast Origin Transfer.
+
+**Current scale:** ~95 API calls/build × ~1.5MB avg response = **~150MB Fast Origin Transfer per build** (2 locales, 15 docs).
+
+**At 9 locales + 30 docs:** ~585 API calls/build = **~1.35GB per build**. 27 builds/month = ~36GB Fast Origin Transfer/month.
+
+**Also worth fixing regardless of which option is chosen:** `generateMetadata` and the page component both call `fetchPayloadData` with the same URL + `cache: 'no-store'`, meaning each page is fetched TWICE per locale — ~50% of all per-document API calls are wasted. Fix: hoist the fetch result in `page.tsx` and pass it to both functions. Quick win, no infrastructure change needed.
+
+---
+
+### Option A: Cloudflare Worker as Caching Proxy (no GH Actions needed)
+
+A small CF Worker sits in front of the Vercel CMS and caches API responses in CF KV. Builds fetch from the Worker URL instead of Vercel directly.
+
+```
+CF Pages Build → Worker (KV cache) → Vercel CMS (only on cache miss / after purge)
+```
+
+**How it works:**
+1. Worker receives `GET /api/pages?where[slug]=...` → checks KV for cached entry
+2. Cache hit → returns JSON from KV, Vercel is never contacted
+3. Cache miss → fetches from Vercel, stores response in KV (30-day TTL), returns it
+4. On content publish → Payload `afterChange` hook POSTs to Worker's purge endpoint
+5. Worker deletes KV keys for the changed document (all locales) + list endpoints
+6. Next CF Pages build → cache miss only for the changed doc → 1-2 Vercel origin hits instead of 585
+
+**CF Pages auto-builds keep working. No CI changes needed. Frontend `cache: 'no-store'` can stay as-is** — the Worker handles caching transparently at the HTTP layer.
+
+**Cost:**
+- CF Workers free tier: 100k requests/day — covers even 9 locales × 585 calls × many builds/day
+- CF KV free tier: 100k reads/day, 1k writes/day, 1GB storage — trivially covered
+- If scale demands: Workers Paid = $5/month (10M requests included)
+
+**What to build:**
+
+1. New directory `cms-cache-worker/`:
+   - `wrangler.toml` — KV namespace binding `CMS_CACHE`, custom domain `cms-api.visitauschwitz.info`
+   - `src/index.ts` (~150 lines):
+     - Proxy all `GET /api/*` with KV caching (key = `sha256(url)`)
+     - `POST /api/purge` endpoint (auth via `x-purge-secret` header) — accepts `{ collection, slug, locales[] }` → deletes KV entries for each `GET /api/{collection}?where[slug][equals]={slug}&locale={locale}&depth=2` per locale + list endpoints (`/api/pages?limit=1000`, `/api/posts?limit=1000`, globals)
+     - Cache TTL: 30 days (content rarely changes; purge handles freshness)
+
+2. **CMS hooks** — update `revalidatePage.ts` and `revalidatePost.ts` to call the Worker purge endpoint alongside the existing `revalidatePath()`:
+   ```ts
+   await fetch(`https://cms-api.visitauschwitz.info/api/purge`, {
+     method: 'POST',
+     headers: { 'x-purge-secret': process.env.CF_PROXY_PURGE_SECRET! },
+     body: JSON.stringify({ collection: 'pages', slug: doc.slug, locales: ['en', 'pl'] }),
+   })
+   // Locales must be read from src/i18n/localization.ts dynamically — never hardcoded
+   ```
+
+3. **Frontend env** — change `CMS_PUBLIC_SERVER_URL` from `https://auschwitz.vercel.app` to `https://cms-api.visitauschwitz.info`
+
+4. **New env vars:**
+   - CMS `.env`: `CF_PROXY_PURGE_SECRET=<random>`
+   - Worker secrets (via `wrangler secret put`): `CF_PROXY_PURGE_SECRET`, `CMS_ORIGIN_URL=https://auschwitz.vercel.app`
+
+---
+
+### Option B: GitHub Actions Build Cache (no new infrastructure)
+
+Move frontend builds from CF Pages auto-deploy to GitHub Actions, which persists the Next.js fetch cache between runs. Only changed content re-fetches from Vercel.
+
+```
+Payload change → GH repo dispatch webhook → GH Actions (cached .next/cache/) → wrangler pages deploy
+```
+
+**How it works:**
+1. Change `cmsFetch.ts` and `fetchPayloadData.js`: `cache: 'no-store'` → `cache: 'force-cache'`
+2. GH Actions caches `.next/cache/fetch-cache/` between runs (persists across builds)
+3. Pre-build script fetches a lightweight manifest from CMS: `GET /api/pages?limit=1000&select=slug,updatedAt` + same for posts (~5KB total, 2 calls)
+4. Compares manifest with `scripts/content-manifest.json` saved from the previous build (also cached)
+5. For each slug where `updatedAt` changed: computes SHA-256 hash of each fetch URL per locale, deletes matching files from `.next/cache/fetch-cache/`
+6. `next build` runs — deleted entries re-fetch from Vercel; all others use disk cache
+
+**Disabling CF Pages auto-builds:**
+- CF Pages Dashboard → Settings → Builds → disable automatic builds
+- Deploy exclusively from GH Actions via `wrangler pages deploy out --project-name visitauschwitz-frontend`
+
+**Trigger from Payload afterChange hooks:**
+```ts
+await fetch('https://api.github.com/repos/Lukasz-tester/visitauschwitz-frontend/dispatches', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${process.env.GH_DISPATCH_TOKEN}` },
+  body: JSON.stringify({
+    event_type: 'content-change',
+    client_payload: { collection: 'pages', slug: doc.slug },
+  }),
+})
+```
+
+**What to build:**
+
+1. `visitauschwitz-frontend/.github/workflows/deploy.yml` (~80 lines):
+   - Triggers: `repository_dispatch` (from Payload hook) + manual `workflow_dispatch`
+   - Steps: checkout → restore `.next/cache/` → pnpm install → run bust-stale-cache script → build → save cache → `wrangler pages deploy`
+   - GH Actions secrets needed: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GH_DISPATCH_TOKEN`
+
+2. `visitauschwitz-frontend/scripts/bust-stale-cache.mjs` (~70 lines):
+   - Fetches manifest (2 API calls)
+   - Loads previous `scripts/content-manifest.json`
+   - For each changed slug: computes `crypto.createHash('sha256').update(url).digest('hex')`, deletes matching file in `.next/cache/fetch-cache/`
+   - Saves updated manifest
+
+3. `visitauschwitz-frontend/src/utilities/cmsFetch.ts` + `fetchPayloadData.js`:
+   - Remove `cache: 'no-store'`, replace with `cache: 'force-cache'`
+
+**GH Actions minutes:** ~5-7 min/build on Linux (1× multiplier). Free tier: 2000 min/month on private repos (400 builds/month). Public repos: unlimited.
+
+**Risks to design for:**
+
+1. **Cache key mismatch → stale content deployed (medium)** — The bust-stale-cache script must compute the exact same hash Next.js uses for `.next/cache/fetch-cache/` filenames. If wrong, stale content is deployed silently. Also breaks if Next.js changes its internal cache key format after an upgrade. **Fix:** script must fall back to deleting the entire cache (full rebuild) if anything looks wrong — never deploy potentially stale content.
+
+2. **Dispatch webhook failure → no rebuild after publish (low-medium)** — If the Payload→GitHub API call fails (network blip, expired token), the CMS saves but no build fires. Site shows old content until next manual deploy. **Fix:** log errors in the hook; keep `workflow_dispatch` manual trigger in the workflow as a fallback.
+
+3. **Race condition on rapid successive publishes (low)** — Two builds triggered seconds apart may deploy in wrong order, leaving one change stale. **Fix:** add GH Actions concurrency group (`cancel-in-progress: false`) to queue builds instead of running in parallel.
+
+4. **Next.js upgrade breaks cache format (low)** — Cache files may be ignored or cause errors after `pnpm upgrade next`. **Fix:** harmless — worst case is a full rebuild. Clear GH Actions cache once after upgrading Next.js.
+
+5. **Operational overhead** — CI pipeline failures require debugging (failed step, stale secrets, wrangler CLI version change). Not a blocker, but more work than CF Pages auto-build. Manual `workflow_dispatch` button in GH UI means you're never blocked.
+
+**Not a risk:** public repo (GH secrets are server-side only, never exposed), subscriber data (stays in MongoDB on CMS), public content (stale = UX issue not security issue), GH minutes (unlimited for public repos).
+
+---
+
+### Comparison
+
+|  | Option A (CF Worker Proxy) | Option B (GH Actions Cache) |
+|---|---|---|
+| Frontend code changes | None | `cache: 'no-store'` → `force-cache` in 2 files |
+| Build pipeline | CF Pages auto-builds unchanged | Migrate to GH Actions, disable CF Pages auto-builds |
+| New infrastructure | CF Worker + KV namespace | GH Actions workflow + cache busting script |
+| Vercel FOT after content change | ~1-2 API calls (changed doc only) | ~1-2 API calls (changed doc only) |
+| Vercel FOT with no content change | 0 (100% KV cache hits) | 0 (100% disk cache hits) |
+| Works with existing `cache: 'no-store'` | Yes | No — must change to `force-cache` |
+| Cost | Free / $5 Workers Paid | Free (GH Actions minutes) |
+| Recommended | Yes — no pipeline changes needed | If adding CF Worker infrastructure is unwanted |
+
+---
+
+## Done this session (2026-04-08): Quick FOT reduction fixes in visitauschwitz-frontend
+
+**Problem:** Every CF Pages build was fetching each page/post TWICE (once in `generateMetadata`, once in the Page component) due to `cache: 'no-store'` disabling React's deduplication. Also, `cache: 'no-store'` was sending `Cache-Control: no-store` in every HTTP request, which told Vercel's edge to bypass its own CDN cache — so the middleware's `s-maxage=3600` was doing nothing.
+
+**Fixes applied:**
+
+1. ~~`src/utilities/cmsFetch.ts` + `src/utilities/fetchPayloadData.js` — changed `cache: 'no-store'` → `cache: 'force-cache'`~~ **REVERTED** — `force-cache` causes builds to receive stale content from Vercel's edge CDN when content was recently updated. There is no clean way to purge query-param-specific API cache entries on Vercel without the CF Worker proxy. Stays as `no-store`.
+
+2. Added `React.cache()` deduplication to 4 route files — each now fetches each doc only once per locale per render, shared between `generateMetadata` and the page component:
+   - `src/app/(frontend)/[locale]/[slug]/page.tsx`
+   - `src/app/(frontend)/[locale]/posts/[slug]/page.tsx`
+   - `src/app/(frontend)/[locale]/newsletter/page.tsx`
+   - `src/app/(frontend)/[locale]/page.tsx`
+
+**Expected effect:** ~50% fewer per-doc API calls per build. Between builds (within 1h), Vercel edge cache serves responses → near-zero Fast Origin Transfer for repeated builds.
+
+**Still to do (see "Future" section above):** CF Worker proxy (Option A) or GH Actions cache (Option B) for full incremental build support.
