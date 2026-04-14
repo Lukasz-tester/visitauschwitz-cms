@@ -1,16 +1,19 @@
 diff --git a/dist/utils/schemaConversion/sanitizeJsonSchema.js b/dist/utils/schemaConversion/sanitizeJsonSchema.js
-index 8c3cd2d6b63df34799b5de74fb54e17640023442..c927114efa14385eba9ce1ca0b787c66bb97087d 100644
+index 2895b8d383de67ca37edd4ad6ffd087615761b8e..d647fddb230ea163366fda5b4acb1251268fbf72 100644
 --- a/dist/utils/schemaConversion/sanitizeJsonSchema.js
 +++ b/dist/utils/schemaConversion/sanitizeJsonSchema.js
-@@ -1,7 +1,38 @@
-+/**
+@@ -7,7 +7,34 @@
+  * `'array'`) throughout the schema tree. Without this, `json-schema-to-zod`
+  * emits a Zod union which the MCP SDK serialises back as `anyOf`, stripping
+  * the concrete `type` from the output and breaking schema introspection.
+- */ export function sanitizeJsonSchema(schema) {
++ */ /**
 + * Recursively finds array fields whose items contain a block-type union
 + * (anyOf/oneOf with members having a blockType property) and replaces the
 + * items schema with {} (accept any) to avoid json-schema-to-zod failing
 + * on discriminated unions.
 + */ function stripBlockUnions(obj) {
 +    if (!obj || typeof obj !== 'object') return obj;
-+    // Check if this is an array field with block-type union items
 +    if (obj.type === 'array' && obj.items) {
 +        const members = obj.items.oneOf || obj.items.anyOf;
 +        if (Array.isArray(members) && members.length > 0 && members.every(
@@ -20,33 +23,26 @@ index 8c3cd2d6b63df34799b5de74fb54e17640023442..c927114efa14385eba9ce1ca0b787c66
 +            return obj;
 +        }
 +    }
-+    // Recurse into properties
 +    if (obj.properties) {
 +        for (const value of Object.values(obj.properties)) {
 +            stripBlockUnions(value);
 +        }
 +    }
-+    // Recurse into items (for non-block arrays with nested objects)
 +    if (obj.items && typeof obj.items === 'object') {
 +        stripBlockUnions(obj.items);
 +    }
 +    return obj;
 +}
 +
- /**
-  * Removes internal Payload properties (id, createdAt, updatedAt) from a
-  * JSON Schema so they don't appear in the generated Zod validation schema.
-  * Also strips `id` from the `required` array when present.
-+ * Patches block union schemas to avoid json-schema-to-zod validation failures.
-  */ export function sanitizeJsonSchema(schema) {
++export function sanitizeJsonSchema(schema) {
      delete schema?.properties?.id;
      delete schema?.properties?.createdAt;
-@@ -12,6 +43,8 @@
-             delete schema.required;
+     delete schema?.properties?.updatedAt;
+@@ -32,6 +59,7 @@
+             }
          }
      }
-+    // Patch: skip Zod validation for block fields (anyOf/oneOf with blockType discriminator)
 +    stripBlockUnions(schema);
      return schema;
  }
- 
+ /**

@@ -60,8 +60,29 @@ If the exports point to a bundled file, patch THAT file, not the individual sour
 
 | Package | Patch file | What it fixes |
 |---------|-----------|---------------|
-| `payload@3.77.0` | `patches/payload@3.77.0.patch` | `mergeLocalizedData.js` — block/array matching by ID instead of index during multi-locale saves. Prevents block reorder when autosaving with locales. |
-| `@payloadcms/ui@3.77.0` | `patches/@payloadcms__ui@3.77.0.patch` | **Bundled** `dist/exports/client/index.js` (minified) + `dist/forms/Form/mergeServerFormState.js` — strips `collapsed` from server row before merging. Prevents autosave race condition from closing open blocks. Bundled fix: `if(c>-1){let{collapsed:_sc,...lnc}=l;n[r].rows[c]={...e[r].rows[c],...lnc};}` |
+| `payload@3.82.1` | `patches/payload@3.82.1.patch` | `mergeLocalizedData.js` — block/array matching by ID instead of index during multi-locale saves. Prevents block reorder when autosaving with locales. |
+| `@payloadcms/ui@3.82.1` | `patches/@payloadcms__ui@3.82.1.patch` | **Bundled** `dist/exports/client/index.js` (minified) — strips `collapsed` from server row before merging. Prevents autosave race condition from closing open blocks. Bundled fix: `if(c>-1){let{collapsed:_sc,...lnc}=a;n[r].rows[c]={...e[r].rows[c],...lnc};}` Note: 3.82.1 uses `a` as the row variable, not `l`. |
+| `@payloadcms/plugin-mcp@3.82.1` | `patches/@payloadcms__plugin-mcp@3.82.1.patch` | `dist/utils/schemaConversion/sanitizeJsonSchema.js` — adds `stripBlockUnions()` to prevent `json-schema-to-zod` failing on block-type discriminated unions (`anyOf`/`oneOf` with `blockType`). |
+
+## CRITICAL: Patch SHA Mismatch — How to Detect and Fix
+
+**Patches can silently fail** if they were created from a different build of the package. pnpm may accept a patch even when it can't apply the content change, leaving the file unmodified.
+
+**How to verify a patch is actually working:**
+```bash
+# After pnpm install, check for the patched string in the installed file
+grep -o "collapsed:_sc" node_modules/@payloadcms/ui/dist/exports/client/index.js
+grep -o "stripBlockUnions" node_modules/@payloadcms/plugin-mcp/dist/utils/schemaConversion/sanitizeJsonSchema.js
+```
+
+**If a patch silently failed** (file unchanged despite patch being registered):
+1. Remove the broken entry from `package.json` `patchedDependencies`
+2. `pnpm install` (restores clean package)
+3. `pnpm patch <pkg@version>` → get fresh temp folder from the CURRENT installed files
+4. Apply fixes with python3 using the ACTUAL variable names from the current build
+5. `pnpm patch-commit <temp-path>`
+
+**The key mistake**: if an old patch used variable `l` but the new build uses `a`, the patch hunk won't match. Always verify the exact string in the current build before writing the python3 replacement.
 
 ## Common Mistakes to Avoid
 
