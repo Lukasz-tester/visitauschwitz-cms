@@ -1,13 +1,3 @@
-## newsletter building
-
-- [x] 1. Create CMS Page via MCP (slug: `newsletter`, hero + content blocks)
-- [x] 2. Create newsletter page route — reuse `NewsletterSignup` via `insertNode` (same pattern as homepage)
-- [x] 4. Create CF Function proxy (`visitauschwitz-frontend/functions/api/subscribe.js`)
-- [x] 5. Modify `useNewsletterSubmit` hook → POST to `/api/subscribe` instead of `/api/contact`
-- [x] 6. Add i18n keys to `en.json` + `pl.json`
-- [x] 7. Modify FooterNewsletter → add "Learn more" link to `/newsletter`
-- [x] 8. Add newsletter CTA to contact form auto-reply (`functions/api/contact.js`)
-
 ## newsletter preview
 
 http://localhost:3000/api/newsletter-email-preview?locale=en
@@ -15,19 +5,6 @@ http://localhost:3000/api/newsletter-email-preview?locale=en
 2.  Open http://localhost:3000/api/confirmation-email-preview — verify English version
 3.  Open http://localhost:3000/api/confirmation-email-preview?locale=pl — verify Polish version
 4.  Compare side-by-side with http://localhost:3000/api/newsletter-email-preview for visual consistency
-
-## double opt-in
-
-- [x] Confirmation email template (`src/email/generateConfirmationEmail.ts`) + i18n keys
-- [x] `Subscribers` collection — fields: `email`, `confirmed`, `token`, `locale`, `confirmedAt` (9 locales)
-- [x] Form submission hook — on newsletter submit: create subscriber, generate token, send confirmation email
-- [x] `/api/confirm?token=xxx` endpoint — validate token, mark confirmed, send lead magnet email, redirect
-- [x] Lead magnet email (`src/email/generateNewsletterEmail.ts`) — checklist email sent after confirmation
-- [x] Redirect after confirm → `/?confirmed=true`
-- [x] `/api/unsubscribe?token=xxx` endpoint — deletes subscriber, shows confirmation page
-- [x] `List-Unsubscribe` + `List-Unsubscribe-Post` headers on all outgoing emails
-- [x] Unsubscribe link in email footer (confirmation + lead magnet)
-- [x] All email strings in i18n (`en.json`) — ready for translation
 
 ## campaign (next steps)
 
@@ -53,15 +30,12 @@ lsof -ti :3000,3002 | xargs kill -9 2>/dev/null; echo "Done"
 Najczęstsze zapytania | Kliknięcia | Wyświetlenia
 bus from krakow to auschwitz 169 2 008
 auschwitz bilety cennik 124 4 454
-krakow to auschwitz 115 11 739
-krakow to auschwitz bus 108 1 968
 oświęcim bilety 90 3 377
 auschwitz bilety 80 10 088
 bus krakow to auschwitz 66 725
 bus to auschwitz from krakow 60 851
 bilety auschwitz 59 1 321
 how to get to auschwitz from krakow 50 2 987
-visit auschwitz 45 8 398
 how to get from krakow to auschwitz 45 1 822
 oswiecim bilety 42 1 239
 auschwitz bilety bez przewodnika 37 764
@@ -186,37 +160,16 @@ The interactive map is the site's unique asset. Expand it:
 | Query                                  | Intent        | Target                               | Status                                      |
 | -------------------------------------- | ------------- | ------------------------------------ | ------------------------------------------- |
 | how to get to auschwitz from krakow    | informational | NEW POST: "How to Get from Krakow"   | **TODO** — #1 priority                      |
-| is auschwitz free to visit             | informational | /tickets H2 + /faq                   | page update                                 |
 | how long does auschwitz take           | informational | NEW POST: "How Long Does It Take"    | **TODO**                                    |
-| auschwitz dress code / what to wear    | informational | post: "What to Wear"                 | DONE                                        |
 | can you take photos at auschwitz       | informational | NEW POST: "Photography Rules"        | **TODO**                                    |
-| visiting auschwitz with children       | informational | post: "With Children"                | DONE                                        |
-| auschwitz I vs birkenau difference     | informational | post: "Auschwitz vs Birkenau"        | DONE                                        |
-| auschwitz skip the line tickets        | transactional | /tickets H2 + /faq                   | page update                                 |
 | best time to visit auschwitz           | informational | NEW POST: "Best Time to Visit"       | **TODO** — also covers "how far in advance" |
 | how far in advance to book auschwitz   | informational | covered by "Best Time to Visit" post | **TODO** (merged)                           |
-| auschwitz self-guided tour worth it    | informational | post: "Without a Guide"              | DONE                                        |
-| krakow to auschwitz day trip           | transactional | post: "Krakow Day Trip"              | DONE                                        |
 | auschwitz virtual tour                 | informational | future product                       | parked                                      |
-| auschwitz audio guide                  | informational | /tour H2 + "Without a Guide" post    | page update + SEO tune existing post        |
 | where to eat near auschwitz            | informational | NEW POST: "Where to Eat"             | **TODO**                                    |
 | auschwitz winter visit                 | informational | NEW POST: "Auschwitz in Winter"      | **TODO**                                    |
 | auschwitz accessibility wheelchair     | informational | NEW POST: "Accessibility Guide"      | **TODO**                                    |
 | auschwitz emotional preparation        | informational | NEW POST: "Emotional Preparation"    | **TODO** — merged with reading list         |
 | what to read before visiting auschwitz | informational | covered by "Emotional Preparation"   | **TODO** (merged, lead magnet CTA)          |
-| auschwitz online tickets 2026          | transactional | post: "Tickets Online Only in 2026"  | DONE                                        |
-| auschwitz ticket scam                  | informational | NEW POST: "Ticket Scams"             | **TODO** — URGENT                           |
-
-### Polish
-
-| Query                               | Target                                     | Status                            |
-| ----------------------------------- | ------------------------------------------ | --------------------------------- |
-| jak dojechac do auschwitz z krakowa | PL translation of "How to Get from Krakow" | **TODO** — translate new post     |
-| ile trwa zwiedzanie auschwitz       | PL translation of "How Long Does It Take"  | **TODO** — translate new post     |
-| co zabrac do auschwitz              | post: "What to Wear" (PL exists)           | DONE — SEO tune PL version        |
-| auschwitz z dziecmi                 | post: "With Children" (PL exists)          | DONE — SEO tune PL version        |
-| auschwitz zima                      | PL translation of "Winter" post            | **TODO** — translate new post     |
-| auschwitz cennik 2026               | /tickets PL                                | page update — ensure 2026 pricing |
 
 ---
 
@@ -306,6 +259,7 @@ CF Pages Build → Worker (KV cache) → Vercel CMS (only on cache miss / after 
 ```
 
 **How it works:**
+
 1. Worker receives `GET /api/pages?where[slug]=...` → checks KV for cached entry
 2. Cache hit → returns JSON from KV, Vercel is never contacted
 3. Cache miss → fetches from Vercel, stores response in KV (30-day TTL), returns it
@@ -316,6 +270,7 @@ CF Pages Build → Worker (KV cache) → Vercel CMS (only on cache miss / after 
 **CF Pages auto-builds keep working. No CI changes needed. Frontend `cache: 'no-store'` can stay as-is** — the Worker handles caching transparently at the HTTP layer.
 
 **Cost:**
+
 - CF Workers free tier: 100k requests/day — covers even 9 locales × 585 calls × many builds/day
 - CF KV free tier: 100k reads/day, 1k writes/day, 1GB storage — trivially covered
 - If scale demands: Workers Paid = $5/month (10M requests included)
@@ -323,6 +278,7 @@ CF Pages Build → Worker (KV cache) → Vercel CMS (only on cache miss / after 
 **What to build:**
 
 1. New directory `cms-cache-worker/`:
+
    - `wrangler.toml` — KV namespace binding `CMS_CACHE`, custom domain `cms-api.visitauschwitz.info`
    - `src/index.ts` (~150 lines):
      - Proxy all `GET /api/*` with KV caching (key = `sha256(url)`)
@@ -330,6 +286,7 @@ CF Pages Build → Worker (KV cache) → Vercel CMS (only on cache miss / after 
      - Cache TTL: 30 days (content rarely changes; purge handles freshness)
 
 2. **CMS hooks** — update `revalidatePage.ts` and `revalidatePost.ts` to call the Worker purge endpoint alongside the existing `revalidatePath()`:
+
    ```ts
    await fetch(`https://cms-api.visitauschwitz.info/api/purge`, {
      method: 'POST',
@@ -356,6 +313,7 @@ Payload change → GH repo dispatch webhook → GH Actions (cached .next/cache/)
 ```
 
 **How it works:**
+
 1. Change `cmsFetch.ts` and `fetchPayloadData.js`: `cache: 'no-store'` → `cache: 'force-cache'`
 2. GH Actions caches `.next/cache/fetch-cache/` between runs (persists across builds)
 3. Pre-build script fetches a lightweight manifest from CMS: `GET /api/pages?limit=1000&select=slug,updatedAt` + same for posts (~5KB total, 2 calls)
@@ -364,10 +322,12 @@ Payload change → GH repo dispatch webhook → GH Actions (cached .next/cache/)
 6. `next build` runs — deleted entries re-fetch from Vercel; all others use disk cache
 
 **Disabling CF Pages auto-builds:**
+
 - CF Pages Dashboard → Settings → Builds → disable automatic builds
 - Deploy exclusively from GH Actions via `wrangler pages deploy out --project-name visitauschwitz-frontend`
 
 **Trigger from Payload afterChange hooks:**
+
 ```ts
 await fetch('https://api.github.com/repos/Lukasz-tester/visitauschwitz-frontend/dispatches', {
   method: 'POST',
@@ -382,11 +342,13 @@ await fetch('https://api.github.com/repos/Lukasz-tester/visitauschwitz-frontend/
 **What to build:**
 
 1. `visitauschwitz-frontend/.github/workflows/deploy.yml` (~80 lines):
+
    - Triggers: `repository_dispatch` (from Payload hook) + manual `workflow_dispatch`
    - Steps: checkout → restore `.next/cache/` → pnpm install → run bust-stale-cache script → build → save cache → `wrangler pages deploy`
    - GH Actions secrets needed: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GH_DISPATCH_TOKEN`
 
 2. `visitauschwitz-frontend/scripts/bust-stale-cache.mjs` (~70 lines):
+
    - Fetches manifest (2 API calls)
    - Loads previous `scripts/content-manifest.json`
    - For each changed slug: computes `crypto.createHash('sha256').update(url).digest('hex')`, deletes matching file in `.next/cache/fetch-cache/`
@@ -415,16 +377,16 @@ await fetch('https://api.github.com/repos/Lukasz-tester/visitauschwitz-frontend/
 
 ### Comparison
 
-|  | Option A (CF Worker Proxy) | Option B (GH Actions Cache) |
-|---|---|---|
-| Frontend code changes | None | `cache: 'no-store'` → `force-cache` in 2 files |
-| Build pipeline | CF Pages auto-builds unchanged | Migrate to GH Actions, disable CF Pages auto-builds |
-| New infrastructure | CF Worker + KV namespace | GH Actions workflow + cache busting script |
-| Vercel FOT after content change | ~1-2 API calls (changed doc only) | ~1-2 API calls (changed doc only) |
-| Vercel FOT with no content change | 0 (100% KV cache hits) | 0 (100% disk cache hits) |
-| Works with existing `cache: 'no-store'` | Yes | No — must change to `force-cache` |
-| Cost | Free / $5 Workers Paid | Free (GH Actions minutes) |
-| Recommended | Yes — no pipeline changes needed | If adding CF Worker infrastructure is unwanted |
+|                                         | Option A (CF Worker Proxy)        | Option B (GH Actions Cache)                         |
+| --------------------------------------- | --------------------------------- | --------------------------------------------------- |
+| Frontend code changes                   | None                              | `cache: 'no-store'` → `force-cache` in 2 files      |
+| Build pipeline                          | CF Pages auto-builds unchanged    | Migrate to GH Actions, disable CF Pages auto-builds |
+| New infrastructure                      | CF Worker + KV namespace          | GH Actions workflow + cache busting script          |
+| Vercel FOT after content change         | ~1-2 API calls (changed doc only) | ~1-2 API calls (changed doc only)                   |
+| Vercel FOT with no content change       | 0 (100% KV cache hits)            | 0 (100% disk cache hits)                            |
+| Works with existing `cache: 'no-store'` | Yes                               | No — must change to `force-cache`                   |
+| Cost                                    | Free / $5 Workers Paid            | Free (GH Actions minutes)                           |
+| Recommended                             | Yes — no pipeline changes needed  | If adding CF Worker infrastructure is unwanted      |
 
 ---
 

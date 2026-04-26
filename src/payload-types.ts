@@ -216,6 +216,7 @@ export interface Page {
     | CodeBlock
     | BannerBlock
     | AccordionBlock
+    | BankTransferBlock
   )[];
   meta?: {
     title?: string | null;
@@ -672,6 +673,94 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BankTransferBlock".
+ */
+export interface BankTransferBlock {
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  currencies?:
+    | {
+        currencyLabel?: string | null;
+        recipient?: string | null;
+        /**
+         * For EUR and PLN transfers
+         */
+        iban?: string | null;
+        /**
+         * For EUR transfers
+         */
+        bicSwift?: string | null;
+        /**
+         * For USD transfers
+         */
+        routingNumber?: string | null;
+        /**
+         * For USD, GBP, and PLN transfers
+         */
+        accountNumber?: string | null;
+        /**
+         * For GBP transfers
+         */
+        sortCode?: string | null;
+        /**
+         * For PLN transfers
+         */
+        bankName?: string | null;
+        currencyCode?: ('EUR' | 'USD' | 'GBP' | 'PLN') | null;
+        recommendedFor?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  changeBackground?: boolean | null;
+  blikHeading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  blikButton?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bankTransfer';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscribers".
  */
 export interface Subscriber {
@@ -1005,6 +1094,7 @@ export interface PagesSelect<T extends boolean = true> {
         Image?: T | CodeBlockSelect<T>;
         Text?: T | BannerBlockSelect<T>;
         accordion?: T | AccordionBlockSelect<T>;
+        bankTransfer?: T | BankTransferBlockSelect<T>;
       };
   meta?:
     | T
@@ -1150,6 +1240,33 @@ export interface AccordionBlockSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BankTransferBlock_select".
+ */
+export interface BankTransferBlockSelect<T extends boolean = true> {
+  heading?: T;
+  currencies?:
+    | T
+    | {
+        currencyLabel?: T;
+        recipient?: T;
+        iban?: T;
+        bicSwift?: T;
+        routingNumber?: T;
+        accountNumber?: T;
+        sortCode?: T;
+        bankName?: T;
+        currencyCode?: T;
+        recommendedFor?: T;
+        id?: T;
+      };
+  changeBackground?: T;
+  blikHeading?: T;
+  blikButton?: T;
   id?: T;
   blockName?: T;
 }

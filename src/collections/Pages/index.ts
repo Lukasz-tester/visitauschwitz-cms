@@ -17,6 +17,7 @@ import { syncPageMediaUsage, deletePageMediaUsage } from '../../hooks/syncMediaU
 
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
+import { BankTransfer } from '@/blocks/BankTransfer/config'
 
 import {
   MetaDescriptionField,
@@ -103,6 +104,7 @@ export const Pages: CollectionConfig = {
                 Code,
                 Banner,
                 Accordion,
+                BankTransfer,
               ],
               required: true,
             },
