@@ -14,6 +14,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
 import { syncPageMediaUsage, deletePageMediaUsage } from '../../hooks/syncMediaUsage'
+import { filterEmptyLayout } from '../../hooks/filterEmptyLayout'
 
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
@@ -153,6 +154,7 @@ export const Pages: CollectionConfig = {
     afterChange: [revalidatePage, syncPageMediaUsage],
     afterDelete: [deletePageMediaUsage],
     beforeChange: [populatePublishedAt],
+    beforeRead: [filterEmptyLayout],
   },
   versions: {
     drafts: {

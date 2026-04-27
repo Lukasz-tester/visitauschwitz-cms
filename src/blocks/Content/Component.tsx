@@ -4,12 +4,7 @@ import { cn } from 'src/utilities/cn'
 import type { Page } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { extractContentSchema } from './extractContentSchema'
-
-function hasRichTextContent(rt: { root: { children?: Array<any> } } | null | undefined): boolean {
-  return !!rt?.root?.children?.some((node: any) =>
-    node?.children?.some((child: any) => !!child?.text)
-  )
-}
+import { hasRichTextContent } from '@/utilities/hasRichTextContent'
 
 const ImageMedia = dynamic(() =>
   import('@/components/Media/ImageMedia').then((mod) => mod.ImageMedia),

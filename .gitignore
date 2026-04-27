@@ -6,6 +6,7 @@ node_modules
 .mcp.json
 .next
 .vercel
+.subs
 
 # Payload default media upload directory
 public/media/
