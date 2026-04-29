@@ -2,7 +2,7 @@
  * Export confirmed subscribers grouped by locale.
  *
  * Usage:
- *   pnpm tsx src/scripts/export-subscribers.ts
+ *   pnpm tsx --env-file=.env src/scripts/export-subscribers.ts
  *
  * Output:
  *   .subs  — written to the project root, two sections:
@@ -13,11 +13,10 @@
  *   - Needs DATABASE_URI and PAYLOAD_SECRET set in .env (loaded automatically).
  */
 
-import 'dotenv/config'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { getPayload } from 'payload'
-import config from '../../payload.config'
+import config from '../payload.config'
 import fs from 'fs/promises'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))

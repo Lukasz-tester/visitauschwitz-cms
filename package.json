@@ -56,7 +56,6 @@
     "openai": "^6.25.0",
     "payload": "^3.82.1",
     "payload-admin-bar": "^1.0.7",
-    "payload-sync-ai-translations": "^1.19.2",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

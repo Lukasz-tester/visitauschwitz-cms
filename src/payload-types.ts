@@ -106,15 +106,11 @@ export interface Config {
     header: Header;
     footer: Footer;
     'newsletter-email': NewsletterEmail;
-    'ai-bulk-translation': AiBulkTranslation;
-    'sync-links': SyncLink;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'newsletter-email': NewsletterEmailSelect<false> | NewsletterEmailSelect<true>;
-    'ai-bulk-translation': AiBulkTranslationSelect<false> | AiBulkTranslationSelect<true>;
-    'sync-links': SyncLinksSelect<false> | SyncLinksSelect<true>;
   };
   locale: 'en' | 'pl';
   widgets: {
@@ -1583,24 +1579,6 @@ export interface NewsletterEmail {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ai-bulk-translation".
- */
-export interface AiBulkTranslation {
-  id: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sync-links".
- */
-export interface SyncLink {
-  id: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1653,24 +1631,6 @@ export interface NewsletterEmailSelect<T extends boolean = true> {
   subject?: T;
   intro?: T;
   footer?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ai-bulk-translation_select".
- */
-export interface AiBulkTranslationSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sync-links_select".
- */
-export interface SyncLinksSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -41,7 +41,6 @@ import localization from './i18n/localization'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { translator, openAIResolver } from '@payload-enchants/translator'
-import { payloadSyncAiTranslations } from 'payload-sync-ai-translations'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 
 const filename = fileURLToPath(import.meta.url)
@@ -249,27 +248,6 @@ export default buildConfig({
         },
       },
     }),
-    payloadSyncAiTranslations({
-      collections: {
-        // clientProps.locales overrides the plugin default which passes full locale objects.
-        // The server endpoint expects plain string codes — this is a bug in the plugin.
-        posts: {
-          excludeFields: ['slug'],
-          clientProps: { locales: localization.locales.map((l) => l.code) },
-        },
-        pages: {
-          excludeFields: ['slug'],
-          clientProps: { locales: localization.locales.map((l) => l.code) },
-        },
-        categories: {
-          excludeFields: ['slug'],
-          clientProps: { locales: localization.locales.map((l) => l.code) },
-        },
-      },
-      openai: {
-        apiKey: process.env.OPENAI_KEY || '',
-      },
-    }) as unknown as Plugin,
     mcpPlugin({
       collections: {
         posts: {
