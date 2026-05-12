@@ -19,6 +19,7 @@ import { filterEmptyLayout } from '../../hooks/filterEmptyLayout'
 import { OpeningHours } from '@/blocks/OpeningHours/config'
 import { Accordion } from '@/blocks/Accordion/config'
 import { BankTransfer } from '@/blocks/BankTransfer/config'
+import { DonationTrigger } from '@/blocks/DonationTrigger/config'
 
 import {
   MetaDescriptionField,
@@ -106,6 +107,7 @@ export const Pages: CollectionConfig = {
                 Banner,
                 Accordion,
                 BankTransfer,
+                DonationTrigger,
               ],
               required: true,
             },

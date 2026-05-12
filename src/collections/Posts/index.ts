@@ -13,6 +13,7 @@ import { authenticated, authenticatedAdmin } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
+import { DonationTrigger } from '../../blocks/DonationTrigger/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidatePost } from './hooks/revalidatePost'
@@ -89,7 +90,7 @@ export const Posts: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               // localized: true,
-              blocks: [Banner, Code],
+              blocks: [Banner, Code, DonationTrigger],
               required: true,
             },
           ],

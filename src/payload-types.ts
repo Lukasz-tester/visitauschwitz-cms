@@ -213,6 +213,7 @@ export interface Page {
     | BannerBlock
     | AccordionBlock
     | BankTransferBlock
+    | DonationTriggerBlock
   )[];
   meta?: {
     title?: string | null;
@@ -292,7 +293,7 @@ export interface Media {
 export interface Post {
   id: string;
   title: string;
-  layout: (BannerBlock | CodeBlock)[];
+  layout: (BannerBlock | CodeBlock | DonationTriggerBlock)[];
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -368,6 +369,60 @@ export interface CodeBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationTriggerBlock".
+ */
+export interface DonationTriggerBlock {
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  columns?:
+    | {
+        size?: ('oneThird' | 'oneSixth') | null;
+        enableMedia?: boolean | null;
+        /**
+         * Caption shown below the donation image (per column).
+         */
+        mediaCaption?: string | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableButtons?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  changeBackground?: boolean | null;
+  addMarginTop?: boolean | null;
+  addMarginBottom?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'donationTrigger';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1091,6 +1146,7 @@ export interface PagesSelect<T extends boolean = true> {
         Text?: T | BannerBlockSelect<T>;
         accordion?: T | AccordionBlockSelect<T>;
         bankTransfer?: T | BankTransferBlockSelect<T>;
+        donationTrigger?: T | DonationTriggerBlockSelect<T>;
       };
   meta?:
     | T
@@ -1268,6 +1324,28 @@ export interface BankTransferBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationTriggerBlock_select".
+ */
+export interface DonationTriggerBlockSelect<T extends boolean = true> {
+  heading?: T;
+  columns?:
+    | T
+    | {
+        size?: T;
+        enableMedia?: T;
+        mediaCaption?: T;
+        richText?: T;
+        enableButtons?: T;
+        id?: T;
+      };
+  changeBackground?: T;
+  addMarginTop?: T;
+  addMarginBottom?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1277,6 +1355,7 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         Text?: T | BannerBlockSelect<T>;
         Image?: T | CodeBlockSelect<T>;
+        donationTrigger?: T | DonationTriggerBlockSelect<T>;
       };
   relatedPosts?: T;
   categories?: T;
