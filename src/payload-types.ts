@@ -392,7 +392,7 @@ export interface DonationTriggerBlock {
   } | null;
   columns?:
     | {
-        size?: ('oneThird' | 'oneSixth') | null;
+        size?: ('oneHalf' | 'oneThird' | 'oneSixth') | null;
         enableMedia?: boolean | null;
         /**
          * Caption shown below the donation image (per column).
