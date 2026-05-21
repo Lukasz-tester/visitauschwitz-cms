@@ -1,0 +1,23 @@
+name: Refresh FX rates
+
+# Daily at 06:00 UTC. Hits the CMS /api/cron/refresh-rates endpoint which fetches
+# from frankfurter.app (free, ECB-backed) and stores rates in the exchange-rates global.
+#
+# Required repo secrets:
+#   - CMS_URL        e.g. https://cms.visitauschwitz.info
+#   - CRON_SECRET    same value as the CMS env var
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call refresh endpoint
+        run: |
+          curl --fail --show-error --silent \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "${{ secrets.CMS_URL }}/api/cron/refresh-rates"

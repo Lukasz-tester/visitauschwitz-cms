@@ -14,6 +14,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { DonationTrigger } from '../../blocks/DonationTrigger/config'
+import { TicketPrices } from '../../blocks/TicketPrices/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidatePost } from './hooks/revalidatePost'
@@ -90,7 +91,7 @@ export const Posts: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               // localized: true,
-              blocks: [Banner, Code, DonationTrigger],
+              blocks: [Banner, Code, DonationTrigger, TicketPrices],
               required: true,
             },
           ],

@@ -106,11 +106,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     'newsletter-email': NewsletterEmail;
+    'exchange-rates': ExchangeRate;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'newsletter-email': NewsletterEmailSelect<false> | NewsletterEmailSelect<true>;
+    'exchange-rates': ExchangeRatesSelect<false> | ExchangeRatesSelect<true>;
   };
   locale: 'en' | 'pl';
   widgets: {
@@ -293,7 +295,7 @@ export interface Media {
 export interface Post {
   id: string;
   title: string;
-  layout: (BannerBlock | CodeBlock | DonationTriggerBlock)[];
+  layout: (BannerBlock | CodeBlock | DonationTriggerBlock | TicketPricesBlock)[];
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -423,6 +425,150 @@ export interface DonationTriggerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'donationTrigger';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TicketPricesBlock".
+ */
+export interface TicketPricesBlock {
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  sections?:
+    | {
+        /**
+         * Section heading, e.g. "Individual Visit" or "Group Visit (Private Tour)".
+         */
+        title: string;
+        /**
+         * Short intro for this section (e.g. explains individual vs group).
+         */
+        intro?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        /**
+         * Optional. Header for the leftmost (row-label) column when using matrix mode, e.g. "Number of people in group". Leave empty for the standard one-price-per-row layout.
+         */
+        rowLabelHeader?: string | null;
+        /**
+         * Optional. Define column headers (e.g. "0–10", "11–20", "21–30") to switch this section to a matrix layout. Each row must then supply a matching number of values in "Prices PLN (matrix)". Leave empty for the standard layout.
+         */
+        columnHeaders?:
+          | {
+              header: string;
+              id?: string | null;
+            }[]
+          | null;
+        rows?:
+          | {
+              /**
+               * e.g. "3.5-h general tour" or "Typical range"
+               */
+              label: string;
+              /**
+               * Optional smaller text under the label (e.g. "up to 30 people").
+               */
+              sublabel?: string | null;
+              /**
+               * Price in PLN for standard (non-matrix) rows. NOT localized — one value powers every locale. Frontend converts to EUR/USD/GBP on the fly. Leave empty when the section uses Column Headers (matrix mode); fill "Matrix Prices (PLN)" below instead.
+               */
+              pricePLN?: number | null;
+              /**
+               * Optional discounted price in PLN (e.g. student/75+/disability rate).
+               */
+              pricePLNDiscount?: number | null;
+              /**
+               * Optional upper bound — shows as "X–Y" range (use for "Typical range" rows).
+               */
+              priceMaxPLN?: number | null;
+              /**
+               * e.g. "per person", "per group".
+               */
+              unit?: string | null;
+              /**
+               * Matrix-mode prices. Add one entry per column header on the section. Frontend uses these when the section has Column Headers; otherwise the single "Price PLN" field is used.
+               */
+              pricesPLN?:
+                | {
+                    /**
+                     * PLN amount for this column.
+                     */
+                    value: number;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Small print under the table, e.g. discount notes.
+         */
+        footnote?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Callout shown after the sections (e.g. cancellation warning).
+   */
+  warning?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  changeBackground?: boolean | null;
+  addMarginTop?: boolean | null;
+  addMarginBottom?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ticketPrices';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1356,6 +1502,7 @@ export interface PostsSelect<T extends boolean = true> {
         Text?: T | BannerBlockSelect<T>;
         Image?: T | CodeBlockSelect<T>;
         donationTrigger?: T | DonationTriggerBlockSelect<T>;
+        ticketPrices?: T | TicketPricesBlockSelect<T>;
       };
   relatedPosts?: T;
   categories?: T;
@@ -1381,6 +1528,51 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TicketPricesBlock_select".
+ */
+export interface TicketPricesBlockSelect<T extends boolean = true> {
+  heading?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        intro?: T;
+        rowLabelHeader?: T;
+        columnHeaders?:
+          | T
+          | {
+              header?: T;
+              id?: T;
+            };
+        rows?:
+          | T
+          | {
+              label?: T;
+              sublabel?: T;
+              pricePLN?: T;
+              pricePLNDiscount?: T;
+              priceMaxPLN?: T;
+              unit?: T;
+              pricesPLN?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        footnote?: T;
+        id?: T;
+      };
+  warning?: T;
+  changeBackground?: T;
+  addMarginTop?: T;
+  addMarginBottom?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1657,6 +1849,30 @@ export interface NewsletterEmail {
   createdAt?: string | null;
 }
 /**
+ * Foreign-exchange rates with PLN as base. Auto-refreshed daily from frankfurter.app (ECB data). Used by the TicketPrices block to convert museum prices on the fly.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exchange-rates".
+ */
+export interface ExchangeRate {
+  id: string;
+  /**
+   * Base currency for all rates (museum prices are in PLN).
+   */
+  baseCurrency?: string | null;
+  rates?: {
+    EUR?: number | null;
+    USD?: number | null;
+    GBP?: number | null;
+  };
+  /**
+   * Last successful refresh from frankfurter.app.
+   */
+  updatedAt?: string | null;
+  source?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -1711,6 +1927,24 @@ export interface NewsletterEmailSelect<T extends boolean = true> {
   intro?: T;
   footer?: T;
   updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exchange-rates_select".
+ */
+export interface ExchangeRatesSelect<T extends boolean = true> {
+  baseCurrency?: T;
+  rates?:
+    | T
+    | {
+        EUR?: T;
+        USD?: T;
+        GBP?: T;
+      };
+  updatedAt?: T;
+  source?: T;
   createdAt?: T;
   globalType?: T;
 }
