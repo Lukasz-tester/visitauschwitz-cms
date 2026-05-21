@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import type { Page } from '@/payload-types'
+import type { Page, Post } from '@/payload-types'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
@@ -10,6 +10,7 @@ import { AccordionBlock } from './Accordion/Component.client'
 import { extractTextFromRichText, removeSpecialChars } from '@/utilities/helpersSsr'
 import { CodeBlock } from './Code/Component'
 import { BannerBlock } from './Banner/Component'
+import { TicketPricesBlock } from './TicketPrices/Component'
 
 type FAQItem = {
   '@type': 'Question'
@@ -29,10 +30,11 @@ const blockComponents: Record<string, React.FC<{ locale: TypedLocale } & any>> =
   mediaBlock: MediaBlock,
   oh: OpeningHoursBlock,
   accordion: AccordionBlock,
+  ticketPrices: TicketPricesBlock,
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: Page['layout'][0][]
+  blocks: (Page['layout'][0] | Post['layout'][0])[]
   locale: TypedLocale
   url: string
 }> = ({ blocks, locale, url }) => {
