@@ -27,7 +27,6 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import Subscribers from './collections/Subscribers'
-import { ExchangeRates } from './globals/ExchangeRates/config'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { NewsletterEmail } from './globals/NewsletterEmail/config'
@@ -141,7 +140,7 @@ export default buildConfig({
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.FRONTEND_URL].filter(
     Boolean,
   ) as string[],
-  globals: [Header, Footer, NewsletterEmail, ExchangeRates],
+  globals: [Header, Footer, NewsletterEmail],
   logger: {
     destination: process.stdout,
     options: { level: 'info' },

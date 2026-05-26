@@ -106,13 +106,11 @@ export interface Config {
     header: Header;
     footer: Footer;
     'newsletter-email': NewsletterEmail;
-    'exchange-rates': ExchangeRate;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'newsletter-email': NewsletterEmailSelect<false> | NewsletterEmailSelect<true>;
-    'exchange-rates': ExchangeRatesSelect<false> | ExchangeRatesSelect<true>;
   };
   locale: 'en' | 'pl';
   widgets: {
@@ -1849,30 +1847,6 @@ export interface NewsletterEmail {
   createdAt?: string | null;
 }
 /**
- * Foreign-exchange rates with PLN as base. Auto-refreshed daily from frankfurter.app (ECB data). Used by the TicketPrices block to convert museum prices on the fly.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "exchange-rates".
- */
-export interface ExchangeRate {
-  id: string;
-  /**
-   * Base currency for all rates (museum prices are in PLN).
-   */
-  baseCurrency?: string | null;
-  rates?: {
-    EUR?: number | null;
-    USD?: number | null;
-    GBP?: number | null;
-  };
-  /**
-   * Last successful refresh from frankfurter.app.
-   */
-  updatedAt?: string | null;
-  source?: string | null;
-  createdAt?: string | null;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -1927,24 +1901,6 @@ export interface NewsletterEmailSelect<T extends boolean = true> {
   intro?: T;
   footer?: T;
   updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "exchange-rates_select".
- */
-export interface ExchangeRatesSelect<T extends boolean = true> {
-  baseCurrency?: T;
-  rates?:
-    | T
-    | {
-        EUR?: T;
-        USD?: T;
-        GBP?: T;
-      };
-  updatedAt?: T;
-  source?: T;
   createdAt?: T;
   globalType?: T;
 }
