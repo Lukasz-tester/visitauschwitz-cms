@@ -70,10 +70,18 @@ export async function POST(request: NextRequest) {
     // @payloadcms/email-resend adapter passes `attachments` through to
     // resend.emails.send ({ filename, content: base64 }). If attachments ever
     // don't arrive, call the Resend SDK directly here instead.
+    // Pass RAW bytes (Buffer), not the base64 string: Resend base64-encodes the
+    // content itself, so sending a base64 string double-encodes it → a corrupt,
+    // un-openable attachment. Buffer.from(..,'base64') decodes back to bytes.
     const shot = body.screenshot
     const attachments =
       shot?.base64
-        ? [{ filename: shot.name || 'screenshot.jpg', content: shot.base64 }]
+        ? [
+            {
+              filename: shot.name || 'screenshot.jpg',
+              content: Buffer.from(shot.base64, 'base64'),
+            },
+          ]
         : undefined
 
     await payload.sendEmail({
