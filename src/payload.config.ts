@@ -27,6 +27,7 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import Subscribers from './collections/Subscribers'
+import MarketingCampaigns from './collections/MarketingCampaigns'
 import { Footer } from './globals/Footer/config'
 import { Header } from './globals/Header/config'
 import { NewsletterEmail } from './globals/NewsletterEmail/config'
@@ -133,7 +134,7 @@ export default buildConfig({
       heartbeatFrequencyMS: 10000,
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Subscribers],
+  collections: [Pages, Posts, Media, Categories, Users, Subscribers, MarketingCampaigns],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.FRONTEND_URL].filter(
     Boolean,
   ) as string[],
@@ -148,7 +149,7 @@ export default buildConfig({
   plugins: [
     translator({
       // collections with the enabled translator in the admin UI
-      collections: ['posts', 'pages', 'categories'],
+      collections: ['posts', 'pages', 'categories', 'marketing-campaigns'],
       // globals with the enabled translator in the admin UI
       globals: ['header', 'footer', 'newsletter-email'],
       // add resolvers that you want to include, examples on how to write your own in ./plugin/src/resolvers

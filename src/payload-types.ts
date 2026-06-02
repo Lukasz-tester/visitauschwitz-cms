@@ -74,6 +74,7 @@ export interface Config {
     categories: Category;
     users: User;
     subscribers: Subscriber;
+    'marketing-campaigns': MarketingCampaign;
     redirects: Redirect;
     search: Search;
     'payload-mcp-api-keys': PayloadMcpApiKey;
@@ -90,6 +91,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    'marketing-campaigns': MarketingCampaignsSelect<false> | MarketingCampaignsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
@@ -979,6 +981,55 @@ export interface Subscriber {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marketing-campaigns".
+ */
+export interface MarketingCampaign {
+  id: string;
+  /**
+   * Internal campaign label, e.g. "May 2026 promo".
+   */
+  name: string;
+  /**
+   * Email subject line.
+   */
+  subject: string;
+  /**
+   * Preview text shown in email clients before the email is opened.
+   */
+  preheader?: string | null;
+  /**
+   * Main email body. Separate paragraphs with a blank line.
+   */
+  body: string;
+  /**
+   * Optional footer text. Overrides the default footer.
+   */
+  footer?: string | null;
+  /**
+   * Managed automatically by the send endpoint.
+   */
+  status?: ('draft' | 'sending' | 'paused' | 'completed') | null;
+  /**
+   * Total number of emails sent so far.
+   */
+  sentCount?: number | null;
+  /**
+   * Current subscriber page — used to resume a paused send.
+   */
+  currentPage?: number | null;
+  /**
+   * When the first batch was sent.
+   */
+  startedAt?: string | null;
+  /**
+   * When all subscribers were reached.
+   */
+  completedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1185,6 +1236,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subscribers';
         value: string | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'marketing-campaigns';
+        value: string | MarketingCampaign;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1645,6 +1700,24 @@ export interface SubscribersSelect<T extends boolean = true> {
   token?: T;
   locale?: T;
   confirmedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marketing-campaigns_select".
+ */
+export interface MarketingCampaignsSelect<T extends boolean = true> {
+  name?: T;
+  subject?: T;
+  preheader?: T;
+  body?: T;
+  footer?: T;
+  status?: T;
+  sentCount?: T;
+  currentPage?: T;
+  startedAt?: T;
+  completedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
